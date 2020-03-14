@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Default Suite">
+    <test name="Individual">
+        <!--MainTest-->
+        <parameter name="myAccountDropdownText" value="Login"></parameter>
+
+        <parameter name="expectedResultGoToLoginPageTest" value="Returning Customer"></parameter>
+        <parameter name="expectedResultLoginTest" value="My Account"></parameter>
+
+        <classes>
+            <!--MainTest-->
+            <class name="test.MainTest">
+                <methods>
+                    <include name="goToLoginPageTest"/>
+                    <include name="loginTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test> <!-- Individual -->
+</suite> <!-- Default Suite -->

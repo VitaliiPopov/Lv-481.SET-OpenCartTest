@@ -1,4 +1,6 @@
-package data;
+package opencart.data;
+
+import opencart.data.Currencies;
 
 import java.util.HashMap;
 import java.util.Map;

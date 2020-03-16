@@ -1,4 +1,4 @@
-package data;
+package opencart.data;
 
 public class UserRepository {
 }

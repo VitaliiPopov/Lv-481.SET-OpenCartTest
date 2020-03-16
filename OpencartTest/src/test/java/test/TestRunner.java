@@ -1,39 +1,32 @@
 package test;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import opencart.data.ConstantVariables;
+import opencart.pages.HomePage;
+import opencart.pages.account.LoginPage;
+import opencart.tools.Driver;
 import org.testng.annotations.*;
-import pages.HomePage;
-import pages.LoginPage;
 
 import java.util.concurrent.TimeUnit;
 
 public class TestRunner {
-    public static final String URL = "http://40.68.16.59/";
-
-    protected WebDriver driver;
 
     @BeforeClass
     public void beforeClass() throws Exception {
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.get(URL);
+        Driver.getDriver().manage().window().maximize();
+        Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        Driver.getDriver().get(ConstantVariables.URL);
     }
     @AfterClass
     public void afterClass() throws Exception {
-        if(driver != null) driver.quit();
+        Driver.getDriver().quit();
     }
 
     public HomePage getHomePage(){
-        return new HomePage(driver);
+        return new HomePage(Driver.getDriver());
     }
 
     public LoginPage getloginPage(){
-        return new LoginPage(driver);
+        return new LoginPage(Driver.getDriver());
     }
-
 
 }

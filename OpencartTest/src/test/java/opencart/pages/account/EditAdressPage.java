@@ -1,13 +1,13 @@
 package opencart.pages.account;
 
-import org.openqa.selenium.WebDriver;
 import opencart.pages.AbstractPageWithHeader;
+import org.openqa.selenium.WebDriver;
 
-public class AccountLogoutPage extends AbstractPageWithHeader {
+public class EditAdressPage extends AbstractPageWithHeader {
 
     private AccountSidebarComponent accountSidebarComponent;
 
-    public AccountLogoutPage(WebDriver driver) {
+    public EditAdressPage(WebDriver driver) {
         super(driver);
         initElements();
     }

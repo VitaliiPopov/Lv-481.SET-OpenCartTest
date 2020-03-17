@@ -13,7 +13,7 @@ public class EditAccountPage extends AbstractPageWithHeader {
     }
 
     private void initElements(){
-
+        accountSidebarComponent = new AccountSidebarComponent(driver);
     }
 
 }

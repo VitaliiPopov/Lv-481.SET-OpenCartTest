@@ -11,8 +11,6 @@ public class DropdownComponent {
 
     //DATA
     private final String WEBELEMENT_NOT_FOUND = "WebElement not Found";
-    //FIELDS
-    //
     private WebDriver driver;
     //
     private List<WebElement> listOptions;
@@ -28,17 +26,12 @@ public class DropdownComponent {
 
     //PAGE OBJECT
 
-    //listOptions
-    public List<WebElement> getListOptions() {
-        return listOptions;
-    }
-
     //FUNCTIONAL
 
     //listOptions
     public WebElement getDropdownOptionByPartialName(String optionName) {
         WebElement result = null;
-        for (WebElement current : getListOptions()) {
+        for (WebElement current : listOptions) {
             if (current.getText().toLowerCase().contains(optionName.toLowerCase())) {
                 result = current;
                 break;

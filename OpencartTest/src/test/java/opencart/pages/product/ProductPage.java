@@ -13,7 +13,7 @@ public class ProductPage extends AbstractPageWithHeader {
     }
 
     private void initElements(){
-
+        availableOptionsComponent = new AvailableOptionsComponent(driver);
     }
 
 }

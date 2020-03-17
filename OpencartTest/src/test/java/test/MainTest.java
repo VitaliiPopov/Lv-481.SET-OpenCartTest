@@ -1,9 +1,9 @@
 package test;
 
+import opencart.pages.HomePage;
 import opencart.pages.account.LoginPage;
-import opencart.pages.account.SuccessRegisterPage;
+import opencart.pages.account.MyAccountPage;
 import opencart.tools.Driver;
-import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Parameters;
@@ -12,7 +12,6 @@ import opencart.tools.ExcelDataConfig;
 import opencart.tools.Utility;
 
 public class MainTest extends TestRunner {
-
 
     ExcelDataConfig excelDataConfig = new ExcelDataConfig("TestData.xlsx");
 
@@ -23,18 +22,12 @@ public class MainTest extends TestRunner {
         }
     }
 
-    @Parameters({"myAccountDropdownText", "expectedResultGoToLoginPageTest"})
+    @Parameters({"myAccountDropdownText"})
     @Test(priority = 1)
-    public void goToLoginPageTest(String myAccountDropdownText, String expectedResultGoToLoginPageTest) {
+    public void loginTest(String myAccountDropdownText) throws InterruptedException {
         LoginPage loginPage = getHomePage().goToLoginPage(myAccountDropdownText);
-        Assert.assertEquals(loginPage.getTitleLoginBlockText(), expectedResultGoToLoginPageTest);
-    }
-
-    @Parameters("expectedResultLoginTest")
-    @Test(priority = 2)
-    public void loginTest(String expectedResultLoginTest) throws InterruptedException {
-        SuccessRegisterPage successRegisterPage = getloginPage().login(excelDataConfig.getData(0, 1, 0), excelDataConfig.getData(0, 1, 1));
-        Assert.assertEquals(successRegisterPage.getSuccessLoginPageTitleText(), expectedResultLoginTest);
+        MyAccountPage myAccountPage = loginPage.login(excelDataConfig.getData(0, 0, 0), excelDataConfig.getData(0, 0, 1));
+        HomePage homePage = myAccountPage.goToHomePage();
         Thread.sleep(2000);
     }
 

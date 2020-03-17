@@ -4,78 +4,66 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import opencart.pages.AbstractPageWithHeader;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.PageFactory;
 
 public class LoginPage extends AbstractPageWithHeader {
 
     //Components
     private AccountSidebarComponent accountSidebarComponent;
     //RETURNING CUSTOMER
+    @FindBy(how = How.XPATH, xpath = "//input[@id='input-password']/../../../h2")
     private WebElement titleLoginBlock;
+    @FindBy(how = How.ID, id = "input-email")
     private WebElement loginInputField;
+    @FindBy(how = How.ID, id = "input-password")
     private WebElement passwordInputField;
+    @FindBy(how = How.ID, xpath = "//input[@id = 'input-password']/../following-sibling::input")
     private WebElement loginButton;
 
     public LoginPage(WebDriver driver) {
         super(driver);
+        PageFactory.initElements(driver, this);
         initElements();
     }
 
     private void initElements(){
-       // accountSidebarComponent = new AccountSidebarComponent(driver.findElement(By.xpath("")));
-        titleLoginBlock = driver.findElement(By.xpath("//input[@id='input-password']/../../../h2"));
-        loginInputField = driver.findElement(By.id("input-email"));
-        passwordInputField = driver.findElement(By.id("input-password"));
-        loginButton = driver.findElement(By.xpath("//input[@id = 'input-password']/../following-sibling::input"));
+        accountSidebarComponent = new AccountSidebarComponent(driver);
     }
 
     //PAGE OBJECT
 
     //titleLoginBlock
-    public WebElement getTitleLoginBlock() {
-        return titleLoginBlock;
-    }
-
     public String getTitleLoginBlockText() {
-        return getTitleLoginBlock().getText();
+        return titleLoginBlock.getText();
     }
 
     //loginInputField
-    public WebElement getLoginInputField() {
-        return loginInputField;
-    }
-
     public void clickLoginInputField() {
-        getLoginInputField().click();
+        loginInputField.click();
     }
 
     public void clearLoginInputField() {
-        getLoginInputField().clear();
+        loginInputField.clear();
     }
 
     public void setLoginInputField(String login) {
-        getLoginInputField().sendKeys(login);
+        loginInputField.sendKeys(login);
     }
 
     //passwordInputField
-    public WebElement getPasswordInputField() {
-        return passwordInputField;
-    }
-
     public void clickPasswordInputField() {
-        getPasswordInputField().click();
+        passwordInputField.click();
     }
 
     public void setPasswordInputField(String password) {
-        getPasswordInputField().sendKeys(password);
+        passwordInputField.sendKeys(password);
     }
 
     //loginButton
-    public WebElement getLoginButton() {
-        return loginButton;
-    }
-
     public void clickLoginButton() {
-        getLoginButton().click();
+        loginButton.click();
     }
 
     //FUNCTIONAL
@@ -97,11 +85,11 @@ public class LoginPage extends AbstractPageWithHeader {
     //BUSINESS LOGIC
 
     //login
-    public SuccessRegisterPage login(String LOGIN_NAME, String PASSWORD_NAME){
+    public MyAccountPage login(String LOGIN_NAME, String PASSWORD_NAME){
         fillInputLogin(LOGIN_NAME);
         fillInputPassword(PASSWORD_NAME);
         clickLoginButton();
-        return new SuccessRegisterPage(driver);
+        return new MyAccountPage(driver);
     }
 
 }

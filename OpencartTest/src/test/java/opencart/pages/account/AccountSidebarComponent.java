@@ -1,13 +1,10 @@
 package opencart.pages.account;
 
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.WebDriver;
 
 public class AccountSidebarComponent {
 
-    private WebElement accountSidebarLayout;
-
-    public AccountSidebarComponent(WebElement accountSidebarLayout) {
-        this.accountSidebarLayout = accountSidebarLayout;
+    public AccountSidebarComponent(WebDriver driver) {
         initElements();
     }
 

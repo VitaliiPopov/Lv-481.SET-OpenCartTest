@@ -1,12 +1,13 @@
 package opencart.pages;
 
-import opencart.pages.search.SearchPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import opencart.pages.common.CartPage;
 import opencart.pages.account.LoginPage;
-import opencart.pages.common.CartDropdownComponent;
+import opencart.pages.product_table.CartDropdownComponent;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.PageFactory;
 
 public class AbstractPageWithHeader {
 
@@ -18,9 +19,12 @@ public class AbstractPageWithHeader {
     //WebDriver
     protected WebDriver driver;
     //
+    @FindBy(how = How.CSS, css = "i.fa-user")
     private WebElement myAccount;
     private WebElement shoppingCart;
     //
+    @FindBy(how = How.XPATH, xpath = "//h1/a")
+    private WebElement logo;
     private WebElement searchTopField;
     private WebElement searchTopButton;
     //Components
@@ -29,28 +33,25 @@ public class AbstractPageWithHeader {
 
     public AbstractPageWithHeader(WebDriver driver) {
         this.driver = driver;
-        initElements();
-    }
-
-    private void initElements() {
-        myAccount = driver.findElement(By.cssSelector("i.fa-user"));
+        PageFactory.initElements(driver, this);
     }
 
     //PageObject
 
-    //myAccount
-    public WebElement getMyAccount() {
-        return myAccount;
+    //logo
+    private void clickLogo() {
+        logo.click();
     }
 
-    public void clickMyAccount() {
-        getMyAccount().click();
+    //myAccount
+    private void clickMyAccount() {
+        myAccount.click();
     }
 
     //dropdownComponent
     protected DropdownComponent getDropdownComponent(){
         if(dropdownComponent == null){
-            throw  new RuntimeException(OPTION_NULL_MESSAGE);
+            throw new RuntimeException(OPTION_NULL_MESSAGE);
         }
         return dropdownComponent;
     }
@@ -86,6 +87,11 @@ public class AbstractPageWithHeader {
     public LoginPage goToLoginPage(String MY_ACCOUNT_DROPDOWN_TEXT){
         clickMyAccountDropdownComponentByPartialName(MY_ACCOUNT_DROPDOWN_TEXT);
         return new LoginPage(driver);
+    }
+
+    public HomePage goToHomePage(){
+        clickLogo();
+        return new HomePage(driver);
     }
 
 

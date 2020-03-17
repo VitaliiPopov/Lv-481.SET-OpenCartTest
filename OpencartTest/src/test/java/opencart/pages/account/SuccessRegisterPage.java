@@ -8,8 +8,6 @@ import opencart.pages.AbstractPageWithHeader;
 public class SuccessRegisterPage extends AbstractPageWithHeader {
 
     private AccountSidebarComponent accountSidebarComponent;
-    //
-    private WebElement successLoginPageTitle;
 
     public SuccessRegisterPage(WebDriver driver) {
         super(driver);
@@ -17,19 +15,12 @@ public class SuccessRegisterPage extends AbstractPageWithHeader {
     }
 
     private void initElements(){
-        successLoginPageTitle = driver.findElement(By.xpath("//div[@id='content']/*[1] "));
+        accountSidebarComponent = new AccountSidebarComponent(driver);
     }
 
     //PAGE OBJECT
 
-    //myAccountTitle
-    public WebElement getSuccessLoginPageTitle() {
-        return successLoginPageTitle;
-    }
 
-    public String getSuccessLoginPageTitleText() {
-        return getSuccessLoginPageTitle().getText();
-    }
 
 
 }

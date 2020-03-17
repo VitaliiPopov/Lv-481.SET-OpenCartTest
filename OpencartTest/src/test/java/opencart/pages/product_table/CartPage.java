@@ -1,18 +1,15 @@
-package opencart.pages.common;
+package opencart.pages.product_table;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import opencart.pages.AbstractPageWithHeader;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CartPage extends AbstractPageWithHeader {
 
     //Components
-    private List<ProductTableContainersComponent> productTableContainersComponents;
-    //WebElements
-    private WebElement totalPrice;
-    private WebElement checkoutButton;
+    private List<ProductInCartContainerComponent> productInCartContainerComponents;
 
     public CartPage(WebDriver driver) {
         super(driver);
@@ -20,7 +17,7 @@ public class CartPage extends AbstractPageWithHeader {
     }
 
     private void initElements(){
-
+        productInCartContainerComponents = new ArrayList<>();
     }
 
 

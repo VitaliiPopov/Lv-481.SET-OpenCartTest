@@ -17,18 +17,18 @@ public class ProductPage extends AbstractPageWithHeader {
     @FindBy(how = How.XPATH, xpath = "//textarea[contains(@id,'input-review')]")
     private WebElement inputFieldReview;
     @FindBy(how=How.XPATH,xpath="//input[contains(@value,'1')]")
-    private WebElement checkboxUnderLow;
+    private WebElement radioButtonUnderLow;
     @FindBy(how=How.XPATH,xpath="//input[contains(@value,'2')]")
-    private WebElement checkboxLow;
+    private WebElement radioButtonLow;
     @FindBy(how=How.XPATH,xpath="//input[contains(@value,'3')]")
-    private WebElement checkboxOk;
+    private WebElement radioButtonOk;
     @FindBy(how=How.XPATH,xpath="//input[contains(@value,'4')]")
-    private WebElement checkboxHigh;
+    private WebElement radioButtonHigh;
     @FindBy(how=How.XPATH,xpath="//input[contains(@value,'5')]")
-    private WebElement checkboxWell;
+    private WebElement radioButtonWell;
     @FindBy(how=How.XPATH,xpath="//button[contains(@id,'button-review')]")
     private WebElement buttonAddReview;
-    @FindBy(how=How.XPATH,xpath="//div[contains(@id,'review')]")
+    @FindBy(how=How.XPATH,xpath="//div[contains(@id,'review')]/child::p")
     private WebElement informationOfReviews;
     @FindBy(how=How.XPATH,xpath="//div[contains(@id,'review')]/following-sibling::h2")
     private WebElement descriptionOfTabReviews;
@@ -77,24 +77,24 @@ public class ProductPage extends AbstractPageWithHeader {
         inputFieldReview.sendKeys(text);
     }
 
-    public void clickOnCheckboxUnderLow(){
-        checkboxUnderLow.click();
+    public void clickOnRadioButtonUnderLow(){
+        radioButtonUnderLow.click();
     }
 
-    public void clickOnCheckboxLow(){
-        checkboxLow.click();
+    public void clickOnRadioButtonLow(){
+        radioButtonLow.click();
     }
 
-    public void clickOnCheckboxOk(){
-        checkboxOk.click();
+    public void clickOnRadioButtonOk(){
+        radioButtonOk.click();
     }
 
-    public void clickOnCheckboxHigh(){
-        checkboxHigh.click();
+    public void clickOnRadioButtonHigh(){
+        radioButtonHigh.click();
     }
 
-    public void clickOnCheckboxWell(){
-        checkboxWell.click();
+    public void clickOnRadioButtonWell(){
+        radioButtonWell.click();
     }
 
     public void clickOnButtonAddReview(){
@@ -123,7 +123,7 @@ public class ProductPage extends AbstractPageWithHeader {
         openTabReviews();
         inputNameInNameField(name);
         inputTextInReviewField(text);
-        clickOnCheckboxLow();
+        clickOnRadioButtonLow();
         clickOnButtonAddReview();
     }
 

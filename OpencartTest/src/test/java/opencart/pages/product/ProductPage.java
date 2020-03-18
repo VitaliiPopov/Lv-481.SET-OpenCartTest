@@ -28,6 +28,10 @@ public class ProductPage extends AbstractPageWithHeader {
     private WebElement checkboxWell;
     @FindBy(how=How.XPATH,xpath="//button[contains(@id,'button-review')]")
     private WebElement buttonAddReview;
+    @FindBy(how=How.XPATH,xpath="//div[contains(@id,'review')]")
+    private WebElement informationOfReviews;
+    @FindBy(how=How.XPATH,xpath="//div[contains(@id,'review')]/following-sibling::h2")
+    private WebElement descriptionOfTabReviews;
 
     public ProductPage(WebDriver driver) {
         super(driver);
@@ -37,5 +41,90 @@ public class ProductPage extends AbstractPageWithHeader {
     //private void initElements(){
         //availableOptionsComponent = new AvailableOptionsComponent(driver);
     //}
+
+    public void openTabReviews(){
+        tabReviews.click();
+    }
+
+    public String getInformationOfReviews(){
+        return informationOfReviews.getText();
+    }
+
+    public String getDescriptionOfTabReviews(){
+        return descriptionOfTabReviews.getText();
+    }
+    public void clickOnInputFieldName(){
+        inputFieldName.click();
+    }
+
+    public void clearOnInputFieldName(){
+        inputFieldName.clear();
+    }
+
+    public void inputDataInFieldName(String name){
+        inputFieldName.sendKeys(name);
+    }
+
+    public void clickOnInputFieldReview(){
+        inputFieldReview.click();
+    }
+
+    public void clearOnInputFieldReview(){
+        inputFieldReview.clear();
+    }
+
+    public void inputDataInFieldReview(String text){
+        inputFieldReview.sendKeys(text);
+    }
+
+    public void clickOnCheckboxUnderLow(){
+        checkboxUnderLow.click();
+    }
+
+    public void clickOnCheckboxLow(){
+        checkboxLow.click();
+    }
+
+    public void clickOnCheckboxOk(){
+        checkboxOk.click();
+    }
+
+    public void clickOnCheckboxHigh(){
+        checkboxHigh.click();
+    }
+
+    public void clickOnCheckboxWell(){
+        checkboxWell.click();
+    }
+
+    public void clickOnButtonAddReview(){
+        buttonAddReview.click();
+    }
+
+    //functionality
+
+    //inputNameInNameField
+    public void inputNameInNameField(String name){
+        clickOnInputFieldName();
+        clearOnInputFieldName();
+        inputDataInFieldName(name);
+    }
+
+    //inputReviewInReviewField
+    public void inputTextInReviewField(String text){
+        clickOnInputFieldReview();
+        clearOnInputFieldReview();
+        inputDataInFieldReview(text);
+    }
+
+    //business logic
+
+    public void writeReview(String name, String text){
+        openTabReviews();
+        inputNameInNameField(name);
+        inputTextInReviewField(text);
+        clickOnCheckboxLow();
+        clickOnButtonAddReview();
+    }
 
 }

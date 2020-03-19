@@ -9,7 +9,7 @@ import java.util.List;
 public class WishListPage extends AbstractPageWithHeader {
 
     //Components
-    private List<ProductInWishListContainerComponent> productInWishListContainerComponents;
+    private WishListContainerComponent wishListContainerComponent;
 
     public WishListPage(WebDriver driver) {
         super(driver);
@@ -17,10 +17,30 @@ public class WishListPage extends AbstractPageWithHeader {
     }
 
     private void initElements() {
-        productInWishListContainerComponents = new ArrayList<>();
+        wishListContainerComponent = new  WishListContainerComponent(driver);
     }
 
-    //PAGE OBJECT
+    // PAGE OBJECT
 
+    public WishListContainerComponent getWishListContainerComponent(){
+        return wishListContainerComponent;
+    }
+
+    // BUSINESS LOGIC
+
+    // add Product To Cart from Wish List
+    public WishListPage putFromWishListToCartProductByPartialName(String partialProductName){
+        getWishListContainerComponent()
+                .addToCartProductFromWishListByPartialName(partialProductName);
+        return new WishListPage(driver);
+    }
+
+    // remove Product from Wish List
+    public WishListPage removeFromWishListProductByPartialName(String partialProductName)
+    {
+        getWishListContainerComponent()
+                .removeProductFromWishListByPartialName(partialProductName);
+        return new WishListPage(driver);
+    }
 
 }

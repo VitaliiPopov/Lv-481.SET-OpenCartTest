@@ -1,5 +1,6 @@
 package com.opencart.pages;
 
+import com.opencart.pages.product_table.WishListPage;
 import com.opencart.pages.search.SearchPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -19,6 +20,7 @@ public class AbstractPageWithHeader {
     //
     private WebElement myAccount;
     private WebElement shoppingCart;
+    private WebElement wishList;
     //
     private WebElement logo;
     private WebElement searchField;
@@ -34,6 +36,7 @@ public class AbstractPageWithHeader {
 
     private void InitializeElements(){
         myAccount=driver.findElement(By.cssSelector("i.fa-user"));
+        wishList = driver.findElement(By.id("wishlist-total"));
         logo=driver.findElement(By.xpath("//h1/a"));;
         searchField=driver.findElement(By.cssSelector(".form-control.input-lg"));
         searchButton=driver.findElement(By.cssSelector(".btn.btn-default"));
@@ -48,6 +51,9 @@ public class AbstractPageWithHeader {
     private void clickMyAccount() {
         myAccount.click();
     }
+
+    //wishList
+    private void clickWishList(){ wishList.click(); }
 
     //searchButton
     private void clickSearchButton() {
@@ -112,6 +118,11 @@ public class AbstractPageWithHeader {
     public HomePage goToHomePage(){
         clickLogo();
         return new HomePage(driver);
+    }
+
+    public WishListPage goToWishList(){
+        clickWishList();
+        return new WishListPage(driver);
     }
 
     //Search

@@ -3,13 +3,15 @@
 <suite name="Default Suite">
     <test name="Individual">
         <!--MainTest-->
-        <parameter name="myAccountDropdownText" value="Login"></parameter>
-
+        <parameter name="myAccountDropdownText" value="Login"/>
+        <parameter name="search" value="ip"/>
+        <parameter name="productName" value="iPhone"/>
         <classes>
             <!--MainTest-->
-            <class name="test.MainTest">
+            <class name="test.LoginTest">
                 <methods>
-                    <include name="loginTest"/>
+                    <include name="Login"/>
+                    <include name="AddProductToCompareFromSearch"/>
                 </methods>
             </class>
         </classes>

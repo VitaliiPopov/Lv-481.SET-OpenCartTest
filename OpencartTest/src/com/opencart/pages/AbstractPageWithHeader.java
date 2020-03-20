@@ -1,5 +1,7 @@
 package com.opencart.pages;
 
+import com.opencart.pages.account.AccountLogoutPage;
+import com.opencart.pages.account.RegisterPage;
 import com.opencart.pages.search.SearchPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -112,6 +114,16 @@ public class AbstractPageWithHeader {
     public HomePage goToHomePage(){
         clickLogo();
         return new HomePage(driver);
+    }
+
+    public RegisterPage goToRegisterPage(String MY_ACCOUNT_DROPDOWN_TEXT){
+        clickMyAccountDropdownComponentByPartialName(MY_ACCOUNT_DROPDOWN_TEXT);
+        return new RegisterPage(driver);
+    }
+
+    public AccountLogoutPage goToLogoutPage(String MY_ACCOUNT_DROPDOWN_TEXT){
+        clickMyAccountDropdownComponentByPartialName(MY_ACCOUNT_DROPDOWN_TEXT);
+        return new AccountLogoutPage(driver);
     }
 
     //Search

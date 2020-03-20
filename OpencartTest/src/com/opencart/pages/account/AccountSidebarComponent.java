@@ -5,9 +5,19 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+
 public class AccountSidebarComponent {
 
-    private WebElement myAccountSideBarLink;
+    public AccountSidebarComponent(WebDriver driver) {
+        initElements();
+    }
+
+    private void initElements(){
+
+    }
+}
+
+    /*private WebElement myAccountSideBarLink;
     private WebElement editAccountSideBarLink;
     private WebElement changePasswordSideBarLink;
     private WebElement logoutSideBarLink;
@@ -42,5 +52,4 @@ public class AccountSidebarComponent {
         logoutSideBarLink.click();
         return new AccountLogoutPage(Driver.getDriver());
     }
-
-}
+*/

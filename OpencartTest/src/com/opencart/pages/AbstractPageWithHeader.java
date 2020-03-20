@@ -8,6 +8,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import com.opencart.pages.account.LoginPage;
 import com.opencart.pages.product_table.CartDropdownComponent;
+import org.openqa.selenium.support.ui.Select;
+
+import java.util.List;
 
 public class AbstractPageWithHeader {
 
@@ -104,6 +107,36 @@ public class AbstractPageWithHeader {
         clickDropdownComponentByPartialName(text);
     }
 
+    public void clickMyAccountDropdownComponentByName(String optionName){
+        openMyAccountDropdown();
+        WebElement dropdown = driver.findElement(By.cssSelector(DROPDOWN_MYACCONT_CSSSELECTOR));
+        List<WebElement> options = dropdown.findElements(By.tagName("li"));
+        for (WebElement option : options)
+        {
+            if (option.getText().equals(optionName))
+            {
+                option.click();
+                break;
+            }
+        }
+    }
+
+    public boolean isExistMyAccountDropdownOption(String optionName) {
+        boolean isFound = false;
+        openMyAccountDropdown();
+        WebElement dropdown = driver.findElement(By.cssSelector(DROPDOWN_MYACCONT_CSSSELECTOR));
+        List<WebElement> options = dropdown.findElements(By.tagName("li"));
+        for (WebElement option : options)
+        {
+            if (option.getText().equals(optionName))
+            {
+                isFound = true;
+                break;
+            }
+        }
+        return isFound;
+    }
+
     //BUSINESS LOGIC
 
     public LoginPage goToLoginPage(String MY_ACCOUNT_DROPDOWN_TEXT){
@@ -117,12 +150,12 @@ public class AbstractPageWithHeader {
     }
 
     public RegisterPage goToRegisterPage(String MY_ACCOUNT_DROPDOWN_TEXT){
-        clickMyAccountDropdownComponentByPartialName(MY_ACCOUNT_DROPDOWN_TEXT);
+        clickMyAccountDropdownComponentByName(MY_ACCOUNT_DROPDOWN_TEXT);
         return new RegisterPage(driver);
     }
 
     public AccountLogoutPage goToLogoutPage(String MY_ACCOUNT_DROPDOWN_TEXT){
-        clickMyAccountDropdownComponentByPartialName(MY_ACCOUNT_DROPDOWN_TEXT);
+        clickMyAccountDropdownComponentByName(MY_ACCOUNT_DROPDOWN_TEXT);
         return new AccountLogoutPage(driver);
     }
 

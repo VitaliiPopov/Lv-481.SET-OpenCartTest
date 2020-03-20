@@ -9,7 +9,6 @@ import org.openqa.selenium.support.PageFactory;
 
 public class ChangePasswordPage extends AbstractPageWithHeader {
 
-    @FindBy(how = How.ID, id = "column-right")
     private AccountSidebarComponent accountSidebarComponent;
 
     @FindBy(how = How.CSS, css = "#content>h1")

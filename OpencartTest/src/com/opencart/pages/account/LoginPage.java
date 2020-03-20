@@ -30,12 +30,8 @@ public class LoginPage extends AbstractPageWithHeader {
     public LoginPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
-        //initElements();
     }
 
-    /*private void initElements(){
-        accountSidebarComponent = new AccountSidebarComponent(driver);
-    }*/
 
     //PAGE OBJECT
 

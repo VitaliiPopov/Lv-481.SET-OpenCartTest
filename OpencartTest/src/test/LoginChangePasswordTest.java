@@ -23,11 +23,15 @@ public class LoginChangePasswordTest extends TestRunner {
 
     @AfterMethod
     public void tearDown(ITestResult result) {
+        if (getHomePage().isExistMyAccountDropdownOption("My Account")){
+            AccountLogoutPage logoutPage = getHomePage().goToLogoutPage("Logout");
+            logoutPage.logout();
+        }
+        else getHomePage();
+
         if (result.getStatus() == ITestResult.FAILURE) {
             Utility.getScreenshot(Driver.getDriver());
         }
-
-        getHomePage().goToHomePage();
     }
 
     @Parameters({"loginDropdownText"})
@@ -36,7 +40,6 @@ public class LoginChangePasswordTest extends TestRunner {
         LoginPage loginPage = getHomePage().goToLoginPage(loginDropdownText);
         loginPage.login("www@gmail.com", "jkjk");
         Assert.assertTrue(loginPage.isAlertDisplayed());
-        Thread.sleep(2000);
 
     }
 
@@ -46,7 +49,6 @@ public class LoginChangePasswordTest extends TestRunner {
         LoginPage loginPage = getHomePage().goToLoginPage(loginDropdownText);
         loginPage.login("", "");
         Assert.assertTrue(loginPage.isAlertDisplayed());
-        Thread.sleep(2000);
     }
 
     @Parameters({"loginDropdownText"})
@@ -55,7 +57,6 @@ public class LoginChangePasswordTest extends TestRunner {
         LoginPage loginPage = getHomePage().goToLoginPage(loginDropdownText);
         MyAccountPage myAccountPage = loginPage.login("test481@gmail.com", "test");
         Assert.assertTrue(myAccountPage.getTitleMyAccountText().equals("My Account"));
-        Thread.sleep(2000);
     }
 
     @Parameters({"loginDropdownText"})
@@ -66,7 +67,6 @@ public class LoginChangePasswordTest extends TestRunner {
         ChangePasswordPage changePasswordPage = myAccountPage.clickChangePasswordLink();
         changePasswordPage.changePassword("", "");
         Assert.assertTrue(changePasswordPage.isAlertPasswordDisplayed());
-        Thread.sleep(2000);
     }
 
     @Parameters({"loginDropdownText"})
@@ -77,7 +77,6 @@ public class LoginChangePasswordTest extends TestRunner {
         ChangePasswordPage changePasswordPage = myAccountPage.clickChangePasswordLink();
         changePasswordPage.changePassword("ttt", "ttt");
         Assert.assertTrue(changePasswordPage.isAlertPasswordDisplayed());
-        Thread.sleep(2000);
     }
 
     //bug
@@ -89,7 +88,6 @@ public class LoginChangePasswordTest extends TestRunner {
         ChangePasswordPage changePasswordPage = myAccountPage.clickChangePasswordLink();
         changePasswordPage.changePassword("tttttttttttttttttttttttt", "tttttttttttttttttttttttt");
         Assert.assertTrue(changePasswordPage.isAlertPasswordDisplayed()); //bug
-        Thread.sleep(2000);
     }
 
     //bug
@@ -101,7 +99,6 @@ public class LoginChangePasswordTest extends TestRunner {
         ChangePasswordPage changePasswordPage = myAccountPage.clickChangePasswordLink();
         changePasswordPage.changePassword("test", "testtest");
         Assert.assertTrue(changePasswordPage.isAlertConfirmDisplayed()); //bug
-        Thread.sleep(2000);
     }
 
     @Parameters({"loginDropdownText"})
@@ -112,28 +109,5 @@ public class LoginChangePasswordTest extends TestRunner {
         ChangePasswordPage changePasswordPage = myAccountPage.clickChangePasswordLink();
         myAccountPage = changePasswordPage.changePassword("test", "test");
         Assert.assertTrue(myAccountPage.isSuccessAlertDisplayed());
-        Thread.sleep(2000);
-    }
-
-    @Test(priority = 9)
-    public void logoutUserSideBarTest() throws InterruptedException {
-        ChangePasswordPage accountPage = new ChangePasswordPage(Driver.getDriver());
-        AccountLogoutPage logoutPage = accountPage.getAccountSidebarComponent().clickLogoutSideBar();
-        HomePage homePage = logoutPage.logout();
-        Thread.sleep(5000);
-    }
-
-
-    @Parameters({"logoutAccountDropdownText"})
-    @Test(priority = 10)
-    public void logoutUserHeaderTest(String logoutAccountDropdownText) throws InterruptedException {
-        AccountLogoutPage logoutPage = getHomePage().goToLogoutPage(logoutAccountDropdownText);
-        Thread.sleep(5000);
-
-//        if (getHomePage().getMyAccountDropdown().isExistDropdownOptionByPartialName("My Account")) {
-//            System.out.println("YES!");
-//            AccountLogoutPage logoutPage = getHomePage().goToLogoutPage(mySecondAccountDropdownText);
-//            Thread.sleep(5000);
-//        }
     }
 }

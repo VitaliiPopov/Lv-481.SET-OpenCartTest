@@ -60,6 +60,7 @@ public class MyAccountPage extends AbstractPageWithHeader {
         return new AddressBookPage(driver);
     }
 
+    //successAlert
     public boolean isSuccessAlertDisplayed(){
         return successAlert.isDisplayed();
     }

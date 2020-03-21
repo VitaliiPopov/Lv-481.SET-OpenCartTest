@@ -1,15 +1,20 @@
 package test;
 
+import com.opencart.data.ConstantVariables;
 import com.opencart.pages.HomePage;
 import com.opencart.pages.account.AccountLogoutPage;
 import com.opencart.pages.account.ChangePasswordPage;
 import com.opencart.pages.account.LoginPage;
 import com.opencart.pages.account.MyAccountPage;
+import com.opencart.pages.admin.AdminCustomerPage;
+import com.opencart.pages.admin.AdminHomePage;
+import com.opencart.pages.admin.AdminLoginPage;
 import com.opencart.tools.Driver;
 import com.opencart.tools.ExcelDataConfig;
 import com.opencart.tools.TestRunner;
 import com.opencart.tools.Utility;
 import org.junit.Assert;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
@@ -23,11 +28,11 @@ public class LoginChangePasswordTest extends TestRunner {
 
     @AfterMethod
     public void tearDown(ITestResult result) {
-        if (getHomePage().isExistMyAccountDropdownOption("My Account")){
-            AccountLogoutPage logoutPage = getHomePage().goToLogoutPage("Logout");
-            logoutPage.logout();
-        }
-        else getHomePage();
+//        if (getHomePage().isExistMyAccountDropdownOption("My Account")){
+//            AccountLogoutPage logoutPage = getHomePage().goToLogoutPage("Logout");
+//            logoutPage.logout();
+//        }
+//        else getHomePage();
 
         if (result.getStatus() == ITestResult.FAILURE) {
             Utility.getScreenshot(Driver.getDriver());
@@ -109,5 +114,15 @@ public class LoginChangePasswordTest extends TestRunner {
         ChangePasswordPage changePasswordPage = myAccountPage.clickChangePasswordLink();
         myAccountPage = changePasswordPage.changePassword("test", "test");
         Assert.assertTrue(myAccountPage.isSuccessAlertDisplayed());
+    }
+
+
+    @Test(priority = 9)
+    public void adminTest() throws InterruptedException {
+        Driver.getDriver().get(ConstantVariables.AdminURL);
+        AdminLoginPage adminLoginPage = new AdminLoginPage(Driver.getDriver());
+        AdminHomePage adminHomePage = adminLoginPage.adminLogin("root", "root");
+        adminHomePage.clickOnCustomerDropdown();
+        AdminCustomerPage adminCustomerPage = adminHomePage.clickOnCustomerTab();
     }
 }

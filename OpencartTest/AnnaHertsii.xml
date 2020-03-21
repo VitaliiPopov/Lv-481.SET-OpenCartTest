@@ -18,8 +18,7 @@
 <!--                    <include name="changePasswordToShortTest"/>-->
 <!--&lt;!&ndash;                    <include name="changePasswordToLongTest"/>&ndash;&gt;-->
 <!--                    <include name="changePasswordWrongConfirmTest"/>-->
-<!--                    <include name="changePasswordTest"/>-->
-                    <include name="adminTest"/>
+                    <include name="changePasswordTest"/>
 
                 </methods>
             </class>

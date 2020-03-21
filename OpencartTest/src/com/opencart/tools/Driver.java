@@ -37,6 +37,12 @@ public class Driver {
         return driver;
     }
 
+    public static WebDriver getAdminDriver() {
+        driver = getDriver();
+        driver.get(ConstantVariables.AdminURL);
+        return driver;
+    }
+
     public static void Quit(){
         driver.quit();
         driver = null;

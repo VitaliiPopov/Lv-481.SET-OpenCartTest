@@ -149,13 +149,13 @@ public class AbstractPageWithHeader {
         return new HomePage(driver);
     }
 
-    public RegisterPage goToRegisterPage(String MY_ACCOUNT_DROPDOWN_TEXT){
-        clickMyAccountDropdownComponentByName(MY_ACCOUNT_DROPDOWN_TEXT);
+    public RegisterPage goToRegisterPage(){
+        clickMyAccountDropdownComponentByName("Register");
         return new RegisterPage(driver);
     }
 
-    public AccountLogoutPage goToLogoutPage(String MY_ACCOUNT_DROPDOWN_TEXT){
-        clickMyAccountDropdownComponentByName(MY_ACCOUNT_DROPDOWN_TEXT);
+    public AccountLogoutPage goToLogoutPage(){
+        clickMyAccountDropdownComponentByName("Login");
         return new AccountLogoutPage(driver);
     }
 

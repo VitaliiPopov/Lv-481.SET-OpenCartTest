@@ -8,13 +8,13 @@ import org.openqa.selenium.support.PageFactory;
 
 public class AdminHomePage {
     protected WebDriver driver;
-    @FindBy(how = How.XPATH, xpath = "a[@href='#collapse1']")
+    @FindBy(how = How.XPATH, xpath = "//a[@href='#collapse1']")
     private WebElement catalogDropdown;
-    @FindBy(how = How.XPATH, xpath = "a[contains(text(), \"Reviews\")]")
+    @FindBy(how = How.XPATH, xpath = "//a[contains(text(), \"Reviews\")]")
     private WebElement reviewTab;
-    @FindBy(how = How.XPATH, xpath = "a[@href='#collapse5']")
+    @FindBy(how = How.XPATH, xpath = "//a[@href='#collapse5']")
     private WebElement customerDropdown;
-    @FindBy(how = How.XPATH, xpath = "ul[@id='collapse5']/li/a[contains(text(), 'Customers')]")
+    @FindBy(how = How.XPATH, xpath = "//ul[@id='collapse5']/li/a[contains(text(), 'Customers')]")
     private WebElement customerTab;
 
     public AdminHomePage(WebDriver driver) {
@@ -26,8 +26,9 @@ public class AdminHomePage {
         catalogDropdown.click();
     }
 
-    public void clickOnReviewTab(){
+    public AdminReviewPage clickOnReviewTab(){
         reviewTab.click();
+        return new AdminReviewPage(driver);
     }
 
     public void clickOnCustomerDropdown(){
@@ -36,7 +37,6 @@ public class AdminHomePage {
 
     public AdminCustomerPage clickOnCustomerTab(){
         customerTab.click();
-        customerTab.clear();
         return new AdminCustomerPage(driver);
     }
 

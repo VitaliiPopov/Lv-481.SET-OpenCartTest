@@ -8,6 +8,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.concurrent.TimeUnit;
+
 public class AccountLogoutPage extends AbstractPageWithHeader {
 
     private AccountSidebarComponent accountSidebarComponent;
@@ -37,6 +39,7 @@ public class AccountLogoutPage extends AbstractPageWithHeader {
 
     //logout
     public HomePage logout(){
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         clickLogoutButton();
         return new HomePage(driver);
     }

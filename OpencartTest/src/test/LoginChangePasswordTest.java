@@ -2,10 +2,7 @@ package test;
 
 import com.opencart.data.ConstantVariables;
 import com.opencart.pages.HomePage;
-import com.opencart.pages.account.AccountLogoutPage;
-import com.opencart.pages.account.ChangePasswordPage;
-import com.opencart.pages.account.LoginPage;
-import com.opencart.pages.account.MyAccountPage;
+import com.opencart.pages.account.*;
 import com.opencart.pages.admin.AdminCustomerPage;
 import com.opencart.pages.admin.AdminHomePage;
 import com.opencart.pages.admin.AdminLoginPage;
@@ -18,6 +15,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
@@ -26,17 +24,24 @@ import java.util.concurrent.TimeUnit;
 public class LoginChangePasswordTest extends TestRunner {
     ExcelDataConfig excelDataConfig = new ExcelDataConfig("TestData.xlsx");
 
+    @BeforeMethod
+    public void registration(ITestResult result) {
+        RegisterPage registerPage = getHomePage().goToRegisterPage();
+        SuccessRegisterPage success = registerPage.register("aaa", "aaa","aaa@gmail.com", "123", "aaaa", "aaaa");
+        success.goToAccountAfterRegistration();
+        getHomePage();
+    }
+
     @AfterMethod
     public void tearDown(ITestResult result) {
-//        if (getHomePage().isExistMyAccountDropdownOption("My Account")){
-//            AccountLogoutPage logoutPage = getHomePage().goToLogoutPage("Logout");
-//            logoutPage.logout();
-//        }
-//        else getHomePage();
-
         if (result.getStatus() == ITestResult.FAILURE) {
             Utility.getScreenshot(Driver.getDriver());
         }
+        if (getHomePage().isExistMyAccountDropdownOption("My Account")){
+            AccountLogoutPage logoutPage = getHomePage().goToLogoutPage();
+            logoutPage.logout();
+        }
+        else getHomePage();
     }
 
     @Parameters({"loginDropdownText"})
@@ -110,19 +115,21 @@ public class LoginChangePasswordTest extends TestRunner {
     @Test(priority = 8)
     public void changePasswordTest(String loginDropdownText) throws InterruptedException {
         LoginPage loginPage = getHomePage().goToLoginPage(loginDropdownText);
-        MyAccountPage myAccountPage = loginPage.login("test481@gmail.com", "test");
+        MyAccountPage myAccountPage = loginPage.login("aaa@gmail.com", "aaaa");
         ChangePasswordPage changePasswordPage = myAccountPage.clickChangePasswordLink();
-        myAccountPage = changePasswordPage.changePassword("test", "test");
+        myAccountPage = changePasswordPage.changePassword("aaaa", "aaaa");
         Assert.assertTrue(myAccountPage.isSuccessAlertDisplayed());
+        deleteCustomerFromAdmin();
     }
 
 
-    @Test(priority = 9)
-    public void adminTest() throws InterruptedException {
-        Driver.getDriver().get(ConstantVariables.AdminURL);
-        AdminLoginPage adminLoginPage = new AdminLoginPage(Driver.getDriver());
+    public void deleteCustomerFromAdmin() throws InterruptedException {
+        AdminLoginPage adminLoginPage = new AdminLoginPage(Driver.getAdminDriver());
         AdminHomePage adminHomePage = adminLoginPage.adminLogin("root", "root");
         adminHomePage.clickOnCustomerDropdown();
         AdminCustomerPage adminCustomerPage = adminHomePage.clickOnCustomerTab();
+        adminCustomerPage.findCustomerByEmail("aaa@gmail.com");
+        adminCustomerPage.clickDeleteCustomerButton();
+        adminCustomerPage.confirmAction();
     }
 }

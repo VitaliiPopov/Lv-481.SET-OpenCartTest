@@ -18,6 +18,7 @@ public class WishListContainerComponent {
 
     private void initElements(WebDriver driver) {
         productInWishListContainerComponents = new ArrayList<ProductInWishListContainerComponent>();
+
         for (WebElement current : driver.findElements(By.cssSelector(".table-responsive tbody tr")))
             productInWishListContainerComponents.add(new ProductInWishListContainerComponent (current));
     }
@@ -35,13 +36,6 @@ public class WishListContainerComponent {
         }
         return result;
     }
-
-
-    public int getListSize(){
-        return productInWishListContainerComponents.size();
-    }
-
-
 
     // BUSINESS LOGIC
 

@@ -155,7 +155,7 @@ public class AbstractPageWithHeader {
     }
 
     public AccountLogoutPage goToLogoutPage(){
-        clickMyAccountDropdownComponentByName("Login");
+        clickMyAccountDropdownComponentByName("Logout");
         return new AccountLogoutPage(driver);
     }
 

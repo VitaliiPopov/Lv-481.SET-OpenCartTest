@@ -39,7 +39,6 @@ public class AccountLogoutPage extends AbstractPageWithHeader {
 
     //logout
     public HomePage logout(){
-        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         clickLogoutButton();
         return new HomePage(driver);
     }

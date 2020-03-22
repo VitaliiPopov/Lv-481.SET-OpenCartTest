@@ -14,10 +14,7 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.util.concurrent.TimeUnit;
 
@@ -25,11 +22,12 @@ public class LoginChangePasswordTest extends TestRunner {
     ExcelDataConfig excelDataConfig = new ExcelDataConfig("TestData.xlsx");
 
     @BeforeMethod
-    public void registration(ITestResult result) {
+    public void primaryRegistration() {
         RegisterPage registerPage = getHomePage().goToRegisterPage();
         SuccessRegisterPage success = registerPage.register("aaa", "aaa","aaa@gmail.com", "123", "aaaa", "aaaa");
         success.goToAccountAfterRegistration();
-        getHomePage();
+        AccountLogoutPage logoutPage = getHomePage().goToLogoutPage();
+        logoutPage.logout();
     }
 
     @AfterMethod
@@ -37,11 +35,11 @@ public class LoginChangePasswordTest extends TestRunner {
         if (result.getStatus() == ITestResult.FAILURE) {
             Utility.getScreenshot(Driver.getDriver());
         }
-        if (getHomePage().isExistMyAccountDropdownOption("My Account")){
-            AccountLogoutPage logoutPage = getHomePage().goToLogoutPage();
-            logoutPage.logout();
+        try {
+            deleteCustomerFromAdmin();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
-        else getHomePage();
     }
 
     @Parameters({"loginDropdownText"})
@@ -50,7 +48,7 @@ public class LoginChangePasswordTest extends TestRunner {
         LoginPage loginPage = getHomePage().goToLoginPage(loginDropdownText);
         loginPage.login("www@gmail.com", "jkjk");
         Assert.assertTrue(loginPage.isAlertDisplayed());
-
+        logoutUser();
     }
 
     @Parameters({"loginDropdownText"})
@@ -59,69 +57,82 @@ public class LoginChangePasswordTest extends TestRunner {
         LoginPage loginPage = getHomePage().goToLoginPage(loginDropdownText);
         loginPage.login("", "");
         Assert.assertTrue(loginPage.isAlertDisplayed());
+        logoutUser();
     }
 
     @Parameters({"loginDropdownText"})
     @Test(priority = 3)
     public void loginExistedUserTest(String loginDropdownText) throws InterruptedException {
-        LoginPage loginPage = getHomePage().goToLoginPage(loginDropdownText);
-        MyAccountPage myAccountPage = loginPage.login("test481@gmail.com", "test");
+        MyAccountPage myAccountPage = loginUser(loginDropdownText);
         Assert.assertTrue(myAccountPage.getTitleMyAccountText().equals("My Account"));
+        logoutUser();
     }
 
     @Parameters({"loginDropdownText"})
     @Test(priority = 4)
     public void changePasswordToEmptyTest(String loginDropdownText) throws InterruptedException {
-        LoginPage loginPage = getHomePage().goToLoginPage(loginDropdownText);
-        MyAccountPage myAccountPage = loginPage.login("test481@gmail.com", "test");
+        MyAccountPage myAccountPage = loginUser(loginDropdownText);
         ChangePasswordPage changePasswordPage = myAccountPage.clickChangePasswordLink();
         changePasswordPage.changePassword("", "");
         Assert.assertTrue(changePasswordPage.isAlertPasswordDisplayed());
+        logoutUser();
     }
 
     @Parameters({"loginDropdownText"})
     @Test(priority = 5)
     public void changePasswordToShortTest(String loginDropdownText) throws InterruptedException {
-        LoginPage loginPage = getHomePage().goToLoginPage(loginDropdownText);
-        MyAccountPage myAccountPage = loginPage.login("test481@gmail.com", "test");
+        MyAccountPage myAccountPage = loginUser(loginDropdownText);
         ChangePasswordPage changePasswordPage = myAccountPage.clickChangePasswordLink();
         changePasswordPage.changePassword("ttt", "ttt");
         Assert.assertTrue(changePasswordPage.isAlertPasswordDisplayed());
+        logoutUser();
     }
 
     //bug
     @Parameters({"loginDropdownText"})
     @Test(priority = 6)
     public void changePasswordToLongTest(String loginDropdownText) throws InterruptedException {
-        LoginPage loginPage = getHomePage().goToLoginPage(loginDropdownText);
-        MyAccountPage myAccountPage = loginPage.login("test481@gmail.com", "test");
+        MyAccountPage myAccountPage = loginUser(loginDropdownText);
         ChangePasswordPage changePasswordPage = myAccountPage.clickChangePasswordLink();
         changePasswordPage.changePassword("tttttttttttttttttttttttt", "tttttttttttttttttttttttt");
         Assert.assertTrue(changePasswordPage.isAlertPasswordDisplayed()); //bug
+        logoutUser();
     }
 
     //bug
     @Parameters({"loginDropdownText"})
     @Test(priority = 7)
     public void changePasswordWrongConfirmTest(String loginDropdownText) throws InterruptedException {
-        LoginPage loginPage = getHomePage().goToLoginPage(loginDropdownText);
-        MyAccountPage myAccountPage = loginPage.login("test481@gmail.com", "test");
+        MyAccountPage myAccountPage = loginUser(loginDropdownText);
         ChangePasswordPage changePasswordPage = myAccountPage.clickChangePasswordLink();
         changePasswordPage.changePassword("test", "testtest");
         Assert.assertTrue(changePasswordPage.isAlertConfirmDisplayed()); //bug
+        logoutUser();
     }
 
     @Parameters({"loginDropdownText"})
     @Test(priority = 8)
     public void changePasswordTest(String loginDropdownText) throws InterruptedException {
-        LoginPage loginPage = getHomePage().goToLoginPage(loginDropdownText);
-        MyAccountPage myAccountPage = loginPage.login("aaa@gmail.com", "aaaa");
+        MyAccountPage myAccountPage = loginUser(loginDropdownText);
         ChangePasswordPage changePasswordPage = myAccountPage.clickChangePasswordLink();
         myAccountPage = changePasswordPage.changePassword("aaaa", "aaaa");
         Assert.assertTrue(myAccountPage.isSuccessAlertDisplayed());
-        deleteCustomerFromAdmin();
+        logoutUser();
     }
 
+    public MyAccountPage loginUser(String loginDropdownText) throws InterruptedException {
+        LoginPage loginPage = getHomePage().goToLoginPage(loginDropdownText);
+        MyAccountPage myAccountPage = loginPage.login("aaa@gmail.com", "aaaa");
+        return myAccountPage;
+    }
+
+    public void logoutUser() throws InterruptedException {
+        if (getHomePage().isExistMyAccountDropdownOption("MyAccount")){
+            AccountLogoutPage logoutPage = getHomePage().goToLogoutPage();
+            logoutPage.logout();
+        }
+        else getHomePage();
+    }
 
     public void deleteCustomerFromAdmin() throws InterruptedException {
         AdminLoginPage adminLoginPage = new AdminLoginPage(Driver.getAdminDriver());

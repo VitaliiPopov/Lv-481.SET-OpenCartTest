@@ -4,22 +4,19 @@ import com.opencart.pages.HomePage;
 import org.testng.annotations.*;
 
 public class TestRunner {
-
+    
     @BeforeClass
     public void beforeClass(){
         Driver.getDriver();
     }
     @AfterClass
     public void afterClass(){
-        Driver.Quit();
+        Driver.shutDown();
     }
 
     public HomePage getHomePage(){
         return new HomePage(Driver.getDriver());
     }
 
-    /*public SearchPage getSearchPage(){
-        return new SearchPage(Driver.getDriver());
-    }*/
 
 }

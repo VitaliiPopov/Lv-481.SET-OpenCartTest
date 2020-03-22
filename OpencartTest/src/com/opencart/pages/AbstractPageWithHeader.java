@@ -39,7 +39,6 @@ public class AbstractPageWithHeader {
     private void InitializeElements() {
         myAccount = driver.findElement(By.cssSelector("i.fa-user"));
         logo = driver.findElement(By.xpath("//h1/a"));
-        ;
         searchField = driver.findElement(By.cssSelector(".form-control.input-lg"));
         searchButton = driver.findElement(By.cssSelector(".btn.btn-default"));
     }

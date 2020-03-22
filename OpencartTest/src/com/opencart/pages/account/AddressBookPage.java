@@ -2,6 +2,7 @@ package com.opencart.pages.account;
 
 
 import com.opencart.pages.AbstractPageWithHeader;
+import com.opencart.tools.JsonDataConfig;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AddressBookPage extends AbstractPageWithHeader {
-
+    JsonDataConfig jsonDataConfig = new JsonDataConfig("TestData.json");
     //Components
     private AccountSidebarComponent accountSidebarComponent;
     private List<AddressBookContainersComponent> addressBookContainersComponents;
@@ -25,7 +26,6 @@ public class AddressBookPage extends AbstractPageWithHeader {
     private WebElement adresssDeleteDefault;
 
 
-
     public AddressBookPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
@@ -35,7 +35,7 @@ public class AddressBookPage extends AbstractPageWithHeader {
 
     private void InitializeAddressContainers() {
         List<WebElement> addressContainers = driver.findElements(By.xpath("//*[@id='content']/div[1]/table/tbody//tr"));
-        System.out.println(addressContainers.size()); //знаходить всі тр-ки
+        //System.out.println(addressContainers.size()); //знаходить всі тр-ки
         //System.out.println(addressContainers.get(1).getText());
 
         addressBookContainersComponents = new ArrayList<AddressBookContainersComponent>();
@@ -52,6 +52,7 @@ public class AddressBookPage extends AbstractPageWithHeader {
         }
         //if (result == null) throw new RuntimeException();
     }
+
     public EditAdressPage clickNewAddress() {
         newAdressButton.click();
         return new EditAdressPage(driver);
@@ -61,14 +62,15 @@ public class AddressBookPage extends AbstractPageWithHeader {
         newAdressButton.click();
         return new EditAdressPage(driver);
     }
-    public void clickDeleteDefaultAddress(){
+
+    public void clickDeleteDefaultAddress() {
         addressBookContainersComponents.get(0).clickDeleteAddressButton();
     }
 
 
     public AddressBookPage addAddressIfthereisnoaddress() {
         if (addressBookContainersComponents.size() == 1) {
-            return clickNewAddress().register("Yura", "Sereda", "Shopena Str,", "Ternopil", "Ukraine", "Ternopil's'ka Oblast'");
+            return clickNewAddress().register(jsonDataConfig.getFirstNameFromJson(0),jsonDataConfig.getLastNameFromJson(0),jsonDataConfig.getAddressFromJson(0),jsonDataConfig.getCityFromJson(0),jsonDataConfig.getCountryFromJson(0),jsonDataConfig.getRegionFromJson(0));
         }
         return new AddressBookPage(driver);
     }
@@ -81,10 +83,11 @@ public class AddressBookPage extends AbstractPageWithHeader {
         addressBookContainersComponents.get(0).clickEditAddressButton();
         return new EditAdressPage(driver);
     }
-    public boolean  checkAddresTextCorect(String FIRST_NAME, String LAST_NAME, String ADDRESS, String CITY, String COUNTRY,String REGION){
+
+    public boolean checkAddresTextCorect(String FIRST_NAME, String LAST_NAME, String ADDRESS, String CITY, String COUNTRY, String REGION) {
         String actualAddress = addressBookContainersComponents.get(0).getAddressText();
-        System.out.println(actualAddress+"\n");
-        String rightAddress =FIRST_NAME+" "+LAST_NAME+"\n"+ADDRESS+"\n"+CITY+"\n"+REGION+"\n"+COUNTRY;
+        System.out.println(actualAddress + "\n");
+        String rightAddress = FIRST_NAME + " " + LAST_NAME + "\n" + ADDRESS + "\n" + CITY + "\n" + REGION + "\n" + COUNTRY;
         System.out.println(rightAddress);
         return rightAddress.equalsIgnoreCase(actualAddress);
     }
@@ -110,6 +113,7 @@ public class AddressBookPage extends AbstractPageWithHeader {
         } else return false;
 
     }
+
     public boolean defaultDeleteAlert() {
         if (adresssDeleteDefault.getText().equalsIgnoreCase("Warning: You must have at least one address!")) {
             return adresssDeleteDefault.isDisplayed();

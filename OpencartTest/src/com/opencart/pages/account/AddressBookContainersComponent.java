@@ -26,7 +26,7 @@ public class AddressBookContainersComponent {
         address = singleAddress.findElement(By.cssSelector(".text-left"));
         editAddressButton = singleAddress.findElement(By.cssSelector(".btn-info"));
         deleteAddressButton = singleAddress.findElement(By.cssSelector(".btn-danger"));
-       // userFullName=singleAddress.findElement(By.xpath(""))
+        // userFullName=singleAddress.findElement(By.xpath(""))
     }
 
     public String getAddressText() {

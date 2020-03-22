@@ -61,9 +61,10 @@ public class MyAccountPage extends AbstractPageWithHeader {
         return new AddressBookPage(driver);
     }
 
-    public boolean isSuccessAlertDisplayed(){
+    public boolean isSuccessAlertDisplayed() {
         return successAlert.isDisplayed();
     }
+
     public EmptyAddressBookPage clickModifyyouraddresswhuileempty() {
         adressLink.click();
         return new EmptyAddressBookPage(driver);

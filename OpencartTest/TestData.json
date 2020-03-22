@@ -1,0 +1,33 @@
+{
+  "userLogin":
+  [
+
+    {
+      "email": "test481@gmail.com",
+      "password": "test",
+      "firstname": "test",
+      "lastname": "test",
+      "telephone": "481481",
+      "FirstName": "Yurii",
+      "LastName": "Sereda",
+      "Address": "Shopena Str,",
+      "City": "Ternopil",
+      "Country": "Ukraine",
+      "Region": "Ternopil's'ka Oblast'"
+    },
+    {
+      "email": "test481@gmail.com",
+      "password": "test",
+      "firstname": "test",
+      "lastname": "test",
+      "telephone": "481481",
+      "FirstName": "",
+      "LastName": "",
+      "Address": "ww",
+      "City": "w",
+      "Country": "Ukraine",
+      "Region": "Ternopil's'ka Oblast'"
+    }
+
+  ]
+}

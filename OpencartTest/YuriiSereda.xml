@@ -12,12 +12,19 @@
             <!--MainTest-->
             <class name="test.LoginTest">
                 <methods>
-                    <include name="abilityToAddAddress"/>
+                     <include name="abilityToAddAddress"/>
                     <include name="abilityToDeleteAddress"/>
                     <include name="editAddress"/>
                     <include name="checkEditPageAlertMassages"/>
                     <include name="checkAbilityToDeleteDefaultAddress"/>
-                    <include name="createUserWithEmptyFirstname"/>
+                    <include name="createAddressWithEmptyFirstname"/>
+                    <include name="createAddressWithEmptyLastname"/>
+                    <include name="createAddressWithEmptyAddress"/>
+                    <include name="createAddressWithEmptyCountry"/>
+                    <include name="createAddressWithEmptyRegion"/>
+                    <include name="checkAlertsWithTooShortInputs"/>
+
+                    <include name="checkJson"/>
                 </methods>
             </class>
         </classes>

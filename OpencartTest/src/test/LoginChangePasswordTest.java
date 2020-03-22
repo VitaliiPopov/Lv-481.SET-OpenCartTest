@@ -6,10 +6,7 @@ import com.opencart.pages.account.*;
 import com.opencart.pages.admin.AdminCustomerPage;
 import com.opencart.pages.admin.AdminHomePage;
 import com.opencart.pages.admin.AdminLoginPage;
-import com.opencart.tools.Driver;
-import com.opencart.tools.ExcelDataConfig;
-import com.opencart.tools.TestRunner;
-import com.opencart.tools.Utility;
+import com.opencart.tools.*;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -19,7 +16,7 @@ import org.testng.annotations.*;
 import java.util.concurrent.TimeUnit;
 
 public class LoginChangePasswordTest extends TestRunner {
-    ExcelDataConfig excelDataConfig = new ExcelDataConfig("TestData.xlsx");
+    JsonDataConfig jsonDataConfig = new JsonDataConfig("TestData.json");
 
     @BeforeMethod
     public void primaryRegistration() {
@@ -122,7 +119,7 @@ public class LoginChangePasswordTest extends TestRunner {
 
     public MyAccountPage loginUser(String loginDropdownText) throws InterruptedException {
         LoginPage loginPage = getHomePage().goToLoginPage(loginDropdownText);
-        MyAccountPage myAccountPage = loginPage.login("aaa@gmail.com", "aaaa");
+        MyAccountPage myAccountPage = loginPage.login(jsonDataConfig.getEmailFromJson(1),jsonDataConfig.getPasswordFromJson(1));
         return myAccountPage;
     }
 

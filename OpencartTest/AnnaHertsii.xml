@@ -12,14 +12,14 @@
             <!--MainTest-->
             <class name="test.LoginChangePasswordTest">
                 <methods>
-<!--                    <include name="loginWithEmptyFieldsTest"/>-->
-<!--                    <include name="loginNotExistedUserTest"/>-->
+                    <include name="loginWithEmptyFieldsTest"/>
+                    <include name="loginNotExistedUserTest"/>
                     <include name="loginExistedUserTest"/>
-<!--                    <include name="changePasswordToEmptyTest"/>-->
-<!--                    <include name="changePasswordToShortTest"/>-->
-<!--                    <include name="changePasswordToLongTest"/>-->
-<!--                    <include name="changePasswordWrongConfirmTest"/>-->
-<!--                    <include name="changePasswordTest"/>-->
+                    <include name="changePasswordToEmptyTest"/>
+                    <include name="changePasswordToShortTest"/>
+                    <include name="changePasswordToLongTest"/>
+                    <include name="changePasswordWrongConfirmTest"/>
+                    <include name="changePasswordTest"/>
                 </methods>
             </class>
         </classes>

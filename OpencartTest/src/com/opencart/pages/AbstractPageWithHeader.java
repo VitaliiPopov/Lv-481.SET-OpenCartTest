@@ -1,11 +1,14 @@
 package com.opencart.pages;
 
+import com.opencart.pages.account.LoginPage;
+import com.opencart.pages.account.MyAccountPage;
+import com.opencart.pages.product_table.CartDropdownComponent;
 import com.opencart.pages.search.SearchPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import com.opencart.pages.account.LoginPage;
-import com.opencart.pages.product_table.CartDropdownComponent;
+
+import java.util.List;
 
 public class AbstractPageWithHeader {
 
@@ -26,17 +29,19 @@ public class AbstractPageWithHeader {
     //Components
     private CartDropdownComponent cartDropdownComponent;
     private DropdownComponent dropdownComponent;
+    private WebElement MyAccountButtonInDropdown;
 
     public AbstractPageWithHeader(WebDriver driver) {
         this.driver = driver;
         InitializeElements();
     }
 
-    private void InitializeElements(){
-        myAccount=driver.findElement(By.cssSelector("i.fa-user"));
-        logo=driver.findElement(By.xpath("//h1/a"));;
-        searchField=driver.findElement(By.cssSelector(".form-control.input-lg"));
-        searchButton=driver.findElement(By.cssSelector(".btn.btn-default"));
+    private void InitializeElements() {
+        myAccount = driver.findElement(By.cssSelector("i.fa-user"));
+        logo = driver.findElement(By.xpath("//h1/a"));
+        ;
+        searchField = driver.findElement(By.cssSelector(".form-control.input-lg"));
+        searchButton = driver.findElement(By.cssSelector(".btn.btn-default"));
     }
 
     //logo
@@ -68,23 +73,22 @@ public class AbstractPageWithHeader {
     }
 
     //dropdownComponent
-    protected DropdownComponent getDropdownComponent(){
-        if(dropdownComponent == null){
+    protected DropdownComponent getDropdownComponent() {
+        if (dropdownComponent == null) {
             throw new RuntimeException(OPTION_NULL_MESSAGE);
         }
         return dropdownComponent;
     }
 
-    private DropdownComponent createDropdownComponent(By searchLocator){
+    private DropdownComponent createDropdownComponent(By searchLocator) {
         dropdownComponent = new DropdownComponent(driver, searchLocator);
         return dropdownComponent;
     }
 
-    private void clickDropdownComponentByPartialName(String optionName){
-        if(getDropdownComponent().isExistDropdownOptionByPartialName(optionName)){
+    private void clickDropdownComponentByPartialName(String optionName) {
+        if (getDropdownComponent().isExistDropdownOptionByPartialName(optionName)) {
             getDropdownComponent().clickDropdownOptionByPartialName(optionName);
-        }
-        else{
+        } else {
             throw new RuntimeException(String.format(OPTION_NOT_FOUND_MESSAGE, optionName));
         }
     }
@@ -92,30 +96,68 @@ public class AbstractPageWithHeader {
     //FUNCTIONAL
 
     //MyAccount
-    public void openMyAccountDropdown(){
+    public void openMyAccountDropdown() {
         clickMyAccount();
         createDropdownComponent(By.cssSelector(DROPDOWN_MYACCONT_CSSSELECTOR));
     }
 
-    public void clickMyAccountDropdownComponentByPartialName(String text){
+    public void clickMyAccountDropdownComponentByPartialName(String text) {
         openMyAccountDropdown();
         clickDropdownComponentByPartialName(text);
     }
 
+    // hardcode by Yura
+    public MyAccountPage clickMyAccauntInDropdownHardcode() {
+        openMyAccountDropdown();
+        getMyAccount().click();
+        return new MyAccountPage(driver);
+    }
+
+    public WebElement getMyAccount() {
+        myAccount = driver.findElement(By.xpath("//ul[@class='dropdown-menu dropdown-menu-right']//li[last()-4]"));
+        return myAccount;
+    }
+
+    // Anya hardcode dropdown myaccaunt
+    public void clickMyAccountDropdownComponentByName(String optionName) {
+        openMyAccountDropdown();
+        WebElement dropdown = driver.findElement(By.cssSelector(DROPDOWN_MYACCONT_CSSSELECTOR));
+        List<WebElement> options = dropdown.findElements(By.tagName("li"));
+        for (WebElement option : options) {
+            if (option.getText().equals(optionName)) {
+                option.click();
+                break;
+            }
+        }
+    }
+
+    public boolean isExistMyAccountDropdownOption(String optionName) {
+        boolean isFound = false;
+        openMyAccountDropdown();
+        WebElement dropdown = driver.findElement(By.cssSelector(DROPDOWN_MYACCONT_CSSSELECTOR));
+        List<WebElement> options = dropdown.findElements(By.tagName("li"));
+        for (WebElement option : options) {
+            if (option.getText().equals(optionName)) {
+                isFound = true;
+                break;
+            }
+        }
+        return isFound;
+    }
     //BUSINESS LOGIC
 
-    public LoginPage goToLoginPage(String MY_ACCOUNT_DROPDOWN_TEXT){
+    public LoginPage goToLoginPage(String MY_ACCOUNT_DROPDOWN_TEXT) {
         clickMyAccountDropdownComponentByPartialName(MY_ACCOUNT_DROPDOWN_TEXT);
         return new LoginPage(driver);
     }
 
-    public HomePage goToHomePage(){
+    public HomePage goToHomePage() {
         clickLogo();
         return new HomePage(driver);
     }
 
     //Search
-    public SearchPage SearchProduct(String name){
+    public SearchPage SearchProduct(String name) {
         clickSearchField();
         clearSearchField();
         inputSearchField(name);

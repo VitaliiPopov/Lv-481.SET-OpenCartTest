@@ -10,7 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 public class LoginPage extends AbstractPageWithHeader {
 
     //Components
-    private AccountSidebarComponent accountSidebarComponent;
+    //private AccountSidebarComponent accountSidebarComponent;
     //RETURNING CUSTOMER
     @FindBy(how = How.XPATH, xpath = "//input[@id='input-password']/../../../h2")
     private WebElement titleLoginBlock;
@@ -28,7 +28,7 @@ public class LoginPage extends AbstractPageWithHeader {
     }
 
     private void initElements(){
-        accountSidebarComponent = new AccountSidebarComponent(driver);
+        /*accountSidebarComponent = new AccountSidebarComponent(driver)*/;
     }
 
     //PAGE OBJECT

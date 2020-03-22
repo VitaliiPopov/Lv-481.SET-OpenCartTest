@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Default Suite">
-    <test name="Individual">
+<suite name="SeredaYuriiSuite">
+    <test name="YuriiSereda">
         <!--MainTest-->
         <parameter name="myAccountDropdownText" value="Login"/>
         <parameter name="myAccount" value="My Account"/>
@@ -13,13 +13,11 @@
             <class name="test.LoginTest">
                 <methods>
                     <include name="abilityToAddAddress"/>
-                    <include name="abilityToDeleteAddress"/>
+                    <!--<include name="abilityToDeleteAddress"/>
                     <include name="editAddress"/>
-                     <include name="checkEditPageAlertMassages"/>
-                    <include name="checkAdres"/>
-
-                    <!--<include name="checkAbilityToDeleteDefaultAddress"/>-->
-
+                    <include name="checkEditPageAlertMassages"/>
+                    <include name="checkAbilityToDeleteDefaultAddress"/>-->
+                    <include name="createUserWithEmptyFirstname"/>
                 </methods>
             </class>
         </classes>

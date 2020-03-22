@@ -1,6 +1,7 @@
 package com.opencart.tools;
 
 import com.opencart.pages.HomePage;
+import com.opencart.pages.account.AddressBookPage;
 import org.testng.annotations.*;
 
 public class TestRunner {
@@ -17,7 +18,9 @@ public class TestRunner {
     public HomePage getHomePage(){
         return new HomePage(Driver.getDriver());
     }
-
+    public AddressBookPage getAdresbokpage() {
+        return new AddressBookPage(Driver.getDriver());
+    }
     /*public SearchPage getSearchPage(){
         return new SearchPage(Driver.getDriver());
     }*/

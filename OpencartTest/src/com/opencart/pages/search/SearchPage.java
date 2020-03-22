@@ -23,7 +23,7 @@ public class SearchPage extends AbstractPageWithHeader {
 
     private void InitializeProductContainers() {
         //
-        List<WebElement> productContainers = driver.findElements(By.xpath("//div[@class='product-thumb']"));
+        List<WebElement> productContainers = driver.findElements(By.xpath("//div[contains(@class,'product-thumb')]"));
         productContainersComponents = new ArrayList<>();
         for (WebElement current : productContainers){
             productContainersComponents.add(new ProductContainersComponent(current));
@@ -68,6 +68,11 @@ public class SearchPage extends AbstractPageWithHeader {
     //add to cart by button
     public void clickProductComponentAddToCartButtonByName(String productName) {
         getProductComponentByName(productName).clickAddToCartButton();
+    }
+
+    //add to wishList by button
+    public void clickProductComponentAddToWishListButtonByName(String productName){
+        getProductComponentByName(productName).clickAddToWishListButton();
     }
 
     //BUSINESS LOGIC

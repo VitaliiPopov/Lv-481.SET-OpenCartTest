@@ -2,6 +2,7 @@ package com.opencart.pages;
 
 import com.opencart.pages.product_table.WishListPage;
 import com.opencart.pages.search.SearchPage;
+import com.opencart.tools.Regex;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -108,6 +109,15 @@ public class AbstractPageWithHeader {
         clickDropdownComponentByPartialName(text);
     }
 
+    //WishList
+    public String getWishListText(){
+        return wishList.getText();
+    }
+
+    public int getWishListNumberOfProducts(){
+        return Regex.takeNumber(getWishListText());
+    }
+
     //BUSINESS LOGIC
 
     public LoginPage goToLoginPage(String MY_ACCOUNT_DROPDOWN_TEXT){
@@ -126,7 +136,7 @@ public class AbstractPageWithHeader {
     }
 
     //Search
-    public SearchPage SearchProduct(String name){
+    public SearchPage searchProduct(String name){
         clickSearchField();
         clearSearchField();
         inputSearchField(name);

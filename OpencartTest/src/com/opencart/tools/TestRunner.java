@@ -4,7 +4,7 @@ import com.opencart.pages.HomePage;
 import org.testng.annotations.*;
 
 public class TestRunner {
-    
+
     @BeforeClass
     public void beforeClass(){
         Driver.getDriver();

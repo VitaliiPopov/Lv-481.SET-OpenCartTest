@@ -1,7 +1,6 @@
 package com.opencart.pages.product_table;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class ProductInWishListContainerComponent {
@@ -29,7 +28,6 @@ public class ProductInWishListContainerComponent {
 
     // PRODUCT NAME (productNameWishList)
     public String getProductNameWishListText() {
-        System.out.println(productNameWishList.getText());
         return productNameWishList.getText();
     }
 

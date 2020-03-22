@@ -12,7 +12,7 @@ public class WishListContainerComponent {
 
     private List<ProductInWishListContainerComponent> productInWishListContainerComponents;
 
-    public WishListContainerComponent(WebDriver driver){
+    public WishListContainerComponent(WebDriver driver) {
         initElements(driver);
     }
 
@@ -20,7 +20,7 @@ public class WishListContainerComponent {
         productInWishListContainerComponents = new ArrayList<ProductInWishListContainerComponent>();
 
         for (WebElement current : driver.findElements(By.cssSelector(".table-responsive tbody tr")))
-            productInWishListContainerComponents.add(new ProductInWishListContainerComponent (current));
+            productInWishListContainerComponents.add(new ProductInWishListContainerComponent(current));
     }
 
     // PAGE OBJECT
@@ -43,14 +43,12 @@ public class WishListContainerComponent {
     public void addToCartProductFromWishListByPartialName(String partialProductName) {
         getProductInWishListContainerComponentByPartialName(partialProductName)
                 .clickAddToCartFromWishList();
-        System.out.println("added");
     }
 
     // remove product from wish list
-    public void removeProductFromWishListByPartialName(String partialProductName){
+    public void removeProductFromWishListByPartialName(String partialProductName) {
         getProductInWishListContainerComponentByPartialName(partialProductName)
                 .clickRemoveProductFromWishList();
-        System.out.println("removed");
     }
 
 }

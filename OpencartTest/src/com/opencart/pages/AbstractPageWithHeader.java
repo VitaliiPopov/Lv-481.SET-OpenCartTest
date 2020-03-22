@@ -1,13 +1,15 @@
 package com.opencart.pages;
 
+import com.opencart.pages.account.LoginPage;
+import com.opencart.pages.product_table.CartDropdownComponent;
 import com.opencart.pages.product_table.WishListPage;
 import com.opencart.pages.search.SearchPage;
 import com.opencart.tools.Regex;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import com.opencart.pages.account.LoginPage;
-import com.opencart.pages.product_table.CartDropdownComponent;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class AbstractPageWithHeader {
 
@@ -35,12 +37,15 @@ public class AbstractPageWithHeader {
         InitializeElements();
     }
 
-    private void InitializeElements(){
-        myAccount=driver.findElement(By.cssSelector("i.fa-user"));
+    private void InitializeElements() {
+        myAccount = driver.findElement(By.cssSelector("i.fa-user"));
         wishList = driver.findElement(By.id("wishlist-total"));
-        logo=driver.findElement(By.xpath("//h1/a"));;
-        searchField=driver.findElement(By.cssSelector(".form-control.input-lg"));
-        searchButton=driver.findElement(By.cssSelector(".btn.btn-default"));
+        WebDriverWait wait = new WebDriverWait(driver, 15);
+        logo = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h1/a")));
+
+        searchField = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".form-control.input-lg")));
+        //searchField=driver.findElement(By.cssSelector(".form-control.input-lg"));
+        searchButton = driver.findElement(By.cssSelector(".btn.btn-default"));
     }
 
     //logo
@@ -54,7 +59,9 @@ public class AbstractPageWithHeader {
     }
 
     //wishList
-    private void clickWishList(){ wishList.click(); }
+    private void clickWishList() {
+        wishList.click();
+    }
 
     //searchButton
     private void clickSearchButton() {
@@ -75,23 +82,22 @@ public class AbstractPageWithHeader {
     }
 
     //dropdownComponent
-    protected DropdownComponent getDropdownComponent(){
-        if(dropdownComponent == null){
+    protected DropdownComponent getDropdownComponent() {
+        if (dropdownComponent == null) {
             throw new RuntimeException(OPTION_NULL_MESSAGE);
         }
         return dropdownComponent;
     }
 
-    private DropdownComponent createDropdownComponent(By searchLocator){
+    private DropdownComponent createDropdownComponent(By searchLocator) {
         dropdownComponent = new DropdownComponent(driver, searchLocator);
         return dropdownComponent;
     }
 
-    private void clickDropdownComponentByPartialName(String optionName){
-        if(getDropdownComponent().isExistDropdownOptionByPartialName(optionName)){
+    private void clickDropdownComponentByPartialName(String optionName) {
+        if (getDropdownComponent().isExistDropdownOptionByPartialName(optionName)) {
             getDropdownComponent().clickDropdownOptionByPartialName(optionName);
-        }
-        else{
+        } else {
             throw new RuntimeException(String.format(OPTION_NOT_FOUND_MESSAGE, optionName));
         }
     }
@@ -99,44 +105,44 @@ public class AbstractPageWithHeader {
     //FUNCTIONAL
 
     //MyAccount
-    public void openMyAccountDropdown(){
+    public void openMyAccountDropdown() {
         clickMyAccount();
         createDropdownComponent(By.cssSelector(DROPDOWN_MYACCONT_CSSSELECTOR));
     }
 
-    public void clickMyAccountDropdownComponentByPartialName(String text){
+    public void clickMyAccountDropdownComponentByPartialName(String text) {
         openMyAccountDropdown();
         clickDropdownComponentByPartialName(text);
     }
 
     //WishList
-    public String getWishListText(){
+    public String getWishListText() {
         return wishList.getText();
     }
 
-    public int getWishListNumberOfProducts(){
+    public int getWishListNumberOfProducts() {
         return Regex.takeNumber(getWishListText());
     }
 
     //BUSINESS LOGIC
 
-    public LoginPage goToLoginPage(String MY_ACCOUNT_DROPDOWN_TEXT){
+    public LoginPage goToLoginPage(String MY_ACCOUNT_DROPDOWN_TEXT) {
         clickMyAccountDropdownComponentByPartialName(MY_ACCOUNT_DROPDOWN_TEXT);
         return new LoginPage(driver);
     }
 
-    public HomePage goToHomePage(){
+    public HomePage goToHomePage() {
         clickLogo();
         return new HomePage(driver);
     }
 
-    public WishListPage goToWishList(){
+    public WishListPage goToWishList() {
         clickWishList();
         return new WishListPage(driver);
     }
 
     //Search
-    public SearchPage searchProduct(String name){
+    public SearchPage searchProduct(String name) {
         clickSearchField();
         clearSearchField();
         inputSearchField(name);

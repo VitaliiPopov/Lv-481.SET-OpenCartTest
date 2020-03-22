@@ -1,9 +1,12 @@
 package com.opencart.pages.product_table;
 
 import com.opencart.pages.AbstractPageWithHeader;
+import com.opencart.pages.account.MyAccountPage;
+import com.opencart.tools.Regex;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class WishListPage extends AbstractPageWithHeader {
@@ -11,36 +14,67 @@ public class WishListPage extends AbstractPageWithHeader {
     //Components
     private WishListContainerComponent wishListContainerComponent;
 
+    private WebElement continueButton;
+
     public WishListPage(WebDriver driver) {
         super(driver);
         initElements();
     }
 
     private void initElements() {
-        wishListContainerComponent = new  WishListContainerComponent(driver);
+
+        wishListContainerComponent = new WishListContainerComponent(driver);
+        continueButton = driver.findElement(By.xpath("//div[@class='pull-right']/a"));
     }
 
     // PAGE OBJECT
 
-    public WishListContainerComponent getWishListContainerComponent(){
+    // continue button
+    public void clickContinueButton() {
+        continueButton.click();
+    }
+
+
+    public WishListContainerComponent getWishListContainerComponent() {
         return wishListContainerComponent;
     }
 
     // BUSINESS LOGIC
 
     // add Product To Cart from Wish List
-    public WishListPage putFromWishListToCartProductByPartialName(String partialProductName){
+    public WishListPage putFromWishListToCartProductByPartialName(String partialProductName) {
         getWishListContainerComponent()
                 .addToCartProductFromWishListByPartialName(partialProductName);
         return new WishListPage(driver);
     }
 
     // remove Product from Wish List
-    public WishListPage removeFromWishListProductByPartialName(String partialProductName)
-    {
-        getWishListContainerComponent()
-                .removeProductFromWishListByPartialName(partialProductName);
-        return new WishListPage(driver);
+    public Object removeFromWishListProductByPartialName(String partialProductName) {
+        int currentNumberInList = Regex.takeNumber(getWishListText());
+        if (currentNumberInList == 1) {
+            getWishListContainerComponent()
+                    .removeProductFromWishListByPartialName(partialProductName);
+            return new WishListEmptyPage(driver);
+        } else {
+            getWishListContainerComponent()
+                    .removeProductFromWishListByPartialName(partialProductName);
+            return new WishListPage(driver);
+        }
+    }
+
+    // remove ALL Products from Wish List
+    public WishListEmptyPage removeAllProductsFromWishList() {
+        List<WebElement> removeButons = driver.findElements(By.cssSelector(".text-right a.btn.btn-danger"));
+        while (removeButons.size() > 0) {
+            removeButons.get(0).click();
+            removeButons = driver.findElements(By.cssSelector(".text-right a.btn.btn-danger"));
+        }
+        return new WishListEmptyPage(driver);
+    }
+
+    public MyAccountPage goToMyAccountPage() {
+        clickContinueButton();
+        return new MyAccountPage(driver);
     }
 
 }

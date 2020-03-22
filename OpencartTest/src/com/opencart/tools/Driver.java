@@ -20,7 +20,7 @@ public class Driver {
     public static WebDriver getDriver() {
         if (driver == null) {
             if (ConstantVariables.BROWSER_NAME.equalsIgnoreCase("chrome")) {
-                System.setProperty("webdriver.chrome.driver", "./target/drivers/chromedriver.exe");
+                System.setProperty("webdriver.chrome.driver", "./target/drivers/chromedriver");
                 ChromeOptions options = new ChromeOptions();
                 options.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS,true);
                 driver = new ChromeDriver(options);
@@ -34,6 +34,12 @@ public class Driver {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get(ConstantVariables.URL);
+        return driver;
+    }
+
+    public static WebDriver getAdminDriver(){
+        driver=getDriver();
+        driver.get(ConstantVariables.AdminURL);
         return driver;
     }
 

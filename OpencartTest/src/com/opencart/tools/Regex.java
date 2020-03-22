@@ -20,15 +20,15 @@ public final class Regex {
     }
 
     public static int takeNumber(String text) {
-        int result = -1;
+        int number = -1;
         String takenText = takeString(PATTERN_NUMBER, text);
         if (!takenText.isEmpty()) {
             try {
-                result = Integer.parseUnsignedInt(takenText);
+                number = Integer.parseUnsignedInt(takenText);
             } catch (NumberFormatException e) {
                 throw new RuntimeException(String.format(CATCH_NUMBER_MESSAGE, PATTERN_NUMBER, text));
             }
         }
-        return result;
+        return number;
     }
 }

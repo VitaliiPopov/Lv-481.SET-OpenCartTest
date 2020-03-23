@@ -68,6 +68,11 @@ public class AbstractPageWithHeader {
     //TODO
     //shoppingCart
     private void clickOnShoppingCart() {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         shoppingCart.click();
     }
 
@@ -172,7 +177,7 @@ public class AbstractPageWithHeader {
         return new SearchPage(driver);
     }
 
-    public CartPage goToCartPage(){
+    public CartPage goToCartPageByLinkInHeader(){
         clickOnShoppingCart();
         return new CartPage(driver);
     }

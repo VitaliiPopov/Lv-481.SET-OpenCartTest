@@ -10,6 +10,7 @@
             <class name="test.CartTest">
                 <methods>
                     <include name="loginTest"/>
+                    <include name="addTooManyProduct"/>
                 </methods>
             </class>
         </classes>

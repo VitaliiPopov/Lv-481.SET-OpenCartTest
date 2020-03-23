@@ -80,16 +80,9 @@ public class AvailableOptionsComponent {
         return qty;
     }
 
-    public void clickOnQty() {
-        getQty().click();
-    }
-
-    public void clearQty() {
+    public void setTextQty(int value) {
         getQty().clear();
-    }
-
-    public void enterTextQty(int value) {
-        getQty().sendKeys(Integer.toString(value));
+        getQty().sendKeys(String.valueOf(value));
     }
 
     //addToCartButton
@@ -178,15 +171,17 @@ public class AvailableOptionsComponent {
         getSelectByLabelName(lableName).selectByVisibleText(optionName);
     }
 
-    public void chooseSelectsOptionByIndex(String lableName, int index){
-        getSelectByLabelName(lableName).selectByIndex(index);
-    }
+//    public void chooseSelectsOptionByIndex(String lableName, int index){
+//        getSelectByLabelName(lableName).selectByIndex(index);
+//    }
 
-    //setQty
-    public void setQty(int value){
-        clickOnQty();
-        clearQty();
-        enterTextQty(value);
+    //setOptions
+    public void setOptionsForAppleCinema(String radioButtonLableName, String radioButtonOptionName,
+                                         String checkBoxLableName, String checkBoxOptionName,
+                                         String selectLableName, String selectOptionsOptionName){
+        chooseRadioButtonOptionByPartialName(radioButtonLableName, radioButtonOptionName);
+        chooseCheckBoxOptionByPartialName(checkBoxLableName, checkBoxOptionName);
+        chooseSelectsOptionByName(selectLableName, selectOptionsOptionName);
     }
 
 }

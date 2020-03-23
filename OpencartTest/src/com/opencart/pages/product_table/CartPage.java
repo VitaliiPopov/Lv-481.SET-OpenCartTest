@@ -22,12 +22,16 @@ public class CartPage extends AbstractPageWithHeader {
     //Selectors
     private final String PRODUCT_IN_CART_COMPONENT_XPATHSELECTOR = "//h2/preceding-sibling::form//tbody/tr";
     //WebElements
+    @FindBy(how = How.CSS, css = "#content h1")
+    private WebElement pageTitle;
     @FindBy(how = How.CSS, css = "div.col-sm-4.col-sm-offset-8 tr:nth-child(2) > td:nth-child(2)")
     private WebElement totalPrice;
     @FindBy(how = How.CSS, css = "#content p")
     private WebElement emptyCartText;
     //Components
     private List<ProductInCartContainerComponent> productInCartContainerComponents;
+    private SuccessModifyProductInCartAlert successModifyProductInCartAlert;
+    private UnsuccessModifyProductInCartAlert unsuccessModifyProductInCartAlert;
 
     public CartPage(WebDriver driver) {
         super(driver);
@@ -42,6 +46,11 @@ public class CartPage extends AbstractPageWithHeader {
     }
 
     //PAGE OBJECT
+
+    //pageTitle
+    public String getPageTitleText() {
+        return pageTitle.getText();
+    }
 
     //totalPrice
     public BigDecimal getTotalPrice() {
@@ -63,11 +72,23 @@ public class CartPage extends AbstractPageWithHeader {
         return productInCartContainerComponents.size();
     }
 
+    //successModifyProductInCartAlert
+    public SuccessModifyProductInCartAlert getSuccessModifyProductInCartAlert() {
+        successModifyProductInCartAlert = new SuccessModifyProductInCartAlert(driver.findElement(By.xpath("//div[@class='alert alert-success alert-dismissible']")));
+        return successModifyProductInCartAlert;
+    }
+
+    //unsuccessModifyProductInCartAlert
+    public UnsuccessModifyProductInCartAlert getUnsuccessModifyProductInCartAlert() {
+        unsuccessModifyProductInCartAlert = new UnsuccessModifyProductInCartAlert(driver.findElement(By.xpath("//div[@class='alert alert-danger alert-dismissible']")));
+        return unsuccessModifyProductInCartAlert;
+    }
+
     //FUNCTIONAL
 
     //findElement
     //String
-    private ProductInCartContainerComponent getProductInCartComponentByName(String productName){
+    public ProductInCartContainerComponent getProductInCartComponentByName(String productName){
         ProductInCartContainerComponent result = null;
         for (ProductInCartContainerComponent current: productInCartContainerComponents) {
             if (current.getProductNameText().equalsIgnoreCase(productName)){
@@ -79,16 +100,25 @@ public class CartPage extends AbstractPageWithHeader {
         return result;
     }
 
+    //String
+    public boolean checkIsTheProductInCartComponentByName(String productName){
+        boolean result = false;
+        for (ProductInCartContainerComponent current: productInCartContainerComponents) {
+            if (current.getProductNameText().equalsIgnoreCase(productName)){
+                result = true;
+                break;
+            }
+        }
+        return result;
+    }
+
+
     //findTotalPrise
     private BigDecimal getTotalPriceFromColumn(){
         BigDecimal totalPrice1 = new BigDecimal(0);
         for (ProductInCartContainerComponent current: productInCartContainerComponents) {
             totalPrice1 = totalPrice1.add(BigDecimal.valueOf(Double.parseDouble(current.getTotalProductPriceText().substring(1))));
-            System.out.println("total price = " + totalPrice1);
-            String name = current.getProductNameText();
-            System.out.println(current.getProductNameText());
         }
-        System.out.println("getTotalPriceFromColumn() = " + totalPrice1);
         return totalPrice1;
     }
 
@@ -99,7 +129,6 @@ public class CartPage extends AbstractPageWithHeader {
             BigDecimal unitPrice = BigDecimal.valueOf(Double.parseDouble(current.getUnitPriceText().substring(1)));
             totalPrice = totalPrice.add(unitPrice.multiply(BigDecimal.valueOf(quantity)));
         }
-        System.out.println("getTotalPriceFromCalculation() = " + totalPrice);
         return totalPrice;
     }
 
@@ -156,8 +185,6 @@ public class CartPage extends AbstractPageWithHeader {
         return new CartPage(driver);
     }
 
-
-
     //TODO ????????
     public CartPage goToCartPageAfterRefreshProductQuantityByName(String productName, int value) {
         getProductInCartComponentByName(productName).refreshProductQuantity(value);
@@ -165,30 +192,28 @@ public class CartPage extends AbstractPageWithHeader {
     }
 
     //checkRefreshFunction
-    public boolean checkRefreshFunction(String productName, int value){
+    public void checkRefreshFunction(String productName, int value){
         ProductInCartContainerComponent current = getProductInCartComponentByName(productName);
-        int oldPrice = Integer.getInteger(current.getQuantityInputFildText()) * Integer.getInteger(current.getUnitPriceText());
+        BigDecimal oldPrice = BigDecimal.valueOf(Integer.parseInt(current.getQuantityInputFildText())
+                * Double.parseDouble(current.getUnitPriceText().substring(1)));
         current.refreshProductQuantity(value);
-        int newPrice = Integer.getInteger(current.getQuantityInputFildText()) * Integer.getInteger(current.getUnitPriceText());
-        if (oldPrice == newPrice) return true;
-        else return false;
     }
 
     //checkRemoveFunction
-    public boolean checkRemoveFunction(String productName){
-        if (getProductInCartContainerComponentsSize() > 1) {
-            int oldSize = getProductInCartContainerComponentsSize();
-            ProductInCartContainerComponent current = getProductInCartComponentByName(productName);
-            current.clickOnQuantityButtonRemove();
-            int newSize = getProductInCartContainerComponentsSize();
-            if ((oldSize - 1) == newSize) return true;
-            else return false;
-        }else{
-            ProductInCartContainerComponent current = getProductInCartComponentByName(productName);
-            current.clickOnQuantityButtonRemove();
-            if (getProductInCartContainerComponentsSize() == 0) return true;
-            else return false;
-        }
-    }
+//    public boolean checkRemoveFunction(String productName){
+//        if (getProductInCartContainerComponentsSize() > 1) {
+//            int oldSize = getProductInCartContainerComponentsSize();
+//            ProductInCartContainerComponent current = getProductInCartComponentByName(productName);
+//            current.clickOnQuantityButtonRemove();
+//            int newSize = getProductInCartContainerComponentsSize();
+//            if ((oldSize - 1) == newSize) return true;
+//            else return false;
+//        }else{
+//            ProductInCartContainerComponent current = getProductInCartComponentByName(productName);
+//            current.clickOnQuantityButtonRemove();
+//            if (getProductInCartContainerComponentsSize() == 0) return true;
+//            else return false;
+//        }
+//    }
 
 }

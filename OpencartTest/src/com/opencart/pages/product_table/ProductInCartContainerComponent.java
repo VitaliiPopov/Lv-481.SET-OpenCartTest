@@ -24,7 +24,7 @@ public class ProductInCartContainerComponent {
 
     //productName
     private WebElement getProductName() {
-        productName = productInCartContainerComponentLayout.findElement(By.cssSelector("div.table-responsive td.text-left a"));
+        productName = productInCartContainerComponentLayout.findElement(By.cssSelector("td.text-left a"));
         return productName;
     }
 

@@ -19,7 +19,7 @@ public class CartDropdownComponent {
     private WebElement cartDropdownComponentLayout;
     //
     //
-    private WaitUtils cartWait;
+    //private WaitUtils cartWait;
     private WebElement cartTotalMessage;
     //
     private WebElement totalPrice;
@@ -31,7 +31,6 @@ public class CartDropdownComponent {
 
     public CartDropdownComponent(WebDriver driver, WebElement cartDropdownComponentLayout) {
         this.cartDropdownComponentLayout = cartDropdownComponentLayout;
-        this.cartWait = new WaitUtils(driver, 5);
         initElements();
     }
 
@@ -43,10 +42,6 @@ public class CartDropdownComponent {
 
     //PAGE OBJECT
 
-    //cartWait
-    public WaitUtils getCartWait() {
-        return cartWait;
-    }
 
     //getCartTotalMessage
     public WebElement getCartTotalMessage() {
@@ -101,7 +96,7 @@ public class CartDropdownComponent {
     public ProductInCartButtonContainerComponent getProductInCartButtonContainerComponentByName(String productName){
         ProductInCartButtonContainerComponent result = null;
         for (ProductInCartButtonContainerComponent current: productInCartButtonContainerComponents) {
-            cartWait.waitForViewCartButtonLoading();
+
             if (current.getProductNameText().equalsIgnoreCase(productName)){
                 result = current;
                 break;
@@ -112,8 +107,7 @@ public class CartDropdownComponent {
     }
 
     //remove product
-    public void removeViewProductComponent(String productName)    {
-        cartWait.waitForViewCartButtonLoading();
+    public void removeViewProductComponent(String productName){
         getProductInCartButtonContainerComponentByName(productName).clickOnRemoveButton();
     }
 
@@ -134,11 +128,8 @@ public class CartDropdownComponent {
 
     //removeAllProducts
     public void removeAllProducts(){
-        while (productInCartButtonContainerComponents != null){
-            productInCartButtonContainerComponents.get(0).clickOnRemoveButton();
-            cartWait.waitForViewCartButtonLoading();
-            removeAllProducts();
-        }
+        productInCartButtonContainerComponents.get(0).clickOnRemoveButton();
+        if(productInCartButtonContainerComponents.size() > 1 ) removeAllProducts();
     }
 
 

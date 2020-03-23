@@ -40,6 +40,12 @@ public class CartPage extends AbstractPageWithHeader {
     }
 
     private void initElements(){
+        //TODO
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         productInCartContainerComponents = new ArrayList<>();
         for(WebElement current: driver.findElements(By.xpath(PRODUCT_IN_CART_COMPONENT_XPATHSELECTOR)))
             productInCartContainerComponents.add(new ProductInCartContainerComponent(current));

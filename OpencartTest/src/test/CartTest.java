@@ -296,26 +296,15 @@ public class CartTest extends TestRunner {
         SearchPage addToCartIPhoneSearchPage = (SearchPage) ipSearchPage.afterClickOnProductComponentAddToCartButtonByName("iPhone");
         softAssert.assertTrue(addToCartIPhoneSearchPage.getSearchPageAlertComponent().getAlertMessageText().contains("Success: You have added iPhone to your shopping cart!"));
 
-        SearchPage cinemaSearchPage = addToCartIPhoneSearchPage.goToSearchPageAfterSearchProduct("cinema");
-        //Assert TODO -> SearchCriteriaComponent
+        softAssert.assertTrue(addToCartIPhoneSearchPage.getSearchPageAlertComponent().getAlertMessageText().contains("Success: You have added Apple Cinema 30 to your shopping cart!"));
 
-        ProductPage productPage = (ProductPage) cinemaSearchPage.afterClickOnProductComponentAddToCartButtonByName("Apple Cinema 30");
-        softAssert.assertEquals(productPage.getProductName(), "Apple Cinema 30");
-
-        productPage.getAvailableOptionsComponent().setOptionsForAppleCinema("Radio", "Small",
-                "Checkbox", "Checkbox 2",
-                "Select", "Red (+$4.00)");
-        ProductPage productPageAfterAddToCart = productPage.goToProductPageAfterAddToCart(3);
-        softAssert.assertTrue(productPageAfterAddToCart.getSearchPageAlertComponent().getAlertMessageText().contains("Success: You have added Apple Cinema 30 to your shopping cart!"));
-
-        productPageAfterAddToCart.removeViewProductComponentByName("iPhone");
-        //softAssert.assertTrue(productPageAfterAddToCart.checkIsTheProductInCartComponentByName("iPhone"));
-
-        productPageAfterAddToCart.removeViewProductComponentByName("Apple Cinema 30");
-        //softAssert.assertTrue(productPageAfterAddToCart.getEmptyDropdownCartButtonText().contains("Your shopping cart is empty!"));
+        addToCartIPhoneSearchPage.removeViewProductComponentByName("iPhone");
+        softAssert.assertEquals(addToCartIPhoneSearchPage.getEmptyDropdownCartButtonText(), ("Your shopping cart is empty!"));
 
         softAssert.assertAll();
     }
+
+
 
     //Check text of button
 

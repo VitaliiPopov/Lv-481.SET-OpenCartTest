@@ -39,13 +39,10 @@ public class AbstractPageWithHeader {
     //Components
     private CartDropdownComponent cartDropdownComponent;
     private DropdownComponent dropdownComponent;
-    //to check if cart button view already opened
-    private boolean isViewCartOpened;
 
     public AbstractPageWithHeader(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
-        isViewCartOpened = false;
     }
 
     //PageObject
@@ -96,18 +93,7 @@ public class AbstractPageWithHeader {
     }
 
     public void clickOnCartButton() {
-        //TODO
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         cartButton.click();
-    }
-
-    //isViewCartOpened
-    public void setViewCartOpened(boolean viewCartOpened) {
-        isViewCartOpened = viewCartOpened;
     }
 
     //dropdownComponent
@@ -133,7 +119,7 @@ public class AbstractPageWithHeader {
 
     //cartDropdownComponent
     public CartDropdownComponent getCartDropdownComponent() {
-        if (cartDropdownComponent == null) cartDropdownComponent = new CartDropdownComponent(driver, driver.findElement(By.cssSelector("#cart ul")));
+        cartDropdownComponent = new CartDropdownComponent(driver, driver.findElement(By.cssSelector("#cart ul")));
         return cartDropdownComponent;
     }
 
@@ -160,18 +146,10 @@ public class AbstractPageWithHeader {
     //CartButton
     public void openViewCartComponent() {
         clickOnCartButton();
-        setViewCartOpened(true);
     }
 
     public void closeViewCartComponent() {
         clickOnCartButton();
-        if(isViewCartOpened){
-            clickOnCartButton();
-            cartDropdownComponent = null;
-            setViewCartOpened(false);
-        }
-        cartDropdownComponent = null;
-        setViewCartOpened(false);
     }
 
     public String getCartTotalMessageText() {
@@ -179,39 +157,39 @@ public class AbstractPageWithHeader {
     }
 
     public String getEmptyDropdownCartButtonText() {
-        if(!isViewCartOpened) openViewCartComponent();
+        openViewCartComponent();
         return getCartDropdownComponent().getEmptyDropdownCartButtonText();
     }
 
     public BigDecimal getTotalPriceText() {
-        if(!isViewCartOpened) openViewCartComponent();
+        openViewCartComponent();
         return getCartDropdownComponent().getTotalPriceText();
     }
 
     //productInCartButtonContainerComponents size
     public int getProductInCartButtonContainerComponentsSize() {
-        if(!isViewCartOpened) openViewCartComponent();
+        openViewCartComponent();
         return getCartDropdownComponent().getProductInCartButtonContainerComponentsSize();
     }
 
     public ProductInCartButtonContainerComponent getProductInCartButtonContainerComponentByName(String productName){
-        if(!isViewCartOpened) openViewCartComponent();
+        openViewCartComponent();
         return getCartDropdownComponent().getProductInCartButtonContainerComponentByName(productName);
     }
 
     public void removeViewProductComponentByName(String productName) {
-        if(!isViewCartOpened) openViewCartComponent();
+        openViewCartComponent();
         getCartDropdownComponent().removeViewProductComponent(productName);
     }
 
     public boolean checkTotalPrice(){
-        if(!isViewCartOpened) openViewCartComponent();
+        openViewCartComponent();
         if (getTotalPriceText().equals(getCartDropdownComponent().getTotalPriceFromColumn())) return true;
         else return false;
     }
 
     public void removeAllProducts(){
-        if(!isViewCartOpened) openViewCartComponent();
+        openViewCartComponent();
         getCartDropdownComponent().removeAllProducts();
     }
 

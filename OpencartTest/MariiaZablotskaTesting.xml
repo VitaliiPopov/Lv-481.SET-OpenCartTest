@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Default Suite2">
+    <test name="Individua2">
+        <!--MainTest-->
+        <parameter name="productName" value="IPHONE"/>
+        <parameter name="lowerProductName" value="Iphone"/>
+        <parameter name="searchText" value="MAC"/>
+        <parameter name="lowerSearchText" value="mac"/>
+        <parameter name="categoryOption" value="Laptops"/>
+
+        <parameter name="myAccountDropdownText" value="Login"/>
+        <classes>
+            <!--MainTest-->
+            <class name="test.SearchPageTest">
+                <methods>
+                    <include name="Login"/>
+                    <include name="searchPageTesting"/>
+                    <include name="checkLowerCase"/>
+                    <include name="checkLableContainsSearchText"/>
+                    <include name="checkEmptyResultMessage"/>
+                    <include name="checkCategoriesCheckbox"/>
+                    <include name="checkProductCountFromLable"/>
+                    <include name="checkListAndGridResult"/>
+
+                </methods>
+            </class>
+        </classes>
+    </test> <!-- Individual -->
+</suite> <!-- Default Suite -->
+
+

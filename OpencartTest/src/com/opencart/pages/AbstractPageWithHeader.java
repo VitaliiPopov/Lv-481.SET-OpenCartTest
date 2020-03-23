@@ -55,7 +55,7 @@ public class AbstractPageWithHeader {
     }
 
     //searchField
-    private void clearSearchField() {
+    public void clearSearchField() {
         searchField.clear();
     }
 
@@ -113,9 +113,12 @@ public class AbstractPageWithHeader {
         clickLogo();
         return new HomePage(driver);
     }
+    public SearchPage getSearchPage(){
+        return new SearchPage(driver);
+    }
 
     //Search
-    public SearchPage SearchProduct(String name){
+    public  SearchPage SearchProduct(String name){
         clickSearchField();
         clearSearchField();
         inputSearchField(name);
@@ -123,4 +126,6 @@ public class AbstractPageWithHeader {
         return new SearchPage(driver);
     }
 
+
+    
 }

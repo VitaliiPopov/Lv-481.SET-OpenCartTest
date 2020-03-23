@@ -309,7 +309,7 @@ public class EditAdressPage extends AbstractPageWithHeader {
         clickContinueSubmitButton();
         // return new EditAdressPage(driver);
     }
-    public void EmptyCountry(String FIRST_NAME, String LAST_NAME, String ADDRESS, String CITY, String COUNTRY, String REGION) {
+    public void emptyRegion(String FIRST_NAME, String LAST_NAME, String ADDRESS, String CITY, String COUNTRY, String REGION) {
         fillInputFirstname(FIRST_NAME);
         fillInputLastname(LAST_NAME);
         fillAdressfield(ADDRESS);

@@ -21,10 +21,10 @@
                     <include name="createAddressWithEmptyLastname"/>
                     <include name="createAddressWithEmptyAddress"/>
                     <include name="createAddressWithEmptyCountry"/>
-                    <include name="createAddressWithEmptyRegion"/>
+                    <!--<include name="createAddressWithEmptyRegion"/>-->
                     <include name="checkAlertsWithTooShortInputs"/>
 
-                    <include name="checkJson"/>
+              <!--      <include name="checkJson"/>-->
                 </methods>
             </class>
         </classes>

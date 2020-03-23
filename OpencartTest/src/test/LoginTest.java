@@ -120,7 +120,7 @@ public class LoginTest extends TestRunner {
         Assert.assertTrue(edittest.succesCountryAlert());
         Thread.sleep(5000);
     }
-    @Test(priority = 10)
+    @Test(priority = 11)
     public void createAddressWithEmptyRegion() throws InterruptedException {
         MyAccountPage myAccountPage = getHomePage().clickMyAccauntInDropdownHardcode();
         AddressBookPage addressBookPage = myAccountPage.clickModifyYourAddressBookEntries();
@@ -129,7 +129,7 @@ public class LoginTest extends TestRunner {
         Assert.assertTrue(edittest.succesRegionAlert());
         Thread.sleep(5000);
     }
-    @Test(priority = 11)
+    @Test(priority = 12)
     public void checkAlertsWithTooShortInputs() throws InterruptedException {
         MyAccountPage myAccountPage = getHomePage().clickMyAccauntInDropdownHardcode();
         AddressBookPage addressBookPage = myAccountPage.clickModifyYourAddressBookEntries();
@@ -138,7 +138,7 @@ public class LoginTest extends TestRunner {
         Assert.assertTrue(edittest.alerts());
         Thread.sleep(5000);
     }
-    @Test(priority = 11)
+    @Test(priority = 13)
     public void checkJson() throws InterruptedException {
         System.out.println(jsonDataConfig.getFirstNameFromJson(0));
         System.out.println(jsonDataConfig.getLastNameFromJson(0));

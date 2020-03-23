@@ -21,7 +21,13 @@ public class LoginChangePasswordTest extends TestRunner {
     @BeforeMethod
     public void primaryRegistration() {
         RegisterPage registerPage = getHomePage().goToRegisterPage();
-        SuccessRegisterPage success = registerPage.register("aaa", "aaa","aaa@gmail.com", "123", "aaaa", "aaaa");
+        SuccessRegisterPage success = registerPage.register(
+                jsonDataConfig.getFirstNameFromJson(1),
+                jsonDataConfig.getLastNameFromJson(1),
+                jsonDataConfig.getEmailFromJson(1),
+                jsonDataConfig.getTelephoneFromJson(1),
+                jsonDataConfig.getPasswordFromJson(1),
+                jsonDataConfig.getPasswordFromJson(1));
         success.goToAccountAfterRegistration();
         AccountLogoutPage logoutPage = getHomePage().goToLogoutPage();
         logoutPage.logout();
@@ -39,46 +45,55 @@ public class LoginChangePasswordTest extends TestRunner {
         }
     }
 
-    @Parameters({"loginDropdownText"})
+    @Parameters({"loginText"})
     @Test(priority = 1)
-    public void loginNotExistedUserTest(String loginDropdownText) throws InterruptedException {
-        LoginPage loginPage = getHomePage().goToLoginPage(loginDropdownText);
+    public void loginNotExistedUserTest(String loginText) throws InterruptedException {
+        LoginPage loginPage = getHomePage().goToLoginPage(loginText);
         loginPage.login("www@gmail.com", "jkjk");
         Assert.assertTrue(loginPage.isAlertDisplayed());
         logoutUser();
     }
 
-    @Parameters({"loginDropdownText"})
+    @Parameters({"loginText"})
     @Test(priority = 2)
-    public void loginWithEmptyFieldsTest(String loginDropdownText) throws InterruptedException {
-        LoginPage loginPage = getHomePage().goToLoginPage(loginDropdownText);
+    public void loginWithEmptyFieldsTest(String loginText) throws InterruptedException {
+        LoginPage loginPage = getHomePage().goToLoginPage(loginText);
         loginPage.login("", "");
         Assert.assertTrue(loginPage.isAlertDisplayed());
         logoutUser();
     }
 
-    @Parameters({"loginDropdownText"})
+    @Parameters({"loginext"})
     @Test(priority = 3)
-    public void loginExistedUserTest(String loginDropdownText) throws InterruptedException {
-        MyAccountPage myAccountPage = loginUser(loginDropdownText);
+    public void loginCaseSensitiveFieldsTest(String loginText) throws InterruptedException {
+        LoginPage loginPage = getHomePage().goToLoginPage(loginText);
+        loginPage.login(jsonDataConfig.getEmailFromJson(1).toUpperCase(), jsonDataConfig.getPasswordFromJson(1).toUpperCase());
+        Assert.assertTrue(loginPage.isAlertDisplayed());
+        logoutUser();
+    }
+
+    @Parameters({"loginText"})
+    @Test(priority = 4)
+    public void smokeLoginExistedUserTest(String loginText) throws InterruptedException {
+        MyAccountPage myAccountPage = loginUser(loginText);
         Assert.assertTrue(myAccountPage.getTitleMyAccountText().equals("My Account"));
         logoutUser();
     }
 
-    @Parameters({"loginDropdownText"})
-    @Test(priority = 4)
-    public void changePasswordToEmptyTest(String loginDropdownText) throws InterruptedException {
-        MyAccountPage myAccountPage = loginUser(loginDropdownText);
+    @Parameters({"loginText"})
+    @Test(priority = 5)
+    public void changePasswordToEmptyTest(String loginText) throws InterruptedException {
+        MyAccountPage myAccountPage = loginUser(loginText);
         ChangePasswordPage changePasswordPage = myAccountPage.clickChangePasswordLink();
-        changePasswordPage.changePassword("", "");
+        changePasswordPage.clickChangePasswordButton();
         Assert.assertTrue(changePasswordPage.isAlertPasswordDisplayed());
         logoutUser();
     }
 
-    @Parameters({"loginDropdownText"})
-    @Test(priority = 5)
-    public void changePasswordToShortTest(String loginDropdownText) throws InterruptedException {
-        MyAccountPage myAccountPage = loginUser(loginDropdownText);
+    @Parameters({"loginText"})
+    @Test(priority = 6)
+    public void changePasswordToShortTest(String loginText) throws InterruptedException {
+        MyAccountPage myAccountPage = loginUser(loginText);
         ChangePasswordPage changePasswordPage = myAccountPage.clickChangePasswordLink();
         changePasswordPage.changePassword("ttt", "ttt");
         Assert.assertTrue(changePasswordPage.isAlertPasswordDisplayed());
@@ -86,31 +101,31 @@ public class LoginChangePasswordTest extends TestRunner {
     }
 
     //bug
-    @Parameters({"loginDropdownText"})
-    @Test(priority = 6)
-    public void changePasswordToLongTest(String loginDropdownText) throws InterruptedException {
-        MyAccountPage myAccountPage = loginUser(loginDropdownText);
+    @Parameters({"loginText"})
+    @Test(priority = 7)
+    public void changePasswordToLongTest(String loginText) throws InterruptedException {
+        MyAccountPage myAccountPage = loginUser(loginText);
         ChangePasswordPage changePasswordPage = myAccountPage.clickChangePasswordLink();
         changePasswordPage.changePassword("tttttttttttttttttttttttt", "tttttttttttttttttttttttt");
         Assert.assertTrue(changePasswordPage.isAlertPasswordDisplayed()); //bug
         logoutUser();
     }
 
-    //bug
-    @Parameters({"loginDropdownText"})
-    @Test(priority = 7)
-    public void changePasswordWrongConfirmTest(String loginDropdownText) throws InterruptedException {
-        MyAccountPage myAccountPage = loginUser(loginDropdownText);
+
+    @Parameters({"loginText"})
+    @Test(priority = 8)
+    public void changePasswordWrongConfirmTest(String loginText) throws InterruptedException {
+        MyAccountPage myAccountPage = loginUser(loginText);
         ChangePasswordPage changePasswordPage = myAccountPage.clickChangePasswordLink();
         changePasswordPage.changePassword("test", "testtest");
-        Assert.assertTrue(changePasswordPage.isAlertConfirmDisplayed()); //bug
+        Assert.assertTrue(changePasswordPage.isAlertConfirmDisplayed());
         logoutUser();
     }
 
-    @Parameters({"loginDropdownText"})
-    @Test(priority = 8)
-    public void changePasswordTest(String loginDropdownText) throws InterruptedException {
-        MyAccountPage myAccountPage = loginUser(loginDropdownText);
+    @Parameters({"loginText"})
+    @Test(priority = 9)
+    public void changePasswordTest(String loginText) throws InterruptedException {
+        MyAccountPage myAccountPage = loginUser(loginText);
         ChangePasswordPage changePasswordPage = myAccountPage.clickChangePasswordLink();
         myAccountPage = changePasswordPage.changePassword("aaaa", "aaaa");
         Assert.assertTrue(myAccountPage.isSuccessAlertDisplayed());
@@ -119,12 +134,14 @@ public class LoginChangePasswordTest extends TestRunner {
 
     public MyAccountPage loginUser(String loginDropdownText) throws InterruptedException {
         LoginPage loginPage = getHomePage().goToLoginPage(loginDropdownText);
-        MyAccountPage myAccountPage = loginPage.login(jsonDataConfig.getEmailFromJson(1),jsonDataConfig.getPasswordFromJson(1));
+        MyAccountPage myAccountPage = loginPage.login(
+                jsonDataConfig.getEmailFromJson(1),
+                jsonDataConfig.getPasswordFromJson(1));
         return myAccountPage;
     }
 
     public void logoutUser() throws InterruptedException {
-        if (getHomePage().isExistMyAccountDropdownOption("MyAccount")){
+        if (getHomePage().isExistMyAccountDropdownOption("My Account")){
             AccountLogoutPage logoutPage = getHomePage().goToLogoutPage();
             logoutPage.logout();
         }
@@ -136,7 +153,7 @@ public class LoginChangePasswordTest extends TestRunner {
         AdminHomePage adminHomePage = adminLoginPage.adminLogin("root", "root");
         adminHomePage.clickOnCustomerDropdown();
         AdminCustomerPage adminCustomerPage = adminHomePage.clickOnCustomerTab();
-        adminCustomerPage.findCustomerByEmail("aaa@gmail.com");
+        adminCustomerPage.findCustomerByEmail(jsonDataConfig.getEmailFromJson(1));
         adminCustomerPage.clickDeleteCustomerButton();
         adminCustomerPage.confirmAction();
     }

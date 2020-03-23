@@ -62,4 +62,43 @@ public class JsonDataConfig {
         }
         return passwordArray[userID];
     }
+
+    public String getFirstNameFromJson(int userID) {
+        String[] firstnameArray = new String[userLoginArray.size()];
+
+        for (int i = 0; i < userLoginArray.size(); i++) {
+
+            JSONObject usersLog = (JSONObject) userLoginArray.get(i);
+            String firstName = (String) usersLog.get("firstname");
+
+            firstnameArray[i] = firstName;
+        }
+        return firstnameArray[userID];
+    }
+
+    public String getLastNameFromJson(int userID) {
+        String[] lastnameArray = new String[userLoginArray.size()];
+
+        for (int i = 0; i < userLoginArray.size(); i++) {
+
+            JSONObject usersLog = (JSONObject) userLoginArray.get(i);
+            String lastName = (String) usersLog.get("lastname");
+
+            lastnameArray[i] = lastName;
+        }
+        return lastnameArray[userID];
+    }
+
+    public String getTelephoneFromJson(int userID) {
+        String[] telephoneArray = new String[userLoginArray.size()];
+
+        for (int i = 0; i < userLoginArray.size(); i++) {
+
+            JSONObject usersLog = (JSONObject) userLoginArray.get(i);
+            String telephone = (String) usersLog.get("telephone");
+
+            telephoneArray[i] = telephone;
+        }
+        return telephoneArray[userID];
+    }
 }

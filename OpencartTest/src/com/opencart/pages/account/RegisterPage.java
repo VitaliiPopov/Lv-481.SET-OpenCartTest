@@ -38,6 +38,27 @@ public class RegisterPage extends AbstractPageWithHeader {
     @FindBy(how = How.CSS, css = "div.pull-right>input[value='Continue']")
     private WebElement registerButton;
 
+    @FindBy(how = How.XPATH, xpath = "//*[@id='input-firstname']/following-sibling::div")
+    private WebElement firstnameAlert;
+
+    @FindBy(how = How.XPATH, xpath = "//*[@id='input-lastname']/following-sibling::div")
+    private WebElement lastnameAlert;
+
+    @FindBy(how = How.XPATH, xpath = "//*[@id='input-email']/following-sibling::div")
+    private WebElement emailAlert;
+
+    @FindBy(how = How.XPATH, xpath = "//*[@id='input-telephone']/following-sibling::div")
+    private WebElement telephoneAlert;
+
+    @FindBy(how = How.XPATH, xpath = "//*[@id='input-password']/following-sibling::div")
+    private WebElement passwordAlert;
+
+    @FindBy(how = How.XPATH, xpath = "//*[@id='input-confirm']/following-sibling::div")
+    private WebElement confirmPasswordAlert;
+
+    @FindBy(how = How.CSS, css = "div[class='alert alert-danger alert-dismissible']")
+    private WebElement warning;
+
     public RegisterPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
@@ -195,4 +216,39 @@ public class RegisterPage extends AbstractPageWithHeader {
         return new SuccessRegisterPage(driver);
     }
 
+
+    public boolean isFirstNameAlertDisplayed(){
+        return firstnameAlert.isDisplayed();
+    }
+
+    public boolean isLastNameAlertDisplayed(){
+        return lastnameAlert.isDisplayed();
+    }
+
+
+    public boolean isEmailAlertDisplayed(){
+        return emailAlert.isDisplayed();
+    }
+
+    public boolean isTelephoneAlertDisplayed(){
+        return telephoneAlert.isDisplayed();
+    }
+
+    public boolean isPasswordAlertDisplayed(){
+        return passwordAlert.isDisplayed();
+    }
+
+    public boolean isConfirmPasswordAlertDisplayed(){
+        return confirmPasswordAlert.isDisplayed();
+    }
+
+    public boolean isEmailWarningDisplayed(){
+        return warning.isDisplayed();
+    }
+
+    public String getWarningText(){
+        return warning.getText();
+    }
 }
+
+

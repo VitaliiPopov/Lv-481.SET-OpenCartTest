@@ -1,4 +1,4 @@
-package com.opencart.pages.product_table;
+package com.opencart.pages.cart;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;

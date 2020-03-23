@@ -1,7 +1,8 @@
 package com.opencart.pages;
 
 import com.opencart.pages.account.LoginPage;
-import com.opencart.pages.product_table.CartPage;
+import com.opencart.pages.cart.CartPage;
+import com.opencart.pages.cart.ProductInCartContainerComponent;
 import com.opencart.pages.search.SearchPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -9,6 +10,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
+
+import java.math.BigDecimal;
 
 public class AbstractPageWithHeader {
 
@@ -36,7 +39,7 @@ public class AbstractPageWithHeader {
     //Components
     private CartDropdownComponent cartDropdownComponent;
     private DropdownComponent dropdownComponent;
-    // to check if cart view already opened
+    //to check if cart button view already opened
     private boolean isViewCartOpened;
 
     public AbstractPageWithHeader(WebDriver driver) {
@@ -93,6 +96,12 @@ public class AbstractPageWithHeader {
     }
 
     public void clickOnCartButton() {
+        //TODO
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         cartButton.click();
     }
 
@@ -120,6 +129,12 @@ public class AbstractPageWithHeader {
         }else{
             throw new RuntimeException(String.format(OPTION_NOT_FOUND_MESSAGE, optionName));
         }
+    }
+
+    //cartDropdownComponent
+    public CartDropdownComponent getCartDropdownComponent() {
+        if (cartDropdownComponent == null) cartDropdownComponent = new CartDropdownComponent(driver, driver.findElement(By.cssSelector("#cart ul")));
+        return cartDropdownComponent;
     }
 
     //FUNCTIONAL
@@ -152,11 +167,58 @@ public class AbstractPageWithHeader {
         clickOnCartButton();
         if(isViewCartOpened){
             clickOnCartButton();
-            //viewCartComponent = null;
+            cartDropdownComponent = null;
             setViewCartOpened(false);
         }
-        //viewCartComponent = null;
+        cartDropdownComponent = null;
         setViewCartOpened(false);
+    }
+
+    public String getCartTotalMessageText() {
+        return getCartDropdownComponent().getCartTotalMessageText();
+    }
+
+    public String getEmptyDropdownCartButtonText() {
+        if(!isViewCartOpened) openViewCartComponent();
+        return getCartDropdownComponent().getEmptyDropdownCartButtonText();
+    }
+
+    public BigDecimal getTotalPriceText() {
+        if(!isViewCartOpened) openViewCartComponent();
+        return getCartDropdownComponent().getTotalPriceText();
+    }
+
+    //productInCartButtonContainerComponents size
+    public int getProductInCartButtonContainerComponentsSize() {
+        if(!isViewCartOpened) openViewCartComponent();
+        return getCartDropdownComponent().getProductInCartButtonContainerComponentsSize();
+    }
+
+    public ProductInCartButtonContainerComponent getProductInCartButtonContainerComponentByName(String productName){
+        if(!isViewCartOpened) openViewCartComponent();
+        return getCartDropdownComponent().getProductInCartButtonContainerComponentByName(productName);
+    }
+
+    public void removeViewProductComponentByName(String productName) {
+        if(!isViewCartOpened) openViewCartComponent();
+        getCartDropdownComponent().removeViewProductComponent(productName);
+    }
+
+    public boolean checkTotalPrice(){
+        if(!isViewCartOpened) openViewCartComponent();
+        if (getTotalPriceText().equals(getCartDropdownComponent().getTotalPriceFromColumn())) return true;
+        else return false;
+    }
+
+    public void removeAllProducts(){
+        if(!isViewCartOpened) openViewCartComponent();
+        getCartDropdownComponent().removeAllProducts();
+    }
+
+    //String
+    public boolean checkIsTheProductInCartComponentByName(String productName){
+        if (getProductInCartButtonContainerComponentByName(productName) == null) return false;
+        else return true;
     }
 
     //BUSINESS LOGIC
@@ -180,12 +242,6 @@ public class AbstractPageWithHeader {
     public CartPage goToCartPageByLinkInHeader(){
         clickOnShoppingCart();
         return new CartPage(driver);
-    }
-
-    public void deleteProductInCartButton(){
-        clickOnCartButton();
-        cartDropdownComponent.remove1Products();
-        //clickOnCartButton();
     }
 
 }

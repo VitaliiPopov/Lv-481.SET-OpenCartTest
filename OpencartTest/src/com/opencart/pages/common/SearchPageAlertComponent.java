@@ -3,7 +3,7 @@ package com.opencart.pages.common;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-public class AddProductToCartAlertComponent {
+public class SearchPageAlertComponent {
 
     private WebElement addProductToCartAlertComponentLayout;
     //
@@ -11,7 +11,7 @@ public class AddProductToCartAlertComponent {
     private WebElement productLink;
     private WebElement cartLink;
 
-    public AddProductToCartAlertComponent(WebElement addProductToCartAlertComponentLayout) {
+    public SearchPageAlertComponent(WebElement addProductToCartAlertComponentLayout) {
         this.addProductToCartAlertComponentLayout = addProductToCartAlertComponentLayout;
     }
 

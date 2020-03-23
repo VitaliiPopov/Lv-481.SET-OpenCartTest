@@ -56,8 +56,8 @@ public class ProductInCartButtonContainerComponent {
 
     //removeButton
     public WebElement getRemoveButton() {
-        totalProductPrice = productInCartButtonContainerComponentLayout.findElement(By.xpath(".//td/button"));
-        return totalProductPrice;
+        removeButton = productInCartButtonContainerComponentLayout.findElement(By.xpath(".//td/button"));
+        return removeButton;
     }
 
     public void clickOnRemoveButton(){

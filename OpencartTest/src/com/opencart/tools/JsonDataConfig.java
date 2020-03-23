@@ -37,6 +37,19 @@ public class JsonDataConfig {
         userLoginArray = (JSONArray) userLoginsJsonObj.get("userLogin");
     }
 
+    public String getFirstNameFromJson(int userID) {
+        String[] FirstNameArray = new String[userLoginArray.size()];
+
+        for (int i = 0; i < userLoginArray.size(); i++) {
+
+            JSONObject usersLog = (JSONObject) userLoginArray.get(i);
+            String firstName = (String) usersLog.get("FirstName");
+
+            FirstNameArray[i] = firstName;
+        }
+        return FirstNameArray[userID];
+    }
+
     public String getEmailFromJson(int userID) {
         String[] emailArray = new String[userLoginArray.size()];
 
@@ -63,30 +76,69 @@ public class JsonDataConfig {
         return passwordArray[userID];
     }
 
-    public String getFirstNameFromJson(int userID) {
-        String[] firstnameArray = new String[userLoginArray.size()];
+    public String getLastNameFromJson(int userID) {
+        String[] LastNameArray = new String[userLoginArray.size()];
 
         for (int i = 0; i < userLoginArray.size(); i++) {
 
             JSONObject usersLog = (JSONObject) userLoginArray.get(i);
-            String firstName = (String) usersLog.get("firstname");
+            String LastName = (String) usersLog.get("LastName");
 
-            firstnameArray[i] = firstName;
+            LastNameArray[i] = LastName;
         }
-        return firstnameArray[userID];
+        return LastNameArray[userID];
     }
 
-    public String getLastNameFromJson(int userID) {
-        String[] lastnameArray = new String[userLoginArray.size()];
+    public String getAddressFromJson(int userID) {
+        String[] AdddressArray = new String[userLoginArray.size()];
 
         for (int i = 0; i < userLoginArray.size(); i++) {
 
             JSONObject usersLog = (JSONObject) userLoginArray.get(i);
-            String lastName = (String) usersLog.get("lastname");
+            String Address = (String) usersLog.get("Address");
 
-            lastnameArray[i] = lastName;
+            AdddressArray[i] = Address;
         }
-        return lastnameArray[userID];
+        return AdddressArray[userID];
+    }
+
+    public String getCityFromJson(int userID) {
+        String[] CityArray = new String[userLoginArray.size()];
+
+        for (int i = 0; i < userLoginArray.size(); i++) {
+
+            JSONObject usersLog = (JSONObject) userLoginArray.get(i);
+            String City = (String) usersLog.get("City");
+
+            CityArray[i] = City;
+        }
+        return CityArray[userID];
+    }
+
+    public String getCountryFromJson(int userID) {
+        String[] CountryArray = new String[userLoginArray.size()];
+
+        for (int i = 0; i < userLoginArray.size(); i++) {
+
+            JSONObject usersLog = (JSONObject) userLoginArray.get(i);
+            String Country = (String) usersLog.get("Country");
+
+            CountryArray[i] = Country;
+        }
+        return CountryArray[userID];
+    }
+
+    public String getRegionFromJson(int userID) {
+        String[] RegionArray = new String[userLoginArray.size()];
+
+        for (int i = 0; i < userLoginArray.size(); i++) {
+
+            JSONObject usersLog = (JSONObject) userLoginArray.get(i);
+            String Region = (String) usersLog.get("Region");
+
+            RegionArray[i] = Region;
+        }
+        return RegionArray[userID];
     }
 
     public String getTelephoneFromJson(int userID) {

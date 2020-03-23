@@ -1,7 +1,8 @@
 package com.opencart.tools;
 
 import com.opencart.pages.HomePage;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 
 public class TestRunner {
 
@@ -18,8 +19,5 @@ public class TestRunner {
         return new HomePage(Driver.getDriver());
     }
 
-    /*public SearchPage getSearchPage(){
-        return new SearchPage(Driver.getDriver());
-    }*/
 
 }

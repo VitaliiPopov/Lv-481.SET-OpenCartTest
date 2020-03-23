@@ -160,42 +160,42 @@ public class RegisterPage extends AbstractPageWithHeader {
     //FUNCTIONAL
 
     //firstnameInputField
-    public void fillInputFirstname(String firstname){
+    public void fillInputFirstname(String firstname) {
         clickFirstnameInputField();
         clearFirstnameInputField();
         setFirstnameInputField(firstname);
     }
 
     //lastnameInputField
-    public void fillInputLastname(String lastname){
+    public void fillInputLastname(String lastname) {
         clickLastnameInputField();
         clearLastnameInputField();
         setLastnameInputField(lastname);
     }
 
     //emailInputField
-    public void fillInputEmail(String email){
+    public void fillInputEmail(String email) {
         clickEmailInputField();
         clearEmailInputField();
         setEmailInputField(email);
     }
 
     //telephoneInputField
-    public void fillInputTelephone(String telephone){
+    public void fillInputTelephone(String telephone) {
         clickTelephoneInputField();
         clearTelephoneInputField();
         setTelephoneInputField(telephone);
     }
 
     //passwordInputField
-    public void fillInputPassword(String password){
+    public void fillInputPassword(String password) {
         clickPasswordInputField();
         clearPasswordInputField();
         setPasswordInputField(password);
     }
 
     //confirmPasswordInputField
-    public void fillInputConfirmPassword(String confirmPassword){
+    public void fillInputConfirmPassword(String confirmPassword) {
         clickConfirmPasswordInputField();
         clearConfirmPasswordInputField();
         setConfirmPasswordInputField(confirmPassword);
@@ -204,7 +204,7 @@ public class RegisterPage extends AbstractPageWithHeader {
     //BUSINESS LOGIC
 
     //register
-    public SuccessRegisterPage register(String FIRST_NAME, String LAST_NAME, String EMAIL, String PHONE, String PASSWORD_NAME, String CONFIRM_PASSWORD_NAME){
+    public SuccessRegisterPage register(String FIRST_NAME, String LAST_NAME, String EMAIL, String PHONE, String PASSWORD_NAME, String CONFIRM_PASSWORD_NAME) {
         fillInputFirstname(FIRST_NAME);
         fillInputLastname(LAST_NAME);
         fillInputEmail(EMAIL);
@@ -217,36 +217,36 @@ public class RegisterPage extends AbstractPageWithHeader {
     }
 
 
-    public boolean isFirstNameAlertDisplayed(){
+    public boolean isFirstNameAlertDisplayed() {
         return firstnameAlert.isDisplayed();
     }
 
-    public boolean isLastNameAlertDisplayed(){
+    public boolean isLastNameAlertDisplayed() {
         return lastnameAlert.isDisplayed();
     }
 
 
-    public boolean isEmailAlertDisplayed(){
+    public boolean isEmailAlertDisplayed() {
         return emailAlert.isDisplayed();
     }
 
-    public boolean isTelephoneAlertDisplayed(){
+    public boolean isTelephoneAlertDisplayed() {
         return telephoneAlert.isDisplayed();
     }
 
-    public boolean isPasswordAlertDisplayed(){
+    public boolean isPasswordAlertDisplayed() {
         return passwordAlert.isDisplayed();
     }
 
-    public boolean isConfirmPasswordAlertDisplayed(){
+    public boolean isConfirmPasswordAlertDisplayed() {
         return confirmPasswordAlert.isDisplayed();
     }
 
-    public boolean isEmailWarningDisplayed(){
+    public boolean isEmailWarningDisplayed() {
         return warning.isDisplayed();
     }
 
-    public String getWarningText(){
+    public String getWarningText() {
         return warning.getText();
     }
 }

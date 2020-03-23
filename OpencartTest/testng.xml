@@ -4,14 +4,22 @@
     <test name="Individual">
         <!--MainTest-->
         <parameter name="myAccountDropdownText" value="Login"/>
+        <parameter name="myAccount" value="My Account"/>
+
         <parameter name="search" value="ip"/>
         <parameter name="productName" value="iPhone"/>
         <classes>
             <!--MainTest-->
-            <class name="test.LoginTest">
+            <class name="test.AddressTests">
                 <methods>
-                    <include name="Login"/>
-                    <include name="AddProductToCompareFromSearch"/>
+                    <include name="abilityToAddAddress"/>
+                    <include name="abilityToDeleteAddress"/>
+                    <include name="editAddress"/>
+                     <include name="checkEditPageAlertMassages"/>
+                    <include name="checkAdres"/>
+
+                    <!--<include name="checkAbilityToDeleteDefaultAddress"/>-->
+
                 </methods>
             </class>
         </classes>

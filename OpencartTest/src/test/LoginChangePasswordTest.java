@@ -1,19 +1,19 @@
 package test;
 
-import com.opencart.data.ConstantVariables;
-import com.opencart.pages.HomePage;
 import com.opencart.pages.account.*;
 import com.opencart.pages.admin.AdminCustomerPage;
 import com.opencart.pages.admin.AdminHomePage;
 import com.opencart.pages.admin.AdminLoginPage;
-import com.opencart.tools.*;
+import com.opencart.tools.Driver;
+import com.opencart.tools.JsonDataConfig;
+import com.opencart.tools.TestRunner;
+import com.opencart.tools.Utility;
 import org.junit.Assert;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.testng.ITestResult;
-import org.testng.annotations.*;
-
-import java.util.concurrent.TimeUnit;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
 
 public class LoginChangePasswordTest extends TestRunner {
     JsonDataConfig jsonDataConfig = new JsonDataConfig("TestData.json");

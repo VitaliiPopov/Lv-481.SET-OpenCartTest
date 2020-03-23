@@ -99,28 +99,28 @@ public class EditAccountPage extends AbstractPageWithHeader {
     //FUNCTIONAL
 
     //firstnameEditField
-    public void editFirstnameField(String firstname){
+    public void editFirstnameField(String firstname) {
         clickFirstnameEditField();
         clearFirstnameEditField();
         setFirstnameEditField(firstname);
     }
 
     //lastnameEditField
-    public void editLastnameField(String lastname){
+    public void editLastnameField(String lastname) {
         clickLastnameEditField();
         clearLastnameEditField();
         setLastnameEditField(lastname);
     }
 
     //emailEditField
-    public void editEmailField(String email){
+    public void editEmailField(String email) {
         clickEmailEditField();
         clearEmailEditField();
         setEmailEditField(email);
     }
 
     //telephoneEditField
-    public void editTelephoneField(String telephone){
+    public void editTelephoneField(String telephone) {
         clickTelephoneEditField();
         clearTelephoneEditField();
         setTelephoneEditField(telephone);
@@ -130,7 +130,7 @@ public class EditAccountPage extends AbstractPageWithHeader {
     //BUSINESS LOGIC
 
     //register
-    public MyAccountPage editAccountInformation(String FIRST_NAME, String LAST_NAME, String EMAIL, String PHONE){
+    public MyAccountPage editAccountInformation(String FIRST_NAME, String LAST_NAME, String EMAIL, String PHONE) {
         editFirstnameField(FIRST_NAME);
         editLastnameField(LAST_NAME);
         editEmailField(EMAIL);

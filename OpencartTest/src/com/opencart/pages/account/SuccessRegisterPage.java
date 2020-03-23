@@ -37,7 +37,7 @@ public class SuccessRegisterPage extends AbstractPageWithHeader {
     //BUSINESS LOGIC
 
     //go to Account after success registration
-    public MyAccountPage goToAccountAfterRegistration(){
+    public MyAccountPage goToAccountAfterRegistration() {
         clickContinueButton();
         return new MyAccountPage(driver);
     }

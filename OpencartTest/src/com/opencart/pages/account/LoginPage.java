@@ -10,7 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 public class LoginPage extends AbstractPageWithHeader {
 
     //Components
-    private AccountSidebarComponent accountSidebarComponent;
+
     //RETURNING CUSTOMER
     @FindBy(how = How.XPATH, xpath = "//input[@id='input-password']/../../../h2")
     private WebElement titleLoginBlock;
@@ -74,14 +74,14 @@ public class LoginPage extends AbstractPageWithHeader {
     //FUNCTIONAL
 
     //loginInputField
-    public void fillInputLogin(String login){
+    public void fillInputLogin(String login) {
         clickLoginInputField();
         clearLoginInputField();
         setLoginInputField(login);
     }
 
     //passwordInputField
-    public void fillInputPassword(String password){
+    public void fillInputPassword(String password) {
         clickPasswordInputField();
         clearPasswordInputField();
         setPasswordInputField(password);
@@ -90,14 +90,14 @@ public class LoginPage extends AbstractPageWithHeader {
     //BUSINESS LOGIC
 
     //login
-    public MyAccountPage login(String LOGIN_NAME, String PASSWORD_NAME){
+    public MyAccountPage login(String LOGIN_NAME, String PASSWORD_NAME) {
         fillInputLogin(LOGIN_NAME);
         fillInputPassword(PASSWORD_NAME);
         clickLoginButton();
         return new MyAccountPage(driver);
     }
 
-    public boolean isAlertDisplayed(){
+    public boolean isAlertDisplayed() {
         return alert.isDisplayed();
     }
 }

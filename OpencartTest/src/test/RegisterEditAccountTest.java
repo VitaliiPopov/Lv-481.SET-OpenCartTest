@@ -1,6 +1,5 @@
 package test;
 
-import com.opencart.pages.account.AccountLogoutPage;
 import com.opencart.pages.account.MyAccountPage;
 import com.opencart.pages.account.RegisterPage;
 import com.opencart.pages.account.SuccessRegisterPage;
@@ -10,11 +9,7 @@ import com.opencart.pages.admin.AdminLoginPage;
 import com.opencart.tools.Driver;
 import com.opencart.tools.JsonDataConfig;
 import com.opencart.tools.TestRunner;
-import com.opencart.tools.Utility;
 import org.testng.Assert;
-import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 

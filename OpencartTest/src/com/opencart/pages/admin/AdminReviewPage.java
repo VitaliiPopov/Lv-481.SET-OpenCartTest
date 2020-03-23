@@ -1,12 +1,17 @@
 package com.opencart.pages.admin;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.How;
 
 public class AdminReviewPage extends AdminHomePage {
 
     private WebElement reviewRow;
+    @FindBy(how = How.CSS, css = "button[data-original-title='Delete']")
+    private WebElement deleteButton;
 
     public AdminReviewPage(WebDriver driver) {
         super(driver);
@@ -35,12 +40,17 @@ public class AdminReviewPage extends AdminHomePage {
         return null;
     }
 
-    public void deleteReview(String nameOfAuthor) {
+    public void deleteReview(String nameOfAuthor) throws Exception {
         reviewRow = getReviewRow(nameOfAuthor);
-        WebElement pick = reviewRow.findElement(By.cssSelector("input[type='checkbox']"));
-        pick.click();
-        WebElement deleteButton = driver.findElement(By.cssSelector("button[data-original-title='Delete']"));
-        deleteButton.click();
-        driver.switchTo().alert().accept();
+        if (reviewRow != null) {
+            WebElement pick = reviewRow.findElement(By.cssSelector("input[type='checkbox']"));
+            pick.sendKeys(Keys.SPACE);
+            if (!pick.isSelected()) {
+                throw new Exception("pick isn't selected");
+            }
+            deleteButton.click();
+            driver.switchTo().alert().accept();
+            WebElement messageOfSuccessfulDeletingReview = driver.findElement(By.cssSelector("div[class='alert alert-success alert-dismissible']"));
+        }
     }
 }

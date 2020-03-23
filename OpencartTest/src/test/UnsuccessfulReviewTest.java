@@ -1,34 +1,32 @@
 package test;
 
+import com.opencart.data.ConstantVariables;
 import com.opencart.pages.product.ProductPage;
 import com.opencart.tools.Driver;
+import com.opencart.tools.TestRunner;
 import com.opencart.tools.Utility;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
-public class UnsuccessfulReviewTest {
+public class UnsuccessfulReviewTest extends TestRunner {
 
     private WebDriver driver;
     private ProductPage productPage;
-    private String NAME_OF_AUTHOR = "Georgiy";
-    private String INCORRECT_NAME = "Ri";
-    private String EMPTY_NAME_FIELD = "";
-    private String CORRECT_TEXT = "it is a product of amazing quality, everything works and the price is quite affordable.";
-    private String INCORRECT_TEXT = "product is amazing.";
-    private String EMPTY_TEXT_FIELD = "";
-    private String messageOfUndeliveredReviewBecauseOfIncorrectText = "Warning: Review Text must be between 25 and 1000 characters!";
-    private String messageOfUndeliveredReviewBecauseOfIncorrectName = "Warning: Review Name must be between 3 and 25 characters!";
 
-    @BeforeMethod
+    @BeforeClass
     public void setUp() {
         driver = Driver.getDriver();
         productPage = new ProductPage(driver);
+    }
+
+    @BeforeMethod
+    public void setUp1() {
+        driver.navigate().to(ConstantVariables.URL);
     }
 
     @AfterMethod
@@ -38,40 +36,52 @@ public class UnsuccessfulReviewTest {
         }
     }
 
+    @Parameters({"incorrectName","correctText","messageOfUndeliveredReviewBecauseOfIncorrectName"})
     @Test(priority = 1)
-    public void unsuccessfullyWritingReviewBecauseOfIncorrectName() {
+    public void unsuccessfullyWritingReviewBecauseOfIncorrectName(String incorrectName,String correctText,String messageOfUndeliveredReviewBecauseOfIncorrectName) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
         WebElement product = driver.findElement(By.cssSelector("img[alt='MacBook']"));
+        js.executeScript("arguments[0].scrollIntoView();", product);
         product.click();
-        productPage.writeReview(INCORRECT_NAME, CORRECT_TEXT);
+        productPage.writeReview(incorrectName, correctText);
         String textOfUndeliveredReview = productPage.getTextOfUndeliveredReviewMessage();
-        Assert.assertEquals(textOfUndeliveredReview, this.messageOfUndeliveredReviewBecauseOfIncorrectName);
+        Assert.assertEquals(textOfUndeliveredReview, messageOfUndeliveredReviewBecauseOfIncorrectName);
     }
 
+    @Parameters({"nameOfAuthor","incorrectText","messageOfUndeliveredReviewBecauseOfIncorrectText"})
     @Test(priority = 2)
-    public void unsuccessfullyWritingReviewBecauseOfIncorrectText() {
+    public void unsuccessfullyWritingReviewBecauseOfIncorrectText(String nameOfAuthor,String incorrectText,String messageOfUndeliveredReviewBecauseOfIncorrectText) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
         WebElement product = driver.findElement(By.cssSelector("img[alt='MacBook']"));
+        js.executeScript("arguments[0].scrollIntoView();", product);
         product.click();
-        productPage.writeReview(NAME_OF_AUTHOR, INCORRECT_TEXT);
+        productPage.writeReview(nameOfAuthor, incorrectText);
         String textOfUndeliveredReview = productPage.getTextOfUndeliveredReviewMessage();
-        Assert.assertEquals(textOfUndeliveredReview, this.messageOfUndeliveredReviewBecauseOfIncorrectText);
+        Assert.assertEquals(textOfUndeliveredReview, messageOfUndeliveredReviewBecauseOfIncorrectText);
     }
 
+    @Parameters({"incorrectName","incorrectText","messageOfUndeliveredReviewBecauseOfIncorrectText"})
     @Test(priority = 3)
-    public void unsuccessfullyWritingReviewBecauseOfIncorrectTextAndName() {
+    public void unsuccessfullyWritingReviewBecauseOfIncorrectTextAndName(String incorrectName, String incorrectText, String messageOfUndeliveredReviewBecauseOfIncorrectText ) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
         WebElement product = driver.findElement(By.cssSelector("img[alt='MacBook']"));
+        js.executeScript("arguments[0].scrollIntoView();", product);
         product.click();
-        productPage.writeReview(INCORRECT_NAME, INCORRECT_TEXT);
+        productPage.writeReview(incorrectName, incorrectText);
         String textOfUndeliveredReview = productPage.getTextOfUndeliveredReviewMessage();
-        Assert.assertEquals(textOfUndeliveredReview, this.messageOfUndeliveredReviewBecauseOfIncorrectText);
+        Assert.assertEquals(textOfUndeliveredReview, messageOfUndeliveredReviewBecauseOfIncorrectText);
     }
 
+    @Parameters({"emptyNameField","emptyTextField","messageOfUndeliveredReviewBecauseOfIncorrectText"})
     @Test(priority = 4)
-    public void unsuccessfullyWritingReviewBecauseOfEmptyNameAndTextFields() {
+    public void unsuccessfullyWritingReviewBecauseOfEmptyNameAndTextFields(String emptyNameField, String emptyTextField,String messageOfUndeliveredReviewBecauseOfIncorrectText) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
         WebElement product = driver.findElement(By.cssSelector("img[alt='MacBook']"));
+        js.executeScript("arguments[0].scrollIntoView();", product);
         product.click();
-        productPage.writeReview(EMPTY_NAME_FIELD, EMPTY_TEXT_FIELD);
+        productPage.writeReview(emptyNameField, emptyTextField);
         String textOfUndeliveredReview = productPage.getTextOfUndeliveredReviewMessage();
-        Assert.assertEquals(textOfUndeliveredReview, this.messageOfUndeliveredReviewBecauseOfIncorrectText);
+        Assert.assertEquals(textOfUndeliveredReview, messageOfUndeliveredReviewBecauseOfIncorrectText);
     }
 }
 

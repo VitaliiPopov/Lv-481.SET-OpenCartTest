@@ -1,76 +1,83 @@
 package test;
 
+import com.opencart.data.ConstantVariables;
 import com.opencart.pages.admin.AdminHomePage;
 import com.opencart.pages.admin.AdminLoginPage;
 import com.opencart.pages.admin.AdminReviewEditPage;
 import com.opencart.pages.admin.AdminReviewPage;
 import com.opencart.pages.product.ProductPage;
 import com.opencart.tools.Driver;
+import com.opencart.tools.JsonDataConfig;
 import com.opencart.tools.TestRunner;
 import com.opencart.tools.Utility;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 public class ReviewTest extends TestRunner {
-
+    private JsonDataConfig jsonDataConfig = new JsonDataConfig("TestData.json");
     private WebDriver driver;
     private ProductPage productPage;
-    private AdminReviewPage adminReviewPage;
-    private String NAME_OF_AUTHOR = "Georgiy";
-    private String CORRECT_TEXT = "it is a product of amazing quality, everything works and the price is quite affordable.";
-    private String ADMIN_LOGIN = "root";
-    private String ADMIN_PASSWORD = "root";
-    private String messageOfDeliveredReview = "Thank you for your review. It has been submitted to the webmaster for approval.";
 
-    private void startMethod() {
-        AdminLoginPage adminLoginPage = new AdminLoginPage(Driver.getAdminDriver());
-        AdminHomePage adminHomePage = adminLoginPage.adminLogin(ADMIN_LOGIN, ADMIN_PASSWORD);
-        adminReviewPage = adminHomePage.openReviewPage();
+
+    private AdminReviewPage startMethod() {
+        driver.navigate().to(ConstantVariables.AdminURL);
+        AdminLoginPage adminLoginPage = new AdminLoginPage(driver);
+        AdminHomePage adminHomePage = adminLoginPage.adminLogin(jsonDataConfig.getEmailFromJson(2),jsonDataConfig.getPasswordFromJson(2));
+        return adminHomePage.openReviewPage();
     }
 
-    @BeforeMethod
+    @BeforeClass
     public void setUp() {
         driver = Driver.getDriver();
         productPage = new ProductPage(driver);
     }
 
+    @BeforeMethod
+    public void setUp1() {
+        driver.navigate().to(ConstantVariables.URL);
+    }
+
     @AfterMethod
-    public void tearDown(ITestResult result) {
+    @Parameters({"nameOfAuthor"})
+    public void tearDown(ITestResult result,String nameOfAuthor) throws Exception {
         if (result.getStatus() == ITestResult.FAILURE) {
             Utility.getScreenshot(Driver.getDriver());
         }
-        startMethod();
-        adminReviewPage.deleteReview(NAME_OF_AUTHOR);
+        startMethod().deleteReview(nameOfAuthor);
     }
 
+    @Parameters({"nameOfAuthor","correctText"})
     @Test(priority = 1)
-    public void successfulReviewProcess() {
+    public void successfulReviewProcess(String nameOfAuthor,String correctText) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
         WebElement product = driver.findElement(By.cssSelector("img[alt='MacBook']"));
+        js.executeScript("arguments[0].scrollIntoView();", product);
         product.click();
         int startCount = productPage.getReviewCounter();
-        productPage.writeReview(NAME_OF_AUTHOR, CORRECT_TEXT);
+        productPage.writeReview(nameOfAuthor, correctText);
         String productUrl = driver.getCurrentUrl();
-        startMethod();
-        AdminReviewEditPage adminReviewEditPage = adminReviewPage.openReviewEditPage(NAME_OF_AUTHOR);
+        AdminReviewEditPage adminReviewEditPage = startMethod().openReviewEditPage(nameOfAuthor);
         adminReviewEditPage.submitReview();
         driver.navigate().to(productUrl);
         int currentCount = productPage.getReviewCounter();
         Assert.assertEquals(currentCount, startCount + 1);
     }
 
+    @Parameters({"nameOfAuthor","correctText","messageOfDeliveredReview"})
     @Test(priority = 2)
-    public void successfullyWritingReview() {
+    public void successfullyWritingReview(String nameOfAuthor,String correctText,String messageOfDeliveredReview) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
         WebElement product = driver.findElement(By.cssSelector("img[alt='MacBook']"));
+        js.executeScript("arguments[0].scrollIntoView();", product);
         product.click();
-        productPage.writeReview(NAME_OF_AUTHOR, CORRECT_TEXT);
+        productPage.writeReview(nameOfAuthor, correctText);
         String textOfDeliveredReview = productPage.getTextOfDeliveredReviewMessage();
-        Assert.assertEquals(textOfDeliveredReview, this.messageOfDeliveredReview);
+        Assert.assertEquals(textOfDeliveredReview, messageOfDeliveredReview);
     }
 }
 

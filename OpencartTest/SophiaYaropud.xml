@@ -4,20 +4,29 @@
     
         <test name="ReviewTest">
             <!--MainTest-->
-            <parameter name="myAccountDropdownText" value="Login"/>
-            <parameter name="search" value="ip"/>
-            <parameter name="productName" value="iPhone"/>
-
             <classes>
                 <!--MainTest-->
                 <class name="test.ReviewTest">
                     <methods>
-                        <include name="unsuccessfullyWritingReviewBecauseOfIncorrectName"/>
-                        <include name="unsuccessfullyWritingReviewBecauseOfIncorrectText"/>
-                        <include name="unsuccessfullyWritingReviewBecauseOfIncorrectTextAndName"/>
+                        <include name="successfulReviewProcess"/>
+                        <include name="successfullyWritingReview"/>
                     </methods>
                 </class>
             </classes>
         </test> <!-- Individual -->
+    <test name="UnsuccessfulReviewTest">
+        <!--MainTest-->
+        <classes>
+            <!--MainTest-->
+            <class name="test.UnsuccessfulReviewTest">
+                <methods>
+                    <include name="unsuccessfullyWritingReviewBecauseOfIncorrectName"/>
+                    <include name="unsuccessfullyWritingReviewBecauseOfIncorrectText"/>
+                    <include name="unsuccessfullyWritingReviewBecauseOfIncorrectTextAndName"/>
+                    <include name="unsuccessfullyWritingReviewBecauseOfEmptyNameAndTextFields"/>
+                </methods>
+            </class>
+        </classes>
+    </test> <!-- Individual -->
 
 </suite> <!-- Default Suite -->

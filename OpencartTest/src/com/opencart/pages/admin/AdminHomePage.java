@@ -18,15 +18,15 @@ public class AdminHomePage {
     private WebElement customerTab;
 
     public AdminHomePage(WebDriver driver) {
-        this.driver=driver;
+        this.driver = driver;
         PageFactory.initElements(driver, this);
     }
 
-    public void clickOnCatalogDropdown(){
+    public void clickOnCatalogDropdown() {
         catalogDropdown.click();
     }
 
-    public void clickOnCustomerDropdown(){
+    public void clickOnCustomerDropdown() {
         customerDropdown.click();
     }
 
@@ -35,12 +35,12 @@ public class AdminHomePage {
         return new AdminCustomerPage(driver);
     }
 
-    public AdminReviewPage clickOnReviewTab(){
+    public AdminReviewPage clickOnReviewTab() {
         reviewTab.click();
         return new AdminReviewPage(driver);
     }
 
-    public AdminReviewPage openReviewPage(){
+    public AdminReviewPage openReviewPage() {
         clickOnCatalogDropdown();
         return clickOnReviewTab();
     }

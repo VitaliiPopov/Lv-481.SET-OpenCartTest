@@ -50,6 +50,32 @@ public class JsonDataConfig {
         return FirstNameArray[userID];
     }
 
+    public String getEmailFromJson(int userID) {
+        String[] emailArray = new String[userLoginArray.size()];
+
+        for (int i = 0; i < userLoginArray.size(); i++) {
+
+            JSONObject usersLog = (JSONObject) userLoginArray.get(i);
+            String email = (String) usersLog.get("email");
+
+            emailArray[i] = email;
+        }
+        return emailArray[userID];
+    }
+
+    public String getPasswordFromJson(int userID) {
+        String[] passwordArray = new String[userLoginArray.size()];
+
+        for (int i = 0; i < userLoginArray.size(); i++) {
+
+            JSONObject usersLog = (JSONObject) userLoginArray.get(i);
+            String password = (String) usersLog.get("password");
+
+            passwordArray[i] = password;
+        }
+        return passwordArray[userID];
+    }
+
     public String getLastNameFromJson(int userID) {
         String[] LastNameArray = new String[userLoginArray.size()];
 
@@ -62,6 +88,7 @@ public class JsonDataConfig {
         }
         return LastNameArray[userID];
     }
+
     public String getAddressFromJson(int userID) {
         String[] AdddressArray = new String[userLoginArray.size()];
 
@@ -74,6 +101,7 @@ public class JsonDataConfig {
         }
         return AdddressArray[userID];
     }
+
     public String getCityFromJson(int userID) {
         String[] CityArray = new String[userLoginArray.size()];
 
@@ -86,6 +114,7 @@ public class JsonDataConfig {
         }
         return CityArray[userID];
     }
+
     public String getCountryFromJson(int userID) {
         String[] CountryArray = new String[userLoginArray.size()];
 
@@ -98,6 +127,7 @@ public class JsonDataConfig {
         }
         return CountryArray[userID];
     }
+
     public String getRegionFromJson(int userID) {
         String[] RegionArray = new String[userLoginArray.size()];
 
@@ -109,5 +139,18 @@ public class JsonDataConfig {
             RegionArray[i] = Region;
         }
         return RegionArray[userID];
+    }
+
+    public String getTelephoneFromJson(int userID) {
+        String[] telephoneArray = new String[userLoginArray.size()];
+
+        for (int i = 0; i < userLoginArray.size(); i++) {
+
+            JSONObject usersLog = (JSONObject) userLoginArray.get(i);
+            String telephone = (String) usersLog.get("telephone");
+
+            telephoneArray[i] = telephone;
+        }
+        return telephoneArray[userID];
     }
 }

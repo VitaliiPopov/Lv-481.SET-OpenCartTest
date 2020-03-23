@@ -10,26 +10,28 @@ import org.openqa.selenium.support.PageFactory;
 public class LoginPage extends AbstractPageWithHeader {
 
     //Components
-    //private AccountSidebarComponent accountSidebarComponent;
+
     //RETURNING CUSTOMER
     @FindBy(how = How.XPATH, xpath = "//input[@id='input-password']/../../../h2")
     private WebElement titleLoginBlock;
+
     @FindBy(how = How.ID, id = "input-email")
     private WebElement loginInputField;
+
     @FindBy(how = How.ID, id = "input-password")
     private WebElement passwordInputField;
-    @FindBy(how = How.ID, xpath = "//input[@id = 'input-password']/../following-sibling::input")
+
+    @FindBy(how = How.XPATH, xpath = "//input[@value='Login']")
     private WebElement loginButton;
+
+    @FindBy(how = How.XPATH, xpath = "//div[@class='alert alert-danger alert-dismissible']")
+    private WebElement alert;
 
     public LoginPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
-        initElements();
     }
 
-    private void initElements(){
-        /*accountSidebarComponent = new AccountSidebarComponent(driver)*/;
-    }
 
     //PAGE OBJECT
 
@@ -56,6 +58,10 @@ public class LoginPage extends AbstractPageWithHeader {
         passwordInputField.click();
     }
 
+    public void clearPasswordInputField() {
+        passwordInputField.clear();
+    }
+
     public void setPasswordInputField(String password) {
         passwordInputField.sendKeys(password);
     }
@@ -68,27 +74,30 @@ public class LoginPage extends AbstractPageWithHeader {
     //FUNCTIONAL
 
     //loginInputField
-    public void fillInputLogin(String login){
+    public void fillInputLogin(String login) {
         clickLoginInputField();
         clearLoginInputField();
         setLoginInputField(login);
     }
 
     //passwordInputField
-    public void fillInputPassword(String password){
+    public void fillInputPassword(String password) {
         clickPasswordInputField();
-        clickPasswordInputField();
+        clearPasswordInputField();
         setPasswordInputField(password);
     }
 
     //BUSINESS LOGIC
 
     //login
-    public MyAccountPage login(String LOGIN_NAME, String PASSWORD_NAME){
+    public MyAccountPage login(String LOGIN_NAME, String PASSWORD_NAME) {
         fillInputLogin(LOGIN_NAME);
         fillInputPassword(PASSWORD_NAME);
         clickLoginButton();
         return new MyAccountPage(driver);
     }
 
+    public boolean isAlertDisplayed() {
+        return alert.isDisplayed();
+    }
 }

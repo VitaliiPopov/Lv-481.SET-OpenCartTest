@@ -1,7 +1,9 @@
 package com.opencart.pages;
 
+import com.opencart.pages.account.AccountLogoutPage;
 import com.opencart.pages.account.LoginPage;
 import com.opencart.pages.account.MyAccountPage;
+import com.opencart.pages.account.RegisterPage;
 import com.opencart.pages.product_table.CartDropdownComponent;
 import com.opencart.pages.search.SearchPage;
 import org.openqa.selenium.By;
@@ -117,7 +119,7 @@ public class AbstractPageWithHeader {
         return myAccount;
     }
 
-    // Anya hardcode dropdown myaccaunt
+    // Anya hardcode dropdown myaccount
     public void clickMyAccountDropdownComponentByName(String optionName) {
         openMyAccountDropdown();
         WebElement dropdown = driver.findElement(By.cssSelector(DROPDOWN_MYACCONT_CSSSELECTOR));
@@ -129,7 +131,15 @@ public class AbstractPageWithHeader {
             }
         }
     }
+    public RegisterPage goToRegisterPage(){
+        clickMyAccountDropdownComponentByName("Register");
+        return new RegisterPage(driver);
+    }
 
+    public AccountLogoutPage goToLogoutPage(){
+        clickMyAccountDropdownComponentByName("Logout");
+        return new AccountLogoutPage(driver);
+    }
     public boolean isExistMyAccountDropdownOption(String optionName) {
         boolean isFound = false;
         openMyAccountDropdown();
@@ -143,6 +153,8 @@ public class AbstractPageWithHeader {
         }
         return isFound;
     }
+
+
     //BUSINESS LOGIC
 
     public LoginPage goToLoginPage(String MY_ACCOUNT_DROPDOWN_TEXT) {
@@ -154,6 +166,7 @@ public class AbstractPageWithHeader {
         clickLogo();
         return new HomePage(driver);
     }
+
 
     //Search
     public SearchPage SearchProduct(String name) {

@@ -8,7 +8,7 @@ import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-public class LoginTest extends TestRunner {
+public class AddressTests extends TestRunner {
     JsonDataConfig jsonDataConfig = new JsonDataConfig("TestData.json");
     ExcelDataConfig excelDataConfig = new ExcelDataConfig("TestData.xlsx");
 
@@ -27,7 +27,7 @@ public class LoginTest extends TestRunner {
         AddressBookPage addressBookPage = myAccountPage.clickModifyYourAddressBookEntries();
         EditAdressPage edittest = addressBookPage.clickNewAddress();
      //   AddressBookPage tryfill = edittest.register("Yura", "Sereda", "Shopena Str,", "Ternopil", "Ukraine", "Ternopil's'ka Oblast'");
-        AddressBookPage tryfill = edittest.register(jsonDataConfig.getFirstNameFromJson(0),jsonDataConfig.getLastNameFromJson(0),jsonDataConfig.getAddressFromJson(0),jsonDataConfig.getCityFromJson(0),jsonDataConfig.getCountryFromJson(0),jsonDataConfig.getRegionFromJson(0));
+        AddressBookPage tryfill = edittest.register(jsonDataConfig.getFirstNameFromJson(3),jsonDataConfig.getLastNameFromJson(3),jsonDataConfig.getAddressFromJson(3),jsonDataConfig.getCityFromJson(3),jsonDataConfig.getCountryFromJson(3),jsonDataConfig.getRegionFromJson(3));
         Assert.assertTrue(tryfill.succesAddingAlert());
        // Assert.assertTrue(tryfill.checkAddresTextCorect("Yura", "Sereda", "Shopena Str,", "Ternopil", "Ukraine", "Ternopil's'ka Oblast'"), "Incorect Address was added");
         tryfill.deleteLastElement();
@@ -50,9 +50,9 @@ public class LoginTest extends TestRunner {
         MyAccountPage myAccountPage = getHomePage().clickMyAccauntInDropdownHardcode();
         AddressBookPage addressBookPage = myAccountPage.clickModifyYourAddressBookEntries();
         EditAdressPage edittest = addressBookPage.clickEditAddresss();
-        AddressBookPage adres=  edittest.edituser(jsonDataConfig.getFirstNameFromJson(0),jsonDataConfig.getLastNameFromJson(0),jsonDataConfig.getAddressFromJson(0),jsonDataConfig.getCityFromJson(0),jsonDataConfig.getCountryFromJson(0),jsonDataConfig.getRegionFromJson(0));
+        AddressBookPage adres=  edittest.edituser(jsonDataConfig.getFirstNameFromJson(3),jsonDataConfig.getLastNameFromJson(3),jsonDataConfig.getAddressFromJson(3),jsonDataConfig.getCityFromJson(3),jsonDataConfig.getCountryFromJson(3),jsonDataConfig.getRegionFromJson(3));
         Assert.assertTrue(adres.successEditingAlert());
-        Assert.assertTrue(adres.checkAddresTextCorect(jsonDataConfig.getFirstNameFromJson(0),jsonDataConfig.getLastNameFromJson(0),jsonDataConfig.getAddressFromJson(0),jsonDataConfig.getCityFromJson(0),jsonDataConfig.getCountryFromJson(0),jsonDataConfig.getRegionFromJson(0)));
+        Assert.assertTrue(adres.checkAddresTextCorect(jsonDataConfig.getFirstNameFromJson(3),jsonDataConfig.getLastNameFromJson(3),jsonDataConfig.getAddressFromJson(3),jsonDataConfig.getCityFromJson(3),jsonDataConfig.getCountryFromJson(3),jsonDataConfig.getRegionFromJson(3)));
 
     }
 
@@ -80,7 +80,7 @@ public class LoginTest extends TestRunner {
         MyAccountPage myAccountPage = getHomePage().clickMyAccauntInDropdownHardcode();
         AddressBookPage addressBookPage = myAccountPage.clickModifyYourAddressBookEntries();
         EditAdressPage edittest = addressBookPage.clickNewAddress();
-        edittest.EmptyFirstName(jsonDataConfig.getLastNameFromJson(0),jsonDataConfig.getAddressFromJson(0),jsonDataConfig.getCityFromJson(0),jsonDataConfig.getCountryFromJson(0),jsonDataConfig.getRegionFromJson(0));
+        edittest.EmptyFirstName(jsonDataConfig.getLastNameFromJson(3),jsonDataConfig.getAddressFromJson(3),jsonDataConfig.getCityFromJson(3),jsonDataConfig.getCountryFromJson(3),jsonDataConfig.getRegionFromJson(3));
         Assert.assertTrue(edittest.succesFirstNameAlert());
 
     }
@@ -89,7 +89,7 @@ public class LoginTest extends TestRunner {
         MyAccountPage myAccountPage = getHomePage().clickMyAccauntInDropdownHardcode();
         AddressBookPage addressBookPage = myAccountPage.clickModifyYourAddressBookEntries();
         EditAdressPage edittest = addressBookPage.clickNewAddress();
-        edittest.EmptyLastName(jsonDataConfig.getFirstNameFromJson(0),jsonDataConfig.getAddressFromJson(0),jsonDataConfig.getCityFromJson(0),jsonDataConfig.getCountryFromJson(0),jsonDataConfig.getRegionFromJson(0));
+        edittest.EmptyLastName(jsonDataConfig.getFirstNameFromJson(3),jsonDataConfig.getAddressFromJson(3),jsonDataConfig.getCityFromJson(3),jsonDataConfig.getCountryFromJson(3),jsonDataConfig.getRegionFromJson(3));
         Assert.assertTrue(edittest.succesLastNameAlert());
 
     }
@@ -98,7 +98,7 @@ public class LoginTest extends TestRunner {
         MyAccountPage myAccountPage = getHomePage().clickMyAccauntInDropdownHardcode();
         AddressBookPage addressBookPage = myAccountPage.clickModifyYourAddressBookEntries();
         EditAdressPage edittest = addressBookPage.clickNewAddress();
-        edittest.EmptyAddress(jsonDataConfig.getFirstNameFromJson(0),jsonDataConfig.getLastNameFromJson(0),jsonDataConfig.getCityFromJson(0),jsonDataConfig.getCountryFromJson(0),jsonDataConfig.getRegionFromJson(0));
+        edittest.EmptyAddress(jsonDataConfig.getFirstNameFromJson(3),jsonDataConfig.getLastNameFromJson(3),jsonDataConfig.getCityFromJson(3),jsonDataConfig.getCountryFromJson(3),jsonDataConfig.getRegionFromJson(3));
         Assert.assertTrue(edittest.succesAddressAlert());
 
     }
@@ -107,7 +107,7 @@ public class LoginTest extends TestRunner {
         MyAccountPage myAccountPage = getHomePage().clickMyAccauntInDropdownHardcode();
         AddressBookPage addressBookPage = myAccountPage.clickModifyYourAddressBookEntries();
         EditAdressPage edittest = addressBookPage.clickNewAddress();
-        edittest.EmptyCity(jsonDataConfig.getFirstNameFromJson(0),jsonDataConfig.getLastNameFromJson(0),jsonDataConfig.getAddressFromJson(0),jsonDataConfig.getCountryFromJson(0),jsonDataConfig.getRegionFromJson(0));
+        edittest.EmptyCity(jsonDataConfig.getFirstNameFromJson(3),jsonDataConfig.getLastNameFromJson(3),jsonDataConfig.getAddressFromJson(3),jsonDataConfig.getCountryFromJson(3),jsonDataConfig.getRegionFromJson(3));
         Assert.assertTrue(edittest.succesCityAlert());
         Thread.sleep(5000);
     }
@@ -116,7 +116,7 @@ public class LoginTest extends TestRunner {
         MyAccountPage myAccountPage = getHomePage().clickMyAccauntInDropdownHardcode();
         AddressBookPage addressBookPage = myAccountPage.clickModifyYourAddressBookEntries();
         EditAdressPage edittest = addressBookPage.clickNewAddress();
-        edittest.EmptyCountry(jsonDataConfig.getFirstNameFromJson(0),jsonDataConfig.getLastNameFromJson(0),jsonDataConfig.getAddressFromJson(0),jsonDataConfig.getCityFromJson(0),jsonDataConfig.getRegionFromJson(0));
+        edittest.EmptyCountry(jsonDataConfig.getFirstNameFromJson(3),jsonDataConfig.getLastNameFromJson(3),jsonDataConfig.getAddressFromJson(3),jsonDataConfig.getCityFromJson(3),jsonDataConfig.getRegionFromJson(3));
         Assert.assertTrue(edittest.succesCountryAlert());
         Thread.sleep(5000);
     }
@@ -125,7 +125,7 @@ public class LoginTest extends TestRunner {
         MyAccountPage myAccountPage = getHomePage().clickMyAccauntInDropdownHardcode();
         AddressBookPage addressBookPage = myAccountPage.clickModifyYourAddressBookEntries();
         EditAdressPage edittest = addressBookPage.clickNewAddress();
-        edittest.EmptyCountry(jsonDataConfig.getFirstNameFromJson(0),jsonDataConfig.getLastNameFromJson(0),jsonDataConfig.getAddressFromJson(0),jsonDataConfig.getCityFromJson(0),jsonDataConfig.getCountryFromJson(0));
+        edittest.EmptyCountry(jsonDataConfig.getFirstNameFromJson(3),jsonDataConfig.getLastNameFromJson(3),jsonDataConfig.getAddressFromJson(3),jsonDataConfig.getCityFromJson(3),jsonDataConfig.getCountryFromJson(3));
         Assert.assertTrue(edittest.succesRegionAlert());
         Thread.sleep(5000);
     }
@@ -134,7 +134,7 @@ public class LoginTest extends TestRunner {
         MyAccountPage myAccountPage = getHomePage().clickMyAccauntInDropdownHardcode();
         AddressBookPage addressBookPage = myAccountPage.clickModifyYourAddressBookEntries();
         EditAdressPage edittest = addressBookPage.clickEditAddress();
-        edittest.tooShortInputsAlertCheck(jsonDataConfig.getFirstNameFromJson(1),jsonDataConfig.getLastNameFromJson(1),jsonDataConfig.getAddressFromJson(1),jsonDataConfig.getCityFromJson(1),jsonDataConfig.getCountryFromJson(1),jsonDataConfig.getRegionFromJson(1));
+        edittest.tooShortInputsAlertCheck(jsonDataConfig.getFirstNameFromJson(4),jsonDataConfig.getLastNameFromJson(4),jsonDataConfig.getAddressFromJson(4),jsonDataConfig.getCityFromJson(4),jsonDataConfig.getCountryFromJson(4),jsonDataConfig.getRegionFromJson(4));
         Assert.assertTrue(edittest.alerts());
         Thread.sleep(5000);
     }

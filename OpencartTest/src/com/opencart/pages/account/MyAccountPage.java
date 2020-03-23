@@ -10,8 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 public class MyAccountPage extends AbstractPageWithHeader {
 
     //Components
-    @FindBy(how = How.ID, id = "column-right")
-    private AccountSidebarComponent accountSidebarComponent;
+
 
     @FindBy(how = How.CSS, css = "#content>h2")
     private WebElement titleMyAccount;
@@ -31,11 +30,6 @@ public class MyAccountPage extends AbstractPageWithHeader {
     public MyAccountPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
-        accountSidebarComponent = new AccountSidebarComponent(driver);
-    }
-
-    public AccountSidebarComponent getAccountSidebarComponent() {
-        return accountSidebarComponent;
     }
 
     //titleMyAccount
@@ -47,6 +41,11 @@ public class MyAccountPage extends AbstractPageWithHeader {
     public EditAccountPage clickEditMyAccountLink() {
         editMyAccountLink.click();
         return new EditAccountPage(driver);
+    }
+
+    //successAlert
+    public boolean isSuccessAlertDisplayed() {
+        return successAlert.isDisplayed();
     }
 
     //changePasswordLink
@@ -61,10 +60,8 @@ public class MyAccountPage extends AbstractPageWithHeader {
         return new AddressBookPage(driver);
     }
 
-    public boolean isSuccessAlertDisplayed() {
-        return successAlert.isDisplayed();
-    }
 
+    //
     public EmptyAddressBookPage clickModifyyouraddresswhuileempty() {
         adressLink.click();
         return new EmptyAddressBookPage(driver);
@@ -75,5 +72,4 @@ public class MyAccountPage extends AbstractPageWithHeader {
         adressLink.click();
         return new AddressBookPage(driver);
     }
-
 }

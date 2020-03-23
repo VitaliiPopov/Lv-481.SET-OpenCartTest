@@ -70,7 +70,7 @@ public class AddressBookPage extends AbstractPageWithHeader {
 
     public AddressBookPage addAddressIfthereisnoaddress() {
         if (addressBookContainersComponents.size() == 1) {
-            return clickNewAddress().register(jsonDataConfig.getFirstNameFromJson(0),jsonDataConfig.getLastNameFromJson(0),jsonDataConfig.getAddressFromJson(0),jsonDataConfig.getCityFromJson(0),jsonDataConfig.getCountryFromJson(0),jsonDataConfig.getRegionFromJson(0));
+            return clickNewAddress().register(jsonDataConfig.getFirstNameFromJson(3), jsonDataConfig.getLastNameFromJson(3), jsonDataConfig.getAddressFromJson(3), jsonDataConfig.getCityFromJson(3), jsonDataConfig.getCountryFromJson(3), jsonDataConfig.getRegionFromJson(3));
         }
         return new AddressBookPage(driver);
     }

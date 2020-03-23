@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="AnnaHertsiiSuite">
+    <test name="AnnaHertsii">
+        <!--MainTest-->
+        <parameter name="loginText" value="Login"></parameter>
+        <parameter name="logoutText" value="Logout"></parameter>
+        <parameter name="registerText" value="Register"></parameter>
+        <parameter name="myAccountText" value="My Account"></parameter>
+
+        <classes>
+            <!--MainTest-->
+            <class name="test.LoginChangePasswordTest">
+                <methods>
+<!--                    <include name="loginWithEmptyFieldsTest"/>-->
+<!--                    <include name="loginNotExistedUserTest"/>-->
+<!--                    <include name="loginCaseSensitiveFieldsTest"/>-->
+<!--                    <include name="smokeLoginExistedUserTest"/>-->
+<!--                    <include name="changePasswordToEmptyTest"/>-->
+<!--                    <include name="changePasswordToShortTest"/>-->
+<!--                    <include name="changePasswordToLongTest"/>-->
+<!--                    <include name="changePasswordWrongConfirmTest"/>-->
+                    <include name="changePasswordTest"/>
+                </methods>
+           </class>
+
+            <class name="test.RegisterEditAccountTest">
+                <methods>
+                    <include name="smokeRegisterNewUserTest"/>
+                    <include name="registerWithEmptyFieldsTest"/>
+                    <include name="registerWithLongFirstLastNamesTest"/>
+                    <include name="registerWithSameEmailTest"/>
+                    <include name="registerWithoutPrivacyPolicyAgreementTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test> <!-- Individual -->
+</suite> <!-- Default Suite -->
+
+

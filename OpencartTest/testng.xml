@@ -10,7 +10,7 @@
         <parameter name="productName" value="iPhone"/>
         <classes>
             <!--MainTest-->
-            <class name="test.LoginTest">
+            <class name="test.AddressTests">
                 <methods>
                     <include name="abilityToAddAddress"/>
                     <include name="abilityToDeleteAddress"/>
@@ -26,4 +26,4 @@
     </test> <!-- Individual -->
 </suite> <!-- Default Suite -->
 
-
+<!--end-->

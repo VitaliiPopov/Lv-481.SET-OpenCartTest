@@ -119,7 +119,7 @@ public class AbstractPageWithHeader {
         return myAccount;
     }
 
-    // Anya hardcode dropdown myaccount
+    // Anya dropdown myaccount
     public void clickMyAccountDropdownComponentByName(String optionName) {
         openMyAccountDropdown();
         WebElement dropdown = driver.findElement(By.cssSelector(DROPDOWN_MYACCONT_CSSSELECTOR));
@@ -131,15 +131,7 @@ public class AbstractPageWithHeader {
             }
         }
     }
-    public RegisterPage goToRegisterPage(){
-        clickMyAccountDropdownComponentByName("Register");
-        return new RegisterPage(driver);
-    }
 
-    public AccountLogoutPage goToLogoutPage(){
-        clickMyAccountDropdownComponentByName("Logout");
-        return new AccountLogoutPage(driver);
-    }
     public boolean isExistMyAccountDropdownOption(String optionName) {
         boolean isFound = false;
         openMyAccountDropdown();
@@ -156,6 +148,15 @@ public class AbstractPageWithHeader {
 
 
     //BUSINESS LOGIC
+    public RegisterPage goToRegisterPage(){
+        clickMyAccountDropdownComponentByName("Register");
+        return new RegisterPage(driver);
+    }
+
+    public AccountLogoutPage goToLogoutPage(){
+        clickMyAccountDropdownComponentByName("Logout");
+        return new AccountLogoutPage(driver);
+    }
 
     public LoginPage goToLoginPage(String MY_ACCOUNT_DROPDOWN_TEXT) {
         clickMyAccountDropdownComponentByPartialName(MY_ACCOUNT_DROPDOWN_TEXT);
@@ -166,7 +167,6 @@ public class AbstractPageWithHeader {
         clickLogo();
         return new HomePage(driver);
     }
-
 
     //Search
     public SearchPage SearchProduct(String name) {

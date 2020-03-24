@@ -15,42 +15,27 @@
             <class name="test.TestWishList">
                 <methods>
                     <include name="addProductToWishListFromSearchPage"/>
-                    <!--                    <include name="addProductToWishList_fromHomePage"/>-->
-                    <!--                    <include name="addProductToWishList_fromProductPage"/>-->
                 </methods>
             </class>
         </classes>
     </test>
 
-    <test name="removeFromWishList">
+<!--    <test name="removeFromWishList">-->
 
-        <parameter name="myAccountDropdownText" value="Login"/>
+<!--        <parameter name="myAccountDropdownText" value="Login"/>-->
 
-        <parameter name="fromSearchPageProductName" value="MacBook"/>
-        <parameter name="fromHomePageProductName" value="iPhone"/>
-        <classes>
-            <class name="test.TestWishList">
-                <methods>
-                    <include name="removeProductFromWishListByName"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
+<!--        <parameter name="fromSearchPageProductName" value="MacBook"/>-->
+<!--        <parameter name="fromHomePageProductName" value="iPhone"/>-->
+<!--        <classes>-->
+<!--            <class name="test.TestWishList">-->
+<!--                <methods>-->
+<!--                    <include name="removeProductFromWishListByName"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="addFromWishList">
 
-        <parameter name="myAccountDropdownText" value="Login"/>
-
-        <parameter name="fromSearchPageProductName" value="MacBook"/>
-        <parameter name="fromHomePageProductName" value="iPhone"/>
-        <classes>
-            <class name="test.TestWishList">
-                <methods>
-                    <include name="addProductToCartFromWishList"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
 
 
 </suite> <!-- Default Suite -->

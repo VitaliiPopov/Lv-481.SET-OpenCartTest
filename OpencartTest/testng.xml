@@ -1,35 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Default Suite">
-<!--    <test name="Individual">-->
-<!--        &lt;!&ndash;MainTest&ndash;&gt;-->
-<!--        <parameter name="myAccountDropdownText" value="Login"/>-->
-<!--        <parameter name="search" value="ip"/>-->
-<!--        <parameter name="productName" value="iPhone"/>-->
-<!--        <classes>-->
-<!--            &lt;!&ndash;MainTest&ndash;&gt;-->
-<!--            <class name="test.LoginTest">-->
-<!--                <methods>-->
-<!--                    <include name="Login"/>-->
-<!--                    <include name="AddProductToCompareFromSearch"/>-->
-<!--                </methods>-->
-<!--            </class>-->
-<!--        </classes>-->
-<!--    </test> &lt;!&ndash; Individual &ndash;&gt;-->
-
-    <test name="WishList_Mykhailo">
-        <!--WishListTest-->
-        <parameter name="myAccountDropdownText" value="Login"></parameter>
+    <test name="Individual">
+        <!--MainTest-->
+        <parameter name="myAccountDropdownText" value="Login"/>
+        <parameter name="search" value="ip"/>
+        <parameter name="productName" value="iPhone"/>
         <classes>
-            <!--WishListTest-->
-            <class name="test.TestWishList">
+            <!--MainTest-->
+            <class name="test.LoginTest">
                 <methods>
-                    <include name="addToCartFromWishList"/>
+                    <include name="Login"/>
+                    <include name="AddProductToCompareFromSearch"/>
                 </methods>
             </class>
         </classes>
-    </test> <!-- WishList_Mykhailo -->
-
+    </test> <!-- Individual -->
 </suite> <!-- Default Suite -->
 
 

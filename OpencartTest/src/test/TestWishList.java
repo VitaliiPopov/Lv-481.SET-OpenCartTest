@@ -33,7 +33,7 @@ public class TestWishList extends TestRunner {
         // Steps
         SearchPage searchPage = getHomePage().searchProduct(fromSearchPageProductName);
 
-        searchPage.clickProductComponentAddToWishListButtonByName(fromSearchPageProductName);
+        searchPage.clickProductComponentAddToWishList(fromSearchPageProductName);
 
         searchPage.goToHomePage();
         //Actual Result
@@ -50,17 +50,7 @@ public class TestWishList extends TestRunner {
 
     }
 
-//    @Parameters({"fromHomePageProductName"})
-//    @Test(enabled = false)
-//    public void addProductToWishList_fromHomePage(String fromHomePageProductName){
-//
-//    }
-//
-//    @Parameters({"fromProductPageProductName"})
-//    @Test(enabled = false)
-//    public void addProductToWishList_fromProductPage(String fromProductPageProductName){
-//
-//    }
+
     @Parameters({"myAccountDropdownText","fromSearchPageProductName","fromHomePageProductName"})
     @Test(priority = 2)
     public void removeProductFromWishListByName(String myAccountDropdownText,String fromSearchPageProductName,
@@ -72,9 +62,9 @@ public class TestWishList extends TestRunner {
         myAccountPage.goToHomePage();
         //      Add some product to WishList
         SearchPage searchPage = getHomePage().searchProduct(fromSearchPageProductName);
-        searchPage.clickProductComponentAddToWishListButtonByName(fromSearchPageProductName);
+        searchPage.clickProductComponentAddToWishList(fromSearchPageProductName);
         searchPage = searchPage.searchProduct(fromHomePageProductName);
-        searchPage.clickProductComponentAddToWishListButtonByName(fromHomePageProductName);
+        searchPage.clickProductComponentAddToWishList(fromHomePageProductName);
 
         int numberProductsInWishList = getHomePage().getWishListNumberOfProducts();
         System.out.println("before remove " + numberProductsInWishList);

@@ -1,5 +1,6 @@
 package com.opencart.pages.product_table;
 
+import com.opencart.data.Currencies;
 import com.opencart.pages.AbstractPageWithHeader;
 import org.openqa.selenium.WebDriver;
 
@@ -20,5 +21,8 @@ public class CartPage extends AbstractPageWithHeader {
         productInCartContainerComponents = new ArrayList<>();
     }
 
-
+    public CartPage chooseCurrencyInCart(Currencies currency){
+        clickCurrencyByPartialName(currency.toString());
+        return new CartPage(driver);
+    }
 }

@@ -1,8 +1,9 @@
 package com.opencart.pages.product_table;
 
+import com.opencart.data.Currencies;
 import com.opencart.pages.AbstractPageWithHeader;
 import com.opencart.pages.account.MyAccountPage;
-import com.opencart.tools.Regex;
+import com.opencart.tools.RegexUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -24,7 +25,7 @@ public class WishListPage extends AbstractPageWithHeader {
     private void initElements() {
 
         wishListContainerComponent = new WishListContainerComponent(driver);
-        continueButton = driver.findElement(By.xpath("//div[@class='pull-right']/a"));
+        //continueButton = driver.findElement(By.xpath("//div[@class='pull-right']/a"));
     }
 
     // PAGE OBJECT
@@ -39,6 +40,12 @@ public class WishListPage extends AbstractPageWithHeader {
         return wishListContainerComponent;
     }
 
+    // change currency in Wish List
+    public WishListPage chooseCurrencyInWishList(Currencies currency) {
+        clickCurrencyByPartialName(currency.toString());
+        return new WishListPage(driver);
+    }
+
     // BUSINESS LOGIC
 
     // add Product To Cart from Wish List
@@ -50,7 +57,7 @@ public class WishListPage extends AbstractPageWithHeader {
 
     // remove Product from Wish List
     public Object removeFromWishListProductByPartialName(String partialProductName) {
-        int currentNumberInList = Regex.takeNumber(getWishListText());
+        int currentNumberInList = RegexUtils.extractFirstNumber(getWishListText());
         if (currentNumberInList == 1) {
             getWishListContainerComponent()
                     .removeProductFromWishListByPartialName(partialProductName);

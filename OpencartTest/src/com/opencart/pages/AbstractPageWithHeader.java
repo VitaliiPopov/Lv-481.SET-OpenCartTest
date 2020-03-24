@@ -2,14 +2,13 @@ package com.opencart.pages;
 
 import com.opencart.pages.account.LoginPage;
 import com.opencart.pages.product_table.CartDropdownComponent;
+import com.opencart.pages.product_table.CartPage;
 import com.opencart.pages.product_table.WishListPage;
 import com.opencart.pages.search.SearchPage;
-import com.opencart.tools.Regex;
+import com.opencart.tools.RegexUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class AbstractPageWithHeader {
 
@@ -24,6 +23,7 @@ public class AbstractPageWithHeader {
     private WebElement myAccount;
     private WebElement shoppingCart;
     private WebElement wishList;
+    private WebElement currency;
     //
     private WebElement logo;
     private WebElement searchField;
@@ -38,14 +38,38 @@ public class AbstractPageWithHeader {
     }
 
     private void InitializeElements() {
+        //
+
+        currency = driver.findElement(By.cssSelector(".btn.btn-link.dropdown-toggle"));
+        //
         myAccount = driver.findElement(By.cssSelector("i.fa-user"));
         wishList = driver.findElement(By.id("wishlist-total"));
-        WebDriverWait wait = new WebDriverWait(driver, 15);
-        logo = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h1/a")));
-
-        searchField = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".form-control.input-lg")));
-        //searchField=driver.findElement(By.cssSelector(".form-control.input-lg"));
+        shoppingCart = driver.findElement(By.cssSelector(".fa.fa-shopping-cart"));
+        //
+        logo = driver.findElement(By.xpath("//h1/a"));
+        searchField = driver.findElement(By.cssSelector(".form-control.input-lg"));
         searchButton = driver.findElement(By.cssSelector(".btn.btn-default"));
+    }
+
+
+    //CURRENCY
+    public WebElement getCurrency() {
+        return currency;
+    }
+
+    public String getCurrencyText() {
+        //System.out.println("currency : " + getCurrency().getText().substring(0, 1));
+        return getCurrency().getText().substring(0, 1);
+    }
+
+    public void clickCurrency() {
+        getCurrency().click();
+    }
+
+    public void clickCurrencyByPartialName(String optionName) {
+        clickCurrency();
+        createDropdownComponent(By.cssSelector("div.btn-group.open ul.dropdown-menu li"));
+        clickDropdownComponentByPartialName(optionName);
     }
 
     //logo
@@ -58,14 +82,20 @@ public class AbstractPageWithHeader {
         myAccount.click();
     }
 
-    //wishList
-    private void clickWishList() {
-        wishList.click();
-    }
-
     //searchButton
     private void clickSearchButton() {
         searchButton.click();
+    }
+
+    //wishList
+    private void clickWishList() {
+        wishList.click();
+
+    }
+
+    private void clickCart() {
+        shoppingCart.click();
+
     }
 
     //searchField
@@ -121,7 +151,7 @@ public class AbstractPageWithHeader {
     }
 
     public int getWishListNumberOfProducts() {
-        return Regex.takeNumber(getWishListText());
+        return RegexUtils.extractFirstNumber(getWishListText());
     }
 
     //BUSINESS LOGIC
@@ -136,9 +166,15 @@ public class AbstractPageWithHeader {
         return new HomePage(driver);
     }
 
+
     public WishListPage goToWishList() {
         clickWishList();
         return new WishListPage(driver);
+    }
+
+    public CartPage goToCart() {
+        clickCart();
+        return new CartPage(driver);
     }
 
     //Search

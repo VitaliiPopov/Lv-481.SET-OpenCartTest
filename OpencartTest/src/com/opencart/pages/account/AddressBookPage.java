@@ -15,9 +15,9 @@ import java.util.List;
 
 public class AddressBookPage extends AbstractPageWithHeader {
     JsonDataConfig jsonDataConfig = new JsonDataConfig("TestData.json");
-
-
     private List<AddressBookContainersComponent> addressBookContainersComponents;
+
+
     @FindBy(how = How.CSS, css = ".btn-primary")
     private WebElement newAdressButton;
 

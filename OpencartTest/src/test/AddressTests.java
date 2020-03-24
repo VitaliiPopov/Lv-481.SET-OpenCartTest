@@ -4,19 +4,24 @@ import com.opencart.pages.account.AddressBookPage;
 import com.opencart.pages.account.EditAdressPage;
 import com.opencart.pages.account.LoginPage;
 import com.opencart.pages.account.MyAccountPage;
+import com.opencart.tools.Driver;
 import com.opencart.tools.JsonDataConfig;
 import com.opencart.tools.TestRunner;
+import com.opencart.tools.Utility;
 import org.testng.Assert;
+import org.testng.ITestResult;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 public class AddressTests extends TestRunner {
     JsonDataConfig jsonDataConfig = new JsonDataConfig("TestData.json");
 
-    public AddressBookPage getAddressBookPage() {
-        MyAccountPage myAccountPage = getHomePage().clickMyAccauntInDropdownHardcode();
-        AddressBookPage addressBookPage = myAccountPage.clickModifyYourAddressBookEntries();
-        return addressBookPage;
+    @AfterMethod
+    public void tearDown(ITestResult result) {
+        if (result.getStatus() == ITestResult.FAILURE) {
+            Utility.getScreenshot(Driver.getDriver());
+        }
     }
 
     @Parameters({"myAccountDropdownText"})
@@ -185,6 +190,7 @@ public class AddressTests extends TestRunner {
         Assert.assertTrue(edittest.allMandatoryAlerts());
         Thread.sleep(5000);
     }
+
     @Test(priority = 13)
     public void checkAlertsWithTooLongInputs() throws InterruptedException {
         MyAccountPage myAccountPage = getHomePage().clickMyAccauntInDropdownHardcode();
@@ -199,6 +205,7 @@ public class AddressTests extends TestRunner {
         Assert.assertTrue(edittest.allMandatoryAlerts());
         Thread.sleep(5000);
     }
+
     @Test(priority = 14)
     public void createAddressWithNumbersInsteadCharacters() throws InterruptedException {
         MyAccountPage myAccountPage = getHomePage().clickMyAccauntInDropdownHardcode();
@@ -210,9 +217,10 @@ public class AddressTests extends TestRunner {
                 jsonDataConfig.getCityFromJson(6),
                 jsonDataConfig.getCountryFromJson(6),
                 jsonDataConfig.getRegionFromJson(6));
-        Assert.assertTrue(edittest.firstLastNameAlerts(),"Created User With numeric First and Last Names");
+        Assert.assertTrue(edittest.firstLastNameAlerts(), "Created User With numeric First and Last Names");
         Thread.sleep(5000);
     }
+
     @Test(priority = 15)
     public void clearAddressBook() throws InterruptedException {
         MyAccountPage myAccountPage = getHomePage().clickMyAccauntInDropdownHardcode();

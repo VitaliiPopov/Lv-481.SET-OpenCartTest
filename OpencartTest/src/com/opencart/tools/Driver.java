@@ -37,8 +37,8 @@ public class Driver {
         return driver;
     }
 
-    public static WebDriver getAdminDriver() {
-        driver = getDriver();
+    public static WebDriver getAdminDriver(){
+        driver=getDriver();
         driver.get(ConstantVariables.AdminURL);
         return driver;
     }

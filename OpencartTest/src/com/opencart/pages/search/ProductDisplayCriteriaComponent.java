@@ -81,10 +81,6 @@ public class ProductDisplayCriteriaComponent {
         gridButton.click();
     }
 
-    public String ProductCountText() {
-        return productCountLable.getText();
-    }
-
     public void clickSortDropdownComponent() {
         sortDropdownComponent.click();
     }

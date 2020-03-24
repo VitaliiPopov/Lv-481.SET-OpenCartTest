@@ -229,8 +229,13 @@ public class EditAdressPage extends AbstractPageWithHeader {
             return regionAlert.isDisplayed();
         } else return false;
     }
-    public boolean alerts() {
+    public boolean allMandatoryAlerts() {
         if (succesAddressAlert() && succesFirstNameAlert() && succesLastNameAlert() && succesCityAlert()) {
+            return true;
+        } else return false;
+    }
+    public boolean firstLastNameAlerts() {
+        if (succesFirstNameAlert() && succesLastNameAlert()) {
             return true;
         } else return false;
     }
@@ -309,17 +314,16 @@ public class EditAdressPage extends AbstractPageWithHeader {
         clickContinueSubmitButton();
         // return new EditAdressPage(driver);
     }
-    public void emptyRegion(String FIRST_NAME, String LAST_NAME, String ADDRESS, String CITY, String COUNTRY, String REGION) {
+    public void emptyRegion(String FIRST_NAME, String LAST_NAME, String ADDRESS, String CITY, String COUNTRY) {
         fillInputFirstname(FIRST_NAME);
         fillInputLastname(LAST_NAME);
         fillAdressfield(ADDRESS);
         fillInputCity(CITY);
         selectCountry(COUNTRY);
-        selectRegionDefault();
         clickContinueSubmitButton();
         // return new EditAdressPage(driver);
     }
-    public void tooShortInputsAlertCheck(String FIRST_NAME, String LAST_NAME, String ADDRESS, String CITY, String COUNTRY, String REGION) {
+    public void invalidInputsAlertCheck(String FIRST_NAME, String LAST_NAME, String ADDRESS, String CITY, String COUNTRY, String REGION) {
         fillInputFirstname(FIRST_NAME);
         fillInputLastname(LAST_NAME);
         fillAdressfield(ADDRESS);

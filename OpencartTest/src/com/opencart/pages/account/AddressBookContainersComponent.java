@@ -9,14 +9,6 @@ public class AddressBookContainersComponent {
     private WebElement address;
     private WebElement editAddressButton;
     private WebElement deleteAddressButton;
-    private WebElement userFullName;
-    private WebElement userAddress;
-    private WebElement userCity;
-    private WebElement userPostCode;
-    private WebElement Country;
-    private WebElement Region;
-
-    private Boolean adressDefault;
 
     public AddressBookContainersComponent(WebElement singleAddress) {
         initElements(singleAddress);
@@ -26,7 +18,7 @@ public class AddressBookContainersComponent {
         address = singleAddress.findElement(By.cssSelector(".text-left"));
         editAddressButton = singleAddress.findElement(By.cssSelector(".btn-info"));
         deleteAddressButton = singleAddress.findElement(By.cssSelector(".btn-danger"));
-        // userFullName=singleAddress.findElement(By.xpath(""))
+
     }
 
     public String getAddressText() {

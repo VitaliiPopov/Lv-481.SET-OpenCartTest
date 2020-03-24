@@ -229,6 +229,9 @@ public class AbstractPageWithHeader {
         clickLogo();
         return new HomePage(driver);
     }
+    public SearchPage getSearchPage(){
+        return new SearchPage(driver);
+    }
 
     //Search
     public SearchPage searchProduct(String name) {

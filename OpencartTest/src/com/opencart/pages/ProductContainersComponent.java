@@ -9,6 +9,7 @@ public class ProductContainersComponent {
     private final String PRODUCT_NAME_SELECTOR = "h4 a"; // css
     private final String ADD_TO_CART_BUTTON_SELECTOR = ".//i[@class='fa fa-shopping-cart']/.."; //xpath
     private final String COMPARE_BUTTON_SELECTOR = ".//i[@class='fa fa-exchange']/.."; //xpath
+    private final String PICTURE_SELECTOR = ".image a"; // css
     //
     private WebElement productContainerLayout;
 
@@ -19,7 +20,6 @@ public class ProductContainersComponent {
     //Name
     public WebElement getName() {
         return productContainerLayout.findElement(By.cssSelector(PRODUCT_NAME_SELECTOR));
-
     }
 
     public String getNameText() {
@@ -42,5 +42,14 @@ public class ProductContainersComponent {
 
     public void clickCompareButton() {
         getCompareButton().click();
+    }
+
+    //Picture
+    public WebElement getPicture() {
+        return productContainerLayout.findElement(By.cssSelector(PICTURE_SELECTOR));
+    }
+
+    public void clickPicture(){
+        getPicture().click();
     }
 }

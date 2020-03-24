@@ -114,3 +114,6 @@ hs_err_pid*
 
 #Excel file
 *.xlsx
+
+#Json files 
+*.json

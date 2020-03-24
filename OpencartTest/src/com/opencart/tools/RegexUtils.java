@@ -36,7 +36,6 @@ public final class RegexUtils {
             try {
                 result = Integer.parseUnsignedInt(extractText);
             } catch (NumberFormatException e) {
-                // TODO Develop Custom Exception
                 throw new RuntimeException(String.format(EXTRACT_NUMBER_MESSAGE, PATTERN_UNSIGNED_NUMBER, text));
             }
         }

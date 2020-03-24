@@ -41,7 +41,7 @@ public class WishListCurrencyTest extends TestRunner {
     public void addProductToWishList(String productPartialName) throws InterruptedException {
 
 
-        SearchPage searchPage = getHomePage().SearchProduct(productPartialName);
+        SearchPage searchPage = getHomePage().searchProduct(productPartialName);
         Thread.sleep(1000);
         searchPage.clickProductComponentAddToWishList(productPartialName);
         Thread.sleep(2000);
@@ -58,30 +58,30 @@ public class WishListCurrencyTest extends TestRunner {
                 {Currencies.US_DOLLAR,"$"},
         };
     }
-//@DataProvider
-//public Object[][] currencyData(){
-//    return new Object[][]{
-//            {Currencies.POUND_STERLING,"£",306.25},
-//            {Currencies.EURO,"€",392.30},
-//            {Currencies.US_DOLLAR,"$",500.00},
-//    };
-//}
+
+    @DataProvider
+    public Object[][] currencyDataWithPrice(){
+        return new Object[][]{
+                {Currencies.POUND_STERLING,"£",306.25},
+                {Currencies.EURO,"€",392.30},
+                {Currencies.US_DOLLAR,"$",500.00},
+        };
+    }
 
 
     @Test(priority = 3,dataProvider = "currencyData")
-    public void changeCurrencyOnWishListPage(Currencies currency, String
-            ExpectedSymbolOfCurrency) throws InterruptedException {
+    public void changeCurrencyOnWishListPage(Currencies currency,
+                                             String expectedSymbolOfCurrency) throws InterruptedException {
 //    public void changeCurrencyOnWishListPage(Currencies currency
 //            ,double expectedProductPrice) throws InterruptedException {
+        HomePage homePage = getHomePage();
+        WishListPage wishListPage = homePage.goToWishList();
+        wishListPage.chooseCurrencyInWishList(currency);
+       
+        Assert.assertEquals(wishListPage.getCurrencyText(),expectedSymbolOfCurrency);
 
-        WishListPage wishListPage = getWishListPage().goToWishList();
-        wishListPage = wishListPage.chooseCurrencyInWishList(currency);
-
-
-       // Assert.assertEquals(wishListPage.getProductPriceAmountByPartialName(getName()), product.getPrice(currency));
-        Assert.assertEquals(wishListPage.getCurrencyText(),ExpectedSymbolOfCurrency);
-
-        Thread.sleep(2000);
+        //Assert.assertEquals(wishListPage.getProductPriceAmountByPartialName(getName()), product.getPrice(currency));
+        Thread.sleep(5000);
     }
 
 

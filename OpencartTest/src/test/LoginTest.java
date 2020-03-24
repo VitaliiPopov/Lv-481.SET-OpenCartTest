@@ -24,7 +24,7 @@ public class LoginTest extends TestRunner {
     @Parameters({"search", "productName"})
     @Test(priority = 2)
     public void AddProductToCompareFromSearch(String search, String productName) throws InterruptedException {
-        SearchPage searchPage = getHomePage().SearchProduct(search);
+        SearchPage searchPage = getHomePage().searchProduct(search);
         Thread.sleep(1000);
         searchPage.clickProductComponentCompareButtonByName(productName);
         Thread.sleep(1000);

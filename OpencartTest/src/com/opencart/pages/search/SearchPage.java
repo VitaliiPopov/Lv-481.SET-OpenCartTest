@@ -37,10 +37,6 @@ public class SearchPage extends AbstractPageWithHeader {
 
     //Components
     private List<ProductContainersComponent> productContainersComponents;
-    private SearchCriteriaComponent searchCriteriaComponent;
-    private ProductDisplayCriteriaComponent productDisplayCriteriaComponent;
-    private AlertComponent alertComponent;
-
 
     public SearchPage(WebDriver driver) {
         super(driver);
@@ -70,17 +66,11 @@ public class SearchPage extends AbstractPageWithHeader {
         return productContainersComponents;
     }
 
-    public SearchCriteriaComponent getSearchCriteriaComponent(){
-        WebElement SearchCriteriaElement = driver.findElement(By.xpath(SEARCH_CRITERIA_ELEMENT_LOCATOR));
-        return new SearchCriteriaComponent(SearchCriteriaElement);
-    }
-
     public ProductDisplayCriteriaComponent getProductDisplayCriteriaComponent() {
         return new ProductDisplayCriteriaComponent(driver.findElement(By.xpath(PRODUCT_DISPLAY_ELEMENT_LOCATOR)));
-
     }
 
-    public SearchCriteriaComponent searchCriteriaComponent() {
+    public SearchCriteriaComponent getSearchCriteriaComponent() {
         return new SearchCriteriaComponent(driver.findElement(By.xpath(SEARCH_CRITERIA_ELEMENT_LOCATOR)));
     }
 
@@ -228,6 +218,17 @@ public class SearchPage extends AbstractPageWithHeader {
     public ProductPage goToProductPageFromAlert() {
         getAlertComponentWithoutWait().clickOnProductLink();
         return new ProductPage(driver);
+    }
+
+    //add to cart by button
+    public void clickProductComponentAddToCartButtonByName(String productName) {
+        getProductComponentByName(productName).clickAddToCartButton();
+    }
+
+    //add to Wish List by button
+    public void clickProductComponentAddToWishList(String productName) {
+        getProductComponentByName(productName).clickAddToWishListButton();
+        //InitializeAlert();
     }
 
     ///endregion

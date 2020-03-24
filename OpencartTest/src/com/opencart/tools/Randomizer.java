@@ -9,8 +9,11 @@ public class Randomizer {
     private static final String NUMBER = "0123456789";
 
     public static String generateRandomString(int length) {
+        SecureRandom random = new SecureRandom();
+        String CHAR_LOWER = "abcdefghijklmnopqrstuvwxyz";
+        String CHAR_UPPER = CHAR_LOWER.toUpperCase();
+        String NUMBER = "0123456789";
         String DATA_FOR_RANDOM_STRING = CHAR_LOWER + CHAR_UPPER + NUMBER;
-
         if (length < 1) throw new IllegalArgumentException();
         StringBuilder sb = new StringBuilder(length);
         for (int i = 0; i < length; i++) {
@@ -19,6 +22,5 @@ public class Randomizer {
             sb.append(rndChar);
         }
         return sb.toString();
-
     }
 }

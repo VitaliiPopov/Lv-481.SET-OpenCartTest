@@ -22,7 +22,6 @@ import java.util.List;
 
 public class ProductDisplayCriteriaComponent {
 
-    WebDriver driver;
     private WebElement ProductDisplayCriteriaLayout;
 
     private WebElement sortDropdownComponent;
@@ -32,9 +31,8 @@ public class ProductDisplayCriteriaComponent {
     private WebElement gridButton;
     private WebElement productCountLable;
 
+    public ProductDisplayCriteriaComponent(WebElement ProductDisplayCriteriaLayout) {
 
-    public ProductDisplayCriteriaComponent(WebDriver driver, WebElement ProductDisplayCriteriaLayout) {
-        this.driver = driver;
         this.ProductDisplayCriteriaLayout = ProductDisplayCriteriaLayout;
         initElements();
     }
@@ -58,7 +56,7 @@ public class ProductDisplayCriteriaComponent {
                     option.click();
                 }
             }
-        } catch (StaleElementReferenceException ex){
+        } catch (StaleElementReferenceException ex) {
             //ignor StaleElementReferenceException exception
         }
 
@@ -99,5 +97,4 @@ public class ProductDisplayCriteriaComponent {
     public WebElement getSortByDropdown() {
         return sortDropdownComponent;
     }
-
 }

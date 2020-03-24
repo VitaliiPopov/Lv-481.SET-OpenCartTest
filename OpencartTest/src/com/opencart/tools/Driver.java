@@ -22,23 +22,27 @@ public class Driver {
             if (ConstantVariables.BROWSER_NAME.equalsIgnoreCase("chrome")) {
                 System.setProperty("webdriver.chrome.driver", "./target/drivers/chromedriver.exe");
                 ChromeOptions options = new ChromeOptions();
-                options.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS,true);
+                options.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
                 driver = new ChromeDriver(options);
             } else if (ConstantVariables.BROWSER_NAME.equalsIgnoreCase("firefox")) {
                 System.setProperty("webdriver.gecko.driver", "./target/drivers/geckodriver.exe");
                 FirefoxOptions options = new FirefoxOptions();
-                options.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS,true);
+                options.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
                 driver = new FirefoxDriver(options);
             }
         }
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         driver.get(ConstantVariables.URL);
         return driver;
     }
 
-    public static void Quit(){
+    public static void Quit() {
         driver.quit();
         driver = null;
+    }
+
+    public static void ClearCookies() {
+        driver.manage().deleteAllCookies();
     }
 }

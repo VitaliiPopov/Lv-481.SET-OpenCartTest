@@ -27,7 +27,7 @@ public class LoginPage extends AbstractPageWithHeader {
         initElements();
     }
 
-    private void initElements(){
+    private void initElements() {
         accountSidebarComponent = new AccountSidebarComponent(driver);
     }
 
@@ -68,14 +68,14 @@ public class LoginPage extends AbstractPageWithHeader {
     //FUNCTIONAL
 
     //loginInputField
-    public void fillInputLogin(String login){
+    public void fillInputLogin(String login) {
         clickLoginInputField();
         clearLoginInputField();
         setLoginInputField(login);
     }
 
     //passwordInputField
-    public void fillInputPassword(String password){
+    public void fillInputPassword(String password) {
         clickPasswordInputField();
         clickPasswordInputField();
         setPasswordInputField(password);
@@ -84,11 +84,10 @@ public class LoginPage extends AbstractPageWithHeader {
     //BUSINESS LOGIC
 
     //login
-    public MyAccountPage login(String LOGIN_NAME, String PASSWORD_NAME){
+    public MyAccountPage login(String LOGIN_NAME, String PASSWORD_NAME) {
         fillInputLogin(LOGIN_NAME);
         fillInputPassword(PASSWORD_NAME);
         clickLoginButton();
         return new MyAccountPage(driver);
     }
-
 }

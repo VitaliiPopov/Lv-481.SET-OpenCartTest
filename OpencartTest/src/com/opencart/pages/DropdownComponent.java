@@ -24,7 +24,6 @@ public class DropdownComponent {
         listOptions = driver.findElements(searchLocator);
     }
 
-    //PAGE OBJECT
 
     //FUNCTIONAL
 
@@ -72,8 +71,4 @@ public class DropdownComponent {
         if (isExistDropdownOptionByPartialName(optionName)) getDropdownOptionByPartialName(optionName).click();
         else throw new RuntimeException(WEBELEMENT_NOT_FOUND);
     }
-
-    //BUSINESS LOGIC
-
-
 }

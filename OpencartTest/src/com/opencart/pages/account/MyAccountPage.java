@@ -13,9 +13,9 @@ public class MyAccountPage extends AbstractPageWithHeader {
         initElements();
     }
 
-    private void initElements(){
+    private void initElements() {
         accountSidebarComponent = new AccountSidebarComponent(driver);
     }
-
-
 }
+
+

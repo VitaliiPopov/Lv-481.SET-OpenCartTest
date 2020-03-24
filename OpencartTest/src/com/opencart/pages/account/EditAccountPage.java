@@ -29,6 +29,18 @@ public class EditAccountPage extends AbstractPageWithHeader {
     @FindBy(how = How.CSS, css = "div.pull-right>input[value='Continue']")
     private WebElement editButton;
 
+    @FindBy(how = How.XPATH, xpath = "//*[@id='input-firstname']/following-sibling::div")
+    private WebElement alertBadFirstname;
+
+    @FindBy(how = How.XPATH, xpath = "//*[@id='input-lastname']/following-sibling::div")
+    private WebElement alertBadLastname;
+
+    @FindBy(how = How.XPATH, xpath = "//*[@id='input-email']/following-sibling::div")
+    private WebElement alertBadEmail;
+
+    @FindBy(how = How.XPATH, xpath = "//*[@id='input-telephone']/following-sibling::div")
+    private WebElement alertBadTelephone;
+
     public EditAccountPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
@@ -137,6 +149,22 @@ public class EditAccountPage extends AbstractPageWithHeader {
         editTelephoneField(PHONE);
         clickEditButton();
         return new MyAccountPage(driver);
+    }
+
+    public boolean isAlertFirstnameDisplayed() {
+        return alertBadFirstname.isDisplayed();
+    }
+
+    public boolean isAlertLastnameDisplayed() {
+        return alertBadLastname.isDisplayed();
+    }
+
+    public boolean isAlertEmailDisplayed() {
+        return alertBadEmail.isDisplayed();
+    }
+
+    public boolean isAlertTelephoneDisplayed() {
+        return alertBadTelephone.isDisplayed();
     }
 
 }

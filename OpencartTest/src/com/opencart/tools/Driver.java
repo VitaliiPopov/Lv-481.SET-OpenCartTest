@@ -20,7 +20,7 @@ public class Driver {
     public static WebDriver getDriver() {
         if (driver == null) {
             if (ConstantVariables.BROWSER_NAME.equalsIgnoreCase("chrome")) {
-                System.setProperty("webdriver.chrome.driver", "C:\\Users\\Admin\\Documents\\Lv-481.SET-OpenCartTest\\OpencartTest\\chromedriver.exe");
+                System.setProperty("webdriver.chrome.driver", "./target/drivers/chromedriver.exe");
                 ChromeOptions options = new ChromeOptions();
                 options.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS,true);
                 driver = new ChromeDriver(options);

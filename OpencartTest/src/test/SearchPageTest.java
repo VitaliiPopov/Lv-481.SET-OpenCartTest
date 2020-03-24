@@ -8,6 +8,7 @@ import com.opencart.pages.search.ProductDisplayCriteriaComponent;
 import com.opencart.pages.search.SearchCriteriaComponent;
 import com.opencart.pages.search.SearchPage;
 import com.opencart.tools.ExcelDataConfig;
+import com.opencart.tools.Randomizer;
 import com.opencart.tools.TestRunner;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -55,7 +56,7 @@ public class SearchPageTest extends TestRunner {
 
     @Test(priority = 4)
     public void checkEmptyResultMessage() throws InterruptedException {
-        String searchText = SearchPage.generateRandomString(9);
+        String searchText = Randomizer.generateRandomString(9);
         searchPage = getHomePage().SearchProduct(searchText);
         boolean actual = searchPage.isEmptyResult();
         Assert.assertTrue(actual);

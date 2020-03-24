@@ -1,5 +1,7 @@
 package com.opencart.pages;
 
+import com.opencart.pages.product_table.CartPage;
+import com.opencart.pages.product_table.WishListPage;
 import com.opencart.pages.search.SearchPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -19,6 +21,8 @@ public class AbstractPageWithHeader {
     //
     private WebElement myAccount;
     private WebElement shoppingCart;
+    private WebElement currency;
+    private WebElement wishList;
     //
     private WebElement logo;
     private WebElement searchField;
@@ -37,8 +41,30 @@ public class AbstractPageWithHeader {
         logo=driver.findElement(By.xpath("//h1/a"));;
         searchField=driver.findElement(By.cssSelector(".form-control.input-lg"));
         searchButton=driver.findElement(By.cssSelector(".btn.btn-default"));
+        currency=driver.findElement(By.cssSelector(".btn.btn-link.dropdown-toggle"));
+        wishList=driver.findElement(By.cssSelector("#wishlist-total"));
+        shoppingCart=driver.findElement(By.cssSelector(".fa.fa-shopping-cart"));
     }
 
+
+    //CURRENCY
+    public WebElement getCurrency(){
+        return currency;
+    }
+
+    public String getCurrencyText(){
+        return getCurrency().getText().substring(0,1);
+    }
+
+    public void clickCurrency(){
+        getCurrency().click();
+    }
+
+    public void clickCurrencyByPartialName(String optionName) {
+        clickCurrency();
+        createDropdownComponent(By.cssSelector("div.btn-group.open ul.dropdown-menu li"));
+        clickDropdownComponentByPartialName(optionName);
+    }
     //logo
     private void clickLogo() {
         logo.click();
@@ -52,6 +78,30 @@ public class AbstractPageWithHeader {
     //searchButton
     private void clickSearchButton() {
         searchButton.click();
+    }
+
+//    public WebElement getWishList(){
+//        return wishList;
+//    }
+//    public WishListPage clickWishList(){
+//        getWishList().click();
+//        return new WishListPage(driver);
+//    }
+
+    private void clickWishList(){
+        wishList.click();
+
+    }
+//    public WebElement getWishList(){
+//        return wishList;
+//    }
+//    public HomePage clickWishList(){
+//        getWishList().click();
+//        return new HomePage(driver);
+//    }
+    private void clickCart(){
+        shoppingCart.click();
+
     }
 
     //searchField
@@ -112,6 +162,17 @@ public class AbstractPageWithHeader {
     public HomePage goToHomePage(){
         clickLogo();
         return new HomePage(driver);
+    }
+
+
+    public WishListPage goToWishList() {
+        clickWishList();
+        return new WishListPage(driver);
+    }
+
+    public CartPage goToCart() {
+        clickCart();
+        return new CartPage(driver);
     }
 
     //Search

@@ -68,8 +68,13 @@ public class SearchPage extends AbstractPageWithHeader {
     //add to cart by button
     public void clickProductComponentAddToCartButtonByName(String productName) {
         getProductComponentByName(productName).clickAddToCartButton();
+        InitializeAlert();
     }
-
+    //add to wishlist
+    public void clickProductComponentAddToWishList(String productName) {
+        getProductComponentByName(productName).clickAddToWishList();
+        InitializeAlert();
+    }
     //BUSINESS LOGIC
 
 }

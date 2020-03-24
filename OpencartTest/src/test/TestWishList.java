@@ -25,7 +25,7 @@ public class TestWishList extends TestRunner {
         // Preconditions
         //      Login to system
         LoginPage loginPage = getHomePage().goToLoginPage(myAccountDropdownText);
-        MyAccountPage myAccountPage = loginPage.login(jsonParser.getEmailFromJson(0),jsonParser.getPasswordFromJson(0));
+        MyAccountPage myAccountPage = loginPage.login(jsonParser.getEmailFromJson(7),jsonParser.getPasswordFromJson(7));
         myAccountPage.goToHomePage();
 
         int numberProductsInWishList = getHomePage().getWishListNumberOfProducts();
@@ -58,7 +58,7 @@ public class TestWishList extends TestRunner {
         // Preconditions
         //      Login to system
         LoginPage loginPage = getHomePage().goToLoginPage(myAccountDropdownText);
-        MyAccountPage myAccountPage = loginPage.login(jsonParser.getEmailFromJson(0),jsonParser.getPasswordFromJson(0));
+        MyAccountPage myAccountPage = loginPage.login(jsonParser.getEmailFromJson(7),jsonParser.getPasswordFromJson(7));
         myAccountPage.goToHomePage();
         //      Add some product to WishList
         SearchPage searchPage = getHomePage().searchProduct(fromSearchPageProductName);

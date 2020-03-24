@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="wishList">
+
+
+    <test name="addToWishList">
+
+        <parameter name="myAccountDropdownText" value="Login"/>
+
+        <parameter name="fromSearchPageProductName" value="iPod Nano"/>
+        <parameter name="fromHomePageProductName" value="iPhone"/>
+        <parameter name="fromProductPageProductName" value="Samsung Galaxy Tab 10.1"/>
+
+        <classes>
+            <class name="test.TestWishList">
+                <methods>
+                    <include name="addProductToWishListFromSearchPage"/>
+                    <!--                    <include name="addProductToWishList_fromHomePage"/>-->
+                    <!--                    <include name="addProductToWishList_fromProductPage"/>-->
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="removeFromWishList">
+
+        <parameter name="myAccountDropdownText" value="Login"/>
+
+        <parameter name="fromSearchPageProductName" value="MacBook"/>
+        <parameter name="fromHomePageProductName" value="iPhone"/>
+        <classes>
+            <class name="test.TestWishList">
+                <methods>
+                    <include name="removeProductFromWishListByName"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="addFromWishList">
+
+        <parameter name="myAccountDropdownText" value="Login"/>
+
+        <parameter name="fromSearchPageProductName" value="MacBook"/>
+        <parameter name="fromHomePageProductName" value="iPhone"/>
+        <classes>
+            <class name="test.TestWishList">
+                <methods>
+                    <include name="addProductToCartFromWishList"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+
+</suite> <!-- Default Suite -->
+

@@ -21,13 +21,14 @@ public class TestRunner {
     /*public SearchPage getSearchPage(){
         return new SearchPage(Driver.getDriver());
     }*/
+    public HomePage getHomePage(){
+        return new HomePage(Driver.getDriver());
+    }
     public CartPage getCartPage(){
         return new CartPage(Driver.getDriver());
     }
     public WishListPage getWishListPage(){
         return new WishListPage(Driver.getDriver());
     }
-    public HomePage getHomePage(){
-        return new HomePage(Driver.getDriver());
-    }
+
 }

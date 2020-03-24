@@ -15,28 +15,40 @@ public class ProductPage extends AbstractPageWithHeader {
     private AvailableOptionsComponent availableOptionsComponent;
     @FindBy(how = How.CSS, css = "a[href='#tab-review']")
     private WebElement tabReviews;
+
     @FindBy(how = How.XPATH, xpath = "//input[contains(@id,'input-name')]")
     private WebElement inputFieldName;
+
     @FindBy(how = How.XPATH, xpath = "//textarea[contains(@id,'input-review')]")
     private WebElement inputFieldReview;
+
     @FindBy(how = How.XPATH, xpath = "//input[@type='radio'][contains(@value,'1')]")
     private WebElement radioButtonUnderLow;
+
     @FindBy(how = How.XPATH, xpath = "//input[@type='radio'][contains(@value,'2')]")
     private WebElement radioButtonLow;
+
     @FindBy(how = How.XPATH, xpath = "//input[@type='radio'][contains(@value,'3')]")
     private WebElement radioButtonOk;
+
     @FindBy(how = How.XPATH, xpath = "//input[@type='radio'][contains(@value,'4')]")
     private WebElement radioButtonHigh;
+
     @FindBy(how = How.XPATH, xpath = "//input[@type='radio'][contains(@value,'5')]")
     private WebElement radioButtonWell;
+
     @FindBy(how = How.XPATH, xpath = "//button[contains(@id,'button-review')]")
     private WebElement buttonAddReview;
+
     @FindBy(how = How.XPATH, xpath = "//div[contains(@id,'review')]/child::p")
     private WebElement informationOfReviews;
+
     @FindBy(how = How.XPATH, xpath = "//div[contains(@id,'review')]/following-sibling::h2")
     private WebElement descriptionOfTabReviews;
+
     @FindBy(how = How.CSS, css = "div.alert.alert-success")
     private WebElement deliveredReviewMessage;
+
     @FindBy(how = How.CSS, css = "div.alert.alert-danger")
     private WebElement undeliveredReviewMessage;
 

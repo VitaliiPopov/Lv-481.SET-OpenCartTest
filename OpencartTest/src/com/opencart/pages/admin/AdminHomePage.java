@@ -10,10 +10,13 @@ public class AdminHomePage {
     protected WebDriver driver;
     @FindBy(how = How.XPATH, xpath = "//a[@href='#collapse1']")
     private WebElement catalogDropdown;
+
     @FindBy(how = How.XPATH, xpath = "//a[contains(text(), \"Reviews\")]")
     private WebElement reviewTab;
+
     @FindBy(how = How.XPATH, xpath = "//a[@href='#collapse5']")
     private WebElement customerDropdown;
+
     @FindBy(how = How.XPATH, xpath = "//ul[@id='collapse5']/li/a[contains(text(), 'Customers')]")
     private WebElement customerTab;
 

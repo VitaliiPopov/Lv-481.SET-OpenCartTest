@@ -11,8 +11,10 @@ public class AdminLoginPage {
     protected WebDriver driver;
     @FindBy(how = How.ID, id = "input-username")
     private WebElement adminUsernameField;
+
     @FindBy(how = How.ID, id = "input-password")
     private WebElement adminPasswordField;
+
     @FindBy(how = How.CSS, css = "button[type=submit]")
     private WebElement adminLoginButton;
 

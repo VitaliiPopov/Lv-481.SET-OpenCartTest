@@ -14,6 +14,7 @@ public class AdminReviewEditPage {
     private Select selectStatus;
     @FindBy(how = How.CSS, css = "select#input-status")
     private WebElement status;
+
     @FindBy(how = How.CSS, css = "button[data-original-title='Save']")
     private WebElement buttonSave;
 

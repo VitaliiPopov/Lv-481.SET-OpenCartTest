@@ -23,7 +23,6 @@ public class ReviewTest extends TestRunner {
     private WebDriver driver;
     private ProductPage productPage;
 
-
     private AdminReviewPage startMethod() {
         driver.navigate().to(ConstantVariables.AdminURL);
         AdminLoginPage adminLoginPage = new AdminLoginPage(driver);

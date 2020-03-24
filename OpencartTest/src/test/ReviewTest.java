@@ -26,7 +26,7 @@ public class ReviewTest extends TestRunner {
     private AdminReviewPage startMethod() {
         driver.navigate().to(ConstantVariables.AdminURL);
         AdminLoginPage adminLoginPage = new AdminLoginPage(driver);
-        AdminHomePage adminHomePage = adminLoginPage.adminLogin(jsonDataConfig.getEmailFromJson(2),jsonDataConfig.getPasswordFromJson(2));
+        AdminHomePage adminHomePage = adminLoginPage.adminLogin(jsonDataConfig.getEmailFromJson(2), jsonDataConfig.getPasswordFromJson(2));
         return adminHomePage.openReviewPage();
     }
 
@@ -43,16 +43,16 @@ public class ReviewTest extends TestRunner {
 
     @AfterMethod
     @Parameters({"nameOfAuthor"})
-    public void tearDown(ITestResult result,String nameOfAuthor) throws Exception {
+    public void tearDown(ITestResult result, String nameOfAuthor) throws Exception {
         if (result.getStatus() == ITestResult.FAILURE) {
             Utility.getScreenshot(Driver.getDriver());
         }
         startMethod().deleteReview(nameOfAuthor);
     }
 
-    @Parameters({"nameOfAuthor","correctText"})
+    @Parameters({"nameOfAuthor", "correctText"})
     @Test(priority = 1)
-    public void successfulReviewProcess(String nameOfAuthor,String correctText) {
+    public void successfulReviewProcess(String nameOfAuthor, String correctText) {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         WebElement product = driver.findElement(By.cssSelector("img[alt='MacBook']"));
         js.executeScript("arguments[0].scrollIntoView();", product);
@@ -67,9 +67,9 @@ public class ReviewTest extends TestRunner {
         Assert.assertEquals(currentCount, startCount + 1);
     }
 
-    @Parameters({"nameOfAuthor","correctText","messageOfDeliveredReview"})
+    @Parameters({"nameOfAuthor", "correctText", "messageOfDeliveredReview"})
     @Test(priority = 2)
-    public void successfullyWritingReview(String nameOfAuthor,String correctText,String messageOfDeliveredReview) {
+    public void successfullyWritingReview(String nameOfAuthor, String correctText, String messageOfDeliveredReview) {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         WebElement product = driver.findElement(By.cssSelector("img[alt='MacBook']"));
         js.executeScript("arguments[0].scrollIntoView();", product);

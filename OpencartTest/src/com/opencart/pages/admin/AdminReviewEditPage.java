@@ -18,13 +18,14 @@ public class AdminReviewEditPage {
     @FindBy(how = How.CSS, css = "button[data-original-title='Save']")
     private WebElement buttonSave;
 
-    public Select selectStatus(){
-        this.selectStatus=new Select(status);
+    public Select selectStatus() {
+        this.selectStatus = new Select(status);
         return selectStatus;
     }
+
     public AdminReviewEditPage(WebDriver driver) {
         this.driver = driver;
-        PageFactory.initElements(driver,this);
+        PageFactory.initElements(driver, this);
         //initElements();
     }
 

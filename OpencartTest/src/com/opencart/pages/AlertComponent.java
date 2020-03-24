@@ -5,22 +5,22 @@ import org.openqa.selenium.WebElement;
 
 public class AlertComponent {
 
-    private WebElement addProductToCartAlertComponentLayout;
+    private WebElement alertComponentLayout;
     //
-    private WebElement alertMessage;
-    private WebElement productLink;
-    private WebElement cartLink;
+    private final String ALERT_LAYOUT_SELECTOR = "."; //xpath
+    private final String PRODUCT_LINK_SELECTOR = "./a[contains(@href,'?route=product/product')]"; //xpath
+    private final String CART_LINK_SELECTOR = "./a[text() = 'shopping cart']"; //xpath
+    private final String COMPARE_LINK_SELECTOR = "./a[.='product comparison']"; //xpath
 
-    public AlertComponent(WebElement addProductToCartAlertComponentLayout) {
-        this.addProductToCartAlertComponentLayout = addProductToCartAlertComponentLayout;
+    public AlertComponent(WebElement alertComponentLayout) {
+        this.alertComponentLayout = alertComponentLayout;
     }
 
     // Page Object
 
     //alertMessage
     public WebElement getAlertMessage() {
-        alertMessage = addProductToCartAlertComponentLayout.findElement(By.xpath("."));
-        return alertMessage;
+        return alertComponentLayout.findElement(By.xpath("."));
     }
 
     public String getAlertMessageText() {
@@ -29,8 +29,7 @@ public class AlertComponent {
 
     //productLink
     public WebElement getProductLink() {
-        productLink = addProductToCartAlertComponentLayout.findElement(By.xpath("./a[contains(@href,'?route=product/product')]"));
-        return productLink;
+        return alertComponentLayout.findElement(By.xpath("./a[contains(@href,'?route=product/product')]"));
     }
 
     public void clickOnProductLink() {
@@ -39,12 +38,19 @@ public class AlertComponent {
 
     //cartLink
     public WebElement getCartLink() {
-        cartLink = addProductToCartAlertComponentLayout.findElement(By.xpath("./a[text() = 'shopping cart']"));
-        return cartLink;
+        return alertComponentLayout.findElement(By.xpath("./a[text() = 'shopping cart']"));
     }
 
     public void clickOnCartLink() {
         getCartLink().click();
     }
 
+    //compareLink
+    public WebElement getCompareLink() {
+        return alertComponentLayout.findElement(By.xpath("./a[.='product comparison']"));
+    }
+
+    public void clickOnCompareLink() {
+        getCompareLink().click();
+    }
 }

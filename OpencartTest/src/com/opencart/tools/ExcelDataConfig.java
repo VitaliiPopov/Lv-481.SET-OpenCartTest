@@ -28,5 +28,4 @@ public class ExcelDataConfig {
         sheet1 = workBook.getSheetAt(sheetNumber);
         return sheet1.getRow(row).getCell(column).getStringCellValue();
     }
-
 }

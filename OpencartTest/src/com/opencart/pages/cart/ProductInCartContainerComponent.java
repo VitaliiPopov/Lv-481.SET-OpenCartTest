@@ -105,6 +105,4 @@ public class ProductInCartContainerComponent {
         setQuantityInput(value);
         clickOnQuantityButtonRefresh();
     }
-
-
 }

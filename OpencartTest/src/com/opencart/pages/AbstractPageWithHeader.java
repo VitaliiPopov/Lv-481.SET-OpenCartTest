@@ -17,27 +17,34 @@ public class AbstractPageWithHeader {
     //ExceptionsText
     private final String OPTION_NULL_MESSAGE = "DropdownComponent is null";
     private final String OPTION_NOT_FOUND_MESSAGE = "Option %s not found in %s";
+
     //selectors
-    private final String DROPDOWN_MYACCONT_CSSSELECTOR = "ul.dropdown-menu.dropdown-menu-right";
+    private final String DROPDOWN_MYACCONT_SELECTOR = "ul.dropdown-menu.dropdown-menu-right"; //css
+
     //WebDriver
     protected WebDriver driver;
-    //
-    @FindBy(how = How.CSS, css = "i.fa-user")
-    private WebElement myAccount;
-    @FindBy(how = How.XPATH, xpath = "//a[@title='Shopping Cart']")
-    private WebElement shoppingCart;
-    //
-    @FindBy(how = How.XPATH, xpath = "//h1/a")
-    private WebElement logo;
-    @FindBy(how = How.NAME, name = "search")
-    private WebElement searchTopField;
-    @FindBy(how = How.CSS, css = "button.btn.btn-default")
-    private WebElement searchTopButton;
-    @FindBy(how = How.ID, id = "cart-total")//"#cart > button"
-    private WebElement cartButton;
+
     //Components
     private CartDropdownComponent cartDropdownComponent;
     private DropdownComponent dropdownComponent;
+
+    @FindBy(how = How.CSS, css = "i.fa-user")
+    private WebElement myAccount;
+
+    @FindBy(how = How.XPATH, xpath = "//a[@title='Shopping Cart']")
+    private WebElement shoppingCart;
+
+    @FindBy(how = How.XPATH, xpath = "//h1/a")
+    private WebElement logo;
+
+    @FindBy(how = How.NAME, name = "search")
+    private WebElement searchTopField;
+
+    @FindBy(how = How.CSS, css = "button.btn.btn-default")
+    private WebElement searchTopButton;
+
+    @FindBy(how = How.ID, id = "cart-total")//"#cart > button"
+    private WebElement cartButton;
 
     public AbstractPageWithHeader(WebDriver driver) {
         this.driver = driver;
@@ -85,6 +92,23 @@ public class AbstractPageWithHeader {
         myAccount.click();
     }
 
+    //searchButton
+    private void clickSearchButton() {
+        searchTopButton.click();
+    }
+
+    //searchField
+    private void clearSearchField() {
+        searchTopField.clear();
+    }
+
+    private void inputSearchField(String search) {
+        searchTopField.sendKeys(search);
+    }
+
+    private void clickSearchField() {
+        searchTopField.click();
+    }
 
     //cartButton
     public String getCartButtonText() {
@@ -127,7 +151,7 @@ public class AbstractPageWithHeader {
     //MyAccount
     public void openMyAccountDropdown() {
         clickMyAccount();
-        createDropdownComponent(By.cssSelector(DROPDOWN_MYACCONT_CSSSELECTOR));
+        createDropdownComponent(By.cssSelector(DROPDOWN_MYACCONT_SELECTOR));
     }
 
     public void clickMyAccountDropdownComponentByPartialName(String text) {
@@ -143,11 +167,7 @@ public class AbstractPageWithHeader {
     }
 
     //CartButton
-    public void openViewCartComponent() {
-        clickOnCartButton();
-    }
-
-    public void closeViewCartComponent() {
+    public void viewCartComponent() {
         clickOnCartButton();
     }
 
@@ -156,39 +176,39 @@ public class AbstractPageWithHeader {
     }
 
     public String getEmptyDropdownCartButtonText() {
-        openViewCartComponent();
+        viewCartComponent();
         return getCartDropdownComponent().getEmptyDropdownCartButtonText();
     }
 
     public BigDecimal getTotalPriceText() {
-        openViewCartComponent();
+        viewCartComponent();
         return getCartDropdownComponent().getTotalPriceText();
     }
 
     //productInCartButtonContainerComponents size
     public int getProductInCartButtonContainerComponentsSize() {
-        openViewCartComponent();
+        viewCartComponent();
         return getCartDropdownComponent().getProductInCartButtonContainerComponentsSize();
     }
 
     public ProductInCartButtonContainerComponent getProductInCartButtonContainerComponentByName(String productName) {
-        openViewCartComponent();
+        viewCartComponent();
         return getCartDropdownComponent().getProductInCartButtonContainerComponentByName(productName);
     }
 
     public void removeViewProductComponentByName(String productName) {
-        openViewCartComponent();
+        viewCartComponent();
         getCartDropdownComponent().removeViewProductComponent(productName);
     }
 
     public boolean checkTotalPrice() {
-        openViewCartComponent();
+        viewCartComponent();
         if (getTotalPriceText().equals(getCartDropdownComponent().getTotalPriceFromColumn())) return true;
         else return false;
     }
 
     public void removeAllProducts() {
-        openViewCartComponent();
+        viewCartComponent();
         getCartDropdownComponent().removeAllProducts();
     }
 
@@ -210,6 +230,15 @@ public class AbstractPageWithHeader {
         return new HomePage(driver);
     }
 
+    //Search
+    public SearchPage searchProduct(String name) {
+        clickSearchField();
+        clearSearchField();
+        inputSearchField(name);
+        clickSearchButton();
+        return new SearchPage(driver);
+    }
+
     public SearchPage goToSearchPageAfterSearchProduct(String productName) {
         fillSearchTopField(productName);
         clickSearchTopButton();
@@ -220,5 +249,4 @@ public class AbstractPageWithHeader {
         clickOnShoppingCart();
         return new CartPage(driver);
     }
-
 }

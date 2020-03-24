@@ -37,8 +37,6 @@ public class CartDropdownComponent {
             productInCartButtonContainerComponents.add(new ProductInCartButtonContainerComponent(current));
     }
 
-    //PAGE OBJECT
-
     //getCartTotalMessage
     public WebElement getCartTotalMessage() {
         cartTotalMessage = cartDropdownComponentLayout.findElement(By.id("cart-total"));
@@ -127,6 +125,4 @@ public class CartDropdownComponent {
         productInCartButtonContainerComponents.get(0).clickOnRemoveButton();
         if (productInCartButtonContainerComponents.size() > 1) removeAllProducts();
     }
-
-
 }

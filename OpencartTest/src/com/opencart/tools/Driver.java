@@ -8,6 +8,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.CapabilityType;
 
+import java.util.concurrent.TimeUnit;
+
 public class Driver {
 
     private static WebDriver driver = null;
@@ -27,10 +29,20 @@ public class Driver {
                 FirefoxOptions options = new FirefoxOptions();
                 options.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
                 driver = new FirefoxDriver(options);
-
             }
         }
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        driver.get(ConstantVariables.URL);
         return driver;
     }
 
+    public static void Quit() {
+        driver.quit();
+        driver = null;
+    }
+
+    public static void ClearCookies() {
+        driver.manage().deleteAllCookies();
+    }
 }

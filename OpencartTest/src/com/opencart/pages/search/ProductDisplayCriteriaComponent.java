@@ -11,8 +11,7 @@ public class ProductDisplayCriteriaComponent {
         initElements();
     }
 
-    private void initElements() {
+    private void initElements(){
 
     }
-
 }

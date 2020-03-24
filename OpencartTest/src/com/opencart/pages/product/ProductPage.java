@@ -3,6 +3,7 @@ package com.opencart.pages.product;
 import com.opencart.pages.AbstractPageWithHeader;
 import com.opencart.pages.AlertComponent;
 import com.opencart.pages.cart.CartPage;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -58,6 +59,4 @@ public class ProductPage extends AbstractPageWithHeader {
         getAlertComponent().clickOnProductLink();
         return new ProductPage(driver);
     }
-
-
 }

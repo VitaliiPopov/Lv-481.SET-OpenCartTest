@@ -15,5 +15,4 @@ public class AccountLogoutPage extends AbstractPageWithHeader {
     private void initElements() {
         accountSidebarComponent = new AccountSidebarComponent(driver);
     }
-
 }

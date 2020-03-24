@@ -58,6 +58,4 @@ public class ProductInCartButtonContainerComponent {
     public void clickOnRemoveButton() {
         getRemoveButton().click();
     }
-
-
 }

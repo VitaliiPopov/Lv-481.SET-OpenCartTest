@@ -1,12 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Default Suite">
-    <test name="Individual">
+    <test name="CompareTest">
         <!--MainTest-->
-        <parameter name="myAccountDropdownText" value="Login"></parameter>
-
+        <parameter name="myAccountDropdownText" value="Login"/>
+        <parameter name="search" value="ip"/>
+        <parameter name="productName1" value="iPhone"/>
+        <parameter name="productName2" value="iPod Classic"/>
         <classes>
             <!--MainTest-->
+            <class name="test.ProductCompareTest">
+                <methods>
+<!--                    <include name="Login"/>-->
+                    <include name="AddProductToCompareFromSearchByAlert"/>
+                    <include name="AddSameProductTwoTimes"/>
+                    <include name="CleanProductFromComparison"/>
+                    <include name="AddToCartFromComparisonPage"/>
+                    <include name="GoToProductPageFromComparisonPage"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <!--<test name="CartTest">
+        &lt;!&ndash;MainTest&ndash;&gt;
+        <parameter name="myAccountDropdownText" value="Login"></parameter>
+        <classes>
+            &lt;!&ndash;MainTest&ndash;&gt;
             <class name="test.CartTest">
                 <methods>
                     <include name="loginTest"/>
@@ -14,7 +33,7 @@
                 </methods>
             </class>
         </classes>
-    </test> <!-- Individual -->
+    </test> &lt;!&ndash; Individual &ndash;&gt;-->
 </suite> <!-- Default Suite -->
 
 

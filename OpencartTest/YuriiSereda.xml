@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="SeredaYuriiSuite">
+    <test name="YuriiSereda">
+        <!--MainTest-->
+        <parameter name="myAccountDropdownText" value="Login"/>
+        <parameter name="myAccount" value="My Account"/>
+
+        <parameter name="search" value="ip"/>
+        <parameter name="productName" value="iPhone"/>
+        <classes>
+            <!--MainTest-->
+            <class name="test.AddressTests">
+                <methods>
+                     <include name="abilityToAddAddress"/>
+                    <include name="abilityToDeleteAddress"/>
+                    <include name="editAddress"/>
+                    <include name="checkEditPageAlertMassages"/>
+                    <include name="checkAbilityToDeleteDefaultAddress"/>
+                    <include name="createAddressWithEmptyFirstname"/>
+                    <include name="createAddressWithEmptyLastname"/>
+                    <include name="createAddressWithEmptyAddress"/>
+                    <include name="createAddressWithEmptyCountry"/>
+                    <include name="createAddressWithEmptyRegion"/>
+                    <include name="checkAlertsWithTooShortInputs"/>
+                    <include name="checkAlertsWithTooLongInputs"/>
+                    <include name="checkAlertsWithTooLongInputs"/>
+                    <include name="createAddressWithNumbersInsteadCharacters"/>
+                    <include name="clearAddressBook"/>
+                </methods>
+            </class>
+        </classes>
+    </test> <!-- Individual -->
+</suite> <!-- Default Suite -->
+
+

@@ -54,6 +54,20 @@ public class DropdownComponent {
         return result;
     }
 
+    public WebElement dropdownOptionByPartialName(String optionName) {
+        WebElement result = null;
+        for (WebElement current : listOptions) {
+            if (current.getText().toLowerCase().contains(optionName.toLowerCase())) {
+                result = current;
+                break;
+            }
+        }
+        if (result == null) {
+            throw new RuntimeException(WEBELEMENT_NOT_FOUND);
+        }
+        return result;
+    }
+
     public boolean isExistDropdownOptionByPartialName(String optionName) {
         boolean isFound = false;
         for (String current : getListOptionsText()) {
@@ -74,6 +88,4 @@ public class DropdownComponent {
     }
 
     //BUSINESS LOGIC
-
-
 }

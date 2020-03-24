@@ -1,6 +1,9 @@
 package com.opencart.pages;
 
+import com.opencart.pages.account.AccountLogoutPage;
 import com.opencart.pages.account.LoginPage;
+import com.opencart.pages.account.MyAccountPage;
+import com.opencart.pages.account.RegisterPage;
 import com.opencart.pages.product_table.CartDropdownComponent;
 import com.opencart.pages.product_table.CartPage;
 import com.opencart.pages.product_table.WishListPage;
@@ -9,6 +12,8 @@ import com.opencart.tools.RegexUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 public class AbstractPageWithHeader {
 
@@ -31,6 +36,7 @@ public class AbstractPageWithHeader {
     //Components
     private CartDropdownComponent cartDropdownComponent;
     private DropdownComponent dropdownComponent;
+    private WebElement MyAccountButtonInDropdown;
 
     public AbstractPageWithHeader(WebDriver driver) {
         this.driver = driver;
@@ -58,7 +64,6 @@ public class AbstractPageWithHeader {
     }
 
     public String getCurrencyText() {
-        //System.out.println("currency : " + getCurrency().getText().substring(0, 1));
         return getCurrency().getText().substring(0, 1);
     }
 
@@ -154,7 +159,56 @@ public class AbstractPageWithHeader {
         return RegexUtils.extractFirstNumber(getWishListText());
     }
 
+    // hardcode by Yura // work with dropdown
+    public MyAccountPage clickMyAccauntInDropdownHardcode() {
+        openMyAccountDropdown();
+        getMyAccount().click();
+        return new MyAccountPage(driver);
+    }
+
+    public WebElement getMyAccount() {
+        myAccount = driver.findElement(By.xpath("//ul[@class='dropdown-menu dropdown-menu-right']//li[last()-4]"));
+        return myAccount;
+    }
+
+    // Anya work with dropdown myAccount
+    public void clickMyAccountDropdownComponentByName(String optionName) {
+        openMyAccountDropdown();
+        WebElement dropdown = driver.findElement(By.cssSelector(DROPDOWN_MYACCONT_CSSSELECTOR));
+        List<WebElement> options = dropdown.findElements(By.tagName("li"));
+        for (WebElement option : options) {
+            if (option.getText().equals(optionName)) {
+                option.click();
+                break;
+            }
+        }
+    }
+
+    public boolean isExistMyAccountDropdownOption(String optionName) {
+        boolean isFound = false;
+        openMyAccountDropdown();
+        WebElement dropdown = driver.findElement(By.cssSelector(DROPDOWN_MYACCONT_CSSSELECTOR));
+        List<WebElement> options = dropdown.findElements(By.tagName("li"));
+        for (WebElement option : options) {
+            if (option.getText().equals(optionName)) {
+                isFound = true;
+                break;
+            }
+        }
+        return isFound;
+    }
+
+
     //BUSINESS LOGIC
+    public RegisterPage goToRegisterPage() {
+        clickMyAccountDropdownComponentByName("Register");
+        return new RegisterPage(driver);
+    }
+
+    public AccountLogoutPage goToLogoutPage() {
+        clickMyAccountDropdownComponentByName("Logout");
+        return new AccountLogoutPage(driver);
+    }
 
     public LoginPage goToLoginPage(String MY_ACCOUNT_DROPDOWN_TEXT) {
         clickMyAccountDropdownComponentByPartialName(MY_ACCOUNT_DROPDOWN_TEXT);

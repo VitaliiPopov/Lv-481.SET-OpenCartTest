@@ -2,6 +2,7 @@ package com.opencart.pages.search;
 
 import com.opencart.pages.AbstractPageWithHeader;
 import com.opencart.tools.Driver;
+import org.apache.poi.ss.formula.functions.T;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -12,6 +13,7 @@ import org.openqa.selenium.support.How;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 
 public class SearchPage extends AbstractPageWithHeader {
 
@@ -36,7 +38,7 @@ public class SearchPage extends AbstractPageWithHeader {
     private void InitializeDisplayCriteriaComponent() {
         if (!isEmptyResult()) {
             WebElement ProductDisplayElement = driver.findElement(By.xpath(ProductDisplayElementLocator));
-            productDisplayCriteriaComponent = new ProductDisplayCriteriaComponent(ProductDisplayElement);
+            productDisplayCriteriaComponent = new ProductDisplayCriteriaComponent(driver, ProductDisplayElement);
         }
     }
 
@@ -49,12 +51,12 @@ public class SearchPage extends AbstractPageWithHeader {
         }
     }
 
-    private void InitializeSearchCriteriaComponent() {
+    public void InitializeSearchCriteriaComponent() {
         WebElement SearchCriteriaElement = driver.findElement(By.xpath(searchCriteriaElementLocator));
         searchCriteriaComponent = new SearchCriteriaComponent(SearchCriteriaElement);
     }
 
-    private void InitializeProductContainers() {
+    public void InitializeProductContainers() {
 
         List<WebElement> productContainers = driver.findElements(By.xpath("//div[@class='product-thumb']"));
         productContainersComponents = new ArrayList<>();
@@ -128,31 +130,30 @@ public class SearchPage extends AbstractPageWithHeader {
         return productContainersComponents.size();
     }
 
-
-
-
-
-
-
-    public static class Randomizer {
-
-        private static SecureRandom random = new SecureRandom();
-        private static final String CHAR_LOWER = "abcdefghijklmnopqrstuvwxyz";
-        private static final String CHAR_UPPER = CHAR_LOWER.toUpperCase();
-        private static final String NUMBER = "0123456789";
-
-        private static final String DATA_FOR_RANDOM_STRING = CHAR_LOWER + CHAR_UPPER + NUMBER;
-
-        public static String generateRandomString(int length) {
-            if (length < 1) throw new IllegalArgumentException();
-            StringBuilder sb = new StringBuilder(length);
-            for (int i = 0; i < length; i++) {
-                int rndCharAt = random.nextInt(DATA_FOR_RANDOM_STRING.length());
-                char rndChar = DATA_FOR_RANDOM_STRING.charAt(rndCharAt);
-                sb.append(rndChar);
-            }
-            return sb.toString();
-
+    public void toLowerCaseProductList(List<String> list){
+        ListIterator<String> iterator = list.listIterator();
+        while (iterator.hasNext())
+        {
+            iterator.set(iterator.next().toLowerCase());
         }
+    }
+
+    public static String generateRandomString(int length) {
+        SecureRandom random = new SecureRandom();
+        String CHAR_LOWER = "abcdefghijklmnopqrstuvwxyz";
+        String CHAR_UPPER = CHAR_LOWER.toUpperCase();
+        String NUMBER = "0123456789";
+
+        String DATA_FOR_RANDOM_STRING = CHAR_LOWER + CHAR_UPPER + NUMBER;
+
+        if (length < 1) throw new IllegalArgumentException();
+        StringBuilder sb = new StringBuilder(length);
+        for (int i = 0; i < length; i++) {
+            int rndCharAt = random.nextInt(DATA_FOR_RANDOM_STRING.length());
+            char rndChar = DATA_FOR_RANDOM_STRING.charAt(rndCharAt);
+            sb.append(rndChar);
+        }
+        return sb.toString();
+
     }
 }

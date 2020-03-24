@@ -69,7 +69,6 @@ public class SearchCriteriaComponent {
     public void clickCategoriesDropdown(String optionText) {
         List<WebElement> options = categoriesDropdown.findElements(By.tagName("option"));
         for (WebElement option : options) {
-
             if ((option.getText().trim()).contains(optionText))
                 option.click();
         }

@@ -42,4 +42,5 @@ public class ProductContainersComponent {
         picture.click();
     }
 
+
 }

@@ -22,6 +22,9 @@
                     <include name="checkCategoriesCheckbox"/>
                     <include name="checkProductCountFromLable"/>
                     <include name="checkListAndGridResult"/>
+                    <include name="checkSortByA_Z_Name"/>
+                    <include name="checkSortByZ_A_Name"/>
+
 
                 </methods>
             </class>

@@ -25,16 +25,16 @@ public class SearchPage extends AbstractPageWithHeader {
         //
         List<WebElement> productContainers = driver.findElements(By.xpath("//div[@class='product-thumb']"));
         productContainersComponents = new ArrayList<>();
-        for (WebElement current : productContainers){
+        for (WebElement current : productContainers) {
             productContainersComponents.add(new ProductContainersComponent(current));
         }
     }
 
-    private void InitializeAlert(){
+    private void InitializeAlert() {
         alert = driver.findElements(By.cssSelector(".alert-dismissible"));
     }
 
-    public boolean isAlertDisplayed(){
+    public boolean isAlertDisplayed() {
         return !alert.isEmpty();
     }
 
@@ -70,10 +70,11 @@ public class SearchPage extends AbstractPageWithHeader {
         getProductComponentByName(productName).clickAddToCartButton();
         InitializeAlert();
     }
-    //add to wishlist
+
+    //add to Wish List by button
     public void clickProductComponentAddToWishList(String productName) {
-        getProductComponentByName(productName).clickAddToWishList();
-        InitializeAlert();
+        getProductComponentByName(productName).clickAddToWishListButton();
+        //InitializeAlert();
     }
     //BUSINESS LOGIC
 

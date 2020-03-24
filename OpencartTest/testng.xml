@@ -8,28 +8,12 @@
         <parameter name="productName" value="iPhone"/>
         <classes>
             <!--MainTest-->
-            <class name="test.WishListCurrencyTest">
+            <class name="test.LoginTest">
                 <methods>
                     <include name="Login"/>
-                    <include name="addProductToWishList"/>
-                    <include name="goToWishList"/>
-                    <include name="changeCurrencyOnWishListPage"/>
-
-
-
+                    <include name="AddProductToCompareFromSearch"/>
                 </methods>
             </class>
-
-<!--            <class name="test.CartCurrencyTest">-->
-<!--                <methods>-->
-<!--                    <include name="Login"/>-->
-<!--                    <include name="addProductToCart"/>-->
-<!--                    <include name="changeCurrencyOnCartPage"/>-->
-
-<!--                </methods>-->
-<!--            </class>-->
-
-
         </classes>
     </test> <!-- Individual -->
 </suite> <!-- Default Suite -->

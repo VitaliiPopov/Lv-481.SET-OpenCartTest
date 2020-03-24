@@ -37,7 +37,7 @@ public class Driver {
         return driver;
     }
 
-    public static void Quit(){
+    public static void shutDown(){
         driver.quit();
         driver = null;
     }

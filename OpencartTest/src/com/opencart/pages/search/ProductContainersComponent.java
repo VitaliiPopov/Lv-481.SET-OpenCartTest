@@ -10,34 +10,39 @@ public class ProductContainersComponent {
     private WebElement name;
     private WebElement compareButton;
     private WebElement addToCartButton;
-    private WebElement addToWishList;
+    private WebElement addToWishListButton;
     private WebElement price;
 
     public ProductContainersComponent(WebElement product) {
         InitializeElements(product);
     }
 
-    private void InitializeElements(WebElement product){
+    private void InitializeElements(WebElement product) {
         name = product.findElement(By.cssSelector("h4 a"));
         compareButton = product.findElement(By.xpath("//div[@class='button-group']/button/i[@class='fa fa-exchange']/.."));
         addToCartButton = product.findElement(By.cssSelector(".fa.fa-shopping-cart"));
-        addToWishList=product.findElement(By.xpath("//div[@class='button-group']/button/i[contains(@class,'fa-heart')]"));;
-        price=product.findElement(By.cssSelector(".price"));;
+        price = product.findElement(By.cssSelector(".price"));
+        addToWishListButton = product.findElement(By.xpath("//div[@class='button-group']/button/i[contains(@class,'fa-heart')]"));
     }
 
     //Name
-    public String getNameText(){
+    public String getNameText() {
         return name.getText();
     }
 
     //CompareButton
-    public void clickCompareButton(){
+    public void clickCompareButton() {
         compareButton.click();
     }
 
     //AddToCartButton
-    public void clickAddToCartButton(){
+    public void clickAddToCartButton() {
         addToCartButton.click();
+    }
+
+    //AddToWishListButton
+    public void clickAddToWishListButton() {
+        addToWishListButton.click();
     }
 
     //Price
@@ -48,12 +53,10 @@ public class ProductContainersComponent {
     public String getPriceText() {
         return getPrice().getText();
     }
+
     public double getPriceAmount() {
         return RegexUtils.extractFirstDouble(getPriceText());
     }
 
-    //AddToWishList
-    public void clickAddToWishList() {
-        addToWishList.click();
-    }
+
 }

@@ -38,7 +38,7 @@ public class CartCurrencyTest extends TestRunner {
     public void addProductToCart(String productPartialName) throws InterruptedException {
 
 
-        SearchPage searchPage = getHomePage().SearchProduct(productPartialName);
+        SearchPage searchPage = getHomePage().searchProduct(productPartialName);
         Thread.sleep(1000);
         searchPage.clickProductComponentAddToCartButtonByName(productPartialName);
         Thread.sleep(2000);

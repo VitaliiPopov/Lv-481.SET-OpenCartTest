@@ -27,10 +27,18 @@ public class LoginUserTest extends TestRunner {
         logoutPage.logout();
     }
 
+    @AfterMethod
+    public void finishLogout() {
+        try {
+            logoutUser();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     @AfterTest
     public void tearDown() {
         try {
-            logoutUser();
             deleteCustomerFromAdmin(jsonDataConfig.getEmailFromJson(1));
         } catch (InterruptedException e) {
             e.printStackTrace();

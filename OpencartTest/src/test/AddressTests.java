@@ -4,10 +4,7 @@ import com.opencart.pages.account.AddressBookPage;
 import com.opencart.pages.account.EditAdressPage;
 import com.opencart.pages.account.LoginPage;
 import com.opencart.pages.account.MyAccountPage;
-import com.opencart.tools.Driver;
-import com.opencart.tools.JsonDataConfig;
-import com.opencart.tools.TestRunner;
-import com.opencart.tools.Utility;
+import com.opencart.tools.*;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
@@ -196,10 +193,11 @@ public class AddressTests extends TestRunner {
         MyAccountPage myAccountPage = getHomePage().clickMyAccauntInDropdownHardcode();
         AddressBookPage addressBookPage = myAccountPage.clickModifyYourAddressBookEntries();
         EditAdressPage edittest = addressBookPage.clickEditAddress();
-        edittest.invalidInputsAlertCheck(jsonDataConfig.getFirstNameFromJson(5),
-                jsonDataConfig.getLastNameFromJson(5),
-                jsonDataConfig.getAddressFromJson(5),
-                jsonDataConfig.getCityFromJson(5),
+        edittest.invalidInputsAlertCheck(
+                Randomizer.generateRandomString(33),
+                Randomizer.generateRandomString(33),
+                Randomizer.generateRandomString(129),
+                Randomizer.generateRandomString(129),
                 jsonDataConfig.getCountryFromJson(5),
                 jsonDataConfig.getRegionFromJson(5));
         Assert.assertTrue(edittest.allMandatoryAlerts());

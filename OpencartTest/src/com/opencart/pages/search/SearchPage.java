@@ -1,9 +1,11 @@
 package com.opencart.pages.search;
 
+import com.opencart.pages.AbstractPageWithHeader;
 import com.opencart.pages.AlertComponent;
 import com.opencart.pages.ProductContainersComponent;
-import com.opencart.pages.AbstractPageWithHeader;
+import com.opencart.pages.cart.CartPage;
 import com.opencart.pages.comparison.ComparisonPage;
+import com.opencart.pages.product.ProductPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -16,11 +18,17 @@ import java.util.concurrent.TimeUnit;
 
 public class SearchPage extends AbstractPageWithHeader {
 
-    private final String PRODUCT_COMPONENT_LOCATOR = ".product-layout"; // css
-    private final String ALERT_LOCATOR = ".alert"; //css
-
-    private AlertComponent alertComponent;
+    //Errors
+    public final String PRODUCT_NOT_FOUND = "PRODUCT NOT FOUND";
+    //Selectors
+    private final String PRODUCT_COMPONENT_LOCATOR = "//div[@class='product-thumb']";// xpath
+    private final String SUCCESS_SEARCH_PAGE_URL = "search&search";
+    private final String ALERT_LOCATOR = "//div[@class='alert alert-success alert-dismissible']";// xpath
+    //Components
     private List<ProductContainersComponent> productContainersComponents;
+    private SearchCriteriaComponent searchCriteriaComponent;
+    private ProductDisplayCriteriaComponent productDisplayCriteriaComponent;
+    private AlertComponent alertComponent;
 
     public SearchPage(WebDriver driver) {
         super(driver);
@@ -32,10 +40,14 @@ public class SearchPage extends AbstractPageWithHeader {
         driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
         WebDriverWait wait = new WebDriverWait(driver, 3);
         productContainersComponents = new ArrayList<>();
-        for (WebElement current : wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector(PRODUCT_COMPONENT_LOCATOR)))) {
+        for (WebElement current : wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(PRODUCT_COMPONENT_LOCATOR)))) {
             productContainersComponents.add(new ProductContainersComponent(current));
         }
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+
+        /*productContainersComponents = new ArrayList<>();
+        for (WebElement current : driver.findElements(By.xpath(PRODUCT_COMPONENT_LOCATOR)))
+            productContainersComponents.add(new ProductContainersComponent(current)); //Valera*/
     }
 
     ///region ATOMIC_OPERATIONS
@@ -54,11 +66,16 @@ public class SearchPage extends AbstractPageWithHeader {
 //        searchPageAlertComponent = new SearchPageAlertComponent(wait.until(ExpectedConditions.presenceOfElementLocated((By.cssSelector(ALERT_LOCATOR)))));
 //        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         //return searchPageAlertComponent;
-        return new AlertComponent(driver.findElement(By.cssSelector(ALERT_LOCATOR)));
+        return new AlertComponent(driver.findElement(By.xpath(ALERT_LOCATOR)));
     }
 
     public AlertComponent getAlertComponentWithoutWait() { //TODO different implementation of same methods
-        return new AlertComponent(driver.findElement(By.cssSelector(ALERT_LOCATOR)));
+        return new AlertComponent(driver.findElement(By.xpath(ALERT_LOCATOR)));
+    }
+
+    //productContainerComponents
+    public Integer getProductContainerComponentsSize() {
+        return productContainersComponents.size();
     }
 
     ///endregion
@@ -83,13 +100,12 @@ public class SearchPage extends AbstractPageWithHeader {
     }
 
     /**
-     * Add product to cart by button
+     * Add product to cart by button.
      *
      * @param productName Product name.
      */
-    public SearchPage clickProductComponentAddToCartButtonByName(String productName) {
+    public void clickOnProductComponentAddToCartButtonByName(String productName) {
         getProductComponentByName(productName).clickAddToCartButton();
-        return this;
     }
 
     /**
@@ -124,6 +140,45 @@ public class SearchPage extends AbstractPageWithHeader {
     public ComparisonPage clickProductComparisonLink() {
         getAlertComponentWithWait().clickOnCompareLink();
         return new ComparisonPage(driver);
+    }
+
+    /**
+     * Return SearchPage or ProductPage depending on options of product.
+     *
+     * @param productName Product name.
+     * @return SearchPage or ProductPage.
+     */
+    public AbstractPageWithHeader afterClickOnProductComponentAddToCartButtonByName(String productName) {
+        clickOnProductComponentAddToCartButtonByName(productName);
+        //TODO
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        if (driver.getCurrentUrl().contains(SUCCESS_SEARCH_PAGE_URL)) return returnSearchPage();
+        else return returnProductPage();
+    }
+
+    //returnSearchPage
+    private SearchPage returnSearchPage() {
+        return new SearchPage(driver);
+    }
+
+    //returnProductPage
+    private ProductPage returnProductPage() {
+        return new ProductPage(driver);
+    }
+
+    //alert after add to cart
+    public CartPage goToShoppingCartFromAlert() {
+        getAlertComponentWithoutWait().clickOnCartLink();
+        return new CartPage(driver);
+    }
+
+    public ProductPage goToProductPageFromAlert() {
+        getAlertComponentWithoutWait().clickOnProductLink();
+        return new ProductPage(driver);
     }
 
     ///endregion

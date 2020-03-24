@@ -11,7 +11,6 @@ public class SearchCriteriaComponent {
         initElements();
     }
 
-    private void initElements(){
-
+    private void initElements() {
     }
 }

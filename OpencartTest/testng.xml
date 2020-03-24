@@ -14,13 +14,26 @@
 <!--                    <include name="Login"/>-->
                     <include name="AddProductToCompareFromSearchByAlert"/>
                     <include name="AddSameProductTwoTimes"/>
-                    <include name="CleanProductFromCompare"/>
+                    <include name="CleanProductFromComparison"/>
                     <include name="AddToCartFromComparisonPage"/>
                     <include name="GoToProductPageFromComparisonPage"/>
                 </methods>
             </class>
         </classes>
-    </test> <!-- Individual -->
+    </test>
+    <!--<test name="CartTest">
+        &lt;!&ndash;MainTest&ndash;&gt;
+        <parameter name="myAccountDropdownText" value="Login"></parameter>
+        <classes>
+            &lt;!&ndash;MainTest&ndash;&gt;
+            <class name="test.CartTest">
+                <methods>
+                    <include name="loginTest"/>
+                    <include name="addProductWithoutOptionsToCartAlertCheck"/>
+                </methods>
+            </class>
+        </classes>
+    </test> &lt;!&ndash; Individual &ndash;&gt;-->
 </suite> <!-- Default Suite -->
 
 

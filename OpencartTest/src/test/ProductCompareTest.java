@@ -1,11 +1,8 @@
 package test;
 
-import com.opencart.pages.HomePage;
+import com.opencart.pages.cart.CartPage;
 import com.opencart.pages.comparison.ComparisonPage;
-import com.opencart.pages.comparison.EmptyComparisonPage;
 import com.opencart.pages.product.ProductPage;
-import com.opencart.pages.product_table.CartPage;
-import com.opencart.pages.search.SearchPage;
 import com.opencart.tools.JsonDataConfig;
 import com.opencart.tools.TestRunner;
 import org.testng.Assert;
@@ -23,7 +20,7 @@ public class ProductCompareTest extends TestRunner {
                 .goToLoginPage(myAccountDropdownText)
                 .login(jsonDataConfig.getEmailFromJson(0), jsonDataConfig.getPasswordFromJson(0))
                 .goToHomePage()
-                .SearchProduct(search)
+                .searchProduct(search)
                 .clickProductComponentCompareButtonByName(firstName)
                 .clickProductComparisonLink();
         Assert.assertEquals(firstName, comparisonPage.getFirstProductName());
@@ -46,7 +43,7 @@ public class ProductCompareTest extends TestRunner {
                 .goToLoginPage(myAccountDropdownText)
                 .login(jsonDataConfig.getEmailFromJson(0), jsonDataConfig.getPasswordFromJson(0))
                 .goToHomePage()
-                .SearchProduct(searchName)
+                .searchProduct(searchName)
                 .AddTwoSameProductToComparison(productName)
                 .clickProductComparisonLink();
         Assert.assertEquals(1, comparisonPage.getProductsCount());
@@ -54,12 +51,12 @@ public class ProductCompareTest extends TestRunner {
 
     @Parameters({"myAccountDropdownText", "search", "productName1", "productName2"})
     @Test(priority = 5)
-    public void CleanProductFromCompare(String myAccountDropdownText, String searchName, String firstName, String secondName) {
+    public void CleanProductFromComparison(String myAccountDropdownText, String searchName, String firstName, String secondName) {
         ComparisonPage comparisonPage = getHomePage()
                 .goToLoginPage(myAccountDropdownText)
                 .login(jsonDataConfig.getEmailFromJson(0), jsonDataConfig.getPasswordFromJson(0))
                 .goToHomePage()
-                .SearchProduct(searchName)
+                .searchProduct(searchName)
                 .clickProductComponentCompareButtonByName(firstName)
                 .clickProductComponentCompareButtonByName(secondName)
                 .clickProductComparisonLink()
@@ -74,12 +71,12 @@ public class ProductCompareTest extends TestRunner {
                 .goToLoginPage(myAccountDropdownText)
                 .login(jsonDataConfig.getEmailFromJson(0), jsonDataConfig.getPasswordFromJson(0))
                 .goToHomePage()
-                .SearchProduct(searchName)
+                .searchProduct(searchName)
                 .clickProductComponentCompareButtonByName(productName)
                 .clickProductComparisonLink()
                 .clickFirstAddToCartButton()
                 .clickShoppingCartLink();
-        //Assert.
+        //Assert.assertEquals(productName, cartPage.getProductInCartComponentByName(productName).getProductNameText()); //TODO
     }
 
     @Parameters({"myAccountDropdownText", "search", "productName1"})
@@ -89,7 +86,7 @@ public class ProductCompareTest extends TestRunner {
                 .goToLoginPage(myAccountDropdownText)
                 .login(jsonDataConfig.getEmailFromJson(0), jsonDataConfig.getPasswordFromJson(0))
                 .goToHomePage()
-                .SearchProduct(searchName)
+                .searchProduct(searchName)
                 .clickProductComponentCompareButtonByName(productName)
                 .clickProductComparisonLink()
                 .clickFirstProductName();

@@ -2,37 +2,45 @@ package com.opencart.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ProductContainersComponent {
 
+    //Selectors
+    private final String PRODUCT_NAME_SELECTOR = "h4 a"; // css
+    private final String ADD_TO_CART_BUTTON_SELECTOR = ".//i[@class='fa fa-shopping-cart']/.."; //xpath
+    private final String COMPARE_BUTTON_SELECTOR = ".//i[@class='fa fa-exchange']/.."; //xpath
     //
-    private WebElement name;
-    private WebElement compareButton;
-    private WebElement addToCartButton;
+    private WebElement productContainerLayout;
 
-    public ProductContainersComponent(WebElement product) {
-        InitializeElements(product);
-    }
-
-    private void InitializeElements(WebElement product){
-        name = product.findElement(By.cssSelector(".caption>h4>a"));
-        compareButton = product.findElement(By.xpath(".//i[@class='fa fa-exchange']/.."));
-        addToCartButton = product.findElement(By.xpath(".//i[@class='fa fa-shopping-cart']/.."));
+    public ProductContainersComponent(WebElement productContainerLayout) {
+        this.productContainerLayout = productContainerLayout;
     }
 
     //Name
-    public String getNameText(){
-        return this.name.getText();
+    public WebElement getName() {
+        return productContainerLayout.findElement(By.cssSelector(PRODUCT_NAME_SELECTOR));
+
     }
 
-    //CompareButton
-    public void clickCompareButton(){
-        compareButton.click();
+    public String getNameText() {
+        return getName().getText();
     }
 
     //AddToCartButton
-    public void clickAddToCartButton(){
-        addToCartButton.click();
+    public WebElement getAddToCartButton() {
+        return productContainerLayout.findElement(By.xpath(ADD_TO_CART_BUTTON_SELECTOR));
+    }
+
+    public void clickAddToCartButton() {
+        getAddToCartButton().click();
+    }
+
+    //CompareButton
+    public WebElement getCompareButton() {
+        return productContainerLayout.findElement(By.xpath(COMPARE_BUTTON_SELECTOR));
+    }
+
+    public void clickCompareButton() {
+        getCompareButton().click();
     }
 }

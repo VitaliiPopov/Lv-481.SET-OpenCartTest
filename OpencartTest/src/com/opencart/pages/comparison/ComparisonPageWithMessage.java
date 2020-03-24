@@ -1,7 +1,7 @@
 package com.opencart.pages.comparison;
 
+import com.opencart.pages.cart.CartPage;
 import com.opencart.pages.product.ProductPage;
-import com.opencart.pages.product_table.CartPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

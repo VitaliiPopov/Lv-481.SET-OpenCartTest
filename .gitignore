@@ -113,7 +113,11 @@ hs_err_pid*
 /**/node_modules/
 
 #Excel file
+<<<<<<< HEAD
 *.xlsx
 
 #Json files 
 *.json
+=======
+*.xlsx
+>>>>>>> 3ac47dad470103a537378f91da7ad7f3ecf296bb

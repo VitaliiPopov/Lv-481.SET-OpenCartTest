@@ -1,7 +1,6 @@
 package com.opencart.data;
 
 public enum Currencies {
-
     EURO("Euro"),
     POUND_STERLING("Pound Sterling"),
     US_DOLLAR("US Dollar");
@@ -16,5 +15,7 @@ public enum Currencies {
     @Override
     public String toString() {
         return name;
+
     }
 }
+

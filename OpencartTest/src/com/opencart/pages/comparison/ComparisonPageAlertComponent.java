@@ -1,6 +1,5 @@
 package com.opencart.pages.comparison;
 
-import com.opencart.pages.product_table.CartPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 

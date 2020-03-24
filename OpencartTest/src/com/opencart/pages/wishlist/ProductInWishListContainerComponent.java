@@ -1,4 +1,4 @@
-package com.opencart.pages.product_table;
+package com.opencart.pages.wishlist;
 
 import org.openqa.selenium.WebDriver;
 

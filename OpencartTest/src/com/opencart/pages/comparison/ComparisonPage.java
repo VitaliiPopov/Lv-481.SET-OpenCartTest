@@ -1,8 +1,8 @@
 package com.opencart.pages.comparison;
 
 import com.opencart.pages.AbstractPageWithHeader;
+import com.opencart.pages.cart.CartPage;
 import com.opencart.pages.product.ProductPage;
-import com.opencart.pages.product_table.CartPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,13 +14,13 @@ import java.util.concurrent.TimeUnit;
 
 public class ComparisonPage extends AbstractPageWithHeader {
 
-    private final String PAGE_HEADER = "#content > h1";
-    private final String FIRST_PRODUCT_NAME = "//td[text() = 'Product']/following-sibling::td/a";
-    private final String LAST_PRODUCT_NAME = "//td[text() = 'Product']/following-sibling::td[last()]/a";
-    private final String ADD_TO_CART_FIRST = "//tbody[last()]/descendant::input";
-    private final String ADD_TO_CART_LAST = "//tbody[last()]/descendant::input[last()]";
-    private final String REMOVE_FIRST = "//div[@id='content']//tbody[last()]/descendant::a";
-    private final String REMOVE_LAST = "//div[@id='content']//tbody[last()]/descendant::a[last()]";
+    private final String PAGE_HEADER = "#content > h1"; // css
+    private final String FIRST_PRODUCT_NAME = "//td[text() = 'Product']/following-sibling::td/a"; //xpath
+    private final String LAST_PRODUCT_NAME = "//td[text() = 'Product']/following-sibling::td[last()]/a"; //xpath
+    private final String ADD_TO_CART_FIRST = "//tbody[last()]/descendant::input"; //xpath
+    private final String ADD_TO_CART_LAST = "//tbody[last()]/descendant::input[last()]"; //xpath
+    private final String REMOVE_FIRST = "//div[@id='content']//tbody[last()]/descendant::a"; //xpath
+    private final String REMOVE_LAST = "//div[@id='content']//tbody[last()]/descendant::a[last()]"; //xpath
 
     private ComparisonPageAlertComponent comparisonPageAlertComponent;
 
@@ -51,6 +51,11 @@ public class ComparisonPage extends AbstractPageWithHeader {
     }
 
     private WebElement firstProductName() {
+        /*WebElement name;
+        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        WebDriverWait wait = new WebDriverWait(driver, 3);
+        name = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(FIRST_PRODUCT_NAME)));
+        return name;*/
         return driver.findElement(By.xpath(FIRST_PRODUCT_NAME));
     }
 

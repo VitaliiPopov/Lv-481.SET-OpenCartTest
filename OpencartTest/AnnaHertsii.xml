@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="AnnaHertsiiSuite">
+    <test name="AnnaHertsii">
+        <!--MainTest-->
+        <parameter name="loginText" value="Login"></parameter>
+        <parameter name="logoutText" value="Logout"></parameter>
+        <parameter name="registerText" value="Register"></parameter>
+        <parameter name="myAccountText" value="My Account"></parameter>
+        <parameter name="editAccountText" value="My Account Information"></parameter>
+
+        <classes>
+            <!--MainTest-->
+            <class name="test.LoginUserTest">
+                <methods>
+                    <include name="smokeLoginExistedUserTest"/>
+                    <include name="loginNotExistedUserTest"/>
+                    <include name="loginWithEmptyFieldsTest"/>
+                    <include name="loginWithEmptyEmailTest"/>
+                    <include name="loginWithEmptyPasswordTest"/>
+                    <include name="loginCaseSensitiveFieldsTest"/>
+                </methods>
+           </class>
+            <class name="test.ChangePasswordTest">
+                <methods>
+                    <include name="smokeChangePasswordTest"/>
+                    <include name="changePasswordToEmptyTest"/>
+                    <include name="changePasswordToShortTest"/>
+                    <include name="changePasswordToLongTest"/>
+                    <include name="changePasswordWrongConfirmTest"/>
+                    <include name="changePasswordTest"/>
+                </methods>
+            </class>
+            <class name="test.RegisterTest">
+                <methods>
+                    <include name="smokeRegisterNewUserTest"/>
+                    <include name="registerWithEmptyFieldsTest"/>
+                    <include name="registerWithEmptyFirstNameTest"/>
+                    <include name="registerWithEmptyLastNameTest"/>
+                    <include name="registerWithLongFirstLastNamesTest"/>
+                    <include name="registerWithEmptyEmailTest"/>
+                    <include name="registerWithExistedEmailTest"/>
+                    <include name="registerEmailWithoutAtSymbolTest"/>
+                    <include name="registerEmailWithoutDotSymbolTest"/>
+                    <include name="registerWithEmptyTelephoneTest"/>
+                    <include name="registerWithShortTelephoneTest"/>
+                    <include name="registerWithLongTelephoneTest"/>
+                    <include name="registerWithEmptyPasswordTest"/>
+                    <include name="registerWithShortPasswordTest"/>
+                    <include name="registerWithLongPasswordTest"/>
+                    <include name="registerWithBadConfirmTest"/>
+                    <include name="registerWithoutPrivacyPolicyAgreementTest"/>
+                </methods>
+            </class>
+            <class name="test.EditAccountTest">
+                <methods>
+                    <include name="smokeEditAccountTest"/>
+                    <include name="editAccountWithEmptyFieldsTest"/>
+                    <include name="editAccountWithEmptyFirstnameTest"/>
+                    <include name="editAccountWithLongFirstnameTest"/>
+                    <include name="editAccountWithEmptyLastnameTest"/>
+                    <include name="editAccountWithLongLastnameTest"/>
+                    <include name="editAccountWithEmptyEmailTest"/>
+                    <include name="editAccountEmailWithoutAtSymbolTest"/>
+                    <include name="editAccountEmailWithoutDotSymbolTest"/>
+                    <include name="editAccountWithEmptyTelephoneTest"/>
+                    <include name="editAccountWithShortTelephoneTest"/>
+                    <include name="editAccountWithLongTelephoneTest"/>
+                </methods>
+            </class>
+            </classes>
+    </test> <!-- Individual -->
+</suite> <!-- Default Suite -->
+
+

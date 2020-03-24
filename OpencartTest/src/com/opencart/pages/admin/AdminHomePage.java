@@ -7,6 +7,7 @@ import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 
 public class AdminHomePage {
+
     protected WebDriver driver;
     @FindBy(how = How.XPATH, xpath = "//a[@href='#collapse1']")
     private WebElement catalogDropdown;

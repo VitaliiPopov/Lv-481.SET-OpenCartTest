@@ -4,7 +4,6 @@ import com.opencart.pages.account.LoginPage;
 import com.opencart.pages.account.MyAccountPage;
 import com.opencart.pages.search.SearchCriteriaComponent;
 import com.opencart.pages.search.SearchPage;
-import com.opencart.tools.ExcelDataConfig;
 import com.opencart.tools.Randomizer;
 import com.opencart.tools.TestRunner;
 import org.testng.Assert;

@@ -19,6 +19,4 @@ public class CartPage extends AbstractPageWithHeader {
     private void initElements(){
         productInCartContainerComponents = new ArrayList<>();
     }
-
-
 }

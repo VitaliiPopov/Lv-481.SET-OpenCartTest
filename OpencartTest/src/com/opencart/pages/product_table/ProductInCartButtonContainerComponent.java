@@ -7,6 +7,4 @@ public class ProductInCartButtonContainerComponent {
     public ProductInCartButtonContainerComponent(WebDriver driver) {
 
     }
-
-
 }

@@ -7,6 +7,4 @@ public class ProductInWishListContainerComponent {
     public ProductInWishListContainerComponent(WebDriver driver) {
 
     }
-
-
 }

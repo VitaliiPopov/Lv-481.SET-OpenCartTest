@@ -15,5 +15,4 @@ public class ChangePasswordPage extends AbstractPageWithHeader {
     private void initElements(){
         accountSidebarComponent = new AccountSidebarComponent(driver);
     }
-
 }

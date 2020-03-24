@@ -32,7 +32,7 @@ public class Driver {
             }
         }
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         driver.get(ConstantVariables.URL);
         return driver;
     }
@@ -40,5 +40,9 @@ public class Driver {
     public static void Quit(){
         driver.quit();
         driver = null;
+    }
+
+    public static void ClearCookies(){
+        driver.manage().deleteAllCookies();
     }
 }

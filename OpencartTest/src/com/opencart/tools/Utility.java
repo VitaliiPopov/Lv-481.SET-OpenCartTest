@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class Utility {
 
-    public static String getScreenshot(WebDriver driver){
+    public static String getScreenshot(WebDriver driver) {
         TakesScreenshot takesScreenshot = (TakesScreenshot) driver;
 
         File src = takesScreenshot.getScreenshotAs(OutputType.FILE);
@@ -18,10 +18,9 @@ public class Utility {
         File destination = new File(path);
         try {
             FileUtils.copyFile(src, destination);
-        }catch (IOException e){
+        } catch (IOException e) {
             System.out.println("Capture Failed " + e.getMessage());
         }
         return path;
     }
-
 }

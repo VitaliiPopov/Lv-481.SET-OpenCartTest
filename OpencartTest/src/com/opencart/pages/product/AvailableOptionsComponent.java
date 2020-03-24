@@ -9,8 +9,5 @@ public class AvailableOptionsComponent {
     }
 
     private void initElements() {
-
     }
-
-
 }

@@ -15,5 +15,4 @@ public class RegisterPage extends AbstractPageWithHeader {
     private void initElements(){
         accountSidebarComponent = new AccountSidebarComponent(driver);
     }
-
 }

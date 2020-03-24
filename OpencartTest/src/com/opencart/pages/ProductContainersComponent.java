@@ -1,7 +1,8 @@
-package com.opencart.pages.search;
+package com.opencart.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ProductContainersComponent {
 
@@ -15,14 +16,14 @@ public class ProductContainersComponent {
     }
 
     private void InitializeElements(WebElement product){
-        name = product.findElement(By.cssSelector("h4 a"));
-        compareButton = product.findElement(By.xpath("//div[@class='button-group']/button/i[@class='fa fa-exchange']/.."));
-        addToCartButton = product.findElement(By.xpath("//div[@class='button-group']/button/i[@class='fa fa-shopping-cart']/.."));
+        name = product.findElement(By.cssSelector(".caption>h4>a"));
+        compareButton = product.findElement(By.xpath(".//i[@class='fa fa-exchange']/.."));
+        addToCartButton = product.findElement(By.xpath(".//i[@class='fa fa-shopping-cart']/.."));
     }
 
     //Name
     public String getNameText(){
-        return name.getText();
+        return this.name.getText();
     }
 
     //CompareButton

@@ -17,6 +17,4 @@ public class CartDropdownComponent {
     private void initElements() {
         productInCartButtonContainerComponents = new ArrayList<>();
     }
-
-
 }

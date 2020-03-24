@@ -14,5 +14,4 @@ public class SearchCriteriaComponent {
     private void initElements(){
 
     }
-
 }

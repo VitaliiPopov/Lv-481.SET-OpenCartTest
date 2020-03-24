@@ -32,11 +32,12 @@ public class AbstractPageWithHeader {
         InitializeElements();
     }
 
-    private void InitializeElements(){
-        myAccount=driver.findElement(By.cssSelector("i.fa-user"));
-        logo=driver.findElement(By.xpath("//h1/a"));;
-        searchField=driver.findElement(By.cssSelector(".form-control.input-lg"));
-        searchButton=driver.findElement(By.cssSelector(".btn.btn-default"));
+    private void InitializeElements() {
+        myAccount = driver.findElement(By.cssSelector("i.fa-user"));
+        logo = driver.findElement(By.xpath("//h1/a"));
+        ;
+        searchField = driver.findElement(By.cssSelector(".form-control.input-lg"));
+        searchButton = driver.findElement(By.cssSelector(".btn.btn-default"));
     }
 
     //logo
@@ -68,23 +69,22 @@ public class AbstractPageWithHeader {
     }
 
     //dropdownComponent
-    protected DropdownComponent getDropdownComponent(){
-        if(dropdownComponent == null){
+    protected DropdownComponent getDropdownComponent() {
+        if (dropdownComponent == null) {
             throw new RuntimeException(OPTION_NULL_MESSAGE);
         }
         return dropdownComponent;
     }
 
-    private DropdownComponent createDropdownComponent(By searchLocator){
+    private DropdownComponent createDropdownComponent(By searchLocator) {
         dropdownComponent = new DropdownComponent(driver, searchLocator);
         return dropdownComponent;
     }
 
-    private void clickDropdownComponentByPartialName(String optionName){
-        if(getDropdownComponent().isExistDropdownOptionByPartialName(optionName)){
+    private void clickDropdownComponentByPartialName(String optionName) {
+        if (getDropdownComponent().isExistDropdownOptionByPartialName(optionName)) {
             getDropdownComponent().clickDropdownOptionByPartialName(optionName);
-        }
-        else{
+        } else {
             throw new RuntimeException(String.format(OPTION_NOT_FOUND_MESSAGE, optionName));
         }
     }
@@ -92,35 +92,34 @@ public class AbstractPageWithHeader {
     //FUNCTIONAL
 
     //MyAccount
-    public void openMyAccountDropdown(){
+    public void openMyAccountDropdown() {
         clickMyAccount();
         createDropdownComponent(By.cssSelector(DROPDOWN_MYACCONT_CSSSELECTOR));
     }
 
-    public void clickMyAccountDropdownComponentByPartialName(String text){
+    public void clickMyAccountDropdownComponentByPartialName(String text) {
         openMyAccountDropdown();
         clickDropdownComponentByPartialName(text);
     }
 
     //BUSINESS LOGIC
 
-    public LoginPage goToLoginPage(String MY_ACCOUNT_DROPDOWN_TEXT){
+    public LoginPage goToLoginPage(String MY_ACCOUNT_DROPDOWN_TEXT) {
         clickMyAccountDropdownComponentByPartialName(MY_ACCOUNT_DROPDOWN_TEXT);
         return new LoginPage(driver);
     }
 
-    public HomePage goToHomePage(){
+    public HomePage goToHomePage() {
         clickLogo();
         return new HomePage(driver);
     }
 
     //Search
-    public SearchPage SearchProduct(String name){
+    public SearchPage SearchProduct(String name) {
         clickSearchField();
         clearSearchField();
         inputSearchField(name);
         clickSearchButton();
         return new SearchPage(driver);
     }
-
 }

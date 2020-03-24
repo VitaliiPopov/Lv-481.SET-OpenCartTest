@@ -10,7 +10,7 @@
             <class name="test.CartTest">
                 <methods>
                     <include name="loginTest"/>
-                    <include name="checkRemoveFunctionInCartButton"/>
+                    <include name="addProductWithoutOptionsToCartAlertCheck"/>
                 </methods>
             </class>
         </classes>

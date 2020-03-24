@@ -1,7 +1,7 @@
 package com.opencart.pages.product;
 
 import com.opencart.pages.AbstractPageWithHeader;
-import com.opencart.pages.common.SearchPageAlertComponent;
+import com.opencart.pages.AlertComponent;
 import com.opencart.pages.cart.CartPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -15,7 +15,7 @@ public class ProductPage extends AbstractPageWithHeader {
     private WebElement productName;
     //
     private AvailableOptionsComponent availableOptionsComponent;
-    private SearchPageAlertComponent searchPageAlertComponent;
+    private AlertComponent alertComponent;
 
     public ProductPage(WebDriver driver) {
         super(driver);
@@ -35,14 +35,14 @@ public class ProductPage extends AbstractPageWithHeader {
     }
 
     //addProductToCartAlertComponent
-    public SearchPageAlertComponent getSearchPageAlertComponent() {
-        searchPageAlertComponent = new SearchPageAlertComponent(driver.findElement(By.xpath("//div[@class='alert alert-success alert-dismissible']")));
-        return searchPageAlertComponent;
+    public AlertComponent getAlertComponent() {
+        alertComponent = new AlertComponent(driver.findElement(By.xpath("//div[@class='alert alert-success alert-dismissible']")));
+        return alertComponent;
     }
 
     //BUSINESS LOGIC
 
-    public ProductPage goToProductPageAfterAddToCart(int value){
+    public ProductPage goToProductPageAfterAddToCart(int value) {
         getAvailableOptionsComponent().setTextQty(value);
         getAvailableOptionsComponent().clickOnAddToCartButton();
         return new ProductPage(driver);
@@ -50,12 +50,12 @@ public class ProductPage extends AbstractPageWithHeader {
 
     //alert after add to cart
     public CartPage goToShoppingCartFromAlert() {
-        getSearchPageAlertComponent().clickOnCartLink();
+        getAlertComponent().clickOnCartLink();
         return new CartPage(driver);
     }
 
     public ProductPage goToProductPageFromAlert() {
-        getSearchPageAlertComponent().clickOnProductLink();
+        getAlertComponent().clickOnProductLink();
         return new ProductPage(driver);
     }
 

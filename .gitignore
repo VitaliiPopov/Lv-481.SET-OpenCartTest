@@ -112,5 +112,5 @@ hs_err_pid*
 /node_modules/
 /**/node_modules/
 
-
+#Excel file
 *.xlsx

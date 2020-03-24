@@ -31,7 +31,7 @@ public class AvailableOptionsComponent {
         List<WebElement> propertiesValue = new ArrayList<>();
         Map<WebElement, List<WebElement>> propertiesComponent = new HashMap<>();
         radioButtons = new ArrayList<>();
-        for (WebElement currentName: availableOptionsComponentLayout.findElements(By.xpath("//div[@class='radio']/label/../../../label"))) {
+        for (WebElement currentName : availableOptionsComponentLayout.findElements(By.xpath("//div[@class='radio']/label/../../../label"))) {
             propertiesComponent.clear();
             propertiesValue.clear();
             for (WebElement currentValue : availableOptionsComponentLayout.findElements(By.xpath("//div[@class='radio']/label"))) {
@@ -48,7 +48,7 @@ public class AvailableOptionsComponent {
         List<WebElement> propertiesValue = new ArrayList<>();
         Map<WebElement, List<WebElement>> propertiesComponent = new HashMap<>();
         checkBoxes = new ArrayList<>();
-        for (WebElement currentName: availableOptionsComponentLayout.findElements(By.xpath("//div[@class='checkbox']/label/../../../label"))) {
+        for (WebElement currentName : availableOptionsComponentLayout.findElements(By.xpath("//div[@class='checkbox']/label/../../../label"))) {
             propertiesComponent.clear();
             propertiesValue.clear();
             for (WebElement currentValue : availableOptionsComponentLayout.findElements(By.xpath("//div[@class='checkbox']/label"))) {
@@ -64,7 +64,7 @@ public class AvailableOptionsComponent {
     public List<Map<WebElement, Select>> getSelects() {
         Map<WebElement, Select> propertiesComponent = new HashMap<>();
         selects = new ArrayList<>();
-        for (WebElement currentName: availableOptionsComponentLayout.findElements(By.xpath("//select/../label"))) {
+        for (WebElement currentName : availableOptionsComponentLayout.findElements(By.xpath("//select/../label"))) {
             propertiesComponent.clear();
             WebElement currentValues = availableOptionsComponentLayout.findElement(By.tagName("select"));
             Select select = new Select(currentValues);
@@ -100,10 +100,10 @@ public class AvailableOptionsComponent {
     //label
 
     //radioButtons
-    public List<WebElement> getRadioButtonByLabelName(String lableName){
+    public List<WebElement> getRadioButtonByLabelName(String lableName) {
         List<WebElement> result = null;
-        for (Map<WebElement, List<WebElement>> current: getRadioButtons())
-            for(Map.Entry<WebElement, List<WebElement>> entry: current.entrySet())
+        for (Map<WebElement, List<WebElement>> current : getRadioButtons())
+            for (Map.Entry<WebElement, List<WebElement>> entry : current.entrySet())
                 if (entry.getKey().getText().contains(lableName)) {
                     result = entry.getValue();
                     break;
@@ -113,11 +113,11 @@ public class AvailableOptionsComponent {
     }
 
     //checkBoxes
-    public List<WebElement> getCheckBoxByLabelName(String lableName){
+    public List<WebElement> getCheckBoxByLabelName(String lableName) {
         List<WebElement> result = null;
-        for (Map<WebElement, List<WebElement>> current: getCheckBoxes())
-            for(Map.Entry<WebElement, List<WebElement>> entry: current.entrySet())
-                if (entry.getKey().getText().contains(lableName)){
+        for (Map<WebElement, List<WebElement>> current : getCheckBoxes())
+            for (Map.Entry<WebElement, List<WebElement>> entry : current.entrySet())
+                if (entry.getKey().getText().contains(lableName)) {
                     result = entry.getValue();
                     break;
                 }
@@ -126,11 +126,11 @@ public class AvailableOptionsComponent {
     }
 
     //selects
-    public Select getSelectByLabelName(String lableName){
+    public Select getSelectByLabelName(String lableName) {
         Select result = null;
-        for (Map<WebElement, Select> current: getSelects())
-            for(Map.Entry<WebElement, Select> entry: current.entrySet())
-                if (entry.getKey().getText().contains(lableName)){
+        for (Map<WebElement, Select> current : getSelects())
+            for (Map.Entry<WebElement, Select> entry : current.entrySet())
+                if (entry.getKey().getText().contains(lableName)) {
                     result = entry.getValue();
                     break;
                 }
@@ -141,10 +141,10 @@ public class AvailableOptionsComponent {
     //options
 
     //radioButton
-    public void chooseRadioButtonOptionByPartialName(String lableName, String optionName){
+    public void chooseRadioButtonOptionByPartialName(String lableName, String optionName) {
         WebElement result = null;
-        for (WebElement current: getRadioButtonByLabelName(lableName)) {
-            if(current.getText().contains(optionName)){
+        for (WebElement current : getRadioButtonByLabelName(lableName)) {
+            if (current.getText().contains(optionName)) {
                 result = current;
                 break;
             }
@@ -154,10 +154,10 @@ public class AvailableOptionsComponent {
     }
 
     //checkBox
-    public void chooseCheckBoxOptionByPartialName(String lableName, String optionName){
+    public void chooseCheckBoxOptionByPartialName(String lableName, String optionName) {
         WebElement result = null;
-        for (WebElement current: getCheckBoxByLabelName(lableName)) {
-            if(current.getText().contains(optionName)){
+        for (WebElement current : getCheckBoxByLabelName(lableName)) {
+            if (current.getText().contains(optionName)) {
                 result = current;
                 break;
             }
@@ -167,7 +167,7 @@ public class AvailableOptionsComponent {
     }
 
     //selects
-    public void chooseSelectsOptionByName(String lableName, String optionName){
+    public void chooseSelectsOptionByName(String lableName, String optionName) {
         getSelectByLabelName(lableName).selectByVisibleText(optionName);
     }
 
@@ -178,7 +178,7 @@ public class AvailableOptionsComponent {
     //setOptions
     public void setOptionsForAppleCinema(String radioButtonLableName, String radioButtonOptionName,
                                          String checkBoxLableName, String checkBoxOptionName,
-                                         String selectLableName, String selectOptionsOptionName){
+                                         String selectLableName, String selectOptionsOptionName) {
         chooseRadioButtonOptionByPartialName(radioButtonLableName, radioButtonOptionName);
         chooseCheckBoxOptionByPartialName(checkBoxLableName, checkBoxOptionName);
         chooseSelectsOptionByName(selectLableName, selectOptionsOptionName);

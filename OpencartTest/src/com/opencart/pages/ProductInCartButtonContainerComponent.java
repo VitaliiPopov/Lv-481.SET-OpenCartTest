@@ -1,12 +1,7 @@
 package com.opencart.pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.util.concurrent.TimeUnit;
 
 public class ProductInCartButtonContainerComponent {
 
@@ -30,7 +25,7 @@ public class ProductInCartButtonContainerComponent {
         return productName;
     }
 
-    public String getProductNameText(){
+    public String getProductNameText() {
         return getProductName().getText();
     }
 
@@ -40,7 +35,7 @@ public class ProductInCartButtonContainerComponent {
         return qty;
     }
 
-    public String getQtyText(){
+    public String getQtyText() {
         return getQty().getText().substring(2);
     }
 
@@ -50,7 +45,7 @@ public class ProductInCartButtonContainerComponent {
         return totalProductPrice;
     }
 
-    public String getTotalProductPriceText(){
+    public String getTotalProductPriceText() {
         return getTotalProductPrice().getText().substring(1);
     }
 
@@ -60,7 +55,7 @@ public class ProductInCartButtonContainerComponent {
         return removeButton;
     }
 
-    public void clickOnRemoveButton(){
+    public void clickOnRemoveButton() {
         getRemoveButton().click();
     }
 

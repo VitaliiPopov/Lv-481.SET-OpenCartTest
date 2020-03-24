@@ -1,8 +1,8 @@
 package com.opencart.pages.search;
 
 import com.opencart.pages.AbstractPageWithHeader;
+import com.opencart.pages.AlertComponent;
 import com.opencart.pages.cart.CartPage;
-import com.opencart.pages.common.SearchPageAlertComponent;
 import com.opencart.pages.product.ProductPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -23,7 +23,7 @@ public class SearchPage extends AbstractPageWithHeader {
     private List<ProductContainersComponent> productContainersComponents;
     private SearchCriteriaComponent searchCriteriaComponent;
     private ProductDisplayCriteriaComponent productDisplayCriteriaComponent;
-    private SearchPageAlertComponent searchPageAlertComponent;
+    private AlertComponent alertComponent;
 
     public SearchPage(WebDriver driver) {
         super(driver);
@@ -40,9 +40,9 @@ public class SearchPage extends AbstractPageWithHeader {
     ///region ATOMIC_OPERATIONS
 
     //searchPageAlertComponent
-    public SearchPageAlertComponent getSearchPageAlertComponent() {
-        searchPageAlertComponent = new SearchPageAlertComponent(driver.findElement(By.xpath(ALERT_LOCATOR)));
-        return searchPageAlertComponent;
+    public AlertComponent getAlertComponent() {
+        alertComponent = new AlertComponent(driver.findElement(By.xpath(ALERT_LOCATOR)));
+        return alertComponent;
     }
 
     //productContainerComponents
@@ -87,6 +87,7 @@ public class SearchPage extends AbstractPageWithHeader {
 
     /**
      * Return SearchPage or ProductPage depending on options of product.
+     *
      * @param productName Product name.
      * @return SearchPage or ProductPage.
      */
@@ -114,12 +115,12 @@ public class SearchPage extends AbstractPageWithHeader {
 
     //alert after add to cart
     public CartPage goToShoppingCartFromAlert() {
-        getSearchPageAlertComponent().clickOnCartLink();
+        getAlertComponent().clickOnCartLink();
         return new CartPage(driver);
     }
 
     public ProductPage goToProductPageFromAlert() {
-        getSearchPageAlertComponent().clickOnProductLink();
+        getAlertComponent().clickOnProductLink();
         return new ProductPage(driver);
     }
 

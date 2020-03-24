@@ -17,7 +17,7 @@ public class AddressBookPage extends AbstractPageWithHeader {
         initElements();
     }
 
-    private void initElements(){
+    private void initElements() {
         accountSidebarComponent = new AccountSidebarComponent(driver);
         addressBookContainersComponents = new ArrayList<>();
     }

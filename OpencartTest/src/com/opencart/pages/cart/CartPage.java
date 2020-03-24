@@ -1,8 +1,8 @@
 package com.opencart.pages.cart;
 
+import com.opencart.pages.AbstractPageWithHeader;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import com.opencart.pages.AbstractPageWithHeader;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
@@ -39,7 +39,7 @@ public class CartPage extends AbstractPageWithHeader {
         initElements();
     }
 
-    private void initElements(){
+    private void initElements() {
         //TODO
         try {
             Thread.sleep(1000);
@@ -47,7 +47,7 @@ public class CartPage extends AbstractPageWithHeader {
             e.printStackTrace();
         }
         productInCartContainerComponents = new ArrayList<>();
-        for(WebElement current: driver.findElements(By.xpath(PRODUCT_IN_CART_COMPONENT_XPATHSELECTOR)))
+        for (WebElement current : driver.findElements(By.xpath(PRODUCT_IN_CART_COMPONENT_XPATHSELECTOR)))
             productInCartContainerComponents.add(new ProductInCartContainerComponent(current));
     }
 
@@ -94,10 +94,10 @@ public class CartPage extends AbstractPageWithHeader {
 
     //findElement
     //String
-    public ProductInCartContainerComponent getProductInCartComponentByName(String productName){
+    public ProductInCartContainerComponent getProductInCartComponentByName(String productName) {
         ProductInCartContainerComponent result = null;
-        for (ProductInCartContainerComponent current: productInCartContainerComponents) {
-            if (current.getProductNameText().equalsIgnoreCase(productName)){
+        for (ProductInCartContainerComponent current : productInCartContainerComponents) {
+            if (current.getProductNameText().equalsIgnoreCase(productName)) {
                 result = current;
                 break;
             }
@@ -107,10 +107,10 @@ public class CartPage extends AbstractPageWithHeader {
     }
 
     //String
-    public boolean checkIsTheProductInCartComponentByName(String productName){
+    public boolean checkIsTheProductInCartComponentByName(String productName) {
         boolean result = false;
-        for (ProductInCartContainerComponent current: productInCartContainerComponents) {
-            if (current.getProductNameText().equalsIgnoreCase(productName)){
+        for (ProductInCartContainerComponent current : productInCartContainerComponents) {
+            if (current.getProductNameText().equalsIgnoreCase(productName)) {
                 result = true;
                 break;
             }
@@ -120,17 +120,17 @@ public class CartPage extends AbstractPageWithHeader {
 
 
     //findTotalPrise
-    private BigDecimal getTotalPriceFromColumn(){
+    private BigDecimal getTotalPriceFromColumn() {
         BigDecimal totalPrice1 = new BigDecimal(0);
-        for (ProductInCartContainerComponent current: productInCartContainerComponents) {
+        for (ProductInCartContainerComponent current : productInCartContainerComponents) {
             totalPrice1 = totalPrice1.add(BigDecimal.valueOf(Double.parseDouble(current.getTotalProductPriceText().substring(1))));
         }
         return totalPrice1;
     }
 
-    private BigDecimal getTotalPriceFromCalculation(){
+    private BigDecimal getTotalPriceFromCalculation() {
         BigDecimal totalPrice = new BigDecimal(0);
-        for (ProductInCartContainerComponent current: productInCartContainerComponents) {
+        for (ProductInCartContainerComponent current : productInCartContainerComponents) {
             int quantity = Integer.parseInt(current.getQuantityInputFildText());
             BigDecimal unitPrice = BigDecimal.valueOf(Double.parseDouble(current.getUnitPriceText().substring(1)));
             totalPrice = totalPrice.add(unitPrice.multiply(BigDecimal.valueOf(quantity)));
@@ -139,42 +139,42 @@ public class CartPage extends AbstractPageWithHeader {
     }
 
     //checkTotalPrice
-    private boolean checkTotalPriceFromColumn(){
+    private boolean checkTotalPriceFromColumn() {
         if (getTotalPrice().equals(getTotalPriceFromColumn())) return true;
         else return false;
     }
 
-    private boolean checkTotalPriceFromCalculation(){
+    private boolean checkTotalPriceFromCalculation() {
         if (getTotalPrice().equals(getTotalPriceFromCalculation())) return true;
         else return false;
     }
 
-    public boolean checkTotalPrice(){
+    public boolean checkTotalPrice() {
         if (checkTotalPriceFromColumn() & checkTotalPriceFromCalculation()) return true;
         else return false;
     }
 
     //checkAddElements
-    public boolean checkAddElements(List<String> productsName){
+    public boolean checkAddElements(List<String> productsName) {
         List<String> temp = new ArrayList<>(productsName);
-        for (ProductInCartContainerComponent current: productInCartContainerComponents) {
-            for (String currentProductName: temp) {
-                if(current.getProductNameText().equals(currentProductName)) temp.remove(currentProductName);
+        for (ProductInCartContainerComponent current : productInCartContainerComponents) {
+            for (String currentProductName : temp) {
+                if (current.getProductNameText().equals(currentProductName)) temp.remove(currentProductName);
                 else return false;
             }
         }
-        if(temp.size() != 0) return false;
+        if (temp.size() != 0) return false;
         else return true;
     }
 
     //removeElement
-    private void removeProduct(String productName){
+    private void removeProduct(String productName) {
         getProductInCartComponentByName(productName).clickOnQuantityButtonRemove();
     }
 
     //removeAllProducts
-    public void removeAllProducts(){
-        for (ProductInCartContainerComponent current: productInCartContainerComponents) {
+    public void removeAllProducts() {
+        for (ProductInCartContainerComponent current : productInCartContainerComponents) {
             current.clickOnQuantityButtonRemove();
         }
     }
@@ -198,7 +198,7 @@ public class CartPage extends AbstractPageWithHeader {
     }
 
     //checkRefreshFunction
-    public void checkRefreshFunction(String productName, int value){
+    public void checkRefreshFunction(String productName, int value) {
         ProductInCartContainerComponent current = getProductInCartComponentByName(productName);
         BigDecimal oldPrice = BigDecimal.valueOf(Integer.parseInt(current.getQuantityInputFildText())
                 * Double.parseDouble(current.getUnitPriceText().substring(1)));

@@ -1,9 +1,9 @@
-package com.opencart.pages.common;
+package com.opencart.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-public class SearchPageAlertComponent {
+public class AlertComponent {
 
     private WebElement addProductToCartAlertComponentLayout;
     //
@@ -11,7 +11,7 @@ public class SearchPageAlertComponent {
     private WebElement productLink;
     private WebElement cartLink;
 
-    public SearchPageAlertComponent(WebElement addProductToCartAlertComponentLayout) {
+    public AlertComponent(WebElement addProductToCartAlertComponentLayout) {
         this.addProductToCartAlertComponentLayout = addProductToCartAlertComponentLayout;
     }
 

@@ -1,7 +1,7 @@
 package com.opencart.pages.product_table;
 
-import org.openqa.selenium.WebDriver;
 import com.opencart.pages.AbstractPageWithHeader;
+import org.openqa.selenium.WebDriver;
 
 import java.util.ArrayList;
 import java.util.List;

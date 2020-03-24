@@ -3,12 +3,14 @@ package test;
 import com.opencart.pages.HomePage;
 import com.opencart.pages.account.LoginPage;
 import com.opencart.pages.account.MyAccountPage;
-import com.opencart.pages.product.ProductPage;
 import com.opencart.pages.cart.CartPage;
+import com.opencart.pages.product.ProductPage;
 import com.opencart.pages.search.SearchPage;
 import com.opencart.tools.ExcelDataConfig;
 import com.opencart.tools.TestRunner;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -17,15 +19,23 @@ public class CartTest extends TestRunner {
 
     ExcelDataConfig excelDataConfig = new ExcelDataConfig("TestData.xlsx");
 
+    @BeforeMethod
     @Parameters({"myAccountDropdownText"})
-    @Test(priority = 1)
-    public void loginTest(String myAccountDropdownText) throws InterruptedException {
+    public void setUp(String myAccountDropdownText) {
         LoginPage loginPage = getHomePage().goToLoginPage(myAccountDropdownText);
         MyAccountPage myAccountPage = loginPage.login(excelDataConfig.getData(0, 0, 0), excelDataConfig.getData(0, 0, 1));
         HomePage homePage = myAccountPage.goToHomePage();
     }
 
-    //Add to cart tests
+
+    @AfterMethod
+    public void tearDown() {
+        CartPage cartPage = getHomePage().goToCartPageByLinkInHeader();
+        cartPage.removeAllProducts();
+    }
+
+    //ADD TO CART TEST
+
     @Test(priority = 2)
     public void addProductWithoutOptionsToCartAlertCheck() throws Exception {
         SoftAssert softAssert = new SoftAssert();
@@ -34,7 +44,7 @@ public class CartTest extends TestRunner {
         //Assert TODO -> SearchCriteriaComponent
 
         SearchPage addToCartIPhoneSearchPage = (SearchPage) ipSearchPage.afterClickOnProductComponentAddToCartButtonByName("iPhone");
-        softAssert.assertTrue(addToCartIPhoneSearchPage.getSearchPageAlertComponent().getAlertMessageText().contains("Success: You have added iPhone to your shopping cart!"));
+        softAssert.assertTrue(addToCartIPhoneSearchPage.getAlertComponent().getAlertMessageText().contains("Success: You have added iPhone to your shopping cart!"));
 
         CartPage cartPage = addToCartIPhoneSearchPage.goToShoppingCartFromAlert();
         softAssert.assertTrue(cartPage.getPageTitleText().contains("Shopping Cart"));
@@ -58,7 +68,7 @@ public class CartTest extends TestRunner {
                 "Checkbox", "Checkbox 2",
                 "Select", "Red (+$4.00)");
         ProductPage productPageAfterAddToCart = productPage.goToProductPageAfterAddToCart(3);
-        softAssert.assertTrue(productPageAfterAddToCart.getSearchPageAlertComponent().getAlertMessageText().contains("Success: You have added Apple Cinema 30 to your shopping cart!"));
+        softAssert.assertTrue(productPageAfterAddToCart.getAlertComponent().getAlertMessageText().contains("Success: You have added Apple Cinema 30 to your shopping cart!"));
 
         CartPage cartPage = productPageAfterAddToCart.goToShoppingCartFromAlert();
         softAssert.assertTrue(cartPage.getPageTitleText().contains("Shopping Cart"));
@@ -68,6 +78,9 @@ public class CartTest extends TestRunner {
         Thread.sleep(2000);//Only for presentation
     }
 
+    //Add to cart
+    //negative
+    //too match
     @Test(priority = 4)
     public void addTooManyProduct() throws Exception {
         SoftAssert softAssert = new SoftAssert();
@@ -82,7 +95,7 @@ public class CartTest extends TestRunner {
                 "Checkbox", "Checkbox 2",
                 "Select", "Red (+$4.00)");
         ProductPage productPageAfterAddToCart = productPage.goToProductPageAfterAddToCart(10000);
-        softAssert.assertTrue(productPageAfterAddToCart.getSearchPageAlertComponent().getAlertMessageText().contains("Unsuccess:"));
+        softAssert.assertTrue(productPageAfterAddToCart.getAlertComponent().getAlertMessageText().contains("Unsuccess:"));
 
         CartPage cartPage = productPageAfterAddToCart.goToCartPageByLinkInHeader();
         softAssert.assertTrue(cartPage.getPageTitleText().contains("Shopping Cart"));
@@ -92,6 +105,7 @@ public class CartTest extends TestRunner {
         Thread.sleep(2000);//Only for presentation
     }
 
+    //Add to cart test
     @Test(priority = 5)
     public void addToCartCheckCartButton() throws Exception {
         SoftAssert softAssert = new SoftAssert();
@@ -100,7 +114,7 @@ public class CartTest extends TestRunner {
         //Assert TODO -> SearchCriteriaComponent
 
         SearchPage addToCartIPhoneSearchPage = (SearchPage) ipSearchPage.afterClickOnProductComponentAddToCartButtonByName("iPhone");
-        softAssert.assertTrue(addToCartIPhoneSearchPage.getSearchPageAlertComponent().getAlertMessageText().contains("Success: You have added iPhone to your shopping cart!"));
+        softAssert.assertTrue(addToCartIPhoneSearchPage.getAlertComponent().getAlertMessageText().contains("Success: You have added iPhone to your shopping cart!"));
 
         softAssert.assertTrue(addToCartIPhoneSearchPage.getProductInCartButtonContainerComponentsSize() == 1);
         softAssert.assertTrue(addToCartIPhoneSearchPage.checkIsTheProductInCartComponentByName("iPhone"));
@@ -118,7 +132,7 @@ public class CartTest extends TestRunner {
         //Assert TODO -> SearchCriteriaComponent
 
         SearchPage addToCartIPhoneSearchPage = (SearchPage) ipSearchPage.afterClickOnProductComponentAddToCartButtonByName("iPhone");
-        softAssert.assertTrue(addToCartIPhoneSearchPage.getSearchPageAlertComponent().getAlertMessageText().contains("Success: You have added iPhone to your shopping cart!"));
+        softAssert.assertTrue(addToCartIPhoneSearchPage.getAlertComponent().getAlertMessageText().contains("Success: You have added iPhone to your shopping cart!"));
 
         SearchPage cinemaSearchPage = addToCartIPhoneSearchPage.goToSearchPageAfterSearchProduct("cinema");
         //Assert TODO -> SearchCriteriaComponent
@@ -130,7 +144,7 @@ public class CartTest extends TestRunner {
                 "Checkbox", "Checkbox 2",
                 "Select", "Red (+$4.00)");
         ProductPage productPageAfterAddToCart = productPage.goToProductPageAfterAddToCart(1);
-        softAssert.assertTrue(productPageAfterAddToCart.getSearchPageAlertComponent().getAlertMessageText().contains("Success: You have added Apple Cinema 30 to your shopping cart!"));
+        softAssert.assertTrue(productPageAfterAddToCart.getAlertComponent().getAlertMessageText().contains("Success: You have added Apple Cinema 30 to your shopping cart!"));
 
         CartPage cartPage = productPageAfterAddToCart.goToCartPageByLinkInHeader();
         softAssert.assertTrue(cartPage.getPageTitleText().contains("Shopping Cart"));
@@ -147,7 +161,7 @@ public class CartTest extends TestRunner {
         //Assert TODO -> SearchCriteriaComponent
 
         SearchPage addToCartIPhoneSearchPage = (SearchPage) ipSearchPage.afterClickOnProductComponentAddToCartButtonByName("iPhone");
-        softAssert.assertTrue(addToCartIPhoneSearchPage.getSearchPageAlertComponent().getAlertMessageText().contains("Success: You have added iPhone to your shopping cart!"));
+        softAssert.assertTrue(addToCartIPhoneSearchPage.getAlertComponent().getAlertMessageText().contains("Success: You have added iPhone to your shopping cart!"));
 
         SearchPage cinemaSearchPage = addToCartIPhoneSearchPage.goToSearchPageAfterSearchProduct("cinema");
         //Assert TODO -> SearchCriteriaComponent
@@ -160,7 +174,7 @@ public class CartTest extends TestRunner {
                 "Select", "Red (+$4.00)");
         ProductPage productPageAfterAddToCart = productPage.goToProductPageAfterAddToCart(3);
         Thread.sleep(2000);
-        softAssert.assertTrue(productPageAfterAddToCart.getSearchPageAlertComponent().getAlertMessageText().contains("Success: You have added Apple Cinema 30 to your shopping cart!"));
+        softAssert.assertTrue(productPageAfterAddToCart.getAlertComponent().getAlertMessageText().contains("Success: You have added Apple Cinema 30 to your shopping cart!"));
 
         softAssert.assertTrue(addToCartIPhoneSearchPage.checkTotalPrice());
 
@@ -176,7 +190,7 @@ public class CartTest extends TestRunner {
         //Assert TODO -> SearchCriteriaComponent
 
         SearchPage addToCartIPhoneSearchPage = (SearchPage) ipSearchPage.afterClickOnProductComponentAddToCartButtonByName("iPhone");
-        softAssert.assertTrue(addToCartIPhoneSearchPage.getSearchPageAlertComponent().getAlertMessageText().contains("Success: You have added iPhone to your shopping cart!"));
+        softAssert.assertTrue(addToCartIPhoneSearchPage.getAlertComponent().getAlertMessageText().contains("Success: You have added iPhone to your shopping cart!"));
 
         CartPage cartPage = addToCartIPhoneSearchPage.goToCartPageByLinkInHeader();
         cartPage.checkRefreshFunction("iPhone", 1);
@@ -199,7 +213,7 @@ public class CartTest extends TestRunner {
                 "Checkbox", "Checkbox 2",
                 "Select", "Red (+$4.00)");
         ProductPage productPageAfterAddToCart = productPage.goToProductPageAfterAddToCart(3);
-        Assert.assertTrue(productPageAfterAddToCart.getSearchPageAlertComponent().getAlertMessageText().contains("Success: You have added Apple Cinema 30 to your shopping cart!"));
+        Assert.assertTrue(productPageAfterAddToCart.getAlertComponent().getAlertMessageText().contains("Success: You have added Apple Cinema 30 to your shopping cart!"));
 
         //TODO
         Thread.sleep(1000);
@@ -222,7 +236,7 @@ public class CartTest extends TestRunner {
         //Assert TODO -> SearchCriteriaComponent
 
         SearchPage addToCartIPhoneSearchPage = (SearchPage) ipSearchPage.afterClickOnProductComponentAddToCartButtonByName("iPhone");
-        softAssert.assertTrue(addToCartIPhoneSearchPage.getSearchPageAlertComponent().getAlertMessageText().contains("Success: You have added iPhone to your shopping cart!"));
+        softAssert.assertTrue(addToCartIPhoneSearchPage.getAlertComponent().getAlertMessageText().contains("Success: You have added iPhone to your shopping cart!"));
 
         CartPage cartPage = addToCartIPhoneSearchPage.goToCartPageByLinkInHeader();
         softAssert.assertTrue(cartPage.getPageTitleText().contains("Shopping Cart"));
@@ -243,7 +257,7 @@ public class CartTest extends TestRunner {
         //Assert TODO -> SearchCriteriaComponent
 
         SearchPage addToCartIPhoneSearchPage = (SearchPage) ipSearchPage.afterClickOnProductComponentAddToCartButtonByName("iPhone");
-        softAssert.assertTrue(addToCartIPhoneSearchPage.getSearchPageAlertComponent().getAlertMessageText().contains("Success: You have added iPhone to your shopping cart!"));
+        softAssert.assertTrue(addToCartIPhoneSearchPage.getAlertComponent().getAlertMessageText().contains("Success: You have added iPhone to your shopping cart!"));
 
         SearchPage cinemaSearchPage = addToCartIPhoneSearchPage.goToSearchPageAfterSearchProduct("cinema");
         //Assert TODO -> SearchCriteriaComponent
@@ -255,7 +269,7 @@ public class CartTest extends TestRunner {
                 "Checkbox", "Checkbox 2",
                 "Select", "Red (+$4.00)");
         ProductPage productPageAfterAddToCart = productPage.goToProductPageAfterAddToCart(1);
-        softAssert.assertTrue(productPageAfterAddToCart.getSearchPageAlertComponent().getAlertMessageText().contains("Success: You have added Apple Cinema 30 to your shopping cart!"));
+        softAssert.assertTrue(productPageAfterAddToCart.getAlertComponent().getAlertMessageText().contains("Success: You have added Apple Cinema 30 to your shopping cart!"));
 
         CartPage cartPage = productPageAfterAddToCart.goToCartPageByLinkInHeader();
         softAssert.assertTrue(cartPage.getPageTitleText().contains("Shopping Cart"));
@@ -274,7 +288,7 @@ public class CartTest extends TestRunner {
         //Assert TODO -> SearchCriteriaComponent
 
         SearchPage addToCartIPhoneSearchPage = (SearchPage) ipSearchPage.afterClickOnProductComponentAddToCartButtonByName("iPhone");
-        softAssert.assertTrue(addToCartIPhoneSearchPage.getSearchPageAlertComponent().getAlertMessageText().contains("Success: You have added iPhone to your shopping cart!"));
+        softAssert.assertTrue(addToCartIPhoneSearchPage.getAlertComponent().getAlertMessageText().contains("Success: You have added iPhone to your shopping cart!"));
 
         CartPage cartPage = addToCartIPhoneSearchPage.goToCartPageByLinkInHeader();
         softAssert.assertTrue(cartPage.getPageTitleText().contains("Shopping Cart"));
@@ -294,16 +308,15 @@ public class CartTest extends TestRunner {
         //Assert TODO -> SearchCriteriaComponent
 
         SearchPage addToCartIPhoneSearchPage = (SearchPage) ipSearchPage.afterClickOnProductComponentAddToCartButtonByName("iPhone");
-        softAssert.assertTrue(addToCartIPhoneSearchPage.getSearchPageAlertComponent().getAlertMessageText().contains("Success: You have added iPhone to your shopping cart!"));
+        softAssert.assertTrue(addToCartIPhoneSearchPage.getAlertComponent().getAlertMessageText().contains("Success: You have added iPhone to your shopping cart!"));
 
-        softAssert.assertTrue(addToCartIPhoneSearchPage.getSearchPageAlertComponent().getAlertMessageText().contains("Success: You have added Apple Cinema 30 to your shopping cart!"));
+        softAssert.assertTrue(addToCartIPhoneSearchPage.getAlertComponent().getAlertMessageText().contains("Success: You have added Apple Cinema 30 to your shopping cart!"));
 
         addToCartIPhoneSearchPage.removeViewProductComponentByName("iPhone");
         softAssert.assertEquals(addToCartIPhoneSearchPage.getEmptyDropdownCartButtonText(), ("Your shopping cart is empty!"));
 
         softAssert.assertAll();
     }
-
 
 
     //Check text of button

@@ -1,6 +1,5 @@
 package com.opencart.pages;
 
-import com.opencart.tools.WaitUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,8 +17,6 @@ public class CartDropdownComponent {
     //
     private WebElement cartDropdownComponentLayout;
     //
-    //
-    //private WaitUtils cartWait;
     private WebElement cartTotalMessage;
     //
     private WebElement totalPrice;
@@ -36,12 +33,11 @@ public class CartDropdownComponent {
 
     private void initElements() {
         productInCartButtonContainerComponents = new ArrayList<>();
-        for (WebElement current: cartDropdownComponentLayout.findElements(By.cssSelector(PRODUCTS_IN_CART_BUTTON_CSSLOCATOR)))
+        for (WebElement current : cartDropdownComponentLayout.findElements(By.cssSelector(PRODUCTS_IN_CART_BUTTON_CSSLOCATOR)))
             productInCartButtonContainerComponents.add(new ProductInCartButtonContainerComponent(current));
     }
 
     //PAGE OBJECT
-
 
     //getCartTotalMessage
     public WebElement getCartTotalMessage() {
@@ -70,7 +66,7 @@ public class CartDropdownComponent {
         return cartRemoveButton;
     }
 
-    public void clickOnCartRemoveButtonInCartDropdown(){
+    public void clickOnCartRemoveButtonInCartDropdown() {
         getCartRemoveButton().click();
     }
 
@@ -93,11 +89,11 @@ public class CartDropdownComponent {
 
     //findElement
     //String
-    public ProductInCartButtonContainerComponent getProductInCartButtonContainerComponentByName(String productName){
+    public ProductInCartButtonContainerComponent getProductInCartButtonContainerComponentByName(String productName) {
         ProductInCartButtonContainerComponent result = null;
-        for (ProductInCartButtonContainerComponent current: productInCartButtonContainerComponents) {
+        for (ProductInCartButtonContainerComponent current : productInCartButtonContainerComponents) {
 
-            if (current.getProductNameText().equalsIgnoreCase(productName)){
+            if (current.getProductNameText().equalsIgnoreCase(productName)) {
                 result = current;
                 break;
             }
@@ -107,31 +103,30 @@ public class CartDropdownComponent {
     }
 
     //remove product
-    public void removeViewProductComponent(String productName){
+    public void removeViewProductComponent(String productName) {
         getProductInCartButtonContainerComponentByName(productName).clickOnRemoveButton();
     }
 
     //findTotalPrise
-    public BigDecimal getTotalPriceFromColumn(){
+    public BigDecimal getTotalPriceFromColumn() {
         BigDecimal totalPrice = new BigDecimal(0);
-        for (ProductInCartButtonContainerComponent current: productInCartButtonContainerComponents) {
+        for (ProductInCartButtonContainerComponent current : productInCartButtonContainerComponents) {
             totalPrice = totalPrice.add(BigDecimal.valueOf(Double.parseDouble(current.getTotalProductPriceText())));
         }
         return totalPrice;
     }
 
     //checkTotalPrice
-    public boolean checkTotalPrice(){
+    public boolean checkTotalPrice() {
         if (getTotalPriceText().equals(getTotalPriceFromColumn())) return true;
         else return false;
     }
 
     //removeAllProducts
-    public void removeAllProducts(){
+    public void removeAllProducts() {
         productInCartButtonContainerComponents.get(0).clickOnRemoveButton();
-        if(productInCartButtonContainerComponents.size() > 1 ) removeAllProducts();
+        if (productInCartButtonContainerComponents.size() > 1) removeAllProducts();
     }
-
 
 
 }

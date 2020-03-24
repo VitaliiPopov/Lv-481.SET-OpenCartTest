@@ -2,7 +2,6 @@ package com.opencart.pages;
 
 import com.opencart.pages.account.LoginPage;
 import com.opencart.pages.cart.CartPage;
-import com.opencart.pages.cart.ProductInCartContainerComponent;
 import com.opencart.pages.search.SearchPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -97,22 +96,22 @@ public class AbstractPageWithHeader {
     }
 
     //dropdownComponent
-    protected DropdownComponent getDropdownComponent(){
-        if(dropdownComponent == null){
+    protected DropdownComponent getDropdownComponent() {
+        if (dropdownComponent == null) {
             throw new RuntimeException(OPTION_NULL_MESSAGE);
         }
         return dropdownComponent;
     }
 
-    private DropdownComponent createDropdownComponent(By searchLocator){
+    private DropdownComponent createDropdownComponent(By searchLocator) {
         dropdownComponent = new DropdownComponent(driver, searchLocator);
         return dropdownComponent;
     }
 
-    private void clickDropdownComponentByPartialName(String optionName){
-        if(getDropdownComponent().isExistDropdownOptionByPartialName(optionName)){
+    private void clickDropdownComponentByPartialName(String optionName) {
+        if (getDropdownComponent().isExistDropdownOptionByPartialName(optionName)) {
             getDropdownComponent().clickDropdownOptionByPartialName(optionName);
-        }else{
+        } else {
             throw new RuntimeException(String.format(OPTION_NOT_FOUND_MESSAGE, optionName));
         }
     }
@@ -126,18 +125,18 @@ public class AbstractPageWithHeader {
     //FUNCTIONAL
 
     //MyAccount
-    public void openMyAccountDropdown(){
+    public void openMyAccountDropdown() {
         clickMyAccount();
         createDropdownComponent(By.cssSelector(DROPDOWN_MYACCONT_CSSSELECTOR));
     }
 
-    public void clickMyAccountDropdownComponentByPartialName(String text){
+    public void clickMyAccountDropdownComponentByPartialName(String text) {
         openMyAccountDropdown();
         clickDropdownComponentByPartialName(text);
     }
 
     //SearchTopField
-    public void fillSearchTopField(String searchText){
+    public void fillSearchTopField(String searchText) {
         clickSearchTopField();
         clearSearchTopField();
         setSearchTopField(searchText);
@@ -172,7 +171,7 @@ public class AbstractPageWithHeader {
         return getCartDropdownComponent().getProductInCartButtonContainerComponentsSize();
     }
 
-    public ProductInCartButtonContainerComponent getProductInCartButtonContainerComponentByName(String productName){
+    public ProductInCartButtonContainerComponent getProductInCartButtonContainerComponentByName(String productName) {
         openViewCartComponent();
         return getCartDropdownComponent().getProductInCartButtonContainerComponentByName(productName);
     }
@@ -182,42 +181,42 @@ public class AbstractPageWithHeader {
         getCartDropdownComponent().removeViewProductComponent(productName);
     }
 
-    public boolean checkTotalPrice(){
+    public boolean checkTotalPrice() {
         openViewCartComponent();
         if (getTotalPriceText().equals(getCartDropdownComponent().getTotalPriceFromColumn())) return true;
         else return false;
     }
 
-    public void removeAllProducts(){
+    public void removeAllProducts() {
         openViewCartComponent();
         getCartDropdownComponent().removeAllProducts();
     }
 
     //String
-    public boolean checkIsTheProductInCartComponentByName(String productName){
+    public boolean checkIsTheProductInCartComponentByName(String productName) {
         if (getProductInCartButtonContainerComponentByName(productName) == null) return false;
         else return true;
     }
 
     //BUSINESS LOGIC
 
-    public LoginPage goToLoginPage(String MY_ACCOUNT_DROPDOWN_TEXT){
+    public LoginPage goToLoginPage(String MY_ACCOUNT_DROPDOWN_TEXT) {
         clickMyAccountDropdownComponentByPartialName(MY_ACCOUNT_DROPDOWN_TEXT);
         return new LoginPage(driver);
     }
 
-    public HomePage goToHomePage(){
+    public HomePage goToHomePage() {
         clickLogo();
         return new HomePage(driver);
     }
 
-    public SearchPage goToSearchPageAfterSearchProduct(String productName){
+    public SearchPage goToSearchPageAfterSearchProduct(String productName) {
         fillSearchTopField(productName);
         clickSearchTopButton();
         return new SearchPage(driver);
     }
 
-    public CartPage goToCartPageByLinkInHeader(){
+    public CartPage goToCartPageByLinkInHeader() {
         clickOnShoppingCart();
         return new CartPage(driver);
     }

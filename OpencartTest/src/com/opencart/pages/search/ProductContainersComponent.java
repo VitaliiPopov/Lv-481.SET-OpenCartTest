@@ -24,7 +24,7 @@ public class ProductContainersComponent {
         return name;
     }
 
-    public String getNameText(){
+    public String getNameText() {
         return getName().getText();
     }
 
@@ -34,7 +34,7 @@ public class ProductContainersComponent {
         return addToCartButton;
     }
 
-    public void clickAddToCartButton(){
+    public void clickAddToCartButton() {
         getAddToCartButton().click();
     }
 

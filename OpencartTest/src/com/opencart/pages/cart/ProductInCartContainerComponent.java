@@ -1,7 +1,6 @@
 package com.opencart.pages.cart;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class ProductInCartContainerComponent {
@@ -28,7 +27,7 @@ public class ProductInCartContainerComponent {
         return productName;
     }
 
-    public String getProductNameText(){
+    public String getProductNameText() {
         return getProductName().getText();
     }
 
@@ -38,20 +37,20 @@ public class ProductInCartContainerComponent {
         return quantityInputFild;
     }
 
-    public String getQuantityInputFildText(){
+    public String getQuantityInputFildText() {
         return getQuantityInputFild().getAttribute("value");
     }
 
-    public void clearQuantityInputFild(){
+    public void clearQuantityInputFild() {
         getQuantityInputFild().clear();
     }
 
-    public void clickOnQuantityInputFild(){
+    public void clickOnQuantityInputFild() {
         getQuantityInputFild().click();
     }
 
     //TODO EXEPTION
-    public void modifyTextQuantityInputFild(int number){
+    public void modifyTextQuantityInputFild(int number) {
         quantityInputFild.sendKeys(Integer.toString(number));
     }
 
@@ -61,7 +60,7 @@ public class ProductInCartContainerComponent {
         return quantityButtonRefresh;
     }
 
-    public void clickOnQuantityButtonRefresh(){
+    public void clickOnQuantityButtonRefresh() {
         getQuantityButtonRefresh().click();
     }
 
@@ -71,7 +70,7 @@ public class ProductInCartContainerComponent {
         return quantityButtonRemove;
     }
 
-    public void clickOnQuantityButtonRemove(){
+    public void clickOnQuantityButtonRemove() {
         getQuantityButtonRemove().click();
     }
 
@@ -106,7 +105,6 @@ public class ProductInCartContainerComponent {
         setQuantityInput(value);
         clickOnQuantityButtonRefresh();
     }
-
 
 
 }

@@ -1,7 +1,7 @@
 package com.opencart.pages.account;
 
-import org.openqa.selenium.WebDriver;
 import com.opencart.pages.AbstractPageWithHeader;
+import org.openqa.selenium.WebDriver;
 
 public class SuccessRegisterPage extends AbstractPageWithHeader {
 
@@ -12,13 +12,11 @@ public class SuccessRegisterPage extends AbstractPageWithHeader {
         initElements();
     }
 
-    private void initElements(){
+    private void initElements() {
         accountSidebarComponent = new AccountSidebarComponent(driver);
     }
 
     //PAGE OBJECT
-
-
 
 
 }

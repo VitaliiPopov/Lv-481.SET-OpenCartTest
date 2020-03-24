@@ -90,5 +90,4 @@ public class LoginPage extends AbstractPageWithHeader {
         clickLoginButton();
         return new MyAccountPage(driver);
     }
-
 }

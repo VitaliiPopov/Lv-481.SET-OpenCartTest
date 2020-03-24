@@ -15,8 +15,4 @@ public class SuccessRegisterPage extends AbstractPageWithHeader {
     private void initElements() {
         accountSidebarComponent = new AccountSidebarComponent(driver);
     }
-
-    //PAGE OBJECT
-
-
 }

@@ -183,5 +183,4 @@ public class AvailableOptionsComponent {
         chooseCheckBoxOptionByPartialName(checkBoxLableName, checkBoxOptionName);
         chooseSelectsOptionByName(selectLableName, selectOptionsOptionName);
     }
-
 }

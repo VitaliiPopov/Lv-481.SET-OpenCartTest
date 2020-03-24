@@ -15,5 +15,4 @@ public class EditAdressPage extends AbstractPageWithHeader {
     private void initElements() {
         accountSidebarComponent = new AccountSidebarComponent(driver);
     }
-
 }

@@ -1,4 +1,4 @@
-package com.opencart.pages.product_table;
+package com.opencart.pages.wishlist;
 
 import com.opencart.pages.AbstractPageWithHeader;
 import org.openqa.selenium.WebDriver;
@@ -19,8 +19,5 @@ public class WishListPage extends AbstractPageWithHeader {
     private void initElements() {
         productInWishListContainerComponents = new ArrayList<>();
     }
-
-    //PAGE OBJECT
-
 
 }

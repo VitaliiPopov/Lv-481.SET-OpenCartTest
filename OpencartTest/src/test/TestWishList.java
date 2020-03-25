@@ -1,16 +1,14 @@
 package test;
 
 import com.opencart.pages.HomePage;
-import com.opencart.pages.account.*;
-import com.opencart.pages.product_table.WishListEmptyPage;
-import com.opencart.pages.product_table.WishListPage;
-import com.opencart.pages.search.*;
+import com.opencart.pages.account.LoginPage;
+import com.opencart.pages.account.MyAccountPage;
+import com.opencart.pages.search.SearchPage;
+import com.opencart.pages.wishlist.WishListEmptyPage;
 import com.opencart.pages.wishlist.WishListPage;
 import com.opencart.tools.JsonDataConfig;
 import com.opencart.tools.TestRunner;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 

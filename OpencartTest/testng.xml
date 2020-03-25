@@ -1,39 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Default Suite">
-<!--    <test name="CompareTest">-->
-<!--        &lt;!&ndash;MainTest&ndash;&gt;-->
-<!--        <parameter name="myAccountDropdownText" value="Login"/>-->
-<!--        <parameter name="search" value="ip"/>-->
-<!--        <parameter name="productName1" value="iPhone"/>-->
-<!--        <parameter name="productName2" value="iPod Classic"/>-->
-<!--        <classes>-->
-<!--            &lt;!&ndash;MainTest&ndash;&gt;-->
-<!--            <class name="test.ProductCompareTest">-->
-<!--                <methods>-->
-<!--&lt;!&ndash;                    <include name="Login"/>&ndash;&gt;-->
-<!--                    <include name="AddProductToCompareFromSearchByAlert"/>-->
-<!--                    <include name="AddSameProductTwoTimes"/>-->
-<!--                    <include name="CleanProductFromComparison"/>-->
-<!--                    <include name="AddToCartFromComparisonPage"/>-->
-<!--                    <include name="GoToProductPageFromComparisonPage"/>-->
-<!--                </methods>-->
-<!--            </class>-->
-<!--        </classes>-->
-<!--    </test>-->
-    <test name="CartTest">
+<suite name="TestNGSuite">
+    <test name="ReviewTest">
         <!--MainTest-->
-        <parameter name="myAccountDropdownText" value="Login"></parameter>
+        <parameter name="nameOfAuthor" value="Georgiy"/>
+        <parameter name="correctText" value="it is a product of amazing quality, everything works and the price is quite affordable."/>
+        <parameter name="messageOfDeliveredReview" value="Thank you for your review. It has been submitted to the webmaster for approval."/>
+        <parameter name="textOfSuccessfulDeletingReview" value=" Success: You have modified reviews!"/>
         <classes>
             <!--MainTest-->
-            <class name="test.cart_test.CartTest">
+            <class name="test.ReviewTest">
                 <methods>
-                    <include name="loginTest"/>
-                    <include name="checkUncorrectFunctionOfRefreshButtonInCart"/>
+                    <include name="successfulReviewProcess"/>
+                    <include name="successfullyWritingReview"/>
                 </methods>
             </class>
         </classes>
-    </test> <!-- Individual &ndash;&gt;-->
+    </test> <!-- Individual -->
+    <test name="UnsuccessfulReviewTest">
+        <!--MainTest-->
+        <parameter name="incorrectName" value="Ri"/>
+        <parameter name="correctText" value="it is a product of amazing quality, everything works and the price is quite affordable."/>
+        <parameter name="messageOfUndeliveredReviewBecauseOfIncorrectName" value="Warning: Review Name must be between 3 and 25 characters!"/>
+        <parameter name="nameOfAuthor" value="Georgiy"/>
+        <parameter name="incorrectText" value="product is amazing."/>
+        <parameter name="messageOfUndeliveredReviewBecauseOfIncorrectText" value="Warning: Review Text must be between 25 and 1000 characters!"/>
+        <parameter name="emptyNameField" value=""/>
+        <parameter name="emptyTextField" value=""/>
+
+        <classes>
+            <!--MainTest-->
+            <class name="test.UnsuccessfulReviewTest">
+                <methods>
+                    <include name="unsuccessfullyWritingReviewBecauseOfIncorrectName"/>
+                    <include name="unsuccessfullyWritingReviewBecauseOfIncorrectText"/>
+                    <include name="unsuccessfullyWritingReviewBecauseOfIncorrectTextAndName"/>
+                    <include name="unsuccessfullyWritingReviewBecauseOfEmptyNameAndTextFields"/>
+                </methods>
+            </class>
+        </classes>
+    </test> <!-- Individual -->
 </suite> <!-- Default Suite -->
 
 <!--end-->

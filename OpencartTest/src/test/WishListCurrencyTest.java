@@ -1,11 +1,10 @@
 package test;
 
 import com.opencart.data.Currencies;
-import com.opencart.data.Product;
 import com.opencart.pages.account.LoginPage;
 import com.opencart.pages.account.MyAccountPage;
-import com.opencart.pages.product_table.WishListPage;
 import com.opencart.pages.search.SearchPage;
+import com.opencart.pages.wishlist.WishListPage;
 import com.opencart.tools.JsonDataConfig;
 import com.opencart.tools.TestRunner;
 import org.testng.Assert;

@@ -191,6 +191,9 @@ public class TestWishList extends TestRunner {
         MyAccountPage myAccountPage = loginPage.login(jsonParser.getEmailFromJson(7),jsonParser.getPasswordFromJson(7));
         myAccountPage.goToHomePage();
 
-        WishListEmptyPage wishListEmptyPage = getHomePage().goToWishListEmpty()
+        String message = getHomePage().goToWishListEmpty().getLabelText();
+
+        Assert.assertEquals(message,"Your wish list is empty.");
+
     }
 }

@@ -112,6 +112,7 @@ public class SearchPage extends AbstractPageWithHeader {
      */
     public ProductContainersComponent getProductComponentByName(String productName) {
         ProductContainersComponent result = null;
+        productContainersComponents = getProductContainersComponents();
         for (ProductContainersComponent current : productContainersComponents) {
             if (current.getNameText().equalsIgnoreCase(productName)) {
                 result = current;
@@ -123,6 +124,7 @@ public class SearchPage extends AbstractPageWithHeader {
 
     public ArrayList<String> getProductComponentNamesList() {
         ArrayList<String> ProductComponentNamesList = new ArrayList<>();
+        productContainersComponents = getProductContainersComponents();
         for (ProductContainersComponent current : productContainersComponents) {
             ProductComponentNamesList.add(current.getNameText());
         }

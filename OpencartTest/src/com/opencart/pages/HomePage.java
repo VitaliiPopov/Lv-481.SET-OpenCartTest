@@ -16,7 +16,8 @@ public class HomePage extends AbstractPageWithHeader {
 
     private final String PRODUCT_COMPONENT_LOCATOR = ".product-layout"; // css
     private final String ALERT_LOCATOR = ".alert"; //css
-    //
+
+    //Components
     private List<ProductContainersComponent> productContainersComponents;
 
     public HomePage(WebDriver driver) {
@@ -35,6 +36,8 @@ public class HomePage extends AbstractPageWithHeader {
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
     }
 
+    ///region ATOMIC_OPERATIONS
+
     public AlertComponent getAlertComponentWithWait() {
         try {
             Thread.sleep(3000); //Only for presentation, bug alert
@@ -51,6 +54,7 @@ public class HomePage extends AbstractPageWithHeader {
         return new AlertComponent(driver.findElement(By.cssSelector(ALERT_LOCATOR)));
     }
 
+    ///endregion
 
     ///region FUNCTIONAL
 

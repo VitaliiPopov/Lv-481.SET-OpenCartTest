@@ -6,14 +6,18 @@ import com.opencart.pages.ProductContainersComponent;
 import com.opencart.pages.cart.CartPage;
 import com.opencart.pages.comparison.ComparisonPage;
 import com.opencart.pages.product.ProductPage;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.concurrent.TimeUnit;
 
 public class SearchPage extends AbstractPageWithHeader {
@@ -22,21 +26,31 @@ public class SearchPage extends AbstractPageWithHeader {
     public final String PRODUCT_NOT_FOUND = "PRODUCT NOT FOUND";
     //Selectors
     private final String PRODUCT_COMPONENT_LOCATOR = "//div[@class='product-thumb']";// xpath
-    private final String SUCCESS_SEARCH_PAGE_URL = "search&search";
+    private final String SUCCESS_SEARCH_PAGE_URL = "search&search";// url
     private final String ALERT_LOCATOR = "//div[@class='alert alert-success alert-dismissible']";// xpath
+    private final String SEARCH_CRITERIA_ELEMENT_LOCATOR = "//div[@id='content']";// xpath
+    private final String PRODUCT_DISPLAY_ELEMENT_LOCATOR = "//div[@id='content']/p/following-sibling::div[1]"; //xpath
+
+    //WebElements
+    @FindBy(how = How.XPATH, xpath = "//p[contains(text(),'no product')]")
+    private WebElement emptyResultMessage;
+
     //Components
     private List<ProductContainersComponent> productContainersComponents;
-    private SearchCriteriaComponent searchCriteriaComponent;
-    private ProductDisplayCriteriaComponent productDisplayCriteriaComponent;
-    private AlertComponent alertComponent;
 
     public SearchPage(WebDriver driver) {
         super(driver);
-        initElements();
     }
 
-    //INITIALIZATION
-    private void initElements() {
+    ///region ATOMIC_OPERATIONS
+
+    //emptyResultMessage
+    public String  getemptyResultMessageText(){
+        return emptyResultMessage.getText();
+    }
+
+    //productContainersComponents
+    public List<ProductContainersComponent> getProductContainersComponents() {
         driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
         WebDriverWait wait = new WebDriverWait(driver, 3);
         productContainersComponents = new ArrayList<>();
@@ -48,9 +62,17 @@ public class SearchPage extends AbstractPageWithHeader {
         /*productContainersComponents = new ArrayList<>();
         for (WebElement current : driver.findElements(By.xpath(PRODUCT_COMPONENT_LOCATOR)))
             productContainersComponents.add(new ProductContainersComponent(current)); //Valera*/
+
+        return productContainersComponents;
     }
 
-    ///region ATOMIC_OPERATIONS
+    public ProductDisplayCriteriaComponent getProductDisplayCriteriaComponent() {
+        return new ProductDisplayCriteriaComponent(driver.findElement(By.xpath(PRODUCT_DISPLAY_ELEMENT_LOCATOR)));
+    }
+
+    public SearchCriteriaComponent getSearchCriteriaComponent() {
+        return new SearchCriteriaComponent(driver.findElement(By.xpath(SEARCH_CRITERIA_ELEMENT_LOCATOR)));
+    }
 
     //alertComponent
     public AlertComponent getAlertComponentWithWait() {
@@ -98,6 +120,16 @@ public class SearchPage extends AbstractPageWithHeader {
         }
         return result;
     }
+
+    public ArrayList<String> getProductComponentNamesList() {
+        ArrayList<String> ProductComponentNamesList = new ArrayList<>();
+        for (ProductContainersComponent current : productContainersComponents) {
+            ProductComponentNamesList.add(current.getNameText());
+        }
+        return ProductComponentNamesList;
+    }
+
+    //CompareButton
 
     /**
      * Add product to cart by button.
@@ -170,6 +202,13 @@ public class SearchPage extends AbstractPageWithHeader {
         return new ProductPage(driver);
     }
 
+    public void toLowerCaseProductList(List<String> list) {
+        ListIterator<String> iterator = list.listIterator();
+        while (iterator.hasNext()) {
+            iterator.set(iterator.next().toLowerCase());
+        }
+    }
+
     //alert after add to cart
     public CartPage goToShoppingCartFromAlert() {
         getAlertComponentWithoutWait().clickOnCartLink();
@@ -179,6 +218,17 @@ public class SearchPage extends AbstractPageWithHeader {
     public ProductPage goToProductPageFromAlert() {
         getAlertComponentWithoutWait().clickOnProductLink();
         return new ProductPage(driver);
+    }
+
+    //add to cart by button
+    public void clickProductComponentAddToCartButtonByName(String productName) {
+        getProductComponentByName(productName).clickAddToCartButton();
+    }
+
+    //add to Wish List by button
+    public void clickProductComponentAddToWishList(String productName) {
+        getProductComponentByName(productName).clickAddToWishListButton();
+        //InitializeAlert();
     }
 
     ///endregion

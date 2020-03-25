@@ -2,7 +2,13 @@ package com.opencart.pages;
 
 import com.opencart.pages.account.LoginPage;
 import com.opencart.pages.cart.CartPage;
+import com.opencart.pages.account.AccountLogoutPage;
+import com.opencart.pages.account.MyAccountPage;
+import com.opencart.pages.account.RegisterPage;
 import com.opencart.pages.search.SearchPage;
+import com.opencart.pages.wishlist.WishListPage;
+import com.opencart.tools.RegexUtils;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,6 +17,8 @@ import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 
 import java.math.BigDecimal;
+import java.util.List;
+
 
 public class AbstractPageWithHeader {
 
@@ -25,11 +33,16 @@ public class AbstractPageWithHeader {
     protected WebDriver driver;
 
     //Components
-    private CartDropdownComponent cartDropdownComponent;
     private DropdownComponent dropdownComponent;
+
+    @FindBy(how = How.CSS, css = ".btn.btn-link.dropdown-toggle")
+    private WebElement currency;
 
     @FindBy(how = How.CSS, css = "i.fa-user")
     private WebElement myAccount;
+
+    @FindBy(how = How.ID, id = "wishlist-total")
+    private WebElement wishList;
 
     @FindBy(how = How.XPATH, xpath = "//a[@title='Shopping Cart']")
     private WebElement shoppingCart;
@@ -51,7 +64,7 @@ public class AbstractPageWithHeader {
         PageFactory.initElements(driver, this);
     }
 
-    //PageObject
+    ///region ATOMIC_OPERATIONS
 
     //searchTopField
     public void clickSearchTopField() {
@@ -71,15 +84,30 @@ public class AbstractPageWithHeader {
         searchTopButton.click();
     }
 
-    //TODO
     //shoppingCart
     private void clickOnShoppingCart() {
+        //TODO
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         shoppingCart.click();
+    }
+
+    //currency
+    public String getCurrencyText() {
+        return currency.getText().substring(0, 1);
+    }
+
+    public void clickCurrency() {
+        currency.click();
+    }
+
+    public void clickCurrencyByPartialName(String optionName) {
+        clickCurrency();
+        createDropdownComponent(By.cssSelector("div.btn-group.open ul.dropdown-menu li"));
+        clickDropdownComponentByPartialName(optionName);
     }
 
     //logo
@@ -95,6 +123,16 @@ public class AbstractPageWithHeader {
     //searchButton
     private void clickSearchButton() {
         searchTopButton.click();
+    }
+
+    //wishList
+    private void clickWishList() {
+        wishList.click();
+    }
+
+    private void clickCart() {
+        shoppingCart.click();
+
     }
 
     //searchField
@@ -145,7 +183,9 @@ public class AbstractPageWithHeader {
         return new CartDropdownComponent(driver, driver.findElement(By.cssSelector("#cart ul")));
     }
 
-    //FUNCTIONAL
+    ///endregion
+
+    ///region FUNCTIONAL
 
     //MyAccount
     public void openMyAccountDropdown() {
@@ -216,8 +256,62 @@ public class AbstractPageWithHeader {
         if (getProductInCartButtonContainerComponentByName(productName) == null) return false;
         else return true;
     }
+///////////////////////////////////////////////////////////////
+    //WishList
+    public String getWishListText() {
+        return wishList.getText();
+    }
 
-    //BUSINESS LOGIC
+    public int getWishListNumberOfProducts() {
+        return RegexUtils.extractFirstNumber(getWishListText());
+    }
+
+    // hardcode by Yura
+    public MyAccountPage clickMyAccauntInDropdownHardcode() {
+        openMyAccountDropdown();
+        driver.findElement(By.xpath("//ul[@class='dropdown-menu dropdown-menu-right']//li[last()-4]")).click();
+        return new MyAccountPage(driver);
+    }
+
+    // Anya work with dropdown myAccount
+    public void clickMyAccountDropdownComponentByName(String optionName) {
+        openMyAccountDropdown();
+        WebElement dropdown = driver.findElement(By.cssSelector(DROPDOWN_MYACCONT_SELECTOR));
+        List<WebElement> options = dropdown.findElements(By.tagName("li"));
+        for (WebElement option : options) {
+            if (option.getText().equals(optionName)) {
+                option.click();
+                break;
+            }
+        }
+    }
+
+    public boolean isExistMyAccountDropdownOption(String optionName) {
+        boolean isFound = false;
+        openMyAccountDropdown();
+        WebElement dropdown = driver.findElement(By.cssSelector(DROPDOWN_MYACCONT_SELECTOR));
+        List<WebElement> options = dropdown.findElements(By.tagName("li"));
+        for (WebElement option : options) {
+            if (option.getText().equals(optionName)) {
+                isFound = true;
+                break;
+            }
+        }
+        return isFound;
+    }
+
+    ///endregion
+
+    ///region LOGIC
+    public RegisterPage goToRegisterPage() {
+        clickMyAccountDropdownComponentByName("Register");
+        return new RegisterPage(driver);
+    }
+
+    public AccountLogoutPage goToLogoutPage() {
+        clickMyAccountDropdownComponentByName("Logout");
+        return new AccountLogoutPage(driver);
+    }
 
     public LoginPage goToLoginPage(String MY_ACCOUNT_DROPDOWN_TEXT) {
         clickMyAccountDropdownComponentByPartialName(MY_ACCOUNT_DROPDOWN_TEXT);
@@ -227,6 +321,19 @@ public class AbstractPageWithHeader {
     public HomePage goToHomePage() {
         clickLogo();
         return new HomePage(driver);
+    }
+    public SearchPage getSearchPage(){
+        return new SearchPage(driver);
+    }
+
+    public WishListPage goToWishList() {
+        clickWishList();
+        return new WishListPage(driver);
+    }
+
+    public CartPage goToCart() {
+        clickCart();
+        return new CartPage(driver);
     }
 
     //Search
@@ -248,4 +355,7 @@ public class AbstractPageWithHeader {
         clickOnShoppingCart();
         return new CartPage(driver);
     }
+
+    ///endregion
+
 }

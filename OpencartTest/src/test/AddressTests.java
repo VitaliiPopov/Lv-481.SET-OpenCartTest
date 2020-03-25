@@ -22,7 +22,7 @@ public class AddressTests extends TestRunner {
     }
 */
     @Parameters({"myAccountDropdownText"})
-    @Test(priority = 1)
+    @Test(priority = 1, description = "Check the ability to add Address")
     public void abilityToAddAddress(String myAccountDropdownText) throws InterruptedException {
         LoginPage loginPage = getHomePage().goToLoginPage(myAccountDropdownText);
         MyAccountPage myAccountPage = loginPage.login(jsonDataConfig.getEmailFromJson(3), jsonDataConfig.getPasswordFromJson(3));
@@ -39,7 +39,7 @@ public class AddressTests extends TestRunner {
 
     }
 
-    @Test(priority = 2)
+    @Test(priority = 2,description = "Check the ability to delete address")
     public void abilityToDeleteAddress() throws InterruptedException {
         MyAccountPage myAccountPage = getHomePage().clickMyAccauntInDropdownHardcode();
         AddressBookPage addressBookPage = myAccountPage.clickModifyYourAddressBookEntries();
@@ -50,7 +50,7 @@ public class AddressTests extends TestRunner {
 
     }
 
-    @Test(priority = 3)
+    @Test(priority = 3,description = "Check the ability to edit address")
     public void editAddress() throws InterruptedException {
         MyAccountPage myAccountPage = getHomePage().clickMyAccauntInDropdownHardcode();
         AddressBookPage addressBookPage = myAccountPage.clickModifyYourAddressBookEntries();
@@ -71,7 +71,7 @@ public class AddressTests extends TestRunner {
 
     }
 
-    @Test(priority = 4)
+    @Test(priority = 4, description = "Check All edit Page Alerts")
     public void checkEditPageAlertMassages() throws InterruptedException {
         MyAccountPage myAccountPage = getHomePage().clickMyAccauntInDropdownHardcode();
         AddressBookPage addressBookPage = myAccountPage.clickModifyYourAddressBookEntries();
@@ -80,7 +80,7 @@ public class AddressTests extends TestRunner {
         Assert.assertTrue(edittest.allMandatoryAlerts());
     }
 
-    @Test(priority = 5)
+    @Test(priority = 5,description = "Check the ability to delete default address")
     public void checkAbilityToDeleteDefaultAddress() throws InterruptedException {
         MyAccountPage myAccountPage = getHomePage().clickMyAccauntInDropdownHardcode();
         AddressBookPage addressBookPage = myAccountPage.clickModifyYourAddressBookEntries();
@@ -89,7 +89,7 @@ public class AddressTests extends TestRunner {
 
     }
 
-    @Test(priority = 6)
+    @Test(priority = 6, description = "Check the ability to create address with empty First Name mandatory field")
     public void createAddressWithEmptyFirstname() throws InterruptedException {
         MyAccountPage myAccountPage = getHomePage().clickMyAccauntInDropdownHardcode();
         AddressBookPage addressBookPage = myAccountPage.clickModifyYourAddressBookEntries();
@@ -103,7 +103,7 @@ public class AddressTests extends TestRunner {
 
     }
 
-    @Test(priority = 7)
+    @Test(priority = 7,description = "Check the ability to create address with empty Last Name mandatory field")
     public void createAddressWithEmptyLastname() throws InterruptedException {
         MyAccountPage myAccountPage = getHomePage().clickMyAccauntInDropdownHardcode();
         AddressBookPage addressBookPage = myAccountPage.clickModifyYourAddressBookEntries();
@@ -117,7 +117,7 @@ public class AddressTests extends TestRunner {
 
     }
 
-    @Test(priority = 8)
+    @Test(priority = 8, description = "Check the ability to create address with empty Address mandatory field")
     public void createAddressWithEmptyAddress() throws InterruptedException {
         MyAccountPage myAccountPage = getHomePage().clickMyAccauntInDropdownHardcode();
         AddressBookPage addressBookPage = myAccountPage.clickModifyYourAddressBookEntries();
@@ -131,7 +131,7 @@ public class AddressTests extends TestRunner {
 
     }
 
-    @Test(priority = 9)
+    @Test(priority = 9,description = "Check the ability to create address with empty City mandatory field")
     public void createAddressWithEmptyCity() throws InterruptedException {
         MyAccountPage myAccountPage = getHomePage().clickMyAccauntInDropdownHardcode();
         AddressBookPage addressBookPage = myAccountPage.clickModifyYourAddressBookEntries();
@@ -145,7 +145,7 @@ public class AddressTests extends TestRunner {
         Thread.sleep(5000);
     }
 
-    @Test(priority = 10)
+    @Test(priority = 10, description = "Check the ability to create address with empty Country Drop down box")
     public void createAddressWithEmptyCountry() throws InterruptedException {
         MyAccountPage myAccountPage = getHomePage().clickMyAccauntInDropdownHardcode();
         AddressBookPage addressBookPage = myAccountPage.clickModifyYourAddressBookEntries();
@@ -159,7 +159,7 @@ public class AddressTests extends TestRunner {
         Thread.sleep(5000);
     }
 
-    @Test(priority = 11)
+    @Test(priority = 11,description = "Check the ability to create address with empty Region Drop down box")
     public void createAddressWithEmptyRegion() throws InterruptedException {
         MyAccountPage myAccountPage = getHomePage().clickMyAccauntInDropdownHardcode();
         AddressBookPage addressBookPage = myAccountPage.clickModifyYourAddressBookEntries();
@@ -173,7 +173,7 @@ public class AddressTests extends TestRunner {
         Thread.sleep(5000);
     }
 
-    @Test(priority = 12)
+    @Test(priority = 12,description = "Check the alerts while creating address with too short inputs")
     public void checkAlertsWithTooShortInputs() throws InterruptedException {
         MyAccountPage myAccountPage = getHomePage().clickMyAccauntInDropdownHardcode();
         AddressBookPage addressBookPage = myAccountPage.clickModifyYourAddressBookEntries();
@@ -188,7 +188,7 @@ public class AddressTests extends TestRunner {
         Thread.sleep(5000);
     }
 
-    @Test(priority = 13)
+    @Test(priority = 13,description = "Check the alerts while creating address with too short inputs")
     public void checkAlertsWithTooLongInputs() throws InterruptedException {
         MyAccountPage myAccountPage = getHomePage().clickMyAccauntInDropdownHardcode();
         AddressBookPage addressBookPage = myAccountPage.clickModifyYourAddressBookEntries();
@@ -204,7 +204,7 @@ public class AddressTests extends TestRunner {
         Thread.sleep(5000);
     }
 
-    @Test(priority = 14)
+    @Test(priority = 14,description = "Check the ability to create address with numbers in First and Last name fields")
     public void createAddressWithNumbersInsteadCharacters() throws InterruptedException {
         MyAccountPage myAccountPage = getHomePage().clickMyAccauntInDropdownHardcode();
         AddressBookPage addressBookPage = myAccountPage.clickModifyYourAddressBookEntries();
@@ -219,11 +219,16 @@ public class AddressTests extends TestRunner {
         Thread.sleep(5000);
     }
 
-    @Test(priority = 15)
+  /*  @Test(priority = 15)
     public void clearAddressBook() throws InterruptedException {
         MyAccountPage myAccountPage = getHomePage().clickMyAccauntInDropdownHardcode();
         AddressBookPage addressBookPage = myAccountPage.clickModifyYourAddressBookEntries();
         addressBookPage.deleteAll();
+        Thread.sleep(5000);
+    }*/
+    @Test(priority = 16)
+    public void checkJson() throws InterruptedException {
+        System.out.println(jsonDataConfig.getEmailFromJson(2)+jsonDataConfig.getPasswordFromJson(2));
         Thread.sleep(5000);
     }
 }

@@ -28,10 +28,10 @@ public class TestRunner {
 
     @AfterMethod
     public void tearDown(ITestResult result) {
-        if (result.getStatus() == ITestResult.FAILURE) {
+       /* if (result.getStatus() == ITestResult.FAILURE) {
             //Utility.getScreenshot(Driver.getDriver());
             Driver.getDriver().get("https://137.116.222.54/index.php?route=account/logout");
-        }
+        }*/
     }
 
     public HomePage getHomePage() {

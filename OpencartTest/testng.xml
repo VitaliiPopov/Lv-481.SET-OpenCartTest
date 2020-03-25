@@ -47,7 +47,7 @@
             <class name="test.AddressTests">
                 <methods>
                     <include name="abilityToAddAddress"/>
-                   <!-- <include name="abilityToDeleteAddress"/>
+                    <include name="abilityToDeleteAddress"/>
                     <include name="editAddress"/>
                     <include name="checkEditPageAlertMassages"/>
                     <include name="checkAbilityToDeleteDefaultAddress"/>
@@ -59,8 +59,9 @@
                     <include name="checkAlertsWithTooShortInputs"/>
                     <include name="checkAlertsWithTooLongInputs"/>
                     <include name="checkAlertsWithTooLongInputs"/>
-                    <include name="createAddressWithNumbersInsteadCharacters"/>-->
+                    <include name="createAddressWithNumbersInsteadCharacters"/>
                     <include name="clearAddressBook"/>
+                    <include name="checkJson"/>
                 </methods>
             </class>
         </classes>

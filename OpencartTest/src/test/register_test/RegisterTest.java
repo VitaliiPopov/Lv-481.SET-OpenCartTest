@@ -1,4 +1,4 @@
-package test;
+package test.register_test;
 
 import com.opencart.pages.account.*;
 import com.opencart.pages.admin.AdminCustomerPage;
@@ -9,19 +9,25 @@ import com.opencart.tools.JsonDataConfig;
 import com.opencart.tools.Randomizer;
 import com.opencart.tools.TestRunner;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
 
 public class RegisterTest extends TestRunner {
     JsonDataConfig jsonDataConfig = new JsonDataConfig("TestData.json");
 
     @AfterMethod
-    public void tearDown() {
+    public void finishLogout() {
         try {
             logoutUser();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @AfterClass
+    public void tearDown() {
+        try {
+            deleteCustomerFromAdmin(jsonDataConfig.getEmailFromJson(1));
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -40,7 +46,6 @@ public class RegisterTest extends TestRunner {
                 jsonDataConfig.getPasswordFromJson(1));
         MyAccountPage myAccountPage = success.goToAccountAfterRegistration();
         Assert.assertEquals(myAccountPage.getTitleMyAccountText(), myAccountText);
-        deleteCustomerFromAdmin(jsonDataConfig.getEmailFromJson(1));
     }
 
     @Parameters({"registerText"})
@@ -112,13 +117,9 @@ public class RegisterTest extends TestRunner {
     }
 
     @Test(priority = 6)
-    public void registerWithExistedEmailTest() {
+    public void registerWithExistedEmailTest() throws InterruptedException {
         String email = null;
-        try {
-            email = getExistedEmailFromAdmin();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        email = getExistedEmailFromAdmin();
         String password = Randomizer.generateRandomString(5);
         RegisterPage registerPage = getHomePage().goToRegisterPage();
         registerPage.register(
@@ -143,7 +144,7 @@ public class RegisterTest extends TestRunner {
                 Randomizer.generateRandomString(5),
                 password,
                 password);
-        Assert.assertTrue(registerPage.getTitleRegisterBlockText().equals(registerText));
+        Assert.assertTrue(registerPage.getTitleRegisterBlockText().contains(registerText));
     }
 
     @Parameters({"loginText"})

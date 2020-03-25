@@ -1,4 +1,4 @@
-package test;
+package test.login_test;
 
 import com.opencart.pages.account.*;
 import com.opencart.pages.admin.AdminCustomerPage;
@@ -36,7 +36,7 @@ public class LoginUserTest extends TestRunner {
         }
     }
 
-    @AfterTest
+    @AfterClass
     public void tearDown() {
         try {
             deleteCustomerFromAdmin(jsonDataConfig.getEmailFromJson(1));

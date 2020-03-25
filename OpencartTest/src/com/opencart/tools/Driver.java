@@ -44,7 +44,7 @@ public class Driver {
 
     public static WebDriver getAdminDriver() {
         driver = getDriver();
-        driver.get(ConstantVariables.AdminURL);
+        driver.get(ConstantVariables.ADMIN_URL);
         return driver;
     }
 

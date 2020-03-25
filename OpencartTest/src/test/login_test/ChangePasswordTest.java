@@ -1,4 +1,4 @@
-package test;
+package test.login_test;
 
 import com.opencart.pages.account.*;
 import com.opencart.pages.admin.AdminCustomerPage;

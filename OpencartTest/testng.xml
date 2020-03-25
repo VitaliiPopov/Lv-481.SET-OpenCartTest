@@ -36,6 +36,8 @@
                     <include name="unsuccessfullyWritingReviewBecauseOfIncorrectText"/>
                     <include name="unsuccessfullyWritingReviewBecauseOfIncorrectTextAndName"/>
                     <include name="unsuccessfullyWritingReviewBecauseOfEmptyNameAndTextFields"/>
+                    <include name="unsuccessfullyWritingReviewBecauseOfTooLongName"/>
+                    <include name="unsuccessfullyWritingReviewBecauseOfTooLongText"/>
                 </methods>
             </class>
         </classes>

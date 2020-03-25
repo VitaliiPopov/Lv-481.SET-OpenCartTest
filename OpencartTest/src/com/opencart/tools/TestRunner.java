@@ -23,7 +23,7 @@ public class TestRunner {
 
     @AfterMethod(alwaysRun = true)
     public void afterMethod() {
-        Driver.ClearCookies();
+       // Driver.ClearCookies();
     }
 
     @AfterMethod

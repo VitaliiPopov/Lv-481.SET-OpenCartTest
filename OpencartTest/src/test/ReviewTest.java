@@ -1,3 +1,4 @@
+/*
 package test;
 
 import com.opencart.data.ConstantVariables;
@@ -80,3 +81,4 @@ public class ReviewTest extends TestRunner {
     }
 }
 
+*/

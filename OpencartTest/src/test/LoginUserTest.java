@@ -1,3 +1,4 @@
+/*
 package test;
 
 import com.opencart.pages.account.*;
@@ -114,4 +115,4 @@ public class LoginUserTest extends TestRunner {
         adminCustomerPage.clickDeleteCustomerButton();
         adminCustomerPage.confirmAction();
     }
-}
+}*/

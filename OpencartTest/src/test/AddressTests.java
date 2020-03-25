@@ -4,23 +4,23 @@ import com.opencart.pages.account.AddressBookPage;
 import com.opencart.pages.account.EditAdressPage;
 import com.opencart.pages.account.LoginPage;
 import com.opencart.pages.account.MyAccountPage;
-import com.opencart.tools.*;
+import com.opencart.tools.JsonDataConfig;
+import com.opencart.tools.Randomizer;
+import com.opencart.tools.TestRunner;
 import org.testng.Assert;
-import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 public class AddressTests extends TestRunner {
     JsonDataConfig jsonDataConfig = new JsonDataConfig("TestData.json");
 
-    @AfterMethod
+   /* @AfterMethod
     public void tearDown(ITestResult result) {
         if (result.getStatus() == ITestResult.FAILURE) {
             Utility.getScreenshot(Driver.getDriver());
         }
     }
-
+*/
     @Parameters({"myAccountDropdownText"})
     @Test(priority = 1)
     public void abilityToAddAddress(String myAccountDropdownText) throws InterruptedException {

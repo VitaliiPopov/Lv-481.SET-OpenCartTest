@@ -1,3 +1,4 @@
+/*
 package test;
 
 import com.opencart.pages.HomePage;
@@ -87,3 +88,4 @@ public class TestWishList extends TestRunner {
         // Returning to the starter view -> then must be logOut
     }
 }
+*/

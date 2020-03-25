@@ -1,14 +1,14 @@
 package com.opencart.pages;
 
-import com.opencart.pages.account.LoginPage;
-import com.opencart.pages.cart.CartPage;
 import com.opencart.pages.account.AccountLogoutPage;
+import com.opencart.pages.account.LoginPage;
 import com.opencart.pages.account.MyAccountPage;
 import com.opencart.pages.account.RegisterPage;
+import com.opencart.pages.cart.CartPage;
 import com.opencart.pages.search.SearchPage;
+import com.opencart.pages.wishlist.WishListEmptyPage;
 import com.opencart.pages.wishlist.WishListPage;
 import com.opencart.tools.RegexUtils;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -224,6 +224,10 @@ public class AbstractPageWithHeader {
         return getCartDropdownComponent().getTotalPriceText();
     }
 
+    public int getNumberOfProductsInCartButton() {
+        return RegexUtils.extractFirstNumber(getCartButtonText());
+    }
+
     //productInCartButtonContainerComponents size
     public int getProductInCartButtonContainerComponentsSize() {
         viewCartComponent();
@@ -256,7 +260,8 @@ public class AbstractPageWithHeader {
         if (getProductInCartButtonContainerComponentByName(productName) == null) return false;
         else return true;
     }
-///////////////////////////////////////////////////////////////
+
+    ///////////////////////////////////////////////////////////////
     //WishList
     public String getWishListText() {
         return wishList.getText();
@@ -322,13 +327,19 @@ public class AbstractPageWithHeader {
         clickLogo();
         return new HomePage(driver);
     }
-    public SearchPage getSearchPage(){
+
+    public SearchPage getSearchPage() {
         return new SearchPage(driver);
     }
 
     public WishListPage goToWishList() {
         clickWishList();
         return new WishListPage(driver);
+    }
+
+    public WishListEmptyPage goToWishListEmpty() {
+        clickWishList();
+        return new WishListEmptyPage(driver);
     }
 
     public CartPage goToCart() {

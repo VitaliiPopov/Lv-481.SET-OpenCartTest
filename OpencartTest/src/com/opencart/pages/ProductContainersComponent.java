@@ -12,7 +12,7 @@ public class ProductContainersComponent {
     private final String COMPARE_BUTTON_SELECTOR = ".//i[@class='fa fa-exchange']/.."; //xpath
     private final String PICTURE_SELECTOR = ".image a"; // css
     //TODO MISHA
-    private final String ADD_TO_WISHLIST_BUTTON_SELECTOR  = "//div[@class='button-group']/button/i[contains(@class,'fa-heart')]"; //xpath
+    private final String ADD_TO_WISHLIST_BUTTON_SELECTOR  = ".//i[contains(@class,'fa-heart')]/.."; //xpath
     private final String PRICE_SELECTOR  = ".price"; //css
 
     //Layout
@@ -30,6 +30,8 @@ public class ProductContainersComponent {
     public String getNameText() {
         return getName().getText();
     }
+
+    public void clickOnNameLabel(){ getName().click();}
 
     //AddToCartButton
     public WebElement getAddToCartButton() {

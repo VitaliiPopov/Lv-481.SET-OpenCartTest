@@ -69,7 +69,7 @@ public class SearchPage extends AbstractPageWithHeader {
         return new AlertComponent(driver.findElement(By.xpath(ALERT_LOCATOR)));
     }
 
-    public AlertComponent getAlertComponentWithoutWait() { //TODO different implementation of same methods
+    public AlertComponent getAlertComponentWithoutWait() {
         return new AlertComponent(driver.findElement(By.xpath(ALERT_LOCATOR)));
     }
 

@@ -142,8 +142,7 @@ public class AbstractPageWithHeader {
 
     //cartDropdownComponent
     public CartDropdownComponent getCartDropdownComponent() {
-        cartDropdownComponent = new CartDropdownComponent(driver, driver.findElement(By.cssSelector("#cart ul")));
-        return cartDropdownComponent;
+        return new CartDropdownComponent(driver, driver.findElement(By.cssSelector("#cart ul")));
     }
 
     //FUNCTIONAL

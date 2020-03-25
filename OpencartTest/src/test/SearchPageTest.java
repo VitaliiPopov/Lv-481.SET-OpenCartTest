@@ -1,10 +1,12 @@
 package test;
 
+import com.opencart.pages.HomePage;
 import com.opencart.pages.account.LoginPage;
 import com.opencart.pages.account.MyAccountPage;
 import com.opencart.pages.search.SearchCriteriaComponent;
 import com.opencart.pages.search.SearchPage;
 import com.opencart.tools.ExcelDataConfig;
+import com.opencart.tools.JsonDataConfig;
 import com.opencart.tools.Randomizer;
 import com.opencart.tools.TestRunner;
 import org.testng.Assert;
@@ -23,12 +25,20 @@ public class SearchPageTest extends TestRunner {
 
     @Parameters({"myAccountDropdownText"})
     @Test(priority = 1)
+    public void login(String myAccountDropdownText) {
+        LoginPage loginPage = getHomePage().goToLoginPage(myAccountDropdownText);
+        MyAccountPage myAccountPage = loginPage.login(excelDataConfig.getData(0, 0, 0), excelDataConfig.getData(0, 0, 1));
+        HomePage homePage = myAccountPage.goToHomePage();
+    }
+
+
+    @Parameters({"myAccountDropdownText"})
+    @Test(priority = 1)
     public void Login(String myAccountDropdownText) throws InterruptedException {
         LoginPage loginPage = getHomePage().goToLoginPage(myAccountDropdownText);
         MyAccountPage myAccountPage = loginPage.login(excelDataConfig.getData(0, 0, 0), excelDataConfig.getData(0, 0, 1));
         myAccountPage.goToHomePage();
     }
-
 
     @Parameters({"searchText", "lowerSearchText"})
     @Test(priority = 2)

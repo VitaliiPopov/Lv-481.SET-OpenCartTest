@@ -14,8 +14,10 @@
             <!--MainTest-->
             <class name="test.SearchPageTest">
                 <methods>
-                    <include name="Login"/>
+<!--                    <include name="login"/>-->
+
                     <include name="searchPageTesting"/>
+
                     <include name="checkLowerCase"/>
                     <include name="checkLableContainsSearchText"/>
                     <include name="checkEmptyResultMessage"/>
@@ -24,7 +26,6 @@
                     <include name="checkListAndGridResult"/>
                     <include name="checkSortByA_Z_Name"/>
                     <include name="checkSortByZ_A_Name"/>
-
 
                 </methods>
             </class>

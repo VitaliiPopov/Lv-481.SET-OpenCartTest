@@ -6,38 +6,28 @@ import com.opencart.pages.admin.AdminHomePage;
 import com.opencart.pages.admin.AdminLoginPage;
 import com.opencart.tools.*;
 import org.junit.Assert;
-import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
+
+import static org.apache.commons.lang3.RandomStringUtils.*;
 
 public class ChangePasswordTest extends TestRunner {
     JsonDataConfig jsonDataConfig = new JsonDataConfig("TestData.json");
 
+
     @BeforeMethod
-    public void primaryRegistration() {
+    public void primaryRegistration() throws InterruptedException {
         RegisterPage registerPage = getHomePage().goToRegisterPage();
-        SuccessRegisterPage success = registerPage.register(
-                jsonDataConfig.getFirstNameFromJson(1),
-                jsonDataConfig.getLastNameFromJson(1),
-                jsonDataConfig.getEmailFromJson(1),
-                jsonDataConfig.getTelephoneFromJson(1),
-                jsonDataConfig.getPasswordFromJson(1),
-                jsonDataConfig.getPasswordFromJson(1));
+        SuccessRegisterPage success = registerPage.register(jsonDataConfig.getUserFromJson(0));
         success.goToAccountAfterRegistration();
         AccountLogoutPage logoutPage = getHomePage().goToLogoutPage();
         logoutPage.logout();
     }
 
     @AfterMethod
-    public void tearDown(ITestResult result) {
-        if (result.getStatus() == ITestResult.FAILURE) {
-            Utility.getScreenshot(Driver.getDriver());
-        }
+    public void tearDown() {
         try {
             logoutUser();
-            deleteCustomerFromAdmin(jsonDataConfig.getEmailFromJson(1));
+            deleteCustomerFromAdmin(jsonDataConfig.getEmailFromJson(0));
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -48,7 +38,9 @@ public class ChangePasswordTest extends TestRunner {
     public void smokeChangePasswordTest(String loginText) throws InterruptedException {
         MyAccountPage myAccountPage = loginUser(loginText);
         ChangePasswordPage changePasswordPage = myAccountPage.clickChangePasswordLink();
-        myAccountPage = changePasswordPage.changePassword(jsonDataConfig.getPasswordFromJson(1), jsonDataConfig.getPasswordFromJson(1));
+        changePasswordPage.changePassword(
+                jsonDataConfig.getPasswordFromJson(1),
+                jsonDataConfig.getPasswordFromJson(1));
         Assert.assertTrue(myAccountPage.isSuccessAlertDisplayed());
     }
 
@@ -65,18 +57,18 @@ public class ChangePasswordTest extends TestRunner {
     @Test(priority = 2)
     public void changePasswordToShortTest(String loginText) throws InterruptedException {
         MyAccountPage myAccountPage = loginUser(loginText);
-        String password = Randomizer.generateRandomString(3);
+        String password = randomAlphabetic(3);
         ChangePasswordPage changePasswordPage = myAccountPage.clickChangePasswordLink();
         changePasswordPage.changePassword(password, password);
         Assert.assertTrue(changePasswordPage.isAlertPasswordDisplayed());
     }
 
-    //bug
+    //password longer than 20 characters
     @Parameters({"loginText"})
     @Test(priority = 3)
     public void changePasswordToLongTest(String loginText) throws InterruptedException {
         MyAccountPage myAccountPage = loginUser(loginText);
-        String password = Randomizer.generateRandomString(25);
+        String password = randomAlphabetic(25);
         ChangePasswordPage changePasswordPage = myAccountPage.clickChangePasswordLink();
         changePasswordPage.changePassword(password, password);
         Assert.assertTrue(changePasswordPage.isAlertPasswordDisplayed()); //bug
@@ -87,15 +79,15 @@ public class ChangePasswordTest extends TestRunner {
     public void changePasswordWrongConfirmTest(String loginText) throws InterruptedException {
         MyAccountPage myAccountPage = loginUser(loginText);
         ChangePasswordPage changePasswordPage = myAccountPage.clickChangePasswordLink();
-        changePasswordPage.changePassword(Randomizer.generateRandomString(5), Randomizer.generateRandomString(5));
+        changePasswordPage.changePassword(randomAlphabetic(5), randomAlphabetic(5));
         Assert.assertTrue(changePasswordPage.isAlertConfirmDisplayed());
     }
 
     public MyAccountPage loginUser(String loginDropdownText) throws InterruptedException {
         LoginPage loginPage = getHomePage().goToLoginPage(loginDropdownText);
         MyAccountPage myAccountPage = loginPage.login(
-                jsonDataConfig.getEmailFromJson(1),
-                jsonDataConfig.getPasswordFromJson(1));
+                jsonDataConfig.getEmailFromJson(0),
+                jsonDataConfig.getPasswordFromJson(0));
         return myAccountPage;
     }
 

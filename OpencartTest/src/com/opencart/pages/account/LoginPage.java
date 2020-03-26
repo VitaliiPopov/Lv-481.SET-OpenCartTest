@@ -87,9 +87,9 @@ public class LoginPage extends AbstractPageWithHeader {
     //BUSINESS LOGIC
 
     //login
-    public MyAccountPage login(String LOGIN_NAME, String PASSWORD_NAME) {
-        fillInputLogin(LOGIN_NAME);
-        fillInputPassword(PASSWORD_NAME);
+    public MyAccountPage login(String login, String password) {
+        fillInputLogin(login);
+        fillInputPassword(password);
         clickLoginButton();
         return new MyAccountPage(driver);
     }

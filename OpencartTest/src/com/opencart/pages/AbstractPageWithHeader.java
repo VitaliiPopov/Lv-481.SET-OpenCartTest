@@ -313,6 +313,11 @@ public class AbstractPageWithHeader {
         return new AccountLogoutPage(driver);
     }
 
+    public MyAccountPage goToMyAccountPage() {
+        clickMyAccountDropdownComponentByName("My Account");
+        return new MyAccountPage(driver);
+    }
+
     public LoginPage goToLoginPage(String MY_ACCOUNT_DROPDOWN_TEXT) {
         clickMyAccountDropdownComponentByPartialName(MY_ACCOUNT_DROPDOWN_TEXT);
         return new LoginPage(driver);

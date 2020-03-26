@@ -60,9 +60,11 @@
                     <include name="editAccountWithEmptyEmailTest"/>
                     <include name="editAccountEmailWithoutAtSymbolTest"/>
                     <include name="editAccountEmailWithoutDotSymbolTest"/>
+                    <include name="editAccountWithExistedEmailTest"/>
                     <include name="editAccountWithEmptyTelephoneTest"/>
                     <include name="editAccountWithShortTelephoneTest"/>
                     <include name="editAccountWithLongTelephoneTest"/>
+                    <include name="complexTest"/>
                 </methods>
             </class>
         </classes>

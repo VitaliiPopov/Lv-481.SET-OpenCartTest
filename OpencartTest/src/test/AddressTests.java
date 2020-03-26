@@ -11,6 +11,8 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import static org.apache.commons.lang3.RandomStringUtils.random;
+
 public class AddressTests extends TestRunner {
     JsonDataConfig jsonDataConfig = new JsonDataConfig("TestData.json");
 
@@ -194,10 +196,10 @@ public class AddressTests extends TestRunner {
         AddressBookPage addressBookPage = myAccountPage.clickModifyYourAddressBookEntries();
         EditAdressPage edittest = addressBookPage.clickEditAddress();
         edittest.invalidInputsAlertCheck(
-                Randomizer.generateRandomString(33),
-                Randomizer.generateRandomString(33),
-                Randomizer.generateRandomString(129),
-                Randomizer.generateRandomString(129),
+                random(33),
+                random(33),
+                random(129),
+                random(129),
                 jsonDataConfig.getCountryFromJson(5),
                 jsonDataConfig.getRegionFromJson(5));
         Assert.assertTrue(edittest.allMandatoryAlerts());

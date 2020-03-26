@@ -1,5 +1,6 @@
 package com.opencart.pages.account;
 
+import com.opencart.data.users.CustomUser;
 import com.opencart.pages.AbstractPageWithHeader;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -204,13 +205,25 @@ public class RegisterPage extends AbstractPageWithHeader {
     //BUSINESS LOGIC
 
     //register
-    public SuccessRegisterPage register(String FIRST_NAME, String LAST_NAME, String EMAIL, String PHONE, String PASSWORD_NAME, String CONFIRM_PASSWORD_NAME) {
-        fillInputFirstname(FIRST_NAME);
-        fillInputLastname(LAST_NAME);
-        fillInputEmail(EMAIL);
-        fillInputTelephone(PHONE);
-        fillInputPassword(PASSWORD_NAME);
-        fillInputConfirmPassword(CONFIRM_PASSWORD_NAME);
+    public SuccessRegisterPage register(String firstname, String lastname, String email, String phone, String password, String confirm) {
+        fillInputFirstname(firstname);
+        fillInputLastname(lastname);
+        fillInputEmail(email);
+        fillInputTelephone(phone);
+        fillInputPassword(password);
+        fillInputConfirmPassword(confirm);
+        clickAgreeCheckBox();
+        clickRegisterButton();
+        return new SuccessRegisterPage(driver);
+    }
+
+    public SuccessRegisterPage register(CustomUser user) {
+        fillInputFirstname(user.getFirstName());
+        fillInputLastname(user.getLastName());
+        fillInputEmail(user.getEmail());
+        fillInputTelephone(user.getTelephone());
+        fillInputPassword(user.getPassword());
+        fillInputConfirmPassword(user.getPassword());
         clickAgreeCheckBox();
         clickRegisterButton();
         return new SuccessRegisterPage(driver);

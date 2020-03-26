@@ -92,9 +92,9 @@ public class ChangePasswordPage extends AbstractPageWithHeader {
     //BUSINESS LOGIC
 
     //change password
-    public MyAccountPage changePassword(String PASSWORD_NAME, String CONFIRM_PASSWORD_NAME) {
-        changePasswordField(PASSWORD_NAME);
-        changeConfirmPasswordField(CONFIRM_PASSWORD_NAME);
+    public MyAccountPage changePassword(String password, String confirm) {
+        changePasswordField(password);
+        changeConfirmPasswordField(confirm);
         clickChangePasswordButton();
         return new MyAccountPage(driver);
     }

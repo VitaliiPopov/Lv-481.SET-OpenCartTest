@@ -6,11 +6,14 @@ import com.opencart.pages.admin.AdminHomePage;
 import com.opencart.pages.admin.AdminLoginPage;
 import com.opencart.tools.*;
 import org.junit.Assert;
-import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+import org.apache.commons.lang3.RandomStringUtils;
+
+import static org.apache.commons.lang3.RandomStringUtils.random;
+import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
 
 public class EditAccountTest extends TestRunner {
     JsonDataConfig jsonDataConfig = new JsonDataConfig("TestData.json");
@@ -18,26 +21,18 @@ public class EditAccountTest extends TestRunner {
     @BeforeMethod
     public void primaryRegistration() {
         RegisterPage registerPage = getHomePage().goToRegisterPage();
-        SuccessRegisterPage success = registerPage.register(
-                jsonDataConfig.getFirstNameFromJson(1),
-                jsonDataConfig.getLastNameFromJson(1),
-                jsonDataConfig.getEmailFromJson(1),
-                jsonDataConfig.getTelephoneFromJson(1),
-                jsonDataConfig.getPasswordFromJson(1),
-                jsonDataConfig.getPasswordFromJson(1));
+        //getting valid user data
+        SuccessRegisterPage success = registerPage.register(jsonDataConfig.getUserFromJson(0));
         success.goToAccountAfterRegistration();
         AccountLogoutPage logoutPage = getHomePage().goToLogoutPage();
         logoutPage.logout();
     }
 
     @AfterMethod
-    public void tearDown(ITestResult result) {
-        if (result.getStatus() == ITestResult.FAILURE) {
-            Utility.getScreenshot(Driver.getDriver());
-        }
+    public void tearDown() {
         try {
             logoutUser();
-            deleteCustomerFromAdmin(jsonDataConfig.getEmailFromJson(1));
+            deleteCustomerFromAdmin(jsonDataConfig.getEmailFromJson(0));
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -48,10 +43,11 @@ public class EditAccountTest extends TestRunner {
     public void smokeEditAccountTest(String loginText) throws InterruptedException {
         MyAccountPage myAccountPage = loginUser(loginText);
         EditAccountPage editAccountPage = myAccountPage.clickEditMyAccountLink();
+        //getting valid user data for editing account
         myAccountPage = editAccountPage.editAccountInformation(
                 jsonDataConfig.getFirstNameFromJson(1),
                 jsonDataConfig.getLastNameFromJson(1),
-                jsonDataConfig.getEmailFromJson(1),
+                jsonDataConfig.getEmailFromJson(0),
                 jsonDataConfig.getTelephoneFromJson(1)
         );
         Assert.assertTrue(myAccountPage.isSuccessAlertDisplayed());
@@ -62,10 +58,7 @@ public class EditAccountTest extends TestRunner {
     public void editAccountWithEmptyFieldsTest(String loginText) throws InterruptedException {
         MyAccountPage myAccountPage = loginUser(loginText);
         EditAccountPage editAccountPage = myAccountPage.clickEditMyAccountLink();
-        editAccountPage.clearFirstnameEditField();
-        editAccountPage.clearLastnameEditField();
-        editAccountPage.clearEmailEditField();
-        editAccountPage.clearTelephoneEditField();
+        editAccountPage.clearFields();
         editAccountPage.clickEditButton();
         Assert.assertTrue(editAccountPage.isAlertFirstnameDisplayed());
         Assert.assertTrue(editAccountPage.isAlertLastnameDisplayed());
@@ -80,9 +73,9 @@ public class EditAccountTest extends TestRunner {
         EditAccountPage editAccountPage = myAccountPage.clickEditMyAccountLink();
         editAccountPage.editAccountInformation(
                 "",
-                jsonDataConfig.getLastNameFromJson(1),
-                jsonDataConfig.getEmailFromJson(1),
-                jsonDataConfig.getTelephoneFromJson(1)
+                jsonDataConfig.getLastNameFromJson(0),
+                jsonDataConfig.getEmailFromJson(0),
+                jsonDataConfig.getTelephoneFromJson(0)
         );
         Assert.assertTrue(editAccountPage.isAlertFirstnameDisplayed());
     }
@@ -94,10 +87,10 @@ public class EditAccountTest extends TestRunner {
         MyAccountPage myAccountPage = loginUser(loginText);
         EditAccountPage editAccountPage = myAccountPage.clickEditMyAccountLink();
         editAccountPage.editAccountInformation(
-                Randomizer.generateRandomString(33),
-                jsonDataConfig.getLastNameFromJson(1),
-                jsonDataConfig.getEmailFromJson(1),
-                jsonDataConfig.getTelephoneFromJson(1)
+                randomAlphabetic(33),
+                jsonDataConfig.getLastNameFromJson(0),
+                jsonDataConfig.getEmailFromJson(0),
+                jsonDataConfig.getTelephoneFromJson(0)
         );
         Assert.assertTrue(editAccountPage.isAlertFirstnameDisplayed());
     }
@@ -108,10 +101,10 @@ public class EditAccountTest extends TestRunner {
         MyAccountPage myAccountPage = loginUser(loginText);
         EditAccountPage editAccountPage = myAccountPage.clickEditMyAccountLink();
         editAccountPage.editAccountInformation(
-                jsonDataConfig.getFirstNameFromJson(1),
+                jsonDataConfig.getFirstNameFromJson(0),
                 "",
-                jsonDataConfig.getEmailFromJson(1),
-                jsonDataConfig.getTelephoneFromJson(1)
+                jsonDataConfig.getEmailFromJson(0),
+                jsonDataConfig.getTelephoneFromJson(0)
         );
         Assert.assertTrue(editAccountPage.isAlertLastnameDisplayed());
     }
@@ -123,10 +116,10 @@ public class EditAccountTest extends TestRunner {
         MyAccountPage myAccountPage = loginUser(loginText);
         EditAccountPage editAccountPage = myAccountPage.clickEditMyAccountLink();
         editAccountPage.editAccountInformation(
-                jsonDataConfig.getFirstNameFromJson(1),
-                Randomizer.generateRandomString(33),
-                jsonDataConfig.getEmailFromJson(1),
-                jsonDataConfig.getTelephoneFromJson(1)
+                jsonDataConfig.getFirstNameFromJson(0),
+                randomAlphabetic(33),
+                jsonDataConfig.getEmailFromJson(0),
+                jsonDataConfig.getTelephoneFromJson(0)
         );
         Assert.assertTrue(editAccountPage.isAlertLastnameDisplayed());
     }
@@ -137,10 +130,10 @@ public class EditAccountTest extends TestRunner {
         MyAccountPage myAccountPage = loginUser(loginText);
         EditAccountPage editAccountPage = myAccountPage.clickEditMyAccountLink();
         editAccountPage.editAccountInformation(
-                jsonDataConfig.getFirstNameFromJson(1),
-                jsonDataConfig.getLastNameFromJson(1),
+                jsonDataConfig.getFirstNameFromJson(0),
+                jsonDataConfig.getLastNameFromJson(0),
                 "",
-                jsonDataConfig.getTelephoneFromJson(1)
+                jsonDataConfig.getTelephoneFromJson(0)
         );
         Assert.assertTrue(editAccountPage.isAlertEmailDisplayed());
     }
@@ -151,10 +144,10 @@ public class EditAccountTest extends TestRunner {
         MyAccountPage myAccountPage = loginUser(loginText);
         EditAccountPage editAccountPage = myAccountPage.clickEditMyAccountLink();
         editAccountPage.editAccountInformation(
-                jsonDataConfig.getFirstNameFromJson(1),
-                jsonDataConfig.getLastNameFromJson(1),
-                Randomizer.generateRandomString(5),
-                jsonDataConfig.getTelephoneFromJson(1)
+                jsonDataConfig.getFirstNameFromJson(0),
+                jsonDataConfig.getLastNameFromJson(0),
+                randomAlphabetic(5),
+                jsonDataConfig.getTelephoneFromJson(0)
         );
         Assert.assertTrue(editAccountPage.getTitleAccountInformationText().equals(editAccountText));
     }
@@ -165,23 +158,38 @@ public class EditAccountTest extends TestRunner {
         MyAccountPage myAccountPage = loginUser(loginText);
         EditAccountPage editAccountPage = myAccountPage.clickEditMyAccountLink();
         editAccountPage.editAccountInformation(
-                jsonDataConfig.getFirstNameFromJson(1),
-                jsonDataConfig.getLastNameFromJson(1),
-                Randomizer.generateRandomString(5)+"@"+Randomizer.generateRandomString(5),
-                jsonDataConfig.getTelephoneFromJson(1)
+                jsonDataConfig.getFirstNameFromJson(0),
+                jsonDataConfig.getLastNameFromJson(0),
+                randomAlphabetic(5)+"@"+randomAlphabetic(5),
+                jsonDataConfig.getTelephoneFromJson(0)
         );
         Assert.assertTrue(editAccountPage.isAlertEmailDisplayed());
     }
 
     @Parameters({"loginText"})
     @Test(priority = 9)
+    public void editAccountWithExistedEmailTest(String loginText) throws InterruptedException {
+        String email = getExistedEmailFromAdmin();
+        MyAccountPage myAccountPage = loginUser(loginText);
+        EditAccountPage editAccountPage = myAccountPage.clickEditMyAccountLink();
+        editAccountPage.editAccountInformation(
+                jsonDataConfig.getFirstNameFromJson(0),
+                jsonDataConfig.getLastNameFromJson(0),
+                email,
+                jsonDataConfig.getTelephoneFromJson(0)
+        );
+        Assert.assertTrue(editAccountPage.isWarningDisplayed());
+    }
+
+    @Parameters({"loginText"})
+    @Test(priority = 10)
     public void editAccountWithEmptyTelephoneTest(String loginText) throws InterruptedException {
         MyAccountPage myAccountPage = loginUser(loginText);
         EditAccountPage editAccountPage = myAccountPage.clickEditMyAccountLink();
         editAccountPage.editAccountInformation(
-                jsonDataConfig.getFirstNameFromJson(1),
-                jsonDataConfig.getLastNameFromJson(1),
-                jsonDataConfig.getEmailFromJson(1),
+                jsonDataConfig.getFirstNameFromJson(0),
+                jsonDataConfig.getLastNameFromJson(0),
+                jsonDataConfig.getEmailFromJson(0),
                 ""
         );
         Assert.assertTrue(editAccountPage.isAlertTelephoneDisplayed());
@@ -189,30 +197,30 @@ public class EditAccountTest extends TestRunner {
 
     //telephone shorter than 32 characters
     @Parameters({"loginText"})
-    @Test(priority = 10)
+    @Test(priority = 11)
     public void editAccountWithShortTelephoneTest(String loginText) throws InterruptedException {
         MyAccountPage myAccountPage = loginUser(loginText);
         EditAccountPage editAccountPage = myAccountPage.clickEditMyAccountLink();
         editAccountPage.editAccountInformation(
-                jsonDataConfig.getFirstNameFromJson(1),
-                jsonDataConfig.getLastNameFromJson(1),
-                jsonDataConfig.getEmailFromJson(1),
-                Randomizer.generateRandomString(2)
+                jsonDataConfig.getFirstNameFromJson(0),
+                jsonDataConfig.getLastNameFromJson(0),
+                jsonDataConfig.getEmailFromJson(0),
+                randomAlphabetic(2)
         );
         Assert.assertTrue(editAccountPage.isAlertTelephoneDisplayed());
     }
 
     //telephone longer than 32 characters
     @Parameters({"loginText"})
-    @Test(priority = 11)
+    @Test(priority = 12)
     public void editAccountWithLongTelephoneTest(String loginText) throws InterruptedException {
         MyAccountPage myAccountPage = loginUser(loginText);
         EditAccountPage editAccountPage = myAccountPage.clickEditMyAccountLink();
         editAccountPage.editAccountInformation(
-                jsonDataConfig.getFirstNameFromJson(1),
-                jsonDataConfig.getLastNameFromJson(1),
-                jsonDataConfig.getEmailFromJson(1),
-                Randomizer.generateRandomString(33)
+                jsonDataConfig.getFirstNameFromJson(0),
+                jsonDataConfig.getLastNameFromJson(0),
+                jsonDataConfig.getEmailFromJson(0),
+                randomAlphabetic(33)
         );
         Assert.assertTrue(editAccountPage.isAlertTelephoneDisplayed());
     }
@@ -220,8 +228,8 @@ public class EditAccountTest extends TestRunner {
     public MyAccountPage loginUser(String loginDropdownText) throws InterruptedException {
         LoginPage loginPage = getHomePage().goToLoginPage(loginDropdownText);
         MyAccountPage myAccountPage = loginPage.login(
-                jsonDataConfig.getEmailFromJson(1),
-                jsonDataConfig.getPasswordFromJson(1));
+                jsonDataConfig.getEmailFromJson(0),
+                jsonDataConfig.getPasswordFromJson(0));
         return myAccountPage;
     }
 
@@ -232,13 +240,68 @@ public class EditAccountTest extends TestRunner {
         } else getHomePage();
     }
 
+    public String getExistedEmailFromAdmin() throws InterruptedException {
+        AdminLoginPage adminLoginPage = new AdminLoginPage(Driver.getAdminDriver());
+        AdminHomePage adminHomePage = adminLoginPage.adminLogin(
+                jsonDataConfig.getEmailFromJson(2),
+                jsonDataConfig.getPasswordFromJson(2));
+        adminHomePage.clickOnCustomerDropdown();
+        AdminCustomerPage adminCustomerPage = adminHomePage.clickOnCustomerTab();
+        String mail = adminCustomerPage.getExistedEmail();
+        return mail;
+    }
+
     public void deleteCustomerFromAdmin(String email) throws InterruptedException {
         AdminLoginPage adminLoginPage = new AdminLoginPage(Driver.getAdminDriver());
-        AdminHomePage adminHomePage = adminLoginPage.adminLogin(jsonDataConfig.getEmailFromJson(2), jsonDataConfig.getPasswordFromJson(2));
+        AdminHomePage adminHomePage = adminLoginPage.adminLogin(
+                jsonDataConfig.getEmailFromJson(2),
+                jsonDataConfig.getPasswordFromJson(2));
         adminHomePage.clickOnCustomerDropdown();
         AdminCustomerPage adminCustomerPage = adminHomePage.clickOnCustomerTab();
         adminCustomerPage.findCustomerByEmail(email);
         adminCustomerPage.clickDeleteCustomerButton();
         adminCustomerPage.confirmAction();
+    }
+
+    @Parameters({"loginText"})
+    @Test(priority = 0)
+    public void complexTest(String loginText) throws InterruptedException {
+        MyAccountPage myAccountPage = loginUser(loginText);
+        Assert.assertTrue(myAccountPage.getTitleMyAccountText().equals("My Account"));
+
+        //getting valid user data for editing from json
+        String newFirstName = jsonDataConfig.getFirstNameFromJson(1);
+        String newLastName = jsonDataConfig.getLastNameFromJson(1);
+        String newEmail = jsonDataConfig.getEmailFromJson(1);
+        String newTelephone = jsonDataConfig.getTelephoneFromJson(1);
+        String newPassword = jsonDataConfig.getPasswordFromJson(1);
+
+        EditAccountPage editAccountPage = myAccountPage.clickEditMyAccountLink();
+        myAccountPage = editAccountPage.editAccountInformation(
+                newFirstName,
+                newLastName,
+                newEmail,
+                newTelephone
+        );
+        Assert.assertTrue(myAccountPage.isSuccessAlertDisplayed());
+
+        ChangePasswordPage changePasswordPage = myAccountPage.clickChangePasswordLink();
+        changePasswordPage.changePassword(newPassword, newPassword);
+        Assert.assertTrue(myAccountPage.isSuccessAlertDisplayed());
+
+        AccountLogoutPage logoutPage = getHomePage().goToLogoutPage();
+        logoutPage.logout();
+
+        LoginPage loginPage = getHomePage().goToLoginPage(loginText);
+        myAccountPage = loginPage.login(newEmail, newPassword);
+        Assert.assertTrue(myAccountPage.getTitleMyAccountText().equals("My Account"));
+
+        editAccountPage = myAccountPage.clickEditMyAccountLink();
+        Assert.assertTrue(editAccountPage.getFirstNameEditValue().equals(newFirstName));
+        Assert.assertTrue(editAccountPage.getLastNameEditValue().equals(newLastName));
+        Assert.assertTrue(editAccountPage.getEmailEditValue().equals(newEmail));
+        Assert.assertTrue(editAccountPage.getTelephoneEditValue().equals(newTelephone));
+        editAccountPage.editEmailField(jsonDataConfig.getEmailFromJson(0));
+        editAccountPage.clickEditButton();
     }
 }

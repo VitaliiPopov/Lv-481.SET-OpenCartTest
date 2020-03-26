@@ -37,9 +37,15 @@ public class Driver {
         return driver;
     }
 
-    public static void Quit() {
+    public static void quit() {
         driver.quit();
         driver = null;
+    }
+
+    public static WebDriver getAdminDriver() {
+        driver = getDriver();
+        driver.get(ConstantVariables.AdminURL);
+        return driver;
     }
 
     public static void ClearCookies() {

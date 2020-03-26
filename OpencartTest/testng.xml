@@ -1,39 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Default Suite">
-    <test name="CompareTest">
-        <!--MainTest-->
-        <parameter name="myAccountDropdownText" value="Login"/>
-        <parameter name="search" value="ip"/>
-        <parameter name="productName1" value="iPhone"/>
-        <parameter name="productName2" value="iPod Classic"/>
-        <classes>
-            <!--MainTest-->
-            <class name="test.ProductCompareTest">
-                <methods>
-<!--                    <include name="Login"/>-->
-                    <include name="AddProductToCompareFromSearchByAlert"/>
-                    <include name="AddSameProductTwoTimes"/>
-                    <include name="CleanProductFromComparison"/>
-                    <include name="AddToCartFromComparisonPage"/>
-                    <include name="GoToProductPageFromComparisonPage"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-    <!--<test name="CartTest">
-        &lt;!&ndash;MainTest&ndash;&gt;
+    <!--    <test name="CompareTest">-->
+    <!--        &lt;!&ndash;MainTest&ndash;&gt;-->
+    <!--        <parameter name="myAccountDropdownText" value="Login"/>-->
+    <!--        <parameter name="search" value="ip"/>-->
+    <!--        <parameter name="productName1" value="iPhone"/>-->
+    <!--        <parameter name="productName2" value="iPod Classic"/>-->
+    <!--        <classes>-->
+    <!--            &lt;!&ndash;MainTest&ndash;&gt;-->
+    <!--            <class name="test.ProductCompareTest">-->
+    <!--                <methods>-->
+    <!--&lt;!&ndash;                    <include name="Login"/>&ndash;&gt;-->
+    <!--                    <include name="AddProductToCompareFromSearchByAlert"/>-->
+    <!--                    <include name="AddSameProductTwoTimes"/>-->
+    <!--                    <include name="CleanProductFromComparison"/>-->
+    <!--                    <include name="AddToCartFromComparisonPage"/>-->
+    <!--                    <include name="GoToProductPageFromComparisonPage"/>-->
+    <!--                </methods>-->
+    <!--            </class>-->
+    <!--        </classes>-->
+    <!--    </test>-->
+    <!--    <test name="CartTest">-->
+    <!--MainTest-->
+    <!--        <parameter name="myAccountDropdownText" value="Login"></parameter>-->
+    <!--        <classes>-->
+    <!--MainTest-->
+    <!--            <class name="test.cart_test.CartTest">-->
+    <!--                <methods>-->
+    <!--                    <include name="loginTest"/>-->
+    <!--                    <include name="checkUncorrectFunctionOfRefreshButtonInCart"/>-->
+    <!--                </methods>-->
+    <!--            </class>-->
+    <!--    </classes>-->
+
+
+    <test name="SearchTest">
         <parameter name="myAccountDropdownText" value="Login"></parameter>
+        <parameter name="productName" value="IPHONE"/>
+        <parameter name="lowerProductName" value="Iphone"/>
+        <parameter name="searchText" value="MAC"/>
+        <parameter name="lowerSearchText" value="mac"/>
+        <parameter name="categoryOption" value="Laptops"/>
+        <parameter name="showOption" value="15"/>
+        <parameter name="allProducts" value="%"/>
+
         <classes>
-            &lt;!&ndash;MainTest&ndash;&gt;
-            <class name="test.CartTest">
+            <class name="test.SearchPageTest">
                 <methods>
-                    <include name="loginTest"/>
-                    <include name="addProductWithoutOptionsToCartAlertCheck"/>
+                    <include name="login"/>
+                    <include name="searchPageTesting"/>
+                    <include name="checkLowerCase"/>
+                    <include name="checkLableContainsSearchText"/>
+                    <include name="checkUncorrectFieldResultMessage"/>
+                    <include name="checkEmptyFieldResultMessage"/>
+                    <include name="checkCategoriesCheckbox"/>
+                    <include name="checkProductCountFromLable"/>
+                    <include name="checkListAndGridResult"/>
+                    <include name="checkSortByA_Z_Name"/>
+                    <include name="checkSortByZ_A_Name"/>
+                    <include name="checkSortByPrice"/>
+                    <include name="checkShowDropbox"/>
+                    <include name="checkPagesCount"/>
+                    <include name="checkDescriptionCheckbox"/>
+
                 </methods>
             </class>
         </classes>
-    </test> &lt;!&ndash; Individual &ndash;&gt;-->
+
+    </test> <!-- Individual &ndash;&gt;-->
 </suite> <!-- Default Suite -->
 
-
+        <!--end-->

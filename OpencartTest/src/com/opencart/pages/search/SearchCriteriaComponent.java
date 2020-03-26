@@ -96,7 +96,14 @@ public class SearchCriteriaComponent {
     }
 
     public void clickDescriptionsCheckbox() {
-        descriptionsCheckbox.click();
+        if (!isDescriptionCheckboxSelected()) {
+            descriptionsCheckbox.click();
+        }
+    }
+    public void unClickDescriptionsCheckbox() {
+        if (isDescriptionCheckboxSelected()) {
+            descriptionsCheckbox.click();
+        }
     }
 
     public void clickSearchButton() {
@@ -105,6 +112,14 @@ public class SearchCriteriaComponent {
 
     public boolean isSubcategoriesCheckboxEnabled() {
         if (subcategoriesCheckbox.isEnabled()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean isDescriptionCheckboxSelected() {
+        if (descriptionsCheckbox.isSelected()) {
             return true;
         } else {
             return false;

@@ -1,4 +1,4 @@
-package test;
+package test.cart_test;
 
 import com.opencart.pages.HomePage;
 import com.opencart.pages.account.LoginPage;
@@ -6,7 +6,7 @@ import com.opencart.pages.account.MyAccountPage;
 import com.opencart.pages.cart.CartPage;
 import com.opencart.pages.product.ProductPage;
 import com.opencart.pages.search.SearchPage;
-import com.opencart.tools.ExcelDataConfig;
+import com.opencart.tools.JsonDataConfig;
 import com.opencart.tools.TestRunner;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -17,13 +17,13 @@ import org.testng.asserts.SoftAssert;
 
 public class CartTest extends TestRunner {
 
-    ExcelDataConfig excelDataConfig = new ExcelDataConfig("TestData.xlsx");
+    JsonDataConfig jsonParser = new JsonDataConfig("TestData.json");
 
     @BeforeMethod
     @Parameters({"myAccountDropdownText"})
     public void setUp(String myAccountDropdownText) {
         LoginPage loginPage = getHomePage().goToLoginPage(myAccountDropdownText);
-        MyAccountPage myAccountPage = loginPage.login(excelDataConfig.getData(0, 0, 0), excelDataConfig.getData(0, 0, 1));
+        MyAccountPage myAccountPage = loginPage.login(jsonParser.getEmailFromJson(7),jsonParser.getPasswordFromJson(7));
         HomePage homePage = myAccountPage.goToHomePage();
     }
 

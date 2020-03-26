@@ -37,10 +37,6 @@ public class SearchPage extends AbstractPageWithHeader {
 
     //Components
     private List<ProductContainersComponent> productContainersComponents;
-    private SearchCriteriaComponent searchCriteriaComponent;
-    private ProductDisplayCriteriaComponent productDisplayCriteriaComponent;
-    private AlertComponent alertComponent;
-
 
     public SearchPage(WebDriver driver) {
         super(driver);
@@ -49,7 +45,7 @@ public class SearchPage extends AbstractPageWithHeader {
     ///region ATOMIC_OPERATIONS
 
     //emptyResultMessage
-    public String  getemptyResultMessageText(){
+    public String getemptyResultMessageText() {
         return emptyResultMessage.getText();
     }
 
@@ -70,17 +66,11 @@ public class SearchPage extends AbstractPageWithHeader {
         return productContainersComponents;
     }
 
-    public SearchCriteriaComponent getSearchCriteriaComponent(){
-        WebElement SearchCriteriaElement = driver.findElement(By.xpath(SEARCH_CRITERIA_ELEMENT_LOCATOR));
-        return new SearchCriteriaComponent(SearchCriteriaElement);
-    }
-
     public ProductDisplayCriteriaComponent getProductDisplayCriteriaComponent() {
         return new ProductDisplayCriteriaComponent(driver.findElement(By.xpath(PRODUCT_DISPLAY_ELEMENT_LOCATOR)));
-
     }
 
-    public SearchCriteriaComponent searchCriteriaComponent() {
+    public SearchCriteriaComponent getSearchCriteriaComponent() {
         return new SearchCriteriaComponent(driver.findElement(By.xpath(SEARCH_CRITERIA_ELEMENT_LOCATOR)));
     }
 
@@ -97,7 +87,7 @@ public class SearchPage extends AbstractPageWithHeader {
 //        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(ALERT_LOCATOR)));
 //        searchPageAlertComponent = new SearchPageAlertComponent(wait.until(ExpectedConditions.presenceOfElementLocated((By.cssSelector(ALERT_LOCATOR)))));
 //        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-        //return searchPageAlertComponent;
+//        return searchPageAlertComponent;
         return new AlertComponent(driver.findElement(By.xpath(ALERT_LOCATOR)));
     }
 
@@ -107,6 +97,7 @@ public class SearchPage extends AbstractPageWithHeader {
 
     //productContainerComponents
     public Integer getProductContainerComponentsSize() {
+        getProductContainersComponents();
         return productContainersComponents.size();
     }
 
@@ -122,6 +113,7 @@ public class SearchPage extends AbstractPageWithHeader {
      */
     public ProductContainersComponent getProductComponentByName(String productName) {
         ProductContainersComponent result = null;
+        productContainersComponents = getProductContainersComponents();
         for (ProductContainersComponent current : productContainersComponents) {
             if (current.getNameText().equalsIgnoreCase(productName)) {
                 result = current;
@@ -132,12 +124,23 @@ public class SearchPage extends AbstractPageWithHeader {
     }
 
     public ArrayList<String> getProductComponentNamesList() {
-        ArrayList<String> ProductComponentNamesList = new ArrayList<>();
+        ArrayList<String> productComponentNamesList = new ArrayList<>();
+        productContainersComponents = getProductContainersComponents();
         for (ProductContainersComponent current : productContainersComponents) {
-            ProductComponentNamesList.add(current.getNameText());
+            productComponentNamesList.add(current.getNameText());
         }
-        return ProductComponentNamesList;
+        return productComponentNamesList;
     }
+
+    public ArrayList<Double> getProductComponentPriceList() {
+        ArrayList<Double> productComponentPriceList = new ArrayList<>();
+        productContainersComponents = getProductContainersComponents();
+        for (ProductContainersComponent current : productContainersComponents) {
+            productComponentPriceList.add(current.getPriceAmount());
+        }
+        return productComponentPriceList;
+    }
+
 
     //CompareButton
 
@@ -230,5 +233,41 @@ public class SearchPage extends AbstractPageWithHeader {
         return new ProductPage(driver);
     }
 
-    ///endregion
+    //add to cart by button
+    public void clickProductComponentAddToCartButtonByName(String productName) {
+        getProductComponentByName(productName).clickAddToCartButton();
+    }
+
+    //add to Wish List by button
+    public void clickProductComponentAddToWishList(String productName) {
+        getProductComponentByName(productName).clickAddToWishListButton();
+        //InitializeAlert();
+    }
+
+
+    //how to fix?
+    public void findAllProductPageDescriptions() throws InterruptedException {
+        ProductPage productPage = new ProductPage(driver);
+        ArrayList<String> descriptionList = new ArrayList<>();
+
+        productContainersComponents = getProductContainersComponents();
+        for (ProductContainersComponent current : productContainersComponents) {
+            current.clickPicture();
+            System.out.println(productPage.getDescription());
+            descriptionList.add(productPage.getDescription());
+            driver.navigate().back();
+        }
+    }
+
+    public String getProductPageDescription(int index) throws InterruptedException {
+        productContainersComponents = getProductContainersComponents();
+        ProductPage productPage = new ProductPage(driver);
+
+        productContainersComponents.get(index).clickPicture();
+        String result = productPage.getDescription();
+        driver.navigate().back();
+        return result;
+    }
 }
+
+///endregion

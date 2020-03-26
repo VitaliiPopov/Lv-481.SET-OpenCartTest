@@ -3,6 +3,7 @@ package test;
 import com.opencart.data.ConstantVariables;
 import com.opencart.pages.product.ProductPage;
 import com.opencart.tools.*;
+import org.apache.commons.lang.RandomStringUtils;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -89,7 +90,7 @@ public class UnsuccessfulReviewTest extends TestRunner {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView();", testProduct);
         testProduct.click();
-        String tooLongName = Randomizer.generateRandomString(30);
+        String tooLongName = RandomStringUtils.randomAlphabetic(30);
         productPage.writeReview(tooLongName, correctText);
         String textOfUndeliveredReview = productPage.getTextOfUndeliveredReviewMessage();
         Assert.assertEquals(textOfUndeliveredReview, messageOfUndeliveredReviewBecauseOfIncorrectName);
@@ -101,7 +102,7 @@ public class UnsuccessfulReviewTest extends TestRunner {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView();", testProduct);
         testProduct.click();
-        String tooLongText=Randomizer.generateRandomString(1020);
+        String tooLongText= RandomStringUtils.randomAlphabetic(1020);
         productPage.writeReview(nameOfAuthor, tooLongText);
         String textOfUndeliveredReview = productPage.getTextOfUndeliveredReviewMessage();
         Assert.assertEquals(textOfUndeliveredReview, messageOfUndeliveredReviewBecauseOfIncorrectText);

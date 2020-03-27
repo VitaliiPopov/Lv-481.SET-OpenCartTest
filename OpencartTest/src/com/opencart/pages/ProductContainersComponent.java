@@ -13,10 +13,8 @@ public class ProductContainersComponent {
     private final String COMPARE_BUTTON_SELECTOR = ".//i[@class='fa fa-exchange']/.."; //xpath
     private final String PICTURE_SELECTOR = ".image a"; // css
     //TODO MISHA
-    private final String ADD_TO_WISHLIST_BUTTON_SELECTOR  = "//div[@class='button-group']/button/i[contains(@class,'fa-heart')]"; //xpath
-    private final String DISCOUNT_PRICE_SELECTOR = "//span[@class='price-new']"; //xpath
-    private final String PRICE_SELECTOR  = "//p[contains(@class,'price') and not(child::span[@class='price-new'])]"; //xpath
-
+    private final String ADD_TO_WISHLIST_BUTTON_SELECTOR = "//div[@class='button-group']/button/i[contains(@class,'fa-heart')]"; //xpath
+    private final String PRICE_SELECTOR = "//p[contains(@class,'price') and not(child::span[@class='price-new'])]"; //xpath
 
     //Layout
     private WebElement productContainerLayout;
@@ -72,16 +70,11 @@ public class ProductContainersComponent {
 
     //Price
     public WebElement getPrice() {
-        try {
-            return productContainerLayout.findElement(By.xpath(DISCOUNT_PRICE_SELECTOR));
-        }catch(NoSuchElementException e){
-            return productContainerLayout.findElement(By.xpath(PRICE_SELECTOR));
-        }
+        return productContainerLayout.findElement(By.xpath(PRICE_SELECTOR));
     }
 
     public double getPriceAmount() {
         RegexUtils regexUtils = new RegexUtils();
-        System.out.println(getPrice().getText());
         return regexUtils.extractFirstDouble(getPrice().getText());
     }
 }

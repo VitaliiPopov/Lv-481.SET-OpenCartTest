@@ -46,16 +46,16 @@
         <parameter name="allProducts" value="%"/>
 
         <classes>
-            <class name="test.SearchPageTest">
+            <class name="test.search_test.SearchPageTest">
                 <methods>
                     <include name="login"/>
-                    <include name="searchPageTesting"/>
                     <include name="checkLowerCase"/>
-                    <include name="checkLableContainsSearchText"/>
+                    <include name="searchLabelContainSearchText"/>
                     <include name="checkUncorrectFieldResultMessage"/>
                     <include name="checkEmptyFieldResultMessage"/>
-                    <include name="checkCategoriesCheckbox"/>
-                    <include name="checkProductCountFromLable"/>
+                    <include name="checkCategoriesCheckboxDisabled"/>
+                    <include name="checkCategoriesCheckboxEnabled"/>
+                    <include name="checkProductCountFromLablel"/>
                     <include name="checkListAndGridResult"/>
                     <include name="checkSortByA_Z_Name"/>
                     <include name="checkSortByZ_A_Name"/>

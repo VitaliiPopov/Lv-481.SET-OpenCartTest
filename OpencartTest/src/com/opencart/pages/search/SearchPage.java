@@ -96,7 +96,7 @@ public class SearchPage extends AbstractPageWithHeader {
     }
 
     //productContainerComponents
-    public Integer getProductContainerComponentsSize() {
+    public int getProductContainerComponentsSize() {
         getProductContainersComponents();
         return productContainersComponents.size();
     }
@@ -123,6 +123,7 @@ public class SearchPage extends AbstractPageWithHeader {
         return result;
     }
 
+    // get ArrayList of names from products
     public ArrayList<String> getProductComponentNamesList() {
         ArrayList<String> productComponentNamesList = new ArrayList<>();
         productContainersComponents = getProductContainersComponents();
@@ -132,6 +133,7 @@ public class SearchPage extends AbstractPageWithHeader {
         return productComponentNamesList;
     }
 
+    // get ArrayList of prices from products
     public ArrayList<Double> getProductComponentPriceList() {
         ArrayList<Double> productComponentPriceList = new ArrayList<>();
         productContainersComponents = getProductContainersComponents();
@@ -215,6 +217,7 @@ public class SearchPage extends AbstractPageWithHeader {
         return new ProductPage(driver);
     }
 
+    //ArrayList of names of products to lower case
     public void toLowerCaseProductList(List<String> list) {
         ListIterator<String> iterator = list.listIterator();
         while (iterator.hasNext()) {
@@ -244,29 +247,19 @@ public class SearchPage extends AbstractPageWithHeader {
         //InitializeAlert();
     }
 
-
-    //how to fix?
-    public void findAllProductPageDescriptions() throws InterruptedException {
-        ProductPage productPage = new ProductPage(driver);
-        ArrayList<String> descriptionList = new ArrayList<>();
-
-        productContainersComponents = getProductContainersComponents();
-        for (ProductContainersComponent current : productContainersComponents) {
-            current.clickPicture();
-            System.out.println(productPage.getDescription());
-            descriptionList.add(productPage.getDescription());
-            driver.navigate().back();
-        }
-    }
-
+    //get full description of product from Product Page by index
     public String getProductPageDescription(int index) throws InterruptedException {
         productContainersComponents = getProductContainersComponents();
         ProductPage productPage = new ProductPage(driver);
-
         productContainersComponents.get(index).clickPicture();
         String result = productPage.getDescription();
         driver.navigate().back();
         return result;
+    }
+
+    //calculate pages count according to option number in Show dropbox
+    public int getCalculatedPagesCount(String showOption) {
+        return getProductContainerComponentsSize() / Integer.parseInt(showOption) + 1;
     }
 }
 

@@ -1,75 +1,75 @@
-package test;
+package test.search_test;
 
-import com.opencart.pages.HomePage;
 import com.opencart.pages.account.LoginPage;
 import com.opencart.pages.account.MyAccountPage;
 import com.opencart.pages.search.SearchCriteriaComponent;
 import com.opencart.pages.search.SearchPage;
 import com.opencart.tools.JsonDataConfig;
-import com.opencart.tools.Randomizer;
 import com.opencart.tools.TestRunner;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.util.Collections;
 
 import java.util.*;
 
+import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
+
+@Listeners({AllureListener.class})
 public class SearchPageTest extends TestRunner {
 
     private JsonDataConfig jsonDataConfig = new JsonDataConfig("TestData.json");
     private SearchPage searchPage;
+
+    //lists for sorting by product name
     private ArrayList<String> defaultSorted;
     private ArrayList<String> a_z_byNameSorted;
 
+    //lists for sorting by product price
     private ArrayList<Double> priceList;
     private ArrayList<Double> byPriceSorted;
 
     @Parameters({"myAccountDropdownText"})
     @Test(priority = 1)
-    public void login(String myAccountDropdownText) throws InterruptedException {
+    public void login(String myAccountDropdownText) {
         LoginPage loginPage = getHomePage().goToLoginPage(myAccountDropdownText);
         MyAccountPage myAccountPage = loginPage.login(jsonDataConfig.getEmailFromJson(0), jsonDataConfig.getPasswordFromJson(0));
         myAccountPage.goToHomePage();
     }
 
-    @AfterClass
-    public void afterClass() {
-        //clean all fields
-    }
-
+    //check if product names are the same when lowercase text and uppercase text
     @Parameters({"searchText", "lowerSearchText"})
     @Test(priority = 2)
-    public void checkLowerCase(String searchText, String lowerSearchText) throws InterruptedException {
-        searchPage = getHomePage().searchProduct(searchText);
-        ArrayList<String> upperCaseSearchText = searchPage.getProductComponentNamesList();
-        searchPage = getHomePage().searchProduct(lowerSearchText);
-        ArrayList<String> lowerCaseSearchText = searchPage.getProductComponentNamesList();
+    public void checkLowerCase(String searchText, String lowerSearchText) {
+        ArrayList<String> upperCaseSearchText = getHomePage()
+                .searchProduct(searchText)
+                .getProductComponentNamesList();
+        ArrayList<String> lowerCaseSearchText = getHomePage()
+                .searchProduct(lowerSearchText)
+                .getProductComponentNamesList();
         Assert.assertEquals(upperCaseSearchText, lowerCaseSearchText);
     }
 
+    //check if search label contain text from searsh field
     @Parameters({"lowerProductName"})
     @Test(priority = 3)
-    public void checkLableContainsSearchText(String lowerProductName) throws InterruptedException {
-
+    public void searchLabelContainSearchText(String lowerProductName) throws InterruptedException {
         Assert.assertTrue(getHomePage()
                 .searchProduct(lowerProductName)
                 .getSearchCriteriaComponent()
-                .searchLableContainSearchText(lowerProductName));
+                .searchLabelContainSearchText(lowerProductName));
     }
 
+    //check that "no product" message appears after entering random string to search field
     @Test(priority = 4)
     public void checkUncorrectFieldResultMessage() throws InterruptedException {
-        String searchText = Randomizer.generateRandomString(9);
-        searchPage = getHomePage().searchProduct(searchText);
         Assert.assertTrue(getHomePage()
-                .searchProduct(searchText)
+                .searchProduct(randomAlphabetic(9))
                 .getemptyResultMessageText()
                 .contains("no product"));
     }
 
+    //check that "no product" message appears after entering empty string to search field
     @Test(priority = 5)
     public void checkEmptyFieldResultMessage() throws InterruptedException {
         Assert.assertTrue(getHomePage()
@@ -78,48 +78,72 @@ public class SearchPageTest extends TestRunner {
                 .contains("no product"));
     }
 
+    //check if categories checkbox is disabled when categories dropdown is default
     @Parameters({"lowerSearchText", "categoryOption"})
     @Test(priority = 6)
-    public void checkCategoriesCheckbox(String lowerSearchText, String categoryOption) throws InterruptedException {
-        searchPage = getHomePage().searchProduct(lowerSearchText);
-        SearchCriteriaComponent searchCriteriaComponent = searchPage.getSearchCriteriaComponent();
+    public void checkCategoriesCheckboxDisabled(String lowerSearchText, String categoryOption) throws InterruptedException {
+        Assert.assertFalse(getHomePage()
+                .searchProduct(lowerSearchText)
+                .getSearchCriteriaComponent()
+                .isSubcategoriesCheckboxEnabled());
+    }
 
-        Assert.assertFalse(searchCriteriaComponent.isSubcategoriesCheckboxEnabled());
+    //check if categories checkbox is enabled when categories dropdown is not default
+    @Parameters({"lowerSearchText", "categoryOption"})
+    @Test(priority = 7)
+    public void checkCategoriesCheckboxEnabled(String lowerSearchText, String categoryOption) {
+        SearchCriteriaComponent searchCriteriaComponent = getHomePage()
+                .searchProduct(lowerSearchText)
+                .getSearchCriteriaComponent();
         searchCriteriaComponent.clickCategoriesDropdown(categoryOption);
         searchCriteriaComponent.clickSubcategoriesCheckbox();
-        Assert.assertTrue( searchCriteriaComponent.isSubcategoriesCheckboxEnabled());
+        Assert.assertTrue(searchCriteriaComponent.isSubcategoriesCheckboxEnabled());
     }
 
+    //check if product count in label on the bottom of the page and size of product list are equal
     @Parameters({"lowerSearchText"})
-    @Test(priority = 7)
-    public void checkProductCountFromLable(String lowerSearchText) throws InterruptedException {
-        searchPage = getHomePage().searchProduct(lowerSearchText);
-        int listSize = searchPage.getProductContainerComponentsSize();
-        Assert.assertEquals(listSize, searchPage.getProductDisplayCriteriaComponent().getListSizeCountFromLable());
-    }
-
-    @Parameters({"allProducts", "showOption"})
     @Test(priority = 8)
-    public void checkShowDropbox(String allProducts, String showOption) throws InterruptedException {
-        searchPage = getHomePage().searchProduct(allProducts);
-        searchPage.getProductDisplayCriteriaComponent().clickShowDropdown(showOption);
-        Assert.assertEquals(searchPage.getProductDisplayCriteriaComponent().getShowCountFromLable(), Integer.parseInt(showOption));
+    public void checkProductCountFromLablel(String lowerSearchText) {
+        Assert.assertEquals(
+                getHomePage()
+                        .searchProduct(lowerSearchText)
+                        .getProductContainerComponentsSize(),
+                getHomePage()
+                        .searchProduct(lowerSearchText)
+                        .getProductDisplayCriteriaComponent()
+                        .getListSizeCountFromLabel());
     }
 
+    //check if pages count in label on the bottom of the page and expected pages count are equal
     @Parameters({"allProducts", "showOption"})
     @Test(priority = 9)
-
-    public void checkPagesCount(String allProducts, String showOption) throws InterruptedException {
+    public void checkPagesCount(String allProducts, String showOption) {
         searchPage = getHomePage().searchProduct(allProducts);
         searchPage.getProductDisplayCriteriaComponent().clickShowDropdown(showOption);
-
-        int expectedPagesCount = searchPage.getProductContainerComponentsSize() / Integer.parseInt(showOption) + 1;
-        Assert.assertEquals(searchPage.getProductDisplayCriteriaComponent().getPagesCountFromLable(), expectedPagesCount);
+        Assert.assertEquals(
+                searchPage
+                        .getProductDisplayCriteriaComponent()
+                        .getPagesCountFromLabel(),
+                searchPage
+                        .getCalculatedPagesCount(showOption));
     }
 
-    @Parameters({"lowerSearchText"})
+    //check if products count in label on the bottom of the page and products count in Show dropbox are equal
+    @Parameters({"allProducts", "showOption"})
     @Test(priority = 10)
-    public void checkListAndGridResult(String lowerSearchText) throws InterruptedException {
+    public void checkShowDropbox(String allProducts, String showOption) {
+        searchPage = getHomePage().searchProduct(allProducts);
+        searchPage.getProductDisplayCriteriaComponent().clickShowDropdown(showOption);
+        Assert.assertEquals(searchPage
+                .getProductDisplayCriteriaComponent()
+                .getShowCountFromLabel(),
+                Integer.parseInt(showOption));
+    }
+
+    //check if product names list in default grid mode and product names list in list mode are equal
+    @Parameters({"lowerSearchText"})
+    @Test(priority = 11)
+    public void checkListAndGridResult(String lowerSearchText) {
         searchPage = getHomePage().searchProduct(lowerSearchText);
 
         ArrayList<String> gridModeProdNames = searchPage.getProductComponentNamesList();
@@ -130,9 +154,10 @@ public class SearchPageTest extends TestRunner {
         searchPage.getProductDisplayCriteriaComponent().clickGridButton();
     }
 
+    //check if list is correctly sorted by name after clicking "Name (A - Z)" option in SortBy dropdown
     @Parameters({"lowerSearchText"})
-    @Test(priority = 11)
-    public void checkSortByA_Z_Name(String lowerSearchText) throws InterruptedException {
+    @Test(priority = 12)
+    public void checkSortByA_Z_Name(String lowerSearchText) {
 
         searchPage = getHomePage().searchProduct(lowerSearchText);
         defaultSorted = searchPage.getProductComponentNamesList();
@@ -146,9 +171,10 @@ public class SearchPageTest extends TestRunner {
         Assert.assertEquals(a_z_byNameSorted, defaultSorted);
     }
 
+    //check if list is correctly sorted by name after clicking "Name (Z - A)" option in SortBy dropdown
     @Parameters({"lowerSearchText"})
-    @Test(priority = 12)
-    public void checkSortByZ_A_Name(String lowerSearchText) throws InterruptedException {
+    @Test(priority = 13)
+    public void checkSortByZ_A_Name(String lowerSearchText) {
         searchPage = getHomePage().searchProduct(lowerSearchText);
         defaultSorted = searchPage.getProductComponentNamesList();
         searchPage.toLowerCaseProductList(defaultSorted);
@@ -160,9 +186,10 @@ public class SearchPageTest extends TestRunner {
         Assert.assertEquals(a_z_byNameSorted, defaultSorted);
     }
 
+    //check if list are correctly sorted by price after clicking "Price (Low > High)" option in SortBy dropdown
     @Parameters({"lowerSearchText"})
-    @Test(priority = 13)
-    public void checkSortByPrice(String lowerSearchText) throws InterruptedException {
+    @Test(priority = 14)
+    public void checkSortByPrice(String lowerSearchText) {
         searchPage = getHomePage().searchProduct(lowerSearchText);
         priceList = searchPage.getProductComponentPriceList();
         Collections.sort(priceList);
@@ -171,8 +198,9 @@ public class SearchPageTest extends TestRunner {
         Assert.assertEquals(priceList, byPriceSorted);
     }
 
+    //check if search in descriptions is correct after clicking description checkbox
     @Parameters({"lowerSearchText"})
-    @Test(priority = 14)
+    @Test(priority = 15)
     public void checkDescriptionCheckbox(String lowerSearchText) throws InterruptedException {
         searchPage = getHomePage().searchProduct(lowerSearchText);
         searchPage.getSearchCriteriaComponent().clickDescriptionsCheckbox();
@@ -180,21 +208,6 @@ public class SearchPageTest extends TestRunner {
                 .getProductPageDescription(0)
                 .toLowerCase()
                 .contains(lowerSearchText));
-    }
-    @Parameters({"lowerSearchText"})
-    @Test(priority = 15)
-    public void checkSubcategiriesCheckboxImpact(String lowerSearchText) throws InterruptedException {
-//        searchPage = getHomePage().searchProduct(lowerSearchText);
-//        SearchCriteriaComponent searchCriteriaComponent = searchPage.getSearchCriteriaComponent();
-//        boolean actual = searchCriteriaComponent.isSubcategoriesCheckboxEnabled();
-//        Assert.assertFalse(actual);
-//
-//        searchCriteriaComponent.clickCategoriesDropdown(categoryOption);
-//        searchCriteriaComponent.clickSubcategoriesCheckbox();
-//        actual = searchCriteriaComponent.isSubcategoriesCheckboxEnabled();
-//        Assert.assertTrue(actual);
-
-        //репорт
     }
 }
 

@@ -1,6 +1,7 @@
 package com.opencart.pages;
 
 import com.opencart.pages.comparison.ComparisonPage;
+import com.opencart.pages.product.ProductPage;
 import com.opencart.pages.search.SearchPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -86,6 +87,16 @@ public class HomePage extends AbstractPageWithHeader {
     }
 
     /**
+     * Add product to wish list by button.
+     *
+     * @param productName Product name.
+     */
+    public HomePage clickProductComponentAddToWishListButtonByName(String productName) {
+        getProductComponentByName(productName).clickAddToWishListButton();
+        return this;
+    }
+
+    /**
      * Add product to comparison by button.
      *
      * @param productName Product name.
@@ -99,6 +110,16 @@ public class HomePage extends AbstractPageWithHeader {
     ///endregion
 
     ///region LOGIC
+
+    /**
+     * This method clicks on product name label
+     *
+     * @return Returns new Product page
+     */
+    public ProductPage clickOnProductNameLabel(String productName) {
+        getProductComponentByName(productName).clickOnNameLabel();
+        return new ProductPage(driver);
+    }
 
     /**
      * This method clicks on product comparison link from alert message

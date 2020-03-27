@@ -6,21 +6,14 @@ import com.opencart.pages.account.LoginPage;
 import com.opencart.pages.account.MyAccountPage;
 import com.opencart.tools.JsonDataConfig;
 import com.opencart.tools.Randomizer;
-import com.opencart.tools.TestRunner;
+import com.opencart.tools.TestRunnerYura;
 import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-public class AddressTests extends TestRunner {
+public class AddressTests extends TestRunnerYura {
     JsonDataConfig jsonDataConfig = new JsonDataConfig("TestData.json");
 
-   /* @AfterMethod
-    public void tearDown(ITestResult result) {
-        if (result.getStatus() == ITestResult.FAILURE) {
-            Utility.getScreenshot(Driver.getDriver());
-        }
-    }
-*/
     @Parameters({"myAccountDropdownText"})
     @Test(priority = 1, description = "Check the ability to add Address")
     public void abilityToAddAddress(String myAccountDropdownText) throws InterruptedException {
@@ -44,7 +37,6 @@ public class AddressTests extends TestRunner {
         MyAccountPage myAccountPage = getHomePage().clickMyAccauntInDropdownHardcode();
         AddressBookPage addressBookPage = myAccountPage.clickModifyYourAddressBookEntries();
         addressBookPage = addressBookPage.addAdressIfEmpty();
-        //addressBookPage.addAddressIfthereisnoaddress();
         addressBookPage.deleteLastElement();
         Assert.assertTrue(addressBookPage.succesDeletingAlert());
 
@@ -55,7 +47,7 @@ public class AddressTests extends TestRunner {
         MyAccountPage myAccountPage = getHomePage().clickMyAccauntInDropdownHardcode();
         AddressBookPage addressBookPage = myAccountPage.clickModifyYourAddressBookEntries();
         EditAdressPage edittest = addressBookPage.clickEditAddresss();
-        AddressBookPage adres = edittest.edituser(jsonDataConfig.getFirstNameFromJson(3),
+        AddressBookPage adres = edittest.editUser(jsonDataConfig.getFirstNameFromJson(3),
                 jsonDataConfig.getLastNameFromJson(3),
                 jsonDataConfig.getAddressFromJson(3),
                 jsonDataConfig.getCityFromJson(3),
@@ -94,12 +86,12 @@ public class AddressTests extends TestRunner {
         MyAccountPage myAccountPage = getHomePage().clickMyAccauntInDropdownHardcode();
         AddressBookPage addressBookPage = myAccountPage.clickModifyYourAddressBookEntries();
         EditAdressPage edittest = addressBookPage.clickNewAddress();
-        edittest.EmptyFirstName(jsonDataConfig.getLastNameFromJson(3),
+        edittest.emptyFirstName(jsonDataConfig.getLastNameFromJson(3),
                 jsonDataConfig.getAddressFromJson(3),
                 jsonDataConfig.getCityFromJson(3),
                 jsonDataConfig.getCountryFromJson(3),
                 jsonDataConfig.getRegionFromJson(3));
-        Assert.assertTrue(edittest.succesFirstNameAlert());
+        Assert.assertTrue(edittest.firstNameAlert());
 
     }
 
@@ -108,12 +100,12 @@ public class AddressTests extends TestRunner {
         MyAccountPage myAccountPage = getHomePage().clickMyAccauntInDropdownHardcode();
         AddressBookPage addressBookPage = myAccountPage.clickModifyYourAddressBookEntries();
         EditAdressPage edittest = addressBookPage.clickNewAddress();
-        edittest.EmptyLastName(jsonDataConfig.getFirstNameFromJson(3),
+        edittest.emptyLastName(jsonDataConfig.getFirstNameFromJson(3),
                 jsonDataConfig.getAddressFromJson(3),
                 jsonDataConfig.getCityFromJson(3),
                 jsonDataConfig.getCountryFromJson(3),
                 jsonDataConfig.getRegionFromJson(3));
-        Assert.assertTrue(edittest.succesLastNameAlert());
+        Assert.assertTrue(edittest.lastNameAlert());
 
     }
 
@@ -122,12 +114,12 @@ public class AddressTests extends TestRunner {
         MyAccountPage myAccountPage = getHomePage().clickMyAccauntInDropdownHardcode();
         AddressBookPage addressBookPage = myAccountPage.clickModifyYourAddressBookEntries();
         EditAdressPage edittest = addressBookPage.clickNewAddress();
-        edittest.EmptyAddress(jsonDataConfig.getFirstNameFromJson(3),
+        edittest.emptyAddress(jsonDataConfig.getFirstNameFromJson(3),
                 jsonDataConfig.getLastNameFromJson(3),
                 jsonDataConfig.getCityFromJson(3),
                 jsonDataConfig.getCountryFromJson(3),
                 jsonDataConfig.getRegionFromJson(3));
-        Assert.assertTrue(edittest.succesAddressAlert());
+        Assert.assertTrue(edittest.addressAlert());
 
     }
 
@@ -136,12 +128,12 @@ public class AddressTests extends TestRunner {
         MyAccountPage myAccountPage = getHomePage().clickMyAccauntInDropdownHardcode();
         AddressBookPage addressBookPage = myAccountPage.clickModifyYourAddressBookEntries();
         EditAdressPage edittest = addressBookPage.clickNewAddress();
-        edittest.EmptyCity(jsonDataConfig.getFirstNameFromJson(3),
+        edittest.emptyCity(jsonDataConfig.getFirstNameFromJson(3),
                 jsonDataConfig.getLastNameFromJson(3),
                 jsonDataConfig.getAddressFromJson(3),
                 jsonDataConfig.getCountryFromJson(3),
                 jsonDataConfig.getRegionFromJson(3));
-        Assert.assertTrue(edittest.succesCityAlert());
+        Assert.assertTrue(edittest.cityAlert());
         Thread.sleep(5000);
     }
 
@@ -150,12 +142,11 @@ public class AddressTests extends TestRunner {
         MyAccountPage myAccountPage = getHomePage().clickMyAccauntInDropdownHardcode();
         AddressBookPage addressBookPage = myAccountPage.clickModifyYourAddressBookEntries();
         EditAdressPage edittest = addressBookPage.clickNewAddress();
-        edittest.EmptyCountry(jsonDataConfig.getFirstNameFromJson(3),
+        edittest.emptyCountry(jsonDataConfig.getFirstNameFromJson(3),
                 jsonDataConfig.getLastNameFromJson(3),
                 jsonDataConfig.getAddressFromJson(3),
-                jsonDataConfig.getCityFromJson(3),
-                jsonDataConfig.getRegionFromJson(3));
-        Assert.assertTrue(edittest.succesCountryAlert());
+                jsonDataConfig.getCityFromJson(3));
+        Assert.assertTrue(edittest.countryAlert());
         Thread.sleep(5000);
     }
 
@@ -169,7 +160,7 @@ public class AddressTests extends TestRunner {
                 jsonDataConfig.getAddressFromJson(3),
                 jsonDataConfig.getCityFromJson(3),
                 jsonDataConfig.getCountryFromJson(3));
-        Assert.assertTrue(edittest.succesRegionAlert());
+        Assert.assertTrue(edittest.regionAlert());
         Thread.sleep(5000);
     }
 
@@ -219,16 +210,12 @@ public class AddressTests extends TestRunner {
         Thread.sleep(5000);
     }
 
-  /*  @Test(priority = 15)
+    @Test(priority = 15)
     public void clearAddressBook() throws InterruptedException {
         MyAccountPage myAccountPage = getHomePage().clickMyAccauntInDropdownHardcode();
         AddressBookPage addressBookPage = myAccountPage.clickModifyYourAddressBookEntries();
         addressBookPage.deleteAll();
         Thread.sleep(5000);
-    }*/
-    @Test(priority = 16)
-    public void checkJson() throws InterruptedException {
-        System.out.println(jsonDataConfig.getEmailFromJson(2)+jsonDataConfig.getPasswordFromJson(2));
-        Thread.sleep(5000);
     }
+
 }

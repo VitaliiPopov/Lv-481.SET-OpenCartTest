@@ -66,13 +66,18 @@ public class AddressBookPage extends AbstractPageWithHeader {
 
     public AddressBookPage addAdressIfEmpty() {
         if (addressBookContainersComponents.size() == 1) {
-            return clickNewAddress().register(jsonDataConfig.getFirstNameFromJson(3), jsonDataConfig.getLastNameFromJson(3), jsonDataConfig.getAddressFromJson(3), jsonDataConfig.getCityFromJson(3), jsonDataConfig.getCountryFromJson(3), jsonDataConfig.getRegionFromJson(3));
+            return clickNewAddress().register(jsonDataConfig.getFirstNameFromJson(3), // Adding default valid test address from json
+                    jsonDataConfig.getLastNameFromJson(3),
+                    jsonDataConfig.getAddressFromJson(3),
+                    jsonDataConfig.getCityFromJson(3),
+                    jsonDataConfig.getCountryFromJson(3),
+                    jsonDataConfig.getRegionFromJson(3));
         }
         return new AddressBookPage(driver);
     }
 
     public void deleteLastElement() {
-        addressBookContainersComponents.get(addressBookContainersComponents.size() - 1).clickDeleteAddressButton();
+        addressBookContainersComponents.get(addressBookContainersComponents.size()-1).clickDeleteAddressButton();
     }
 
     public EditAdressPage clickEditAddresss() {
@@ -80,9 +85,9 @@ public class AddressBookPage extends AbstractPageWithHeader {
         return new EditAdressPage(driver);
     }
 
-    public boolean checkAddresTextCorect(String FIRST_NAME, String LAST_NAME, String ADDRESS, String CITY, String COUNTRY, String REGION) {
+    public boolean checkAddresTextCorect(String firstName, String lastName, String address, String city, String country, String region) {
         String actualAddress = addressBookContainersComponents.get(0).getAddressText();
-        String rightAddress = FIRST_NAME + " " + LAST_NAME + "\n" + ADDRESS + "\n" + CITY + "\n" + REGION + "\n" + COUNTRY;
+        String rightAddress = firstName + " " + lastName + "\n" + address + "\n" + city + "\n" + region + "\n" + country;
         return rightAddress.equalsIgnoreCase(actualAddress);
     }
 

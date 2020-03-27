@@ -38,10 +38,10 @@
     <test name="YuriiSereda">
         <!--MainTest-->
         <parameter name="myAccountDropdownText" value="Login"/>
-        <parameter name="myAccount" value="My Account"/>
+      <!--  <parameter name="myAccount" value="My Account"/>-->
 
-        <parameter name="search" value="ip"/>
-        <parameter name="productName" value="iPhone"/>
+      <!--  <parameter name="search" value="ip"/>
+        <parameter name="productName" value="iPhone"/>-->
         <classes>
             <!--MainTest-->
             <class name="test.AddressTests">
@@ -60,8 +60,7 @@
                     <include name="checkAlertsWithTooLongInputs"/>
                     <include name="checkAlertsWithTooLongInputs"/>
                     <include name="createAddressWithNumbersInsteadCharacters"/>
-                    <include name="clearAddressBook"/>
-                    <include name="checkJson"/>
+                    <!--<include name="checkJson"/>-->
                 </methods>
             </class>
         </classes>

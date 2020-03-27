@@ -269,7 +269,7 @@ public class AbstractPageWithHeader {
     // hardcode by Yura
     public MyAccountPage clickMyAccauntInDropdownHardcode() {
         openMyAccountDropdown();
-        driver.findElement(By.xpath("//ul[@class='dropdown-menu dropdown-menu-right']//li[last()-4]")).click();
+        driver.findElement(By.xpath("//ul[@class='dropdown-menu dropdown-menu-right']//li[last()-4]")).click();//
         return new MyAccountPage(driver);
     }
 

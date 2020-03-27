@@ -6,7 +6,6 @@ import com.opencart.pages.wishlist.WishListPage;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
-
 import org.testng.annotations.BeforeClass;
 
 public class TestRunner {
@@ -29,7 +28,7 @@ public class TestRunner {
     @AfterMethod
     public void tearDown(ITestResult result) {
         if (result.getStatus() == ITestResult.FAILURE) {
-            //Utility.getScreenshot(Driver.getDriver());
+            Utility.getScreenshot(Driver.getDriver());
             Driver.getDriver().get("https://137.116.222.54/index.php?route=account/logout");
         }
     }

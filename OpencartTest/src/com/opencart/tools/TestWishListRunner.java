@@ -34,7 +34,7 @@ public class TestWishListRunner {
 
     @AfterMethod(alwaysRun = true)
     public void afterMethod() {
-        Driver.ClearCookies();
+        Driver.clearCookies();
     }
 
     public HomePage getHomePage() {

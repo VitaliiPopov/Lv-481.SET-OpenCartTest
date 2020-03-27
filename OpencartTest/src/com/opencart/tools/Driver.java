@@ -48,7 +48,7 @@ public class Driver {
         return driver;
     }
 
-    public static void ClearCookies() {
+    public static void clearCookies() {
         driver.manage().deleteAllCookies();
     }
 }

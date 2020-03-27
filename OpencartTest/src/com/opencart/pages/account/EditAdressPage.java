@@ -143,16 +143,6 @@ public class EditAdressPage extends AbstractPageWithHeader {
         Select statusDropdown = new Select(regionStateDropdown);
         statusDropdown.selectByVisibleText("--- None ---");
     }
-
-    // DefaultAddresRadioB and not default
-    public void clicknotDefaultAddresRadioB() {
-        notDefaultAddresRadioB.click();
-    }
-
-    public void clickDefaultAddresRadioB() {
-        defaultAddresRadioB.click();
-    }
-
     //continueButton
     public void clickContinueSubmitButton() {
         continueSubmitButton.click();
@@ -161,174 +151,170 @@ public class EditAdressPage extends AbstractPageWithHeader {
 
 
     //firstnameInputField
-    public void fillInputFirstname(String firstname) {
+    public void inputFirstname(String firstname) {
         clickFirstnameInputField();
         clearFirstnameInputField();
         setFirstnameInputField(firstname);
     }
 
     //firstnameInputField
-    public void fillInputLastname(String lastname) {
+    public void inputLastname(String lastname) {
         clickLastnameInputField();
         clearLastnameInputField();
         setLastnameInputField(lastname);
     }
 
     //addressinputField
-    public void fillAdressfield(String addres) {
+    public void inputAdress(String addres) {
         clickAddresInputField();
         clearAddresInputField();
         setAddresInputField(addres);
     }
 
-    //firstnameInputField
-    public void fillInputCity(String city) {
+    //City InputField
+    public void inputCity(String city) {
         clickCityInputField();
         clearCityInputField();
         setCityInputField(city);
     }
 
     //Alerts
-    public boolean succesFirstNameAlert() {
+    public boolean firstNameAlert() {
         if (firstNameAlert.getText().equalsIgnoreCase("First Name must be between 1 and 32 characters!")) {
             return firstNameAlert.isDisplayed();
         } else return false;
     }
 
-    public boolean succesLastNameAlert() {
+    public boolean lastNameAlert() {
         if (lastNameAlert.getText().equalsIgnoreCase("Last Name must be between 1 and 32 characters!")) {
             return lastNameAlert.isDisplayed();
         } else return false;
     }
 
-    public boolean succesAddressAlert() {
+    public boolean addressAlert() {
         if (addressAlert.getText().equalsIgnoreCase("Address must be between 3 and 128 characters!")) {
             return addressAlert.isDisplayed();
         } else return false;
     }
 
-    public boolean succesCityAlert() {
+    public boolean cityAlert() {
         if (cityAlert.getText().equalsIgnoreCase("City must be between 2 and 128 characters!")) {
             return firstNameAlert.isDisplayed();
         } else return false;
     }
 
-    public boolean succesCountryAlert() {
+    public boolean countryAlert() {
         if (countryAlert.getText().equalsIgnoreCase("Please select a country!")) {
             return countryAlert.isDisplayed();
         } else return false;
     }
 
-    public boolean succesRegionAlert() {
+    public boolean regionAlert() {
         if (regionAlert.getText().equalsIgnoreCase("Please select a region / state!")) {
             return regionAlert.isDisplayed();
         } else return false;
     }
 
     public boolean allMandatoryAlerts() {
-        if (succesAddressAlert() && succesFirstNameAlert() && succesLastNameAlert() && succesCityAlert()) {
+        if (addressAlert() && firstNameAlert() && lastNameAlert() && cityAlert()) {
             return true;
         } else return false;
     }
 
     public boolean firstLastNameAlerts() {
-        if (succesFirstNameAlert() && succesLastNameAlert()) {
+        if (firstNameAlert() && lastNameAlert()) {
             return true;
         } else return false;
     }
 
     //Busines logic
-    public AddressBookPage register(String FIRST_NAME, String LAST_NAME, String ADDRESS, String CITY, String COUNTRY, String REGION) {
-        fillInputFirstname(FIRST_NAME);
-        fillInputLastname(LAST_NAME);
-        fillAdressfield(ADDRESS);
-        fillInputCity(CITY);
-        selectCountry(COUNTRY);
-        selectRegion(REGION);
+    public AddressBookPage register(String firstName, String lastName, String address, String city, String country, String region) {
+        inputFirstname(firstName);
+        inputLastname(lastName);
+        inputAdress(address);
+        inputCity(city);
+        selectCountry(country);
+        selectRegion(region);
         clickContinueSubmitButton();
         return new AddressBookPage(driver);
     }
 
-    public AddressBookPage edituser(String FIRST_NAME, String LAST_NAME, String ADDRESS, String CITY, String COUNTRY, String REGION) {
-        fillInputFirstname(FIRST_NAME);
-        fillInputLastname(LAST_NAME);
-        fillAdressfield(ADDRESS);
-        fillInputCity(CITY);
-        selectCountry(COUNTRY);
-        selectRegion(REGION);
+    public AddressBookPage editUser(String firstName, String lastName, String address, String city, String country, String region) {
+        inputFirstname(firstName);
+        inputLastname(lastName);
+        inputAdress(address);
+        inputCity(city);
+        selectCountry(country);
+        selectRegion(region);
         clickContinueSubmitButton();
         return new AddressBookPage(driver);
     }
 
-    public void EmptyFirstName(String LAST_NAME, String ADDRESS, String CITY, String COUNTRY, String REGION) {
-        fillInputLastname(LAST_NAME);
-        fillAdressfield(ADDRESS);
-        fillInputCity(CITY);
-        selectCountry(COUNTRY);
-        selectRegion(REGION);
+    public void emptyFirstName(String lastName, String address, String city, String country, String region) {
+        inputLastname(lastName);
+        inputAdress(address);
+        inputCity(city);
+        selectCountry(country);
+        selectRegion(region);
         clickContinueSubmitButton();
     }
 
-    public void EmptyLastName(String FIRST_NAME, String ADDRESS, String CITY, String COUNTRY, String REGION) {
-        fillInputFirstname(FIRST_NAME);
-        fillAdressfield(ADDRESS);
-        fillInputCity(CITY);
-        selectCountry(COUNTRY);
-        selectRegion(REGION);
+    public void emptyLastName(String firstName, String address, String city, String country, String region) {
+        inputFirstname(firstName);
+        inputAdress(address);
+        inputCity(city);
+        selectCountry(country);
+        selectRegion(region);
         clickContinueSubmitButton();
     }
 
-    public void EmptyAddress(String FIRST_NAME, String LAST_NAME, String CITY, String COUNTRY, String REGION) {
-        fillInputFirstname(FIRST_NAME);
-        fillInputLastname(LAST_NAME);
-
-        fillInputCity(CITY);
-        selectCountry(COUNTRY);
-        selectRegion(REGION);
+    public void emptyAddress(String firstName, String lastName, String city, String country, String region) {
+        inputFirstname(firstName);
+        inputLastname(lastName);
+        inputCity(city);
+        selectCountry(country);
+        selectRegion(region);
         clickContinueSubmitButton();
     }
 
-    public void EmptyCity(String FIRST_NAME, String LAST_NAME, String ADDRESS, String COUNTRY, String REGION) {
-        fillInputFirstname(FIRST_NAME);
-        fillInputLastname(LAST_NAME);
-        fillAdressfield(ADDRESS);
-        selectCountry(COUNTRY);
-        selectRegion(REGION);
+    public void emptyCity(String firstName, String lastName, String address, String country, String region) {
+        inputFirstname(firstName);
+        inputLastname(lastName);
+        inputAdress(address);
+        selectCountry(country);
+        selectRegion(region);
         clickContinueSubmitButton();
 
     }
 
-    public void EmptyCountry(String FIRST_NAME, String LAST_NAME, String ADDRESS, String CITY, String REGION) {
-        fillInputFirstname(FIRST_NAME);
-        fillInputLastname(LAST_NAME);
-        fillAdressfield(ADDRESS);
-        fillInputCity(CITY);
+    public void emptyCountry(String firstName, String lastName, String address, String city) {
+        inputFirstname(firstName);
+        inputLastname(lastName);
+        inputAdress(address);
+        inputCity(city);
         selectCountryDefault();
         clickContinueSubmitButton();
 
     }
 
-    public void emptyRegion(String FIRST_NAME, String LAST_NAME, String ADDRESS, String CITY, String COUNTRY) {
-        fillInputFirstname(FIRST_NAME);
-        fillInputLastname(LAST_NAME);
-        fillAdressfield(ADDRESS);
-        fillInputCity(CITY);
-        selectCountry(COUNTRY);
+    public void emptyRegion(String firstName, String lastName, String address, String city, String country) {
+        inputFirstname(firstName);
+        inputLastname(lastName);
+        inputAdress(address);
+        inputCity(city);
+        selectCountry(country);
         clickContinueSubmitButton();
     }
 
-    public void invalidInputsAlertCheck(String FIRST_NAME, String LAST_NAME, String ADDRESS, String CITY, String COUNTRY, String REGION) {
-        fillInputFirstname(FIRST_NAME);
-        fillInputLastname(LAST_NAME);
-        fillAdressfield(ADDRESS);
-        fillInputCity(CITY);
-        selectCountry(COUNTRY);
-        selectRegion(REGION);
+    public void invalidInputsAlertCheck(String firstName, String lastName, String address, String city, String country, String region) {
+        inputFirstname(firstName);
+        inputLastname(lastName);
+        inputAdress(address);
+        inputCity(city);
+        selectCountry(country);
+        selectRegion(region);
         clickContinueSubmitButton();
 
     }
 
-    public AddressBookPage goToAdressBookPage() {
-        return new AddressBookPage(driver);
-    }
 }

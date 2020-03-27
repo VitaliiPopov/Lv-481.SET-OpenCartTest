@@ -24,8 +24,7 @@ public class JsonDataConfig {
         }
     }
 
-
-    public String getEmailFromJson(int user_index){
+    public String getEmailFromJson(int user_index) {
         return listUser.get(user_index).getEmail();
     }
 
@@ -61,5 +60,7 @@ public class JsonDataConfig {
         return listUser.get(user_index).getRegion();
     }
 
-
+    public CustomUser getUserFromJson(int user_index) {
+        return listUser.get(user_index);
+    }
 }

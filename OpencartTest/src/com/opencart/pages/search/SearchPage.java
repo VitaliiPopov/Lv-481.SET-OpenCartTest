@@ -230,7 +230,6 @@ public class SearchPage extends AbstractPageWithHeader {
     //add to Wish List by button
     public void clickProductComponentAddToWishList(String productName) {
         getProductComponentByName(productName).clickAddToWishListButton();
-        //InitializeAlert();
     }
 
     ///endregion

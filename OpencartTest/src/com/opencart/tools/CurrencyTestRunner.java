@@ -8,7 +8,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 
-public class TestRunner {
+public class CurrencyTestRunner {
 
     @BeforeClass
     public void beforeClass() {
@@ -20,12 +20,6 @@ public class TestRunner {
         Driver.quit();
     }
 
-    @AfterMethod
-    public void tearDown(ITestResult result) {
-        if (result.getStatus() == ITestResult.FAILURE)
-            Utility.getScreenshot(Driver.getDriver());
-        Driver.clearCookies();
-    }
 
     public HomePage getHomePage() {
         return new HomePage(Driver.getDriver());

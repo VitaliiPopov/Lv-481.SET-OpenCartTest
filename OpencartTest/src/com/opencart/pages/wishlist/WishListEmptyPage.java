@@ -19,7 +19,7 @@ public class WishListEmptyPage extends AbstractPageWithHeader {
 
     public void initElements() {
         continueButton = driver.findElement(By.xpath("//div[@class='pull-right']/a"));
-        emptyMessageLabel = driver.findElement(By.xpath("//div[@id='content']/p"));
+        emptyMessageLabel = driver.findElement(By.cssSelector("#content p"));
     }
 
     // continue button

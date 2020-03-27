@@ -6,14 +6,14 @@ import com.opencart.pages.account.LoginPage;
 import com.opencart.pages.account.MyAccountPage;
 import com.opencart.pages.cart.CartPage;
 import com.opencart.pages.search.SearchPage;
+import com.opencart.tools.CurrencyTestRunner;
 import com.opencart.tools.JsonDataConfig;
-import com.opencart.tools.TestRunner;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-public class CartCurrencyTest extends TestRunner {
+public class CartCurrencyTest extends CurrencyTestRunner {
 
     JsonDataConfig jsonParser = new JsonDataConfig("TestData.json");
 
@@ -21,43 +21,33 @@ public class CartCurrencyTest extends TestRunner {
     @Test(priority = 1)
     public void Login(String myAccountDropdownText) throws InterruptedException {
         LoginPage loginPage = getHomePage().goToLoginPage(myAccountDropdownText);
-        MyAccountPage myAccountPage = loginPage.login(jsonParser.getEmailFromJson(8),jsonParser.getPasswordFromJson(8));
+        MyAccountPage myAccountPage = loginPage.login(jsonParser.getEmailFromJson(8), jsonParser.getPasswordFromJson(8));
         HomePage homepage = myAccountPage.goToHomePage();
     }
 
-    @DataProvider
-    public Object[][] Products(){
-        return new Object[][]{
-                { "MacBook" },
-        };
-    }
-    @Test(priority = 2,dataProvider = "Products")
+
+    @Test(priority = 2)
+    @Parameters({"productName"})
     public void addProductToCart(String productPartialName) throws InterruptedException {
-
-
         SearchPage searchPage = getHomePage().searchProduct(productPartialName);
-        Thread.sleep(1000);
+        Thread.sleep(1000);// ONLY FOR PRESENTATION
         searchPage.clickProductComponentAddToCartButtonByName(productPartialName);
-
     }
 
     @DataProvider
-    public Object[][] currencyData(){
+    public Object[][] currencyData() {
         return new Object[][]{
-                {Currencies.POUND_STERLING,"£"},
-                {Currencies.EURO,"€"},
-                {Currencies.US_DOLLAR,"$"},
+                {Currencies.POUND_STERLING, "£"},
+                {Currencies.EURO, "€"},
+                {Currencies.US_DOLLAR, "$"},
         };
     }
 
-
-    @Test(priority = 3,dataProvider = "currencyData")
-    public void changeCurrencyOnCartPage(Currencies currency,String
+    @Test(priority = 3, dataProvider = "currencyData")
+    public void changeCurrencyOnCartPage(Currencies currency, String
             ExpectedSymbolOfCurrency) throws InterruptedException {
-
         CartPage cartPage = getCartPage().goToCart();
         cartPage.chooseCurrencyInCart(currency);
-        Assert.assertEquals(cartPage.getCurrencyText(),ExpectedSymbolOfCurrency);
-
+        Assert.assertEquals(cartPage.getCurrencyText(), ExpectedSymbolOfCurrency);
     }
 }

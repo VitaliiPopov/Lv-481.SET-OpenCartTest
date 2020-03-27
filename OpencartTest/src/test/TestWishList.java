@@ -2,9 +2,8 @@ package test;
 
 import com.opencart.pages.HomePage;
 import com.opencart.pages.account.*;
-import com.opencart.pages.product_table.WishListEmptyPage;
-import com.opencart.pages.product_table.WishListPage;
 import com.opencart.pages.search.*;
+import com.opencart.pages.wishlist.WishListEmptyPage;
 import com.opencart.pages.wishlist.WishListPage;
 import com.opencart.tools.JsonDataConfig;
 import com.opencart.tools.TestRunner;

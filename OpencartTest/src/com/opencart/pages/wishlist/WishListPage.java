@@ -85,5 +85,15 @@ public class WishListPage extends AbstractPageWithHeader {
         return new MyAccountPage(driver);
     }
 
+    // Getting product price in Wish
+    public String getProductPriceTextInWishList(String partialProductName){
+        return getWishListContainerComponent().getUnitPrice(partialProductName);
+    }
+
+    //parse to double by Regex
+    public double getProductPriceInWishList(String partialProductName){
+        return RegexUtils.extractFirstDouble(getProductPriceTextInWishList(partialProductName));
+    }
+
 }
 

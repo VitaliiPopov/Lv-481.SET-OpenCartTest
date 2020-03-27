@@ -6,6 +6,7 @@ import com.opencart.pages.account.AccountLogoutPage;
 import com.opencart.pages.account.MyAccountPage;
 import com.opencart.pages.account.RegisterPage;
 import com.opencart.pages.search.SearchPage;
+import com.opencart.pages.wishlist.WishListEmptyPage;
 import com.opencart.pages.wishlist.WishListPage;
 import com.opencart.tools.RegexUtils;
 
@@ -96,6 +97,7 @@ public class AbstractPageWithHeader {
     }
 
     //currency
+    public String getFullCurrencyText(){return currency.getText().substring(1);}
     public String getCurrencyText() {
         return currency.getText().substring(0, 1);
     }
@@ -356,6 +358,10 @@ public class AbstractPageWithHeader {
         return new CartPage(driver);
     }
 
+    public WishListEmptyPage goToWishListEmptyPage(){
+        clickWishList();
+        return new WishListEmptyPage(driver);
+    }
     ///endregion
 
 }

@@ -4,9 +4,9 @@ import com.opencart.data.Currencies;
 import com.opencart.pages.HomePage;
 import com.opencart.pages.account.LoginPage;
 import com.opencart.pages.account.MyAccountPage;
-import com.opencart.pages.product_table.CartPage;
-import com.opencart.pages.product_table.WishListPage;
+import com.opencart.pages.cart.CartPage;
 import com.opencart.pages.search.SearchPage;
+import com.opencart.tools.JsonDataConfig;
 import com.opencart.tools.TestRunner;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -15,21 +15,20 @@ import org.testng.annotations.Test;
 
 public class CartCurrencyTest extends TestRunner {
 
-    ExcelDataConfig excelDataConfig = new ExcelDataConfig("TestData.xlsx");
+    JsonDataConfig jsonParser = new JsonDataConfig("TestData.json");
 
     @Parameters({"myAccountDropdownText"})
     @Test(priority = 1)
     public void Login(String myAccountDropdownText) throws InterruptedException {
         LoginPage loginPage = getHomePage().goToLoginPage(myAccountDropdownText);
-        MyAccountPage myAccountPage = loginPage.login(excelDataConfig.getData(0, 0, 0), excelDataConfig.getData(0, 0, 1));
-        HomePage homepahe = myAccountPage.goToHomePage();
+        MyAccountPage myAccountPage = loginPage.login(jsonParser.getEmailFromJson(8),jsonParser.getPasswordFromJson(8));
+        HomePage homepage = myAccountPage.goToHomePage();
     }
 
     @DataProvider
     public Object[][] Products(){
         return new Object[][]{
                 { "MacBook" },
-                // { "iPhone" }
         };
     }
     @Test(priority = 2,dataProvider = "Products")
@@ -39,9 +38,6 @@ public class CartCurrencyTest extends TestRunner {
         SearchPage searchPage = getHomePage().searchProduct(productPartialName);
         Thread.sleep(1000);
         searchPage.clickProductComponentAddToCartButtonByName(productPartialName);
-        Thread.sleep(2000);
-        CartPage cartPage = searchPage.goToCart();
-        Assert.assertTrue(searchPage.isAlertDisplayed());
 
     }
 
@@ -62,5 +58,6 @@ public class CartCurrencyTest extends TestRunner {
         CartPage cartPage = getCartPage().goToCart();
         cartPage.chooseCurrencyInCart(currency);
         Assert.assertEquals(cartPage.getCurrencyText(),ExpectedSymbolOfCurrency);
+
     }
 }

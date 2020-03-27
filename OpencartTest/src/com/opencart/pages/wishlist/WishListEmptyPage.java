@@ -14,6 +14,7 @@ public class WishListEmptyPage extends AbstractPageWithHeader {
 
     public WishListEmptyPage(WebDriver driver) {
         super(driver);
+        initElements();
     }
 
     public void initElements() {

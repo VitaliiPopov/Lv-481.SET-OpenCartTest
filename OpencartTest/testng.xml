@@ -21,19 +21,58 @@
 <!--            </class>-->
 <!--        </classes>-->
 <!--    </test>-->
-    <test name="CartTest">
+<!--    <test name="CartTest">-->
+<!--        &lt;!&ndash;MainTest&ndash;&gt;-->
+<!--        <parameter name="myAccountDropdownText" value="Login"></parameter>-->
+<!--        <classes>-->
+<!--            &lt;!&ndash;MainTest&ndash;&gt;-->
+<!--            <class name="test.cart_test.CartTest">-->
+<!--                <methods>-->
+<!--                    <include name="loginTest"/>-->
+<!--                    <include name="checkUncorrectFunctionOfRefreshButtonInCart"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test> &lt;!&ndash; Individual &ndash;&gt;&ndash;&gt;-->
+<!--</suite> &lt;!&ndash; Default Suite &ndash;&gt;-->
+
+
+
+
+
+<!--    <test name="CartCurrencyTest">-->
+<!--        &lt;!&ndash;MainTest&ndash;&gt;-->
+<!--        <parameter name="myAccountDropdownText" value="Login"></parameter>-->
+<!--        <classes>-->
+<!--            &lt;!&ndash;MainTest&ndash;&gt;-->
+<!--            <class name="test.CartCurrencyTest">-->
+<!--                <methods>-->
+<!--                    <include name="Login"/>-->
+<!--                    <include name="addProductToCart"/>-->
+<!--                    <include name="changeCurrencyOnCartPage"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test> &lt;!&ndash; Individual &ndash;&gt;&ndash;&gt;-->
+
+
+   <test name="WishListCurrencyTest">
         <!--MainTest-->
         <parameter name="myAccountDropdownText" value="Login"></parameter>
         <classes>
             <!--MainTest-->
-            <class name="test.cart_test.CartTest">
+            <class name="test.WishListCurrencyTest">
                 <methods>
-                    <include name="loginTest"/>
-                    <include name="checkUncorrectFunctionOfRefreshButtonInCart"/>
+                    <include name="Login"/>
+                    <include name="addProductToWishList"/>
+                    <include name="changeCurrencyOnWishListPage"/>
+                    <include name="changeCurrencyAtHomePahe"/>
                 </methods>
             </class>
         </classes>
     </test> <!-- Individual &ndash;&gt;-->
+
+
 </suite> <!-- Default Suite -->
 
 <!--end-->

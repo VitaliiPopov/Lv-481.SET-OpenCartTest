@@ -1,4 +1,4 @@
-/*package test;
+package test;
 
 import com.opencart.pages.account.LoginPage;
 import com.opencart.pages.account.MyAccountPage;
@@ -36,4 +36,4 @@ public class LoginTest extends TestRunner {
     }
 
 
-}*/
+}

@@ -17,13 +17,16 @@ public class AddressBookPage extends AbstractPageWithHeader {
     private List<AddressBookContainersComponent> addressBookContainersComponents;
 
     @FindBy(how = How.CSS, css = ".btn-primary")
-    private WebElement newAdressButton;
+    private WebElement newAddressButton;
+
+    @FindBy(how = How.CSS, css = ".btn-info")
+    private WebElement editAddress;
 
     @FindBy(how = How.XPATH, xpath = "//*[@class='alert alert-success alert-dismissible']")
-    private WebElement adresssBookAlertMessages;
+    private WebElement addressBookAlertMessages;
 
     @FindBy(how = How.CSS, css = ".alert")
-    private WebElement adresssDeleteDefaultAlert;
+    private WebElement addressDeleteDefaultAlert;
 
 
     public AddressBookPage(WebDriver driver) {
@@ -33,12 +36,12 @@ public class AddressBookPage extends AbstractPageWithHeader {
     }
 
     public EditAdressPage clickNewAddress() {
-        newAdressButton.click();
+        newAddressButton.click();
         return new EditAdressPage(driver);
     }
 
     public EditAdressPage clickEditAddress() {
-        newAdressButton.click();
+        editAddress.click();
         return new EditAdressPage(driver);
     }
 
@@ -64,7 +67,7 @@ public class AddressBookPage extends AbstractPageWithHeader {
         addressBookContainersComponents.get(0).clickDeleteAddressButton();
     }
 
-    public AddressBookPage addAdressIfEmpty() {
+    public AddressBookPage addAddressIfEmpty() {
         if (addressBookContainersComponents.size() == 1) {
             return clickNewAddress().register(jsonDataConfig.getFirstNameFromJson(3), // Adding default valid test address from json
                     jsonDataConfig.getLastNameFromJson(3),
@@ -85,37 +88,37 @@ public class AddressBookPage extends AbstractPageWithHeader {
         return new EditAdressPage(driver);
     }
 
-    public boolean checkAddresTextCorect(String firstName, String lastName, String address, String city, String country, String region) {
+    public boolean checkAddressTextCorrect(String firstName, String lastName, String address, String city, String country, String region) {
         String actualAddress = addressBookContainersComponents.get(0).getAddressText();
         String rightAddress = firstName + " " + lastName + "\n" + address + "\n" + city + "\n" + region + "\n" + country;
         return rightAddress.equalsIgnoreCase(actualAddress);
     }
 
     //ALERTS FUNCTIONS
-    public boolean succesAddingAlert() {
-        if (adresssBookAlertMessages.getText().equalsIgnoreCase("Your address has been successfully added")) {
-            return adresssBookAlertMessages.isDisplayed();
+    public boolean successAddingAlert() {
+        if (addressBookAlertMessages.getText().equalsIgnoreCase("Your address has been successfully added")) {
+            return addressBookAlertMessages.isDisplayed();
         } else return false;
 
     }
 
-    public boolean succesDeletingAlert() {
-        if (adresssBookAlertMessages.getText().equalsIgnoreCase("Your address has been successfully deleted")) {
-            return adresssBookAlertMessages.isDisplayed();
+    public boolean successDeletingAlert() {
+        if (addressBookAlertMessages.getText().equalsIgnoreCase("Your address has been successfully deleted")) {
+            return addressBookAlertMessages.isDisplayed();
         } else return false;
 
     }
 
     public boolean successEditingAlert() {
-        if (adresssBookAlertMessages.getText().equalsIgnoreCase("Your address has been successfully updated")) {
-            return adresssBookAlertMessages.isDisplayed();
+        if (addressBookAlertMessages.getText().equalsIgnoreCase("Your address has been successfully updated")) {
+            return addressBookAlertMessages.isDisplayed();
         } else return false;
 
     }
 
     public boolean defaultDeleteAlert() {
-        if (adresssDeleteDefaultAlert.getText().equalsIgnoreCase("Warning: You must have at least one address!")) {
-            return adresssDeleteDefaultAlert.isDisplayed();
+        if (addressDeleteDefaultAlert.getText().equalsIgnoreCase("Warning: You must have at least one address!")) {
+            return addressDeleteDefaultAlert.isDisplayed();
         } else return false;
     }
 }

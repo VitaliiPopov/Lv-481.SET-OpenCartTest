@@ -1,4 +1,3 @@
-/*
 package test;
 
 import com.opencart.data.Currencies;
@@ -81,4 +80,3 @@ public class WishListCurrencyTest extends TestRunner {
 
 
 }
-*/

@@ -21,7 +21,7 @@ public class TestRunnerYura {
 
     @AfterClass
     public void afterClass() {
-        MyAccountPage myAccountPage = getHomePage().clickMyAccauntInDropdownHardcode();
+        MyAccountPage myAccountPage = getHomePage().clickMyAccountInDropdown();
         AddressBookPage addressBookPage = myAccountPage.clickModifyYourAddressBookEntries();
         addressBookPage.deleteAll();
         Driver.quit();

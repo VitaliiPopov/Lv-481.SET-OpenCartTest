@@ -1,4 +1,3 @@
-/*
 package test;
 
 import com.opencart.pages.account.LoginPage;
@@ -139,4 +138,3 @@ public class SearchPageTest extends TestRunner {
 
 }
 
-*/

@@ -46,9 +46,7 @@ public class CartDropdownComponent {
     public String getCartTotalMessageText() {
         return cartTotalMessage.getText();
     }
-
-
-
+    
     //totalPrice
     public WebElement getTotalPrice() {
         totalPrice = cartDropdownComponentLayout.findElement(By.xpath(".//table[@class='table table-bordered']//tr[2]/td[2]"));

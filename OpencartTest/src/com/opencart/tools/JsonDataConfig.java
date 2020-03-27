@@ -24,8 +24,6 @@ public class JsonDataConfig {
         }
     }
 
-    // there will be all getters for fields
-
     public String getEmailFromJson(int user_index) {
         return listUser.get(user_index).getEmail();
     }
@@ -65,4 +63,5 @@ public class JsonDataConfig {
     public CustomUser getUserFromJson(int user_index) {
         return listUser.get(user_index);
     }
+
 }

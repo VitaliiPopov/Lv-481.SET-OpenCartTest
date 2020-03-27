@@ -5,7 +5,6 @@ import com.opencart.pages.product.ProductPage;
 import com.opencart.pages.search.SearchPage;
 import com.opencart.pages.wishlist.WishListEmptyPage;
 import com.opencart.pages.wishlist.WishListPage;
-import com.opencart.tools.JsonDataConfig;
 import com.opencart.tools.TestWishListRunner;
 import org.testng.Assert;
 import org.testng.annotations.Parameters;

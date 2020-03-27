@@ -261,7 +261,6 @@ public class AbstractPageWithHeader {
         else return true;
     }
 
-    ///////////////////////////////////////////////////////////////
     //WishList
     public String getWishListText() {
         return wishList.getText();
@@ -271,10 +270,10 @@ public class AbstractPageWithHeader {
         return RegexUtils.extractFirstNumber(getWishListText());
     }
 
-    // hardcode by Yura
-    public MyAccountPage clickMyAccauntInDropdownHardcode() {
+    //  by Yura dropdown
+    public MyAccountPage clickMyAccountInDropdown() {
         openMyAccountDropdown();
-        driver.findElement(By.xpath("//ul[@class='dropdown-menu dropdown-menu-right']//li[last()-4]")).click();
+        driver.findElement(By.xpath("//ul[@class='dropdown-menu dropdown-menu-right']//li[last()-4]")).click();//
         return new MyAccountPage(driver);
     }
 

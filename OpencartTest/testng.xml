@@ -61,8 +61,8 @@
 
         <parameter name="myAccountDropdownText" value="Login"/>
 
-        <parameter name="first_productName" value="MacBook"/>
-        <parameter name="second_productName" value="iPhone"/>
+        <parameter name="firstProductName" value="MacBook"/>
+        <parameter name="secondProductName" value="iPhone"/>
         <classes>
             <class name="test.TestWishList">
                 <methods>
@@ -76,8 +76,8 @@
 
         <parameter name="myAccountDropdownText" value="Login"/>
 
-        <parameter name="first_productName" value="Samsung Galaxy Tab 10.1"/>
-        <parameter name="second_productName" value="Samsung SyncMaster 941BW"/>
+        <parameter name="firstProductName" value="Samsung Galaxy Tab 10.1"/>
+        <parameter name="secondProductName" value="Samsung SyncMaster 941BW"/>
         <classes>
             <class name="test.TestWishList">
                 <methods>

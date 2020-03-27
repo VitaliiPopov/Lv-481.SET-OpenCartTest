@@ -90,13 +90,13 @@ public class TestWishList extends TestWishListRunner {
 
     @Test(priority = 4,
             description = "check the possibility of adding product to Cart from WishList")
-    @Parameters({"first_productName", "second_productName"})
-    public void addProductToCartFromWishList(String first_productName, String second_productName) {
+    @Parameters({"firstProductName", "secondProductName"})
+    public void addProductToCartFromWishList(String firstProductName, String secondProductName) {
         //      Add some product to WishList
-        SearchPage searchPage = getHomePage().searchProduct(first_productName);
-        searchPage.clickProductComponentAddToWishList(first_productName);
-        searchPage = searchPage.searchProduct(second_productName);
-        searchPage.clickProductComponentAddToWishList(second_productName);
+        SearchPage searchPage = getHomePage().searchProduct(firstProductName);
+        searchPage.clickProductComponentAddToWishList(firstProductName);
+        searchPage = searchPage.searchProduct(secondProductName);
+        searchPage.clickProductComponentAddToWishList(secondProductName);
 
         // Get current number of products in Cart
         int numberOfProductsInCart = getHomePage().getNumberOfProductsInCartButton();
@@ -105,7 +105,7 @@ public class TestWishList extends TestWishListRunner {
         // Go to WishListPage
         WishListPage wishListPage = getHomePage().goToWishList();
         // Add product to cart from Wish List
-        wishListPage.putFromWishListToCartProductByPartialName(second_productName);
+        wishListPage.putFromWishListToCartProductByPartialName(secondProductName);
 
         int actual_numberOfProductsInCart = getHomePage().getNumberOfProductsInCartButton();
 
@@ -121,13 +121,13 @@ public class TestWishList extends TestWishListRunner {
 
     @Test(priority = 5,
             description = "check the possibility of removing product from WishList")
-    @Parameters({"first_productName", "second_productName"})
-    public void removeProductFromWishListByName(String first_productName, String second_productName) {
+    @Parameters({"firstProductName", "secondProductName"})
+    public void removeProductFromWishListByName(String firstProductName, String secondProductName) {
         //      Add some products to WishList
-        SearchPage searchPage = getHomePage().searchProduct(first_productName);
-        searchPage.clickProductComponentAddToWishList(first_productName);
-        searchPage = searchPage.searchProduct(second_productName);
-        searchPage.clickProductComponentAddToWishList(second_productName);
+        SearchPage searchPage = getHomePage().searchProduct(firstProductName);
+        searchPage.clickProductComponentAddToWishList(firstProductName);
+        searchPage = searchPage.searchProduct(secondProductName);
+        searchPage.clickProductComponentAddToWishList(secondProductName);
 
         // Get current number of products in WishList
         int numberProductsInWishList = getHomePage().getWishListNumberOfProducts();
@@ -136,7 +136,7 @@ public class TestWishList extends TestWishListRunner {
         // Go to WishListPage
         WishListPage wishListPage = getHomePage().goToWishList();
         // Remove product from WishListPage by Product Name
-        wishListPage.removeFromWishListProductByPartialName(first_productName);
+        wishListPage.removeFromWishListProductByPartialName(firstProductName);
         HomePage homePage = getHomePage();
         //Actual Result
         int actualNumberOfProductsInWishList = getHomePage().getWishListNumberOfProducts();

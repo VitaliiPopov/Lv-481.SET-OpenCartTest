@@ -6,10 +6,7 @@ import com.opencart.pages.admin.AdminLoginPage;
 import com.opencart.pages.admin.AdminReviewEditPage;
 import com.opencart.pages.admin.AdminReviewPage;
 import com.opencart.pages.product.ProductPage;
-import com.opencart.tools.Driver;
-import com.opencart.tools.JsonDataConfig;
-import com.opencart.tools.TestRunner;
-import com.opencart.tools.Utility;
+import com.opencart.tools.*;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -50,11 +47,10 @@ public class ReviewTest extends TestRunner {
     @Parameters({"nameOfAuthor"})
     public void tearDown(ITestResult result, String nameOfAuthor) throws Exception {
         if (result.getStatus() == ITestResult.FAILURE) {
-            Utility.run(result,driver);
+            Screenshot.run(result,driver);
         }
         startMethod().deleteReview(nameOfAuthor);
     }
-
 
     @Parameters({"nameOfAuthor", "correctText"})
     @Test(priority = 1)

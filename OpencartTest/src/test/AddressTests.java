@@ -6,12 +6,12 @@ import com.opencart.pages.account.LoginPage;
 import com.opencart.pages.account.MyAccountPage;
 import com.opencart.tools.JsonDataConfig;
 import com.opencart.tools.Randomizer;
-import com.opencart.tools.TestRunnerYura;
+import com.opencart.tools.AddressBookTestRunner;
 import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-public class AddressTests extends TestRunnerYura {
+public class AddressTests extends AddressBookTestRunner {
     JsonDataConfig jsonDataConfig = new JsonDataConfig("TestData.json");
 
     @Parameters({"myAccountDropdownText"})

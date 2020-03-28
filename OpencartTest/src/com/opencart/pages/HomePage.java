@@ -1,8 +1,10 @@
 package com.opencart.pages;
 
+import com.opencart.data.Currencies;
 import com.opencart.pages.comparison.ComparisonPage;
 import com.opencart.pages.product.ProductPage;
 import com.opencart.pages.search.SearchPage;
+import com.opencart.pages.wishlist.WishListPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -132,4 +134,8 @@ public class HomePage extends AbstractPageWithHeader {
     }
 
     ///endregion
+    public HomePage chooseCurrencyHomePage(Currencies currency) {
+        clickCurrencyByPartialName(currency.toString());
+        return new HomePage(driver);
+    }
 }

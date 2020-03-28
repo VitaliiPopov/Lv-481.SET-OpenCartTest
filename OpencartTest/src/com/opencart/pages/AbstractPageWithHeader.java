@@ -96,6 +96,7 @@ public class AbstractPageWithHeader {
     }
 
     //currency
+    public String getFullCurrencyText(){return currency.getText().substring(1);}
     public String getCurrencyText() {
         return currency.getText().substring(0, 1);
     }
@@ -366,6 +367,10 @@ public class AbstractPageWithHeader {
         return new CartPage(driver);
     }
 
+    public WishListEmptyPage goToWishListEmptyPage(){
+        clickWishList();
+        return new WishListEmptyPage(driver);
+    }
     ///endregion
 
 }

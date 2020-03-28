@@ -37,6 +37,18 @@ public class WishListContainerComponent {
         return result;
     }
 
+    // remove product from wish list
+    public void removeProductFromWishListByPartialName(String partialProductName) {
+        getProductInWishListContainerComponentByPartialName(partialProductName)
+                .clickRemoveProductFromWishList();
+    }
+
+    //Getting  unit price
+    public String getUnitPrice(String partialProductName){
+        return  getProductInWishListContainerComponentByPartialName(partialProductName)
+                .getUnitPriceWishListText();
+    }
+
     // BUSINESS LOGIC
 
     // add to cart product from wish list
@@ -45,9 +57,5 @@ public class WishListContainerComponent {
                 .clickAddToCartFromWishList();
     }
 
-    // remove product from wish list
-    public void removeProductFromWishListByPartialName(String partialProductName) {
-        getProductInWishListContainerComponentByPartialName(partialProductName)
-                .clickRemoveProductFromWishList();
-    }
+
 }

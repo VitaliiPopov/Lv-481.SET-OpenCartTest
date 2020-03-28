@@ -5,13 +5,13 @@ import com.opencart.pages.product.ProductPage;
 import com.opencart.pages.search.SearchPage;
 import com.opencart.pages.wishlist.WishListEmptyPage;
 import com.opencart.pages.wishlist.WishListPage;
-import com.opencart.tools.TestWishListRunner;
+import com.opencart.tools.WishListTestRunner;
 import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 
-public class TestWishList extends TestWishListRunner {
+public class TestWishList extends WishListTestRunner {
 
     @Test(priority = 1,
             description = "check the possibility of adding product from SearchPage to WishList")

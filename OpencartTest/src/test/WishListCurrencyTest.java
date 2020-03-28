@@ -1,19 +1,21 @@
 package test;
 
 import com.opencart.data.Currencies;
-import com.opencart.data.Product;
+import com.opencart.pages.HomePage;
 import com.opencart.pages.account.LoginPage;
 import com.opencart.pages.account.MyAccountPage;
-import com.opencart.pages.product_table.WishListPage;
 import com.opencart.pages.search.SearchPage;
+import com.opencart.pages.wishlist.WishListEmptyPage;
+import com.opencart.pages.wishlist.WishListPage;
+import com.opencart.tools.CurrencyTestRunner;
 import com.opencart.tools.JsonDataConfig;
-import com.opencart.tools.TestRunner;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-public class WishListCurrencyTest extends TestRunner {
+
+public class WishListCurrencyTest extends CurrencyTestRunner {
 
     JsonDataConfig jsonParser = new JsonDataConfig("TestData.json");
 
@@ -21,62 +23,53 @@ public class WishListCurrencyTest extends TestRunner {
     @Test(priority = 1)
     public void Login(String myAccountDropdownText) throws InterruptedException {
         LoginPage loginPage = getHomePage().goToLoginPage(myAccountDropdownText);
-        MyAccountPage myAccountPage = loginPage.login(jsonParser.getEmailFromJson(7),jsonParser.getPasswordFromJson(7));
+        MyAccountPage myAccountPage = loginPage.login(jsonParser.getEmailFromJson(8), jsonParser.getPasswordFromJson(8));
         myAccountPage.goToHomePage();
     }
 
     @DataProvider
-    public Object[][] Products(){
+    public Object[][] currencyData() {
         return new Object[][]{
-                { "MacBook" },
-                //{ "iPhone" }
+                {"MacBook", Currencies.POUND_STERLING, 306.25},
+                {"iPhone", Currencies.EURO, 79.24},
+                {"Palm Treo Pro", Currencies.US_DOLLAR, 279.99},
         };
     }
 
-
-    @Test(priority = 2,dataProvider = "Products")
-    public void addProductToWishList(String productPartialName) throws InterruptedException {
-
-
+    @Test(priority = 3, dataProvider = "currencyData")
+    public void changeCurrencyOnWishListPage(String productPartialName, Currencies currency,
+                                             double price) throws InterruptedException {
         SearchPage searchPage = getHomePage().searchProduct(productPartialName);
-        Thread.sleep(1000);
+        Thread.sleep(1000);// ONLY FOR PRESENTATION
         searchPage.clickProductComponentAddToWishList(productPartialName);
-        Thread.sleep(1000);
-        //Assert.assertTrue(searchPage.isAlertDisplayed());
 
+        WishListPage wishList = getWishListPage().goToWishList().chooseCurrencyInWishList(currency);
+        Assert.assertEquals(wishList.getProductPriceInWishList(productPartialName), price);
 
+        System.out.println(wishList.getProductPriceInWishList(productPartialName));
+
+        wishList.removeFromWishListProductByPartialName(productPartialName);
+        Thread.sleep(2000);// ONLY FOR PRESENTATION
+
+        String emptyMessage = wishList.goToWishListEmptyPage().getLabelText();
+        Assert.assertEquals(emptyMessage, WishListEmptyPage.EMPTY_WISH_LIST_MESSAGE);
     }
 
     @DataProvider
-    public Object[][] currencyData(){
+    public Object[][] currencyHomeData() {
         return new Object[][]{
-                {Currencies.POUND_STERLING,"£"},
-                {Currencies.EURO,"€"},
-                {Currencies.US_DOLLAR,"$"},
+                {Currencies.POUND_STERLING, "£"},
+                {Currencies.EURO, "€"},
+                {Currencies.US_DOLLAR, "$"},
         };
     }
 
-//    @DataProvider
-//    public Object[][] currencyDataWithPrice(){
-//        return new Object[][]{
-//                {Currencies.POUND_STERLING,"£",306.25},
-//                {Currencies.EURO,"€",392.30},
-//                {Currencies.US_DOLLAR,"$",500.00},
-//        };
-//    }
-
-
-    @Test(priority = 3,dataProvider = "currencyData")
-    public void changeCurrencyOnWishListPage(Currencies currency,
-                                             String expectedSymbolOfCurrency) throws InterruptedException {
-
-        WishListPage wishList = getWishListPage().goToWishList().chooseCurrencyInWishList(currency);
-
-        Assert.assertEquals(wishList.getCurrencyText(),expectedSymbolOfCurrency);
-
-        //Assert.assertEquals(wishListPage.getProductPriceAmountByPartialName(getName()), product.getPrice(currency));
-        Thread.sleep(3000);
+    @Test(priority = 4, dataProvider = "currencyDataHome")
+    public void changeCurrencyAtHomePage(Currencies currency, String
+            ExpectedSymbolOfCurrency) throws InterruptedException {
+        HomePage homePage = getHomePage();
+        homePage = homePage.chooseCurrencyHomePage(currency);
+        Thread.sleep(1000); // ONLY FOR PRESENTATION
+        Assert.assertEquals(homePage.getCurrencyText(), ExpectedSymbolOfCurrency);
     }
-
-
 }

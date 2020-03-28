@@ -24,7 +24,7 @@ public class ReviewTest extends TestRunner {
     private ProductPage productPage;
 
     private AdminReviewPage startMethod() {
-        driver.navigate().to(ConstantVariables.AdminURL);
+        driver.navigate().to(ConstantVariables.ADMIN_URL);
         AdminLoginPage adminLoginPage = new AdminLoginPage(driver);
         AdminHomePage adminHomePage = adminLoginPage.adminLogin(jsonDataConfig.getEmailFromJson(2), jsonDataConfig.getPasswordFromJson(2));
         return adminHomePage.openReviewPage();

@@ -5,7 +5,7 @@ import com.opencart.pages.account.LoginPage;
 import com.opencart.pages.account.MyAccountPage;
 import org.testng.annotations.*;
 
-public class TestWishListRunner {
+public class WishListTestRunner {
 
     JsonDataConfig jsonParser = new JsonDataConfig("TestData.json");
 

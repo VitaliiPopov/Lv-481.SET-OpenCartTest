@@ -1,6 +1,5 @@
 package com.opencart.tools;
 
-
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.opencart.data.users.CustomUser;
@@ -24,7 +23,9 @@ public class JsonDataConfig {
         }
     }
 
-    public String getEmailFromJson(int user_index) {
+    // there will be all getters for filds
+
+    public String getEmailFromJson(int user_index){
         return listUser.get(user_index).getEmail();
     }
 
@@ -63,4 +64,5 @@ public class JsonDataConfig {
     public CustomUser getUserFromJson(int user_index) {
         return listUser.get(user_index);
     }
+
 }

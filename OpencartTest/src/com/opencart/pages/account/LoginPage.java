@@ -1,6 +1,8 @@
 package com.opencart.pages.account;
 
 import com.opencart.pages.AbstractPageWithHeader;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -21,9 +23,6 @@ public class LoginPage extends AbstractPageWithHeader {
 
     @FindBy(how = How.XPATH, xpath = "//input[@value='Login']")
     private WebElement loginButton;
-
-    @FindBy(how = How.XPATH, xpath = "//div[@class='alert alert-danger alert-dismissible']")
-    private WebElement alert;
 
     public LoginPage(WebDriver driver) {
         super(driver);
@@ -87,14 +86,22 @@ public class LoginPage extends AbstractPageWithHeader {
     //BUSINESS LOGIC
 
     //login
-    public MyAccountPage login(String LOGIN_NAME, String PASSWORD_NAME) {
-        fillInputLogin(LOGIN_NAME);
-        fillInputPassword(PASSWORD_NAME);
+    public MyAccountPage login(String login, String password) {
+        fillInputLogin(login);
+        fillInputPassword(password);
         clickLoginButton();
         return new MyAccountPage(driver);
     }
 
-    public boolean isAlertDisplayed() {
-        return alert.isDisplayed();
+    public boolean isAlertPresent(){
+        boolean present = false;
+        try{
+            driver.findElement(By.xpath("//div[@class='alert alert-danger alert-dismissible']"));
+            present = true;
+        }
+        catch(NoSuchElementException e){
+            present = false;
+        }
+        return present;
     }
 }

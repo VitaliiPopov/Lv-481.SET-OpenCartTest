@@ -27,9 +27,9 @@ public class AdminCustomerPage extends AdminHomePage {
     }
 
     public void findCustomerByEmail(String optionName){
-        String xpath = "//td[text()='"+optionName+"']/preceding-sibling::td/input";
-        WebElement сustomerCheckBox = driver.findElement(By.xpath(xpath));
-        clickCustomer(сustomerCheckBox);
+        String customerRow = "//td[text()='"+optionName+"']/preceding-sibling::td/input";
+        WebElement сustomerCheck = driver.findElement(By.xpath(customerRow));
+        clickCustomer(сustomerCheck);
     }
 
     //searchedCustomer
@@ -54,7 +54,7 @@ public class AdminCustomerPage extends AdminHomePage {
 
     public String getExistedEmail() {
         List<WebElement> rows = customerTable.findElements(By.tagName("td"));
-        String existedEmail = rows.get(10).getText();
+        String existedEmail = rows.get(18).getText();
         return existedEmail;
     }
 }

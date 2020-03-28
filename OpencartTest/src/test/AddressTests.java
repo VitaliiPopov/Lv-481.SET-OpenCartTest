@@ -9,6 +9,8 @@ import com.opencart.tools.AddressBookTestRunner;
 import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+import static org.apache.commons.lang.RandomStringUtils.*;
+import static org.apache.commons.lang.RandomStringUtils.randomAlphabetic;
 
 public class AddressTests extends AddressBookTestRunner {
     JsonDataConfig jsonDataConfig = new JsonDataConfig("TestData.json");
@@ -178,21 +180,21 @@ public class AddressTests extends AddressBookTestRunner {
         Thread.sleep(5000);
     }
 
-//    @Test(priority = 13,description = "Check the alerts while creating address with too short inputs")
-//    public void checkAlertsWithTooLongInputs() throws InterruptedException {
-//        MyAccountPage myAccountPage = getHomePage().clickMyAccountInDropdown();
-//        AddressBookPage addressBookPage = myAccountPage.clickModifyYourAddressBookEntries();
-//        EditAdressPage edittest = addressBookPage.clickEditAddress();
-//        edittest.invalidInputsAlertCheck(
-//                Randomizer.generateRandomString(33),
-//                Randomizer.generateRandomString(33),
-//                Randomizer.generateRandomString(129),
-//                Randomizer.generateRandomString(129),
-//                jsonDataConfig.getCountryFromJson(5),
-//                jsonDataConfig.getRegionFromJson(5));
-//        Assert.assertTrue(edittest.allMandatoryAlerts());
-//        Thread.sleep(5000);
-//    }
+    @Test(priority = 13,description = "Check the alerts while creating address with too short inputs")
+    public void checkAlertsWithTooLongInputs() throws InterruptedException {
+        MyAccountPage myAccountPage = getHomePage().clickMyAccountInDropdown();
+        AddressBookPage addressBookPage = myAccountPage.clickModifyYourAddressBookEntries();
+        EditAdressPage edittest = addressBookPage.clickEditAddress();
+        edittest.invalidInputsAlertCheck(
+                randomAlphabetic(33),
+                randomAlphabetic(33),
+                randomAlphabetic(129),
+                randomAlphabetic(129),
+                jsonDataConfig.getCountryFromJson(5),
+                jsonDataConfig.getRegionFromJson(5));
+        Assert.assertTrue(edittest.allMandatoryAlerts());
+        Thread.sleep(5000);
+    }
 
     @Test(priority = 14,description = "Check the ability to create address with numbers in First and Last name fields")
     public void createAddressWithNumbersInsteadCharacters() throws InterruptedException {
@@ -216,5 +218,4 @@ public class AddressTests extends AddressBookTestRunner {
         addressBookPage.deleteAll();
         Thread.sleep(5000);
     }
-
 }

@@ -74,4 +74,3 @@ public class WishListCurrencyTest extends CurrencyTestRunner {
         Assert.assertEquals(homePage.getCurrencyText(), ExpectedSymbolOfCurrency);
     }
 }
-

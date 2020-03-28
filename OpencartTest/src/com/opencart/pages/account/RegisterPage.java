@@ -1,6 +1,9 @@
 package com.opencart.pages.account;
 
+import com.opencart.data.users.CustomUser;
 import com.opencart.pages.AbstractPageWithHeader;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -37,24 +40,6 @@ public class RegisterPage extends AbstractPageWithHeader {
 
     @FindBy(how = How.CSS, css = "div.pull-right>input[value='Continue']")
     private WebElement registerButton;
-
-    @FindBy(how = How.XPATH, xpath = "//*[@id='input-firstname']/following-sibling::div")
-    private WebElement firstnameAlert;
-
-    @FindBy(how = How.XPATH, xpath = "//*[@id='input-lastname']/following-sibling::div")
-    private WebElement lastnameAlert;
-
-    @FindBy(how = How.XPATH, xpath = "//*[@id='input-email']/following-sibling::div")
-    private WebElement emailAlert;
-
-    @FindBy(how = How.XPATH, xpath = "//*[@id='input-telephone']/following-sibling::div")
-    private WebElement telephoneAlert;
-
-    @FindBy(how = How.XPATH, xpath = "//*[@id='input-password']/following-sibling::div")
-    private WebElement passwordAlert;
-
-    @FindBy(how = How.XPATH, xpath = "//*[@id='input-confirm']/following-sibling::div")
-    private WebElement confirmPasswordAlert;
 
     @FindBy(how = How.CSS, css = "div[class='alert alert-danger alert-dismissible']")
     private WebElement warning;
@@ -204,49 +189,103 @@ public class RegisterPage extends AbstractPageWithHeader {
     //BUSINESS LOGIC
 
     //register
-    public SuccessRegisterPage register(String FIRST_NAME, String LAST_NAME, String EMAIL, String PHONE, String PASSWORD_NAME, String CONFIRM_PASSWORD_NAME) {
-        fillInputFirstname(FIRST_NAME);
-        fillInputLastname(LAST_NAME);
-        fillInputEmail(EMAIL);
-        fillInputTelephone(PHONE);
-        fillInputPassword(PASSWORD_NAME);
-        fillInputConfirmPassword(CONFIRM_PASSWORD_NAME);
+    public SuccessRegisterPage register(String firstname, String lastname, String email, String phone, String password, String confirm) {
+        fillInputFirstname(firstname);
+        fillInputLastname(lastname);
+        fillInputEmail(email);
+        fillInputTelephone(phone);
+        fillInputPassword(password);
+        fillInputConfirmPassword(confirm);
         clickAgreeCheckBox();
         clickRegisterButton();
         return new SuccessRegisterPage(driver);
     }
 
-
-    public boolean isFirstNameAlertDisplayed() {
-        return firstnameAlert.isDisplayed();
-    }
-
-    public boolean isLastNameAlertDisplayed() {
-        return lastnameAlert.isDisplayed();
-    }
-
-
-    public boolean isEmailAlertDisplayed() {
-        return emailAlert.isDisplayed();
-    }
-
-    public boolean isTelephoneAlertDisplayed() {
-        return telephoneAlert.isDisplayed();
-    }
-
-    public boolean isPasswordAlertDisplayed() {
-        return passwordAlert.isDisplayed();
-    }
-
-    public boolean isConfirmPasswordAlertDisplayed() {
-        return confirmPasswordAlert.isDisplayed();
-    }
-
-    public boolean isEmailWarningDisplayed() {
-        return warning.isDisplayed();
+    public SuccessRegisterPage register(CustomUser user) {
+        fillInputFirstname(user.getFirstName());
+        fillInputLastname(user.getLastName());
+        fillInputEmail(user.getEmail());
+        fillInputTelephone(user.getTelephone());
+        fillInputPassword(user.getPassword());
+        fillInputConfirmPassword(user.getPassword());
+        clickAgreeCheckBox();
+        clickRegisterButton();
+        return new SuccessRegisterPage(driver);
     }
 
     public String getWarningText() {
         return warning.getText();
+    }
+
+    public boolean isFirstNameAlertPresent(){
+        boolean present = false;
+        try{
+            driver.findElement(By.xpath("//*[@id='input-firstname']/following-sibling::div"));
+            present = true;
+        }
+        catch(NoSuchElementException e){
+            present = false;
+        }
+        return present;
+    }
+
+    public boolean isLastNameAlertPresent(){
+        boolean present = false;
+        try{
+            driver.findElement(By.xpath("//*[@id='input-lastname']/following-sibling::div"));
+            present = true;
+        }
+        catch(NoSuchElementException e){
+            present = false;
+        }
+        return present;
+    }
+
+    public boolean isEmailAlertPresent(){
+        boolean present = false;
+        try{
+            driver.findElement(By.xpath("//*[@id='input-email']/following-sibling::div"));
+            present = true;
+        }
+        catch(NoSuchElementException e){
+            present = false;
+        }
+        return present;
+    }
+
+    public boolean isTelephoneAlertPresent(){
+        boolean present = false;
+        try{
+            driver.findElement(By.xpath("//*[@id='input-telephone']/following-sibling::div"));
+            present = true;
+        }
+        catch(NoSuchElementException e){
+            present = false;
+        }
+        return present;
+    }
+
+    public boolean isPasswordAlertPresent(){
+        boolean present = false;
+        try{
+            driver.findElement(By.xpath("//*[@id='input-password']/following-sibling::div"));
+            present = true;
+        }
+        catch(NoSuchElementException e){
+            present = false;
+        }
+        return present;
+    }
+
+    public boolean isConfirmAlertPresent(){
+        boolean present = false;
+        try{
+            driver.findElement(By.xpath("//*[@id='input-confirm']/following-sibling::div"));
+            present = true;
+        }
+        catch(NoSuchElementException e){
+            present = false;
+        }
+        return present;
     }
 }

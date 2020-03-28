@@ -40,6 +40,4 @@ public class WishListTestRunner {
     public HomePage getHomePage() {
         return new HomePage(Driver.getDriver());
     }
-
-
 }

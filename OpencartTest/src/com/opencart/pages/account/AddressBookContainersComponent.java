@@ -31,6 +31,4 @@ public class AddressBookContainersComponent {
     public void clickDeleteAddressButton() {
         deleteAddressButton.click();
     }
-
-
 }

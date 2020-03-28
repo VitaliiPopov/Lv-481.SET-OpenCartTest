@@ -134,7 +134,6 @@
             <artifactId>jackson-databind</artifactId>
             <version>2.10.3</version>
         </dependency>
-
     </dependencies>
 
 </project>

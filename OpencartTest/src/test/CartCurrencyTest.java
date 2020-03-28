@@ -51,4 +51,3 @@ public class CartCurrencyTest extends CurrencyTestRunner {
         Assert.assertEquals(cartPage.getCurrencyText(), ExpectedSymbolOfCurrency);
     }
 }
-

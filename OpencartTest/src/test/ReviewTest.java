@@ -6,16 +6,20 @@ import com.opencart.pages.admin.AdminLoginPage;
 import com.opencart.pages.admin.AdminReviewEditPage;
 import com.opencart.pages.admin.AdminReviewPage;
 import com.opencart.pages.product.ProductPage;
-import com.opencart.tools.*;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import com.opencart.tools.Driver;
+import com.opencart.tools.JsonDataConfig;
+import com.opencart.tools.TestRunner;
+import io.qameta.allure.Allure;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 
 public class ReviewTest extends TestRunner {
     private JsonDataConfig jsonDataConfig = new JsonDataConfig("TestData.json");
@@ -47,9 +51,13 @@ public class ReviewTest extends TestRunner {
     @Parameters({"nameOfAuthor"})
     public void tearDown(ITestResult result, String nameOfAuthor) throws Exception {
         if (result.getStatus() == ITestResult.FAILURE) {
-            Utility.getScreenshot(Driver.getDriver());
+            byte[] takeScreenShot= takeScreenShot(result.getMethod().getMethodName());
+            Allure.addAttachment(result.getMethod().getMethodName(), new ByteArrayInputStream(takeScreenShot));
         }
         startMethod().deleteReview(nameOfAuthor);
+    }
+    private byte[] takeScreenShot(String methodName) throws IOException {
+        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
     }
 
     @Parameters({"nameOfAuthor", "correctText"})

@@ -1,8 +1,10 @@
 package com.opencart.pages;
 
 import com.opencart.pages.comparison.ComparisonPage;
+import com.opencart.pages.product.ProductPage;
 import com.opencart.pages.search.SearchPage;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -26,6 +28,11 @@ public class HomePage extends AbstractPageWithHeader {
     }
 
     //INITIALIZATION
+
+    /**
+     * This method initializing product inside list of products on a page. First, it waits visibility of all elements on the page,
+     * then pass every element in list in ProductContainerComponent constructor.
+     */
     private void initElements() {
         driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
         WebDriverWait wait = new WebDriverWait(driver, 3);
@@ -39,18 +46,11 @@ public class HomePage extends AbstractPageWithHeader {
     ///region ATOMIC_OPERATIONS
 
     public AlertComponent getAlertComponentWithWait() {
-        try {
-            Thread.sleep(3000); //Only for presentation, bug alert
+        /*try {
+            Thread.sleep(1000); //Only for presentation, bug alert
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
-
-//        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-//        WebDriverWait wait = new WebDriverWait(driver, 5);
-//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(ALERT_LOCATOR)));
-//        searchPageAlertComponent = new SearchPageAlertComponent(wait.until(ExpectedConditions.presenceOfElementLocated((By.cssSelector(ALERT_LOCATOR)))));
-//        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-        //return searchPageAlertComponent;
+        }*/
         return new AlertComponent(driver.findElement(By.cssSelector(ALERT_LOCATOR)));
     }
 
@@ -75,6 +75,7 @@ public class HomePage extends AbstractPageWithHeader {
         return result;
     }
 
+
     /**
      * Add product to cart by button.
      *
@@ -89,11 +90,24 @@ public class HomePage extends AbstractPageWithHeader {
      * Add product to comparison by button.
      *
      * @param productName Product name.
-     * @return Returning new Comparison Page.
+     * @return Returning new Search Page.
      */
     public SearchPage clickProductComponentCompareButtonByName(String productName) {
         getProductComponentByName(productName).clickCompareButton();
         return new SearchPage(driver);
+    }
+
+    /**
+     * This method use javascript method for fast adding product to comparison.
+     *
+     * @param id of product.
+     * @return the same page.
+     */
+    public HomePage addProductToCompareByJS(int id) {
+        if (driver instanceof JavascriptExecutor) {
+            ((JavascriptExecutor) driver).executeScript("document.onclick=compare.add(" + id + ");");
+        }
+        return this;
     }
 
     ///endregion
@@ -103,11 +117,16 @@ public class HomePage extends AbstractPageWithHeader {
     /**
      * This method clicks on product comparison link from alert message
      *
-     * @return Returns new Comparison page
+     * @return new Comparison page
      */
     public ComparisonPage clickProductComparisonLink() {
         getAlertComponentWithWait().clickOnCompareLink();
         return new ComparisonPage(driver);
+    }
+
+    public ProductPage clickProductNameLink(String name) {
+        getProductComponentByName(name).clickNameLink();
+        return new ProductPage(driver);
     }
 
     ///endregion

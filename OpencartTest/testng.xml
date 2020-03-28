@@ -1,39 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Default Suite">
-<!--    <test name="CompareTest">-->
-<!--        &lt;!&ndash;MainTest&ndash;&gt;-->
-<!--        <parameter name="myAccountDropdownText" value="Login"/>-->
-<!--        <parameter name="search" value="ip"/>-->
-<!--        <parameter name="productName1" value="iPhone"/>-->
-<!--        <parameter name="productName2" value="iPod Classic"/>-->
-<!--        <classes>-->
-<!--            &lt;!&ndash;MainTest&ndash;&gt;-->
-<!--            <class name="test.ProductCompareTest">-->
-<!--                <methods>-->
-<!--&lt;!&ndash;                    <include name="Login"/>&ndash;&gt;-->
-<!--                    <include name="AddProductToCompareFromSearchByAlert"/>-->
-<!--                    <include name="AddSameProductTwoTimes"/>-->
-<!--                    <include name="CleanProductFromComparison"/>-->
-<!--                    <include name="AddToCartFromComparisonPage"/>-->
-<!--                    <include name="GoToProductPageFromComparisonPage"/>-->
-<!--                </methods>-->
-<!--            </class>-->
-<!--        </classes>-->
-<!--    </test>-->
-    <test name="CartTest">
-        <!--MainTest-->
-        <parameter name="myAccountDropdownText" value="Login"></parameter>
+<suite name="Regression">
+    <!--ProductComparisonTests-->
+    <test name="CompareTest">
+        <parameter name="myAccountDropdownText" value="Login"/>
+        <parameter name="searchName" value="ip"/>
+        <parameter name="defaultProductId" value="40"/>
+        <parameter name="firstProductId" value="41"/>
+        <parameter name="secondProductId" value="43"/>
+        <parameter name="productName" value="iPhone"/>
+        <parameter name="firstProductName" value="iPhone"/>
+        <parameter name="secondProductName" value="iPod Classic"/>
+        <parameter name="expectedEmptyPageResult" value="You have not chosen any products to compare."/>
         <classes>
-            <!--MainTest-->
-            <class name="test.cart_test.CartTest">
+            <!--LoggedUserProductComparisonTest-->
+            <class name="test.product_comparison_test.LoggedUserProductComparisonTest">
                 <methods>
-                    <include name="loginTest"/>
-                    <include name="checkUncorrectFunctionOfRefreshButtonInCart"/>
+                    <include name="AddProductToCompareFromSearch"/>
+                    <include name="AddProductToCompareFromMainPage"/>
+                    <include name="AddProductToCompareFromProductPage"/>
+                    <include name="AddSameProductTwoTimes"/>
+                    <include name="CleanAllProductsFromComparison"/>
+                    <include name="AddToCartFromComparisonPage"/>
+                    <include name="GoToProductPageFromComparisonPage"/>
+                    <include name="GoToComparisonPageFromProductCompareLabel"/>
+                </methods>
+            </class>
+            <!--NonLoggedUserProductComparisonTest-->
+            <class name="test.product_comparison_test.NonLoggedUserProductComparisonTest">
+                <methods>
+                    <include name="AddProductToCompareFromSearch"/>
+                    <include name="AddProductToCompareFromMainPage"/>
+                    <include name="AddProductToCompareFromProductPage"/>
+                    <include name="AddSameProductTwoTimes"/>
+                    <include name="CleanAllProductsFromComparison"/>
                 </methods>
             </class>
         </classes>
-    </test> <!-- Individual &ndash;&gt;-->
+    </test>
+    <!--    <test name="CartTest">-->
+    <!--        &lt;!&ndash;MainTest&ndash;&gt;-->
+    <!--        <parameter name="myAccountDropdownText" value="Login"></parameter>-->
+    <!--        <classes>-->
+    <!--            &lt;!&ndash;MainTest&ndash;&gt;-->
+    <!--            <class name="test.cart_test.CartCompareTest">-->
+    <!--                <methods>-->
+    <!--                    <include name="loginTest"/>-->
+    <!--                    <include name="checkUncorrectFunctionOfRefreshButtonInCart"/>-->
+    <!--                </methods>-->
+    <!--            </class>-->
+    <!--        </classes>-->
+    <!--    </test> &lt;!&ndash; Individual &ndash;&gt;&ndash;&gt;-->
 </suite> <!-- Default Suite -->
 
-<!--end-->
+        <!--end-->

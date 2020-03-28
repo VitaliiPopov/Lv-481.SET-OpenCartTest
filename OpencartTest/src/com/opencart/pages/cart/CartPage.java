@@ -186,6 +186,10 @@ public class CartPage extends AbstractPageWithHeader {
         }
     }
 
+    public String getProductNameTextByName(String name){
+        return getProductInCartComponentByName(name).getProductNameText();
+    }
+
     //BUSINESS LOGIC
 
     public CartPage goToCartPageAfterRemoveProductByName(String productName) {

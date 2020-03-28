@@ -34,7 +34,6 @@ public class SearchCriteriaComponent {
         subcategoriesCheckbox = searchCriteriaLayout.findElement(By.xpath("//input[@name='sub_category']"));
         descriptionsCheckbox = searchCriteriaLayout.findElement(By.xpath("//input[@name='description']"));
         searchButton = searchCriteriaLayout.findElement(By.xpath("//input[@id='button-search']"));
-
     }
 
     public boolean searchLableContainSearchText(String searchText) {

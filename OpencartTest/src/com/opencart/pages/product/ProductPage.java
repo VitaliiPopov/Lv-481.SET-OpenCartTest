@@ -4,6 +4,7 @@ import com.opencart.pages.AbstractPageWithHeader;
 import com.opencart.pages.AlertComponent;
 import com.opencart.pages.cart.CartPage;
 
+import com.opencart.pages.comparison.ComparisonPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,6 +18,9 @@ public class ProductPage extends AbstractPageWithHeader {
 
     @FindBy(how = How.CSS, css = "#content h1")
     private WebElement productName;
+
+    @FindBy(how = How.XPATH, xpath = "//div[@class='btn-group']//i[@class='fa fa-exchange']") //TODO methods for click
+    private WebElement compareButton;
 
     @FindBy(how = How.CSS, css = "a[href='#tab-review']")
     private WebElement tabReviews;
@@ -135,6 +139,12 @@ public class ProductPage extends AbstractPageWithHeader {
 
     ///region FUNCTIONALITY
 
+    //compareButton
+    public ProductPage clickCompareButton(){
+        compareButton.click();
+        return this;
+    }
+
     //addProductToCartAlertComponent
     public AlertComponent getAlertComponent() {
         alertComponent = new AlertComponent(driver.findElement(By.xpath("//div[@class='alert alert-success alert-dismissible']")));
@@ -212,6 +222,11 @@ public class ProductPage extends AbstractPageWithHeader {
     public ProductPage goToProductPageFromAlert() {
         getAlertComponent().clickOnProductLink();
         return new ProductPage(driver);
+    }
+
+    public ComparisonPage goToComparisonPageFromAlert(){
+        getAlertComponent().clickOnCompareLink();
+        return new ComparisonPage(driver);
     }
 
     ///endregion

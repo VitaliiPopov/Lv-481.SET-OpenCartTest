@@ -31,6 +31,10 @@ public class ProductContainersComponent {
         return getName().getText();
     }
 
+    public void clickNameLink(){
+        getName().click();
+    }
+
     //AddToCartButton
     public WebElement getAddToCartButton() {
         return productContainerLayout.findElement(By.xpath(ADD_TO_CART_BUTTON_SELECTOR));

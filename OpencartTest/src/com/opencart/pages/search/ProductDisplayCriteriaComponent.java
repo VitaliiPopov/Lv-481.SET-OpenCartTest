@@ -10,27 +10,29 @@ import java.util.List;
 
 public class ProductDisplayCriteriaComponent {
 
-    private WebElement ProductDisplayCriteriaLayout;
+    private WebElement productDisplayCriteriaLayout;
 
     private WebElement sortDropdownComponent;
     private WebElement showDropdownComponent;
 
     private WebElement listButton;
     private WebElement gridButton;
-    private WebElement productCountLable;
+    private WebElement productCountLabel;
+    private WebElement productCompareLink;
 
     public ProductDisplayCriteriaComponent(WebElement ProductDisplayCriteriaLayout) {
 
-        this.ProductDisplayCriteriaLayout = ProductDisplayCriteriaLayout;
+        this.productDisplayCriteriaLayout = ProductDisplayCriteriaLayout;
         initElements();
     }
 
     private void initElements() {
-        listButton = ProductDisplayCriteriaLayout.findElement(By.xpath("//button[@id='list-view']"));
-        gridButton = ProductDisplayCriteriaLayout.findElement(By.xpath("//button[@id='grid-view']"));
-        sortDropdownComponent = ProductDisplayCriteriaLayout.findElement(By.xpath("//select[@id='input-sort']"));
-        showDropdownComponent = ProductDisplayCriteriaLayout.findElement(By.cssSelector("select#input-limit.form-control"));
-        productCountLable = ProductDisplayCriteriaLayout.findElement(By.xpath("//div[last()]/div[@class='col-sm-6 text-right']"));
+        listButton = productDisplayCriteriaLayout.findElement(By.xpath("//button[@id='list-view']"));
+        gridButton = productDisplayCriteriaLayout.findElement(By.xpath("//button[@id='grid-view']"));
+        sortDropdownComponent = productDisplayCriteriaLayout.findElement(By.xpath("//select[@id='input-sort']"));
+        showDropdownComponent = productDisplayCriteriaLayout.findElement(By.cssSelector("select#input-limit.form-control"));
+        productCountLabel = productDisplayCriteriaLayout.findElement(By.xpath("//div[last()]/div[@class='col-sm-6 text-right']"));
+        productCompareLink = productCountLabel.findElement(By.xpath("//a[@id='compare-total']"));
     }
 
     private void clickDropdown(WebElement dropdownComponent, String optionText) {
@@ -48,6 +50,10 @@ public class ProductDisplayCriteriaComponent {
             //ignor StaleElementReferenceException exception
         }
 
+    }
+
+    public void clickProductCompareLink(){
+        productCompareLink.click();
     }
 
     public void clickSortByDropdown(String optionText) {
@@ -75,8 +81,8 @@ public class ProductDisplayCriteriaComponent {
         showDropdownComponent.click();
     }
 
-    public Integer getProductCountFromLable() {
-        String productCount = productCountLable.getText();
+    public Integer getProductCountFromLabel() {
+        String productCount = productCountLabel.getText();
         productCount = productCount.replaceAll("[^0-9]+", " ");
         List<String> numberList = Arrays.asList(productCount.trim().split(" "));
         return new Integer(numberList.get(2));

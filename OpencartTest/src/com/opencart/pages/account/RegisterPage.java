@@ -1,5 +1,6 @@
 package com.opencart.pages.account;
 
+import com.opencart.data.products.ProductRepository;
 import com.opencart.pages.AbstractPageWithHeader;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

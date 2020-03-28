@@ -6,17 +6,21 @@ import com.opencart.pages.comparison.EmptyComparisonPage;
 import com.opencart.pages.product.ProductPage;
 import com.opencart.tools.CompareTestRunner;
 import com.opencart.tools.JsonDataConfig;
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
 import io.qameta.allure.Story;
 import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+@Epic("ComparisonTest")
 public class LoggedUserProductComparisonTest extends CompareTestRunner {
 
     JsonDataConfig jsonDataConfig = new JsonDataConfig("TestData.json");
 
     @Parameters({"myAccountDropdownText", "searchName", "productName"})
     @Test
+    @Description("Verify if user can add product to compare from search page")
     public void AddProductToCompareFromSearch(String myAccountDropdownText, String search, String productName) {
         ComparisonPage comparisonPage = getHomePage()
                 .goToLoginPage(myAccountDropdownText)

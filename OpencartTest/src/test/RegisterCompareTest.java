@@ -120,12 +120,12 @@ public class RegisterCompareTest extends CompareTestRunner {
         String password = Randomizer.generateRandomString(5);
         RegisterPage registerPage = getHomePage().goToRegisterPage();
         registerPage.register(
-                 Randomizer.generateRandomString(10),
-                 Randomizer.generateRandomString(10),
-                 email,
-                 Randomizer.generateRandomString(5),
-                 password,
-                 password);
+                Randomizer.generateRandomString(10),
+                Randomizer.generateRandomString(10),
+                email,
+                Randomizer.generateRandomString(5),
+                password,
+                password);
         Assert.assertTrue(registerPage.getWarningText().contains("E-Mail"));
     }
 
@@ -152,7 +152,7 @@ public class RegisterCompareTest extends CompareTestRunner {
         registerPage.register(
                 Randomizer.generateRandomString(10),
                 Randomizer.generateRandomString(10),
-                Randomizer.generateRandomString(5)+"@"+Randomizer.generateRandomString(3),
+                Randomizer.generateRandomString(5) + "@" + Randomizer.generateRandomString(3),
                 Randomizer.generateRandomString(5),
                 password,
                 password);
@@ -163,7 +163,7 @@ public class RegisterCompareTest extends CompareTestRunner {
     @Test(priority = 9)
     public void registerWithEmptyTelephoneTest() {
         String password = Randomizer.generateRandomString(5);
-        String email = Randomizer.generateRandomString(5)+"@"+Randomizer.generateRandomString(3)+"."+Randomizer.generateRandomString(3);
+        String email = Randomizer.generateRandomString(5) + "@" + Randomizer.generateRandomString(3) + "." + Randomizer.generateRandomString(3);
         RegisterPage registerPage = getHomePage().goToRegisterPage();
         registerPage.register(
                 Randomizer.generateRandomString(5),
@@ -179,7 +179,7 @@ public class RegisterCompareTest extends CompareTestRunner {
     @Test(priority = 10)
     public void registerWithShortTelephoneTest() {
         String password = Randomizer.generateRandomString(5);
-        String email = Randomizer.generateRandomString(5)+"@"+Randomizer.generateRandomString(3)+"."+Randomizer.generateRandomString(3);
+        String email = Randomizer.generateRandomString(5) + "@" + Randomizer.generateRandomString(3) + "." + Randomizer.generateRandomString(3);
         RegisterPage registerPage = getHomePage().goToRegisterPage();
         registerPage.register(
                 Randomizer.generateRandomString(5),
@@ -195,7 +195,7 @@ public class RegisterCompareTest extends CompareTestRunner {
     @Test(priority = 11)
     public void registerWithLongTelephoneTest() throws InterruptedException {
         String password = Randomizer.generateRandomString(5);
-        String email = Randomizer.generateRandomString(5)+"@"+Randomizer.generateRandomString(3)+"."+Randomizer.generateRandomString(3);
+        String email = Randomizer.generateRandomString(5) + "@" + Randomizer.generateRandomString(3) + "." + Randomizer.generateRandomString(3);
         RegisterPage registerPage = getHomePage().goToRegisterPage();
         registerPage.register(
                 Randomizer.generateRandomString(5),
@@ -209,7 +209,7 @@ public class RegisterCompareTest extends CompareTestRunner {
 
     @Test(priority = 12)
     public void registerWithEmptyPasswordTest() {
-        String email = Randomizer.generateRandomString(5)+"@"+Randomizer.generateRandomString(3)+"."+Randomizer.generateRandomString(3);
+        String email = Randomizer.generateRandomString(5) + "@" + Randomizer.generateRandomString(3) + "." + Randomizer.generateRandomString(3);
         RegisterPage registerPage = getHomePage().goToRegisterPage();
         registerPage.register(
                 Randomizer.generateRandomString(5),
@@ -226,7 +226,7 @@ public class RegisterCompareTest extends CompareTestRunner {
     @Test(priority = 13)
     public void registerWithShortPasswordTest() {
         String password = Randomizer.generateRandomString(3);
-        String email = Randomizer.generateRandomString(5)+"@"+Randomizer.generateRandomString(3)+"."+Randomizer.generateRandomString(3);
+        String email = Randomizer.generateRandomString(5) + "@" + Randomizer.generateRandomString(3) + "." + Randomizer.generateRandomString(3);
         RegisterPage registerPage = getHomePage().goToRegisterPage();
         registerPage.register(
                 Randomizer.generateRandomString(5),
@@ -241,7 +241,7 @@ public class RegisterCompareTest extends CompareTestRunner {
     //password longer than 20 characters
     @Test(priority = 14)
     public void registerWithLongPasswordTest() throws InterruptedException {
-        String email = Randomizer.generateRandomString(5)+"@"+Randomizer.generateRandomString(3)+"."+Randomizer.generateRandomString(3);
+        String email = Randomizer.generateRandomString(5) + "@" + Randomizer.generateRandomString(3) + "." + Randomizer.generateRandomString(3);
         String password = Randomizer.generateRandomString(25);
         RegisterPage registerPage = getHomePage().goToRegisterPage();
         registerPage.register(
@@ -257,7 +257,7 @@ public class RegisterCompareTest extends CompareTestRunner {
     @Test(priority = 15)
     public void registerWithBadConfirmTest() {
         RegisterPage registerPage = getHomePage().goToRegisterPage();
-        String email = Randomizer.generateRandomString(5)+"@"+Randomizer.generateRandomString(3)+"."+Randomizer.generateRandomString(3);
+        String email = Randomizer.generateRandomString(5) + "@" + Randomizer.generateRandomString(3) + "." + Randomizer.generateRandomString(3);
         registerPage.register(
                 Randomizer.generateRandomString(5),
                 Randomizer.generateRandomString(5),
@@ -282,11 +282,10 @@ public class RegisterCompareTest extends CompareTestRunner {
     }
 
     public void logoutUser() throws InterruptedException {
-        if (getHomePage().isExistMyAccountDropdownOption("My Account")){
+        if (getHomePage().isExistMyAccountDropdownOption("My Account")) {
             AccountLogoutPage logoutPage = getHomePage().goToLogoutPage();
             logoutPage.logout();
-        }
-        else getHomePage();
+        } else getHomePage();
     }
 
     public String getExistedEmailFromAdmin() throws InterruptedException {

@@ -42,7 +42,7 @@
 
     <!--MYKHAILO-->
 
-    <test name="addToWishList">
+    <!--<test name="addToWishList">
         <parameter name="myAccountDropdownText" value="Login"/>
         <parameter name="fromSearchPageProductName" value="iPod Nano"/>
         <parameter name="fromHomePageProductName" value="MacBook"/>
@@ -97,15 +97,15 @@
                 </methods>
             </class>
         </classes>
-    </test>
+    </test>-->
 
     <!--MYKHAILO-->
 
     <!--YuriiSereda-->
 
-    <test name="YuriiSereda">
+   <!-- <test name="YuriiSereda">
         <parameter name="myAccountDropdownText" value="Login"/>
-        <!--  <parameter name="myAccount" value="My Account"/>-->
+        &lt;!&ndash;  <parameter name="myAccount" value="My Account"/>&ndash;&gt;
         <classes>
             <class name="test.AddressTests">
                 <methods>
@@ -127,6 +127,7 @@
             </class>
         </classes>
     </test>
+-->
     <!--YuriiSereda -->
 
 </suite> <!-- Default Suite -->

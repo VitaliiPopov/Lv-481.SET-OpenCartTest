@@ -84,4 +84,3 @@ public class UnsuccessfulReviewCompareTest extends CompareTestRunner {
         Assert.assertEquals(textOfUndeliveredReview, messageOfUndeliveredReviewBecauseOfIncorrectText);
     }
 }
-

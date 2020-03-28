@@ -6,14 +6,11 @@ import com.opencart.pages.admin.AdminHomePage;
 import com.opencart.pages.admin.AdminLoginPage;
 import com.opencart.tools.Driver;
 import com.opencart.tools.JsonDataConfig;
-import com.opencart.tools.Randomizer;
 import com.opencart.tools.TestRunner;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
 
 public class RegisterTest extends TestRunner {
     JsonDataConfig jsonDataConfig = new JsonDataConfig("TestData.json");

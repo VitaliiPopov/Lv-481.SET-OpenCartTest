@@ -25,6 +25,9 @@ public class ProductPage extends AbstractPageWithHeader {
     @FindBy(how = How.CSS, css = "a[href='#tab-review']")
     private WebElement tabReviews;
 
+    @FindBy(how = How.CSS, css = "#tab-description div")
+    private WebElement description;
+
     @FindBy(how = How.XPATH, xpath = "//input[contains(@id,'input-name')]")
     private WebElement inputFieldName;
 
@@ -82,6 +85,10 @@ public class ProductPage extends AbstractPageWithHeader {
     public String getProductName() {
         return productName.getText();
     }
+
+    public  String getDescription() throws InterruptedException {
+        Thread.sleep(2000);
+        return  description.getText();}
 
     public String getInformationOfReviews() {
         return informationOfReviews.getText();

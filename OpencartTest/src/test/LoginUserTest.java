@@ -6,7 +6,6 @@ import com.opencart.pages.admin.AdminHomePage;
 import com.opencart.pages.admin.AdminLoginPage;
 import com.opencart.tools.Driver;
 import com.opencart.tools.JsonDataConfig;
-import com.opencart.tools.Randomizer;
 import com.opencart.tools.TestRunner;
 import org.junit.Assert;
 import org.testng.annotations.*;

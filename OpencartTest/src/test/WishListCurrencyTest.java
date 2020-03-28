@@ -1,3 +1,4 @@
+
 package test;
 
 import com.opencart.data.Currencies;
@@ -73,3 +74,4 @@ public class WishListCurrencyTest extends CurrencyTestRunner {
         Assert.assertEquals(homePage.getCurrencyText(), ExpectedSymbolOfCurrency);
     }
 }
+

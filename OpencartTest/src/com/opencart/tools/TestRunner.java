@@ -3,6 +3,7 @@ package com.opencart.tools;
 import com.opencart.pages.HomePage;
 import com.opencart.pages.cart.CartPage;
 import com.opencart.pages.wishlist.WishListPage;
+import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
@@ -12,6 +13,7 @@ public class TestRunner {
 
     @BeforeClass
     public void beforeClass() {
+
         Driver.getDriver();
     }
 
@@ -22,6 +24,7 @@ public class TestRunner {
 
     @AfterMethod
     public void tearDown(ITestResult result) {
+
         if (result.getStatus() == ITestResult.FAILURE)
             Utility.getScreenshot(Driver.getDriver());
         Driver.clearCookies();

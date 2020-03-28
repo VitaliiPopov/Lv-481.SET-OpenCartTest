@@ -26,7 +26,7 @@ public class UnsuccessfulReviewTest extends TestRunner {
 
     @BeforeMethod
     public void setUp1() {
-        driver.navigate().to(ConstantVariables.URL);
+        driver.navigate().to(System.getenv("URL"));
     }
 
     @AfterMethod

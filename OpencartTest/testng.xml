@@ -1,7 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Default Suite">
-    <test name="LoginRegisterTest">
+    <test name="SmokeAccountTest">
+        <parameter name="loginText" value="Login"></parameter>
+        <parameter name="logoutText" value="Logout"></parameter>
+        <parameter name="registerText" value="Register"></parameter>
+        <parameter name="myAccountText" value="My Account"></parameter>
+        <parameter name="editAccountText" value="My Account Information"></parameter>
+        <classes>
+            <class name="test.login_test.SmokeAccountTest">
+                <methods>
+                    <include name="smokeRegisterNewUserTest"/>
+                    <include name="smokeLoginExistedUserTest"/>
+                    <include name="smokeChangePasswordTest"/>
+                    <include name="smokeEditAccountTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="LoginTest">
         <parameter name="loginText" value="Login"></parameter>
         <parameter name="logoutText" value="Logout"></parameter>
         <parameter name="registerText" value="Register"></parameter>
@@ -10,7 +27,6 @@
         <classes>
             <class name="test.login_test.LoginUserTest">
                 <methods>
-                    <include name="smokeLoginExistedUserTest"/>
                     <include name="loginNotExistedUserTest"/>
                     <include name="loginWithEmptyFieldsTest"/>
                     <include name="loginWithEmptyEmailTest"/>
@@ -18,19 +34,17 @@
                     <include name="loginCaseSensitiveFieldsTest"/>
                 </methods>
             </class>
-            <class name="test.login_test.ChangePasswordTest">
-                <methods>
-                    <include name="smokeChangePasswordTest"/>
-                    <include name="changePasswordToEmptyTest"/>
-                    <include name="changePasswordToShortTest"/>
-                    <include name="changePasswordToLongTest"/>
-                    <include name="changePasswordWrongConfirmTest"/>
-                    <include name="changePasswordTest"/>
-                </methods>
-            </class>
+        </classes>
+    </test>
+    <test name="RegisterTest">
+        <parameter name="loginText" value="Login"></parameter>
+        <parameter name="logoutText" value="Logout"></parameter>
+        <parameter name="registerText" value="Register"></parameter>
+        <parameter name="myAccountText" value="My Account"></parameter>
+        <parameter name="editAccountText" value="My Account Information"></parameter>
+        <classes>
             <class name="test.register_test.RegisterTest">
                 <methods>
-                    <include name="smokeRegisterNewUserTest"/>
                     <include name="registerWithEmptyFieldsTest"/>
                     <include name="registerWithEmptyFirstNameTest"/>
                     <include name="registerWithEmptyLastNameTest"/>
@@ -49,9 +63,35 @@
                     <include name="registerWithoutPrivacyPolicyAgreementTest"/>
                 </methods>
             </class>
+        </classes>
+    </test>
+    <test name="ChangePasswordTest">
+        <parameter name="loginText" value="Login"></parameter>
+        <parameter name="logoutText" value="Logout"></parameter>
+        <parameter name="registerText" value="Register"></parameter>
+        <parameter name="myAccountText" value="My Account"></parameter>
+        <parameter name="editAccountText" value="My Account Information"></parameter>
+        <classes>
+            <class name="test.login_test.ChangePasswordTest">
+                <methods>
+                    <include name="changePasswordToEmptyTest"/>
+                    <include name="changePasswordToShortTest"/>
+                    <include name="changePasswordToLongTest"/>
+                    <include name="changePasswordWrongConfirmTest"/>
+                    <include name="changePasswordTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="EditAccountTest">
+        <parameter name="loginText" value="Login"></parameter>
+        <parameter name="logoutText" value="Logout"></parameter>
+        <parameter name="registerText" value="Register"></parameter>
+        <parameter name="myAccountText" value="My Account"></parameter>
+        <parameter name="editAccountText" value="My Account Information"></parameter>
+        <classes>
             <class name="test.register_test.EditAccountTest">
                 <methods>
-                    <include name="smokeEditAccountTest"/>
                     <include name="editAccountWithEmptyFieldsTest"/>
                     <include name="editAccountWithEmptyFirstnameTest"/>
                     <include name="editAccountWithLongFirstnameTest"/>
@@ -64,11 +104,12 @@
                     <include name="editAccountWithEmptyTelephoneTest"/>
                     <include name="editAccountWithShortTelephoneTest"/>
                     <include name="editAccountWithLongTelephoneTest"/>
-                    <include name="complexTest"/>
+                    <include name="complexScenario"/>
                 </methods>
             </class>
         </classes>
     </test>
+
     <!--    <test name="CompareTest">-->
     <!--        &lt;!&ndash;MainTest&ndash;&gt;-->
     <!--        <parameter name="myAccountDropdownText" value="Login"/>-->
@@ -123,7 +164,6 @@
 <!--                    <include name="checkListAndGridResult"/>-->
 <!--                    <include name="checkSortByA_Z_Name"/>-->
 <!--                    <include name="checkSortByZ_A_Name"/>-->
-
 <!--                </methods>-->
 <!--            </class>-->
 <!--        </classes>-->

@@ -1,6 +1,8 @@
 package com.opencart.pages.account;
 
 import com.opencart.pages.AbstractPageWithHeader;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -28,21 +30,6 @@ public class EditAccountPage extends AbstractPageWithHeader {
 
     @FindBy(how = How.CSS, css = "div.pull-right>input[value='Continue']")
     private WebElement editButton;
-
-    @FindBy(how = How.XPATH, xpath = "//*[@id='input-firstname']/following-sibling::div")
-    private WebElement alertBadFirstname;
-
-    @FindBy(how = How.XPATH, xpath = "//*[@id='input-lastname']/following-sibling::div")
-    private WebElement alertBadLastname;
-
-    @FindBy(how = How.XPATH, xpath = "//*[@id='input-email']/following-sibling::div")
-    private WebElement alertBadEmail;
-
-    @FindBy(how = How.XPATH, xpath = "//*[@id='input-telephone']/following-sibling::div")
-    private WebElement alertBadTelephone;
-
-    @FindBy(how = How.CSS, css = "div[class='alert alert-danger alert-dismissible']")
-    private WebElement warning;
 
     public EditAccountPage(WebDriver driver) {
         super(driver);
@@ -177,23 +164,63 @@ public class EditAccountPage extends AbstractPageWithHeader {
         return new MyAccountPage(driver);
     }
 
-    public boolean isAlertFirstnameDisplayed() {
-        return alertBadFirstname.isDisplayed();
+    public boolean isFirstNameAlertPresent(){
+        boolean present = false;
+        try{
+            driver.findElement(By.xpath("//*[@id='input-firstname']/following-sibling::div"));
+            present = true;
+        }
+        catch(NoSuchElementException e){
+            present = false;
+        }
+        return present;
     }
 
-    public boolean isAlertLastnameDisplayed() {
-        return alertBadLastname.isDisplayed();
+    public boolean isLastNameAlertPresent(){
+        boolean present = false;
+        try{
+            driver.findElement(By.xpath("//*[@id='input-lastname']/following-sibling::div"));
+            present = true;
+        }
+        catch(NoSuchElementException e){
+            present = false;
+        }
+        return present;
     }
 
-    public boolean isAlertEmailDisplayed() {
-        return alertBadEmail.isDisplayed();
+    public boolean isEmailAlertPresent(){
+        boolean present = false;
+        try{
+            driver.findElement(By.xpath("//*[@id='input-email']/following-sibling::div"));
+            present = true;
+        }
+        catch(NoSuchElementException e){
+            present = false;
+        }
+        return present;
     }
 
-    public boolean isAlertTelephoneDisplayed() {
-        return alertBadTelephone.isDisplayed();
+    public boolean isTelephoneAlertPresent(){
+        boolean present = false;
+        try{
+            driver.findElement(By.xpath("//*[@id='input-telephone']/following-sibling::div"));
+            present = true;
+        }
+        catch(NoSuchElementException e){
+            present = false;
+        }
+        return present;
     }
 
-    public boolean isWarningDisplayed() {
-        return warning.isDisplayed();
+    public boolean isWarningPresent(){
+        boolean present = false;
+        try{
+            driver.findElement(By.cssSelector("div[class='alert alert-danger alert-dismissible']"));
+            present = true;
+        }
+        catch(NoSuchElementException e){
+            present = false;
+        }
+        return present;
     }
 }

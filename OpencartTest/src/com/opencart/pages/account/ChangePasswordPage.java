@@ -1,6 +1,8 @@
 package com.opencart.pages.account;
 
 import com.opencart.pages.AbstractPageWithHeader;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -22,12 +24,6 @@ public class ChangePasswordPage extends AbstractPageWithHeader {
 
     @FindBy(how = How.CSS, css = "div.pull-right>input[value='Continue']")
     private WebElement changePasswordButton;
-
-    @FindBy(how = How.XPATH, xpath = "//*[@id='input-password']/following-sibling::div")
-    private WebElement alertBadPassword;
-
-    @FindBy(how = How.XPATH, xpath = "//*[@id='input-confirm']/following-sibling::div")
-    private WebElement alertBadConfirm;
 
     public ChangePasswordPage(WebDriver driver) {
         super(driver);
@@ -99,11 +95,27 @@ public class ChangePasswordPage extends AbstractPageWithHeader {
         return new MyAccountPage(driver);
     }
 
-    public boolean isAlertPasswordDisplayed() {
-        return alertBadPassword.isDisplayed();
+    public boolean isPasswordAlertPresent(){
+        boolean present = false;
+        try{
+            driver.findElement(By.xpath("//*[@id='input-password']/following-sibling::div"));
+                present = true;
+        }
+        catch(NoSuchElementException e){
+            present = false;
+        }
+        return present;
     }
 
-    public boolean isAlertConfirmDisplayed() {
-        return alertBadConfirm.isDisplayed();
+    public boolean isConfirmAlertPresent(){
+        boolean present = false;
+        try{
+            driver.findElement(By.xpath("//*[@id='input-confirm']/following-sibling::div"));
+            present = true;
+        }
+        catch(NoSuchElementException e){
+            present = false;
+        }
+        return present;
     }
 }

@@ -1,48 +1,15 @@
 package test.login_test;
 
 import com.opencart.pages.account.*;
-import com.opencart.pages.admin.AdminCustomerPage;
-import com.opencart.pages.admin.AdminHomePage;
-import com.opencart.pages.admin.AdminLoginPage;
 import com.opencart.tools.*;
 import org.junit.Assert;
 import org.testng.annotations.*;
-
 import static org.apache.commons.lang3.RandomStringUtils.*;
 
-public class ChangePasswordTest extends TestRunner {
+
+@Listeners(com.opencart.tools.AccountListener.class)
+public class ChangePasswordTest extends AccountTestRunner {
     JsonDataConfig jsonDataConfig = new JsonDataConfig("TestData.json");
-
-
-    @BeforeMethod
-    public void primaryRegistration() throws InterruptedException {
-        RegisterPage registerPage = getHomePage().goToRegisterPage();
-        SuccessRegisterPage success = registerPage.register(jsonDataConfig.getUserFromJson(0));
-        success.goToAccountAfterRegistration();
-        AccountLogoutPage logoutPage = getHomePage().goToLogoutPage();
-        logoutPage.logout();
-    }
-
-    @AfterMethod
-    public void tearDown() {
-        try {
-            logoutUser();
-            deleteCustomerFromAdmin(jsonDataConfig.getEmailFromJson(0));
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Parameters({"loginText"})
-    @Test(priority = 0)
-    public void smokeChangePasswordTest(String loginText) throws InterruptedException {
-        MyAccountPage myAccountPage = loginUser(loginText);
-        ChangePasswordPage changePasswordPage = myAccountPage.clickChangePasswordLink();
-        changePasswordPage.changePassword(
-                jsonDataConfig.getPasswordFromJson(1),
-                jsonDataConfig.getPasswordFromJson(1));
-        Assert.assertTrue(myAccountPage.isSuccessAlertDisplayed());
-    }
 
     @Parameters({"loginText"})
     @Test(priority = 1)
@@ -50,7 +17,7 @@ public class ChangePasswordTest extends TestRunner {
         MyAccountPage myAccountPage = loginUser(loginText);
         ChangePasswordPage changePasswordPage = myAccountPage.clickChangePasswordLink();
         changePasswordPage.clickChangePasswordButton();
-        Assert.assertTrue(changePasswordPage.isAlertPasswordDisplayed());
+        Assert.assertEquals(true, changePasswordPage.isPasswordAlertPresent());
     }
 
     @Parameters({"loginText"})
@@ -60,7 +27,7 @@ public class ChangePasswordTest extends TestRunner {
         String password = randomAlphabetic(3);
         ChangePasswordPage changePasswordPage = myAccountPage.clickChangePasswordLink();
         changePasswordPage.changePassword(password, password);
-        Assert.assertTrue(changePasswordPage.isAlertPasswordDisplayed());
+        Assert.assertEquals(true, changePasswordPage.isPasswordAlertPresent());
     }
 
     //password longer than 20 characters
@@ -71,7 +38,7 @@ public class ChangePasswordTest extends TestRunner {
         String password = randomAlphabetic(25);
         ChangePasswordPage changePasswordPage = myAccountPage.clickChangePasswordLink();
         changePasswordPage.changePassword(password, password);
-        Assert.assertTrue(changePasswordPage.isAlertPasswordDisplayed()); //bug
+        Assert.assertEquals(true, changePasswordPage.isPasswordAlertPresent());//bug
     }
 
     @Parameters({"loginText"})
@@ -80,7 +47,7 @@ public class ChangePasswordTest extends TestRunner {
         MyAccountPage myAccountPage = loginUser(loginText);
         ChangePasswordPage changePasswordPage = myAccountPage.clickChangePasswordLink();
         changePasswordPage.changePassword(randomAlphabetic(5), randomAlphabetic(5));
-        Assert.assertTrue(changePasswordPage.isAlertConfirmDisplayed());
+        Assert.assertEquals(true, changePasswordPage.isConfirmAlertPresent());
     }
 
     public MyAccountPage loginUser(String loginDropdownText) throws InterruptedException {
@@ -91,21 +58,4 @@ public class ChangePasswordTest extends TestRunner {
         return myAccountPage;
     }
 
-    public void logoutUser() throws InterruptedException {
-        if (getHomePage().isExistMyAccountDropdownOption("My Account")){
-            AccountLogoutPage logoutPage = getHomePage().goToLogoutPage();
-            logoutPage.logout();
-        }
-        else getHomePage();
-    }
-
-    public void deleteCustomerFromAdmin(String email) throws InterruptedException {
-        AdminLoginPage adminLoginPage = new AdminLoginPage(Driver.getAdminDriver());
-        AdminHomePage adminHomePage = adminLoginPage.adminLogin(jsonDataConfig.getEmailFromJson(2), jsonDataConfig.getPasswordFromJson(2));
-        adminHomePage.clickOnCustomerDropdown();
-        AdminCustomerPage adminCustomerPage = adminHomePage.clickOnCustomerTab();
-        adminCustomerPage.findCustomerByEmail(email);
-        adminCustomerPage.clickDeleteCustomerButton();
-        adminCustomerPage.confirmAction();
-    }
 }

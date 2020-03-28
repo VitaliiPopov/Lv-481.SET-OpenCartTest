@@ -6,14 +6,13 @@ import com.opencart.pages.admin.AdminLoginPage;
 import com.opencart.pages.admin.AdminReviewEditPage;
 import com.opencart.pages.admin.AdminReviewPage;
 import com.opencart.pages.product.ProductPage;
-import com.opencart.tools.Driver;
-import com.opencart.tools.JsonDataConfig;
-import com.opencart.tools.TestRunner;
-import com.opencart.tools.Utility;
-import org.openqa.selenium.By;
+import com.opencart.tools.*;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
@@ -22,6 +21,8 @@ public class ReviewTest extends TestRunner {
     private JsonDataConfig jsonDataConfig = new JsonDataConfig("TestData.json");
     private WebDriver driver;
     private ProductPage productPage;
+    @FindBy(how = How.CSS, css = "img[alt='MacBook']")
+    private WebElement testProduct;
 
     private AdminReviewPage startMethod() {
         driver.navigate().to(ConstantVariables.ADMIN_URL);
@@ -33,6 +34,7 @@ public class ReviewTest extends TestRunner {
     @BeforeClass
     public void setUp() {
         driver = Driver.getDriver();
+        PageFactory.initElements(driver, this);
         productPage = new ProductPage(driver);
     }
 
@@ -45,7 +47,7 @@ public class ReviewTest extends TestRunner {
     @Parameters({"nameOfAuthor"})
     public void tearDown(ITestResult result, String nameOfAuthor) throws Exception {
         if (result.getStatus() == ITestResult.FAILURE) {
-            Utility.getScreenshot(Driver.getDriver());
+            Screenshot.run(result,driver);
         }
         startMethod().deleteReview(nameOfAuthor);
     }
@@ -54,9 +56,8 @@ public class ReviewTest extends TestRunner {
     @Test(priority = 1)
     public void successfulReviewProcess(String nameOfAuthor, String correctText) {
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        WebElement product = driver.findElement(By.cssSelector("img[alt='MacBook']"));
-        js.executeScript("arguments[0].scrollIntoView();", product);
-        product.click();
+        js.executeScript("arguments[0].scrollIntoView();", testProduct);
+        testProduct.click();
         int startCount = productPage.getReviewCounter();
         productPage.writeReview(nameOfAuthor, correctText);
         String productUrl = driver.getCurrentUrl();
@@ -71,9 +72,8 @@ public class ReviewTest extends TestRunner {
     @Test(priority = 2)
     public void successfullyWritingReview(String nameOfAuthor, String correctText, String messageOfDeliveredReview) {
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        WebElement product = driver.findElement(By.cssSelector("img[alt='MacBook']"));
-        js.executeScript("arguments[0].scrollIntoView();", product);
-        product.click();
+        js.executeScript("arguments[0].scrollIntoView();", testProduct);
+        testProduct.click();
         productPage.writeReview(nameOfAuthor, correctText);
         String textOfDeliveredReview = productPage.getTextOfDeliveredReviewMessage();
         Assert.assertEquals(textOfDeliveredReview, messageOfDeliveredReview);

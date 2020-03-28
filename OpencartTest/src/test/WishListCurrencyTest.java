@@ -2,19 +2,19 @@
 package test;
 
 import com.opencart.data.Currencies;
-import com.opencart.pages.HomePage;
+
 import com.opencart.pages.account.LoginPage;
 import com.opencart.pages.account.MyAccountPage;
 import com.opencart.pages.search.SearchPage;
-import com.opencart.pages.wishlist.WishListEmptyPage;
 import com.opencart.pages.wishlist.WishListPage;
+import com.opencart.pages.HomePage;
+import com.opencart.pages.wishlist.WishListEmptyPage;
 import com.opencart.tools.CurrencyTestRunner;
 import com.opencart.tools.JsonDataConfig;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-
 
 public class WishListCurrencyTest extends CurrencyTestRunner {
 

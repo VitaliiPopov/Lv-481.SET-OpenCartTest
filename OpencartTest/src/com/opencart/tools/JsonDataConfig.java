@@ -3,7 +3,6 @@ package com.opencart.tools;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.opencart.data.users.CustomUser;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -64,5 +63,4 @@ public class JsonDataConfig {
     public CustomUser getUserFromJson(int user_index) {
         return listUser.get(user_index);
     }
-
 }

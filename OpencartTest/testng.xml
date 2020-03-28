@@ -1,6 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Default Suite">
+<suite name="TestNGSuite">
+    <test name="ReviewTest">
+        <!--MainTest-->
+        <parameter name="nameOfAuthor" value="Georgiy"/>
+        <parameter name="correctText" value="it is a product of amazing quality, everything works and the price is quite affordable."/>
+        <parameter name="messageOfDeliveredReview" value="Thank you for your review. It has been submitted to the webmaster for approval."/>
+        <parameter name="textOfSuccessfulDeletingReview" value=" Success: You have modified reviews!"/>
+        <classes>
+            <!--MainTest-->
+            <class name="test.ReviewTest">
+                <methods>
+                    <include name="successfulReviewProcess"/>
+                    <include name="successfullyWritingReview"/>
+                </methods>
+            </class>
+        </classes>
+
+    </test> <!-- Individual -->
+    <test name="UnsuccessfulReviewTest">
+        <!--MainTest-->
+        <parameter name="incorrectName" value="Ri"/>
+        <parameter name="correctText" value="it is a product of amazing quality, everything works and the price is quite affordable."/>
+        <parameter name="messageOfUndeliveredReviewBecauseOfIncorrectName" value="Warning: Review Name must be between 3 and 25 characters!"/>
+        <parameter name="nameOfAuthor" value="Georgiy"/>
+        <parameter name="incorrectText" value="product is amazing."/>
+        <parameter name="messageOfUndeliveredReviewBecauseOfIncorrectText" value="Warning: Review Text must be between 25 and 1000 characters!"/>
+        <parameter name="emptyNameField" value=""/>
+        <parameter name="emptyTextField" value=""/>
+
+        <classes>
+            <!--MainTest-->
+            <class name="test.UnsuccessfulReviewTest">
+                <methods>
+                    <include name="unsuccessfullyWritingReviewBecauseOfIncorrectName"/>
+                    <include name="unsuccessfullyWritingReviewBecauseOfIncorrectText"/>
+                    <include name="unsuccessfullyWritingReviewBecauseOfIncorrectTextAndName"/>
+                    <include name="unsuccessfullyWritingReviewBecauseOfEmptyNameAndTextFields"/>
+                    <include name="unsuccessfullyWritingReviewBecauseOfTooLongName"/>
+                    <include name="unsuccessfullyWritingReviewBecauseOfTooLongText"/>
+                </methods>
+            </class>
+        </classes>
+    </test> <!-- Individual -->
+
     <test name="SmokeAccountTest">
         <parameter name="loginText" value="Login"></parameter>
         <parameter name="logoutText" value="Logout"></parameter>
@@ -134,10 +177,7 @@
         <classes>
 
             <class name="test.cart_test.CartTest">
-                <methods>
-                    <include name="loginTest"/>
-                    <include name="checkUncorrectFunctionOfRefreshButtonInCart"/>
-                </methods>
+
             </class>
 
         </classes>
@@ -156,8 +196,32 @@
                 </methods>
             </class>
         </classes>
-    </test>
+    </test> <!-- Individual -->
+    <test name="UnsuccessfulReviewTest">
+        <!--MainTest-->
+        <parameter name="incorrectName" value="Ri"/>
+        <parameter name="correctText" value="it is a product of amazing quality, everything works and the price is quite affordable."/>
+        <parameter name="messageOfUndeliveredReviewBecauseOfIncorrectName" value="Warning: Review Name must be between 3 and 25 characters!"/>
+        <parameter name="nameOfAuthor" value="Georgiy"/>
+        <parameter name="incorrectText" value="product is amazing."/>
+        <parameter name="messageOfUndeliveredReviewBecauseOfIncorrectText" value="Warning: Review Text must be between 25 and 1000 characters!"/>
+        <parameter name="emptyNameField" value=""/>
+        <parameter name="emptyTextField" value=""/>
 
+        <classes>
+            <!--MainTest-->
+            <class name="test.UnsuccessfulReviewTest">
+                <methods>
+                    <include name="unsuccessfullyWritingReviewBecauseOfIncorrectName"/>
+                    <include name="unsuccessfullyWritingReviewBecauseOfIncorrectText"/>
+                    <include name="unsuccessfullyWritingReviewBecauseOfIncorrectTextAndName"/>
+                    <include name="unsuccessfullyWritingReviewBecauseOfEmptyNameAndTextFields"/>
+                    <include name="unsuccessfullyWritingReviewBecauseOfTooLongName"/>
+                    <include name="unsuccessfullyWritingReviewBecauseOfTooLongText"/>
+                </methods>
+            </class>
+        </classes>
+    </test> <!-- Individual --><!-- Default Suite -->
     <test name="WishListCurrencyTest">
         <parameter name="myAccountDropdownText" value="Login"></parameter>
         <classes>
@@ -221,7 +285,7 @@
         </test>
 
         <test name="addToCartFromWishList">
-
+            
             <parameter name="myAccountDropdownText" value="Login"/>
 
             <parameter name="firstProductName" value="MacBook"/>

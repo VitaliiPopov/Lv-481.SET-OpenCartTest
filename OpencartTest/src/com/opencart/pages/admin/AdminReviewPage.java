@@ -50,7 +50,7 @@ public class AdminReviewPage extends AdminHomePage {
             }
             deleteButton.click();
             driver.switchTo().alert().accept();
-            WebElement messageOfSuccessfulDeletingReview = driver.findElement(By.cssSelector("div[class='alert alert-success alert-dismissible']"));
+            driver.findElement(By.cssSelector("div[class='alert alert-success alert-dismissible']"));
         }
     }
 }

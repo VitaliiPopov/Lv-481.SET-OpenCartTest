@@ -3,8 +3,8 @@ package com.opencart.pages.product;
 import com.opencart.pages.AbstractPageWithHeader;
 import com.opencart.pages.AlertComponent;
 import com.opencart.pages.cart.CartPage;
-
 import com.opencart.pages.comparison.ComparisonPage;
+import com.opencart.pages.wishlist.WishListPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,6 +15,9 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.Random;
 
 public class ProductPage extends AbstractPageWithHeader {
+
+    @FindBy(how = How.XPATH, xpath = ".//button/i[contains(@class,'fa-heart')]/..")
+    private WebElement addToWishListButton;
 
     @FindBy(how = How.CSS, css = "#content h1")
     private WebElement productName;
@@ -135,12 +138,16 @@ public class ProductPage extends AbstractPageWithHeader {
         tabReviews.click();
     }
 
+    public void clickAddToWishListButton() {
+        addToWishListButton.click();
+    }
+
     ///endregion
 
     ///region FUNCTIONALITY
 
     //compareButton
-    public ProductPage clickCompareButton(){
+    public ProductPage clickCompareButton() {
         compareButton.click();
         return this;
     }
@@ -224,11 +231,15 @@ public class ProductPage extends AbstractPageWithHeader {
         return new ProductPage(driver);
     }
 
-    public ComparisonPage goToComparisonPageFromAlert(){
+    public ComparisonPage goToComparisonPageFromAlert() {
         getAlertComponent().clickOnCompareLink();
         return new ComparisonPage(driver);
     }
 
-    ///endregion
+    public WishListPage addProductToWishList() {
+        clickAddToWishListButton();
+        return new WishListPage(driver);
+    }
 
+    ///endregion
 }

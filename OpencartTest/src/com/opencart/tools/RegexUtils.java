@@ -12,7 +12,7 @@ public final class RegexUtils {
     public final static String DELETE_SERVER = "http://[^/]+/";
     private final static String EXTRACT_NUMBER_MESSAGE = "NumberFormatException for pattern =  %s text =  %s";
 
-    private RegexUtils() {
+    public RegexUtils() {
     }
 
     public static boolean isTextMatches(String pattern, String text) {

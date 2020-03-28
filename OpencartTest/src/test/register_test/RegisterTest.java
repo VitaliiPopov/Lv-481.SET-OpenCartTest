@@ -6,6 +6,7 @@ import com.opencart.pages.admin.AdminCustomerPage;
 import com.opencart.pages.admin.AdminHomePage;
 import com.opencart.pages.admin.AdminLoginPage;
 import com.opencart.tools.*;
+import io.qameta.allure.Description;
 import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
@@ -38,6 +39,7 @@ public class RegisterTest extends TestRunner{
 
     @Parameters({"registerText"})
     @Test(priority = 1)
+    @Description("Verify that user cant register with empty data")
     public void registerWithEmptyFieldsTest(String registerText) {
         RegisterPage registerPage = getHomePage().goToRegisterPage();
         registerPage.clickRegisterButton();
@@ -51,6 +53,7 @@ public class RegisterTest extends TestRunner{
     }
 
     @Test(priority = 2)
+    @Description("Verify that user cant register with empty firstname")
     public void registerWithEmptyFirstNameTest() {
         String password = randomAlphabetic(5);
         RegisterPage registerPage = getHomePage().goToRegisterPage();
@@ -65,6 +68,7 @@ public class RegisterTest extends TestRunner{
     }
 
     @Test(priority = 3)
+    @Description("Verify that user cant register with empty lastname")
     public void registerWithEmptyLastNameTest() {
         String password = randomAlphabetic(5);
         RegisterPage registerPage = getHomePage().goToRegisterPage();
@@ -80,6 +84,7 @@ public class RegisterTest extends TestRunner{
 
     //first last names longer than 32 characters
     @Test(priority = 4)
+    @Description("Verify that user cant register with long first and lastname (more than 32 symbols)")
     public void registerWithLongFirstLastNamesTest() {
         String password = randomAlphabetic(5);
         RegisterPage registerPage = getHomePage().goToRegisterPage();
@@ -95,6 +100,7 @@ public class RegisterTest extends TestRunner{
     }
 
     @Test(priority = 5)
+    @Description("Verify that user cant register with empty email")
     public void registerWithEmptyEmailTest() {
         String password = randomAlphabetic(5);
         RegisterPage registerPage = getHomePage().goToRegisterPage();
@@ -109,6 +115,7 @@ public class RegisterTest extends TestRunner{
     }
 
     @Test(priority = 6)
+    @Description("Verify that user cant register with existed email")
     public void registerWithExistedEmailTest() throws InterruptedException {
         String existedEmail = adminAccess.getExistedEmailFromAdmin();
         String password = randomAscii(5);
@@ -125,6 +132,7 @@ public class RegisterTest extends TestRunner{
 
     @Parameters({"loginText", "registerText"})
     @Test(priority = 7)
+    @Description("Verify that user cant register with email without @ symbol")
     public void registerEmailWithoutAtSymbolTest(String loginText, String registerText) throws InterruptedException {
         String password = randomAscii(5);
         RegisterPage registerPage = getHomePage().goToRegisterPage();
@@ -140,6 +148,7 @@ public class RegisterTest extends TestRunner{
 
     @Parameters({"loginText"})
     @Test(priority = 8)
+    @Description("Verify that user cant register with email without . symbol")
     public void registerEmailWithoutDotSymbolTest(String loginText) throws InterruptedException {
         String badEmail = randomAlphabetic(5)+"@"+randomAlphabetic(3);
         String password = randomAscii(5);
@@ -156,6 +165,7 @@ public class RegisterTest extends TestRunner{
 
 
     @Test(priority = 9)
+    @Description("Verify that user cant register with empty telephone")
     public void registerWithEmptyTelephoneTest() {
         String password = randomAlphabetic(5);
         RegisterPage registerPage = getHomePage().goToRegisterPage();
@@ -171,6 +181,7 @@ public class RegisterTest extends TestRunner{
 
     //telephone shorter than 3 characters
     @Test(priority = 10)
+    @Description("Verify that user cant register with email with short telephone (less than 3 symbols)")
     public void registerWithShortTelephoneTest() {
         String password = randomAscii(5);
         RegisterPage registerPage = getHomePage().goToRegisterPage();
@@ -186,6 +197,7 @@ public class RegisterTest extends TestRunner{
 
     //telephone longer than 32 characters
     @Test(priority = 11)
+    @Description("Verify that user cant register with long telephone (more than 32 symbols)")
     public void registerWithLongTelephoneTest() throws InterruptedException {
         String password = randomAscii(5);
         RegisterPage registerPage = getHomePage().goToRegisterPage();
@@ -200,6 +212,7 @@ public class RegisterTest extends TestRunner{
     }
 
     @Test(priority = 12)
+    @Description("Verify that user cant register with empty password")
     public void registerWithEmptyPasswordTest() {
         RegisterPage registerPage = getHomePage().goToRegisterPage();
         registerPage.register(
@@ -215,6 +228,7 @@ public class RegisterTest extends TestRunner{
 
     //password shorter than 4 characters
     @Test(priority = 13)
+    @Description("Verify that user cant register with short password (less than 3 symbols)")
     public void registerWithShortPasswordTest() {
         String password = randomAlphabetic(3);
         RegisterPage registerPage = getHomePage().goToRegisterPage();
@@ -230,6 +244,7 @@ public class RegisterTest extends TestRunner{
 
     //password longer than 20 characters
     @Test(priority = 14)
+    @Description("Verify that user cant register with long password (more than 32 symbols)")
     public void registerWithLongPasswordTest() throws InterruptedException {
         String password = randomAscii(25);
         RegisterPage registerPage = getHomePage().goToRegisterPage();
@@ -244,6 +259,7 @@ public class RegisterTest extends TestRunner{
     }
 
     @Test(priority = 15)
+    @Description("Verify that user cant register with bad password confirmation")
     public void registerWithBadConfirmTest() {
         RegisterPage registerPage = getHomePage().goToRegisterPage();
         registerPage.register(
@@ -257,6 +273,7 @@ public class RegisterTest extends TestRunner{
     }
 
     @Test(priority = 16)
+    @Description("Verify that user cant register without privacy police agreement")
     public void registerWithoutPrivacyPolicyAgreementTest() {
         RegisterPage registerPage = getHomePage().goToRegisterPage();
         registerPage.fillInputFirstname(jsonDataConfig.getFirstNameFromJson(0));

@@ -2,7 +2,6 @@ package com.opencart.data.users;
 
 public class CustomUser {
 
-
     private String email;
     private String password;
     private String firstName;

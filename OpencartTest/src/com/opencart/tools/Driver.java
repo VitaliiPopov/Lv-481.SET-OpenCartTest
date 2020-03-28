@@ -14,6 +14,8 @@ public class Driver {
 
     private static WebDriver driver = null;
 
+    public static ThreadLocal<WebDriver> tdriver = new ThreadLocal<>();
+
     private Driver() {
     }
 
@@ -24,11 +26,13 @@ public class Driver {
                 ChromeOptions options = new ChromeOptions();
                 options.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
                 driver = new ChromeDriver(options);
+                tdriver.set(driver);
             } else if (ConstantVariables.BROWSER_NAME.equalsIgnoreCase("firefox")) {
                 System.setProperty("webdriver.gecko.driver", "./target/drivers/geckodriver.exe");
                 FirefoxOptions options = new FirefoxOptions();
                 options.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
                 driver = new FirefoxDriver(options);
+                tdriver.set(driver);
             }
         }
         driver.manage().window().maximize();
@@ -48,7 +52,7 @@ public class Driver {
         return driver;
     }
 
-    public static void ClearCookies() {
+    public static void clearCookies() {
         driver.manage().deleteAllCookies();
     }
 }

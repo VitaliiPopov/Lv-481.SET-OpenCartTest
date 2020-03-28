@@ -1,7 +1,10 @@
 package com.opencart.pages;
 
+import com.opencart.data.Currencies;
 import com.opencart.pages.comparison.ComparisonPage;
+import com.opencart.pages.product.ProductPage;
 import com.opencart.pages.search.SearchPage;
+import com.opencart.pages.wishlist.WishListPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -86,6 +89,16 @@ public class HomePage extends AbstractPageWithHeader {
     }
 
     /**
+     * Add product to wish list by button.
+     *
+     * @param productName Product name.
+     */
+    public HomePage clickProductComponentAddToWishListButtonByName(String productName) {
+        getProductComponentByName(productName).clickAddToWishListButton();
+        return this;
+    }
+
+    /**
      * Add product to comparison by button.
      *
      * @param productName Product name.
@@ -101,6 +114,16 @@ public class HomePage extends AbstractPageWithHeader {
     ///region LOGIC
 
     /**
+     * This method clicks on product name label
+     *
+     * @return Returns new Product page
+     */
+    public ProductPage clickOnProductNameLabel(String productName) {
+        getProductComponentByName(productName).clickOnNameLabel();
+        return new ProductPage(driver);
+    }
+
+    /**
      * This method clicks on product comparison link from alert message
      *
      * @return Returns new Comparison page
@@ -111,4 +134,8 @@ public class HomePage extends AbstractPageWithHeader {
     }
 
     ///endregion
+    public HomePage chooseCurrencyHomePage(Currencies currency) {
+        clickCurrencyByPartialName(currency.toString());
+        return new HomePage(driver);
+    }
 }

@@ -5,6 +5,7 @@ import com.opencart.pages.admin.AdminCustomerPage;
 import com.opencart.pages.admin.AdminHomePage;
 import com.opencart.pages.admin.AdminLoginPage;
 import com.opencart.tools.*;
+import io.qameta.allure.Description;
 import org.junit.Assert;
 import org.testng.annotations.*;
 
@@ -43,6 +44,7 @@ public class LoginUserTest extends TestRunner {
 
     @Parameters({"loginText"})
     @Test(priority = 1)
+    @Description("Verify that not existed user cant login")
     public void loginNotExistedUserTest(String loginText) throws InterruptedException {
         String email = randomAlphabetic(5) + "@" + randomAlphabetic(3) + "." + randomAlphabetic(3);
         LoginPage loginPage = getHomePage().goToLoginPage(loginText);
@@ -52,6 +54,7 @@ public class LoginUserTest extends TestRunner {
 
     @Parameters({"loginText"})
     @Test(priority = 2)
+    @Description("Verify that user cant login with empty fields")
     public void loginWithEmptyFieldsTest(String loginText) throws InterruptedException {
         LoginPage loginPage = getHomePage().goToLoginPage(loginText);
         loginPage.login("", "");
@@ -60,6 +63,7 @@ public class LoginUserTest extends TestRunner {
 
     @Parameters({"loginText"})
     @Test(priority = 3)
+    @Description("Verify that user cant login with empty email")
     public void loginWithEmptyEmailTest(String loginText) throws InterruptedException {
         LoginPage loginPage = getHomePage().goToLoginPage(loginText);
         loginPage.login("", randomAlphabetic(3));
@@ -68,6 +72,7 @@ public class LoginUserTest extends TestRunner {
 
     @Parameters({"loginText"})
     @Test(priority = 4)
+    @Description("Verify that user cant login with empty password")
     public void loginWithEmptyPasswordTest(String loginText) throws InterruptedException {
         String email = randomAlphabetic(5) + "@" + randomAlphabetic(3) + "." + randomAlphabetic(3);
         LoginPage loginPage = getHomePage().goToLoginPage(loginText);
@@ -77,6 +82,7 @@ public class LoginUserTest extends TestRunner {
 
     @Parameters({"loginText"})
     @Test(priority = 5)
+    @Description("Verify that user cant login with upper case data")
     public void loginCaseSensitiveFieldsTest(String loginText) throws InterruptedException {
         LoginPage loginPage = getHomePage().goToLoginPage(loginText);
         loginPage.login(

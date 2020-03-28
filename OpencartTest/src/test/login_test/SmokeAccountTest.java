@@ -2,6 +2,7 @@ package test.login_test;
 
 import com.opencart.pages.account.*;
 import com.opencart.tools.*;
+import io.qameta.allure.Description;
 import org.junit.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
@@ -33,6 +34,7 @@ public class SmokeAccountTest extends TestRunner {
 
     @Parameters({"myAccountText"})
     @Test(priority = 0)
+    @Description("Verify that user can register with valid data")
     public void smokeRegisterNewUserTest(String myAccountText) throws InterruptedException {
         MyAccountPage myAccountPage = getHomePage()
                 .goToRegisterPage()
@@ -44,6 +46,7 @@ public class SmokeAccountTest extends TestRunner {
 
     @Parameters({"loginText"})
     @Test(priority = 1)
+    @Description("Verify that existed user can login with valid data")
     public void smokeLoginExistedUserTest(String loginText) throws InterruptedException {
         LoginPage loginPage = getHomePage().goToLoginPage(loginText);
         MyAccountPage myAccountPage = loginPage.login(
@@ -54,6 +57,7 @@ public class SmokeAccountTest extends TestRunner {
 
     @Parameters({"loginText"})
     @Test(priority = 2)
+    @Description("Verify that user can change password with valid data")
     public void smokeChangePasswordTest(String loginText) throws InterruptedException {
         MyAccountPage myAccountPage = loginUser(loginText);
         ChangePasswordPage changePasswordPage = myAccountPage.clickChangePasswordLink();
@@ -65,6 +69,7 @@ public class SmokeAccountTest extends TestRunner {
 
     @Parameters({"loginText"})
     @Test(priority = 3)
+    @Description("Verify that user can edit account with valid data")
     public void smokeEditAccountTest(String loginText) throws InterruptedException {
         MyAccountPage myAccountPage = loginUser(loginText);
         EditAccountPage editAccountPage = myAccountPage.clickEditMyAccountLink();

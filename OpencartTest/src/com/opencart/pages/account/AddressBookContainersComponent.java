@@ -32,10 +32,5 @@ public class AddressBookContainersComponent {
         deleteAddressButton.click();
     }
 
-    public boolean checkText(String x) {
-        if (address.getText().contains(x)) {
-            return true;
-        } else return false;
 
-    }
 }

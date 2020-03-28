@@ -5,6 +5,7 @@ import com.opencart.pages.admin.AdminCustomerPage;
 import com.opencart.pages.admin.AdminHomePage;
 import com.opencart.pages.admin.AdminLoginPage;
 import com.opencart.tools.*;
+import io.qameta.allure.Description;
 import org.junit.Assert;
 import org.testng.annotations.*;
 
@@ -17,6 +18,7 @@ public class EditAccountTest extends AccountTestRunner {
 
     @Parameters({"loginText"})
     @Test(priority = 1)
+    @Description("Verify that user cant edit account with empty data")
     public void editAccountWithEmptyFieldsTest(String loginText) throws InterruptedException {
         MyAccountPage myAccountPage = loginUser(loginText);
         EditAccountPage editAccountPage = myAccountPage.clickEditMyAccountLink();
@@ -30,6 +32,7 @@ public class EditAccountTest extends AccountTestRunner {
 
     @Parameters({"loginText"})
     @Test(priority = 2)
+    @Description("Verify that user cant edit account with empty firstname")
     public void editAccountWithEmptyFirstnameTest(String loginText) throws InterruptedException {
         MyAccountPage myAccountPage = loginUser(loginText);
         EditAccountPage editAccountPage = myAccountPage.clickEditMyAccountLink();
@@ -41,6 +44,7 @@ public class EditAccountTest extends AccountTestRunner {
     //firstname longer than 32 characters
     @Parameters({"loginText"})
     @Test(priority = 3)
+    @Description("Verify that user cant edit account with long firstname (more than 32 symbols)")
     public void editAccountWithLongFirstnameTest(String loginText) throws InterruptedException {
         MyAccountPage myAccountPage = loginUser(loginText);
         EditAccountPage editAccountPage = myAccountPage.clickEditMyAccountLink();
@@ -51,6 +55,7 @@ public class EditAccountTest extends AccountTestRunner {
 
     @Parameters({"loginText"})
     @Test(priority = 4)
+    @Description("Verify that user cant edit account with empty lastname")
     public void editAccountWithEmptyLastnameTest(String loginText) throws InterruptedException {
         MyAccountPage myAccountPage = loginUser(loginText);
         EditAccountPage editAccountPage = myAccountPage.clickEditMyAccountLink();
@@ -62,6 +67,7 @@ public class EditAccountTest extends AccountTestRunner {
     //lastname longer than 32 characters
     @Parameters({"loginText"})
     @Test(priority = 5)
+    @Description("Verify that user cant edit account with long lastname (more than 32 symbols)")
     public void editAccountWithLongLastnameTest(String loginText) throws InterruptedException {
         MyAccountPage myAccountPage = loginUser(loginText);
         EditAccountPage editAccountPage = myAccountPage.clickEditMyAccountLink();
@@ -72,6 +78,7 @@ public class EditAccountTest extends AccountTestRunner {
 
     @Parameters({"loginText"})
     @Test(priority = 6)
+    @Description("Verify that user cant edit account with empty email")
     public void editAccountWithEmptyEmailTest(String loginText) throws InterruptedException {
         MyAccountPage myAccountPage = loginUser(loginText);
         EditAccountPage editAccountPage = myAccountPage.clickEditMyAccountLink();
@@ -82,6 +89,7 @@ public class EditAccountTest extends AccountTestRunner {
 
     @Parameters({"loginText", "editAccountText"})
     @Test(priority = 7)
+    @Description("Verify that user cant edit account with email without @ symbol")
     public void editAccountEmailWithoutAtSymbolTest(String loginText, String editAccountText) throws InterruptedException {
         MyAccountPage myAccountPage = loginUser(loginText);
         EditAccountPage editAccountPage = myAccountPage.clickEditMyAccountLink();
@@ -92,6 +100,7 @@ public class EditAccountTest extends AccountTestRunner {
 
     @Parameters({"loginText"})
     @Test(priority = 8)
+    @Description("Verify that user cant edit account with email without . symbol")
     public void editAccountEmailWithoutDotSymbolTest(String loginText) throws InterruptedException {
         MyAccountPage myAccountPage = loginUser(loginText);
         EditAccountPage editAccountPage = myAccountPage.clickEditMyAccountLink();
@@ -102,6 +111,7 @@ public class EditAccountTest extends AccountTestRunner {
 
     @Parameters({"loginText"})
     @Test(priority = 9)
+    @Description("Verify that user cant edit account with existed email")
     public void editAccountWithExistedEmailTest(String loginText) throws InterruptedException {
         String email = adminAccess.getExistedEmailFromAdmin();
         MyAccountPage myAccountPage = loginUser(loginText);
@@ -113,6 +123,7 @@ public class EditAccountTest extends AccountTestRunner {
 
     @Parameters({"loginText"})
     @Test(priority = 10)
+    @Description("Verify that user cant edit account with empty telephone")
     public void editAccountWithEmptyTelephoneTest(String loginText) throws InterruptedException {
         MyAccountPage myAccountPage = loginUser(loginText);
         EditAccountPage editAccountPage = myAccountPage.clickEditMyAccountLink();
@@ -121,9 +132,10 @@ public class EditAccountTest extends AccountTestRunner {
         Assert.assertEquals(true, editAccountPage.isTelephoneAlertPresent());
     }
 
-    //telephone shorter than 32 characters
+    //telephone shorter than 3 characters
     @Parameters({"loginText"})
     @Test(priority = 11)
+    @Description("Verify that user cant edit account with short telephone (less than 3 symbols)")
     public void editAccountWithShortTelephoneTest(String loginText) throws InterruptedException {
         MyAccountPage myAccountPage = loginUser(loginText);
         EditAccountPage editAccountPage = myAccountPage.clickEditMyAccountLink();
@@ -135,6 +147,7 @@ public class EditAccountTest extends AccountTestRunner {
     //telephone longer than 32 characters
     @Parameters({"loginText"})
     @Test(priority = 12)
+    @Description("Verify that user cant edit account with long telephone (more than 32 symbols)")
     public void editAccountWithLongTelephoneTest(String loginText) throws InterruptedException {
         MyAccountPage myAccountPage = loginUser(loginText);
         EditAccountPage editAccountPage = myAccountPage.clickEditMyAccountLink();
@@ -145,6 +158,7 @@ public class EditAccountTest extends AccountTestRunner {
 
     @Parameters({"loginText"})
     @Test(priority = 13)
+    @Description("Verify complex functionality of login, registration and editing user data")
     public void complexScenario(String loginText) throws InterruptedException {
         MyAccountPage myAccountPage = loginUser(loginText);
         Assert.assertTrue(myAccountPage.getTitleMyAccountText().equals("My Account"));

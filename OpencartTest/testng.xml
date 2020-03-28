@@ -109,64 +109,187 @@
             </class>
         </classes>
     </test>
-
-    <!--    <test name="CompareTest">-->
-    <!--        &lt;!&ndash;MainTest&ndash;&gt;-->
-    <!--        <parameter name="myAccountDropdownText" value="Login"/>-->
-    <!--        <parameter name="search" value="ip"/>-->
-    <!--        <parameter name="productName1" value="iPhone"/>-->
-    <!--        <parameter name="productName2" value="iPod Classic"/>-->
-    <!--        <classes>-->
-    <!--            &lt;!&ndash;MainTest&ndash;&gt;-->
-    <!--            <class name="test.ProductCompareTest">-->
-    <!--                <methods>-->
-    <!--&lt;!&ndash;                    <include name="Login"/>&ndash;&gt;-->
-    <!--                    <include name="AddProductToCompareFromSearchByAlert"/>-->
-    <!--                    <include name="AddSameProductTwoTimes"/>-->
-    <!--                    <include name="CleanProductFromComparison"/>-->
-    <!--                    <include name="AddToCartFromComparisonPage"/>-->
-    <!--                    <include name="GoToProductPageFromComparisonPage"/>-->
-    <!--                </methods>-->
-    <!--            </class>-->
-    <!--        </classes>-->
-    <!--    </test>-->
+<!--    <test name="CompareTest">-->
+<!--        &lt;!&ndash;MainTest&ndash;&gt;-->
+<!--        <parameter name="myAccountDropdownText" value="Login"/>-->
+<!--        <parameter name="search" value="ip"/>-->
+<!--        <parameter name="productName1" value="iPhone"/>-->
+<!--        <parameter name="productName2" value="iPod Classic"/>-->
+<!--        <classes>-->
+<!--            &lt;!&ndash;MainTest&ndash;&gt;-->
+<!--            <class name="test.ProductCompareTest">-->
+<!--                <methods>-->
+<!--                    &lt;!&ndash;                    <include name="Login"/>&ndash;&gt;-->
+<!--                    <include name="AddProductToCompareFromSearchByAlert"/>-->
+<!--                    <include name="AddSameProductTwoTimes"/>-->
+<!--                    <include name="CleanProductFromComparison"/>-->
+<!--                    <include name="AddToCartFromComparisonPage"/>-->
+<!--                    <include name="GoToProductPageFromComparisonPage"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test>-->
 <!--    <test name="CartTest">-->
-        <!--MainTest-->
-        <!--        <parameter name="myAccountDropdownText" value="Login"></parameter>-->
-        <!--        <classes>-->
-        <!--MainTest-->
-        <!--            <class name="test.cart_test.CartTest">-->
-        <!--                <methods>-->
-        <!--                    <include name="loginTest"/>-->
-        <!--                    <include name="checkUncorrectFunctionOfRefreshButtonInCart"/>-->
-        <!--                </methods>-->
-        <!--            </class>-->
-        <!--    </classes>-->
+<!--        <parameter name="myAccountDropdownText" value="Login"></parameter>-->
+<!--        <classes>-->
+
+<!--            <class name="test.cart_test.CartTest">-->
+<!--                <methods>-->
+<!--                    <include name="loginTest"/>-->
+<!--                    <include name="checkUncorrectFunctionOfRefreshButtonInCart"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+
+<!--        </classes>-->
+<!--    </test>-->
+<!--    <test name="CartCurrencyTest">-->
+<!--        <parameter name="myAccountDropdownText" value="Login"></parameter>-->
+
+<!--        <parameter name="productName" value="MacBook"></parameter>-->
+<!--        <classes>-->
+
+<!--            <class name="test.CartCurrencyTest">-->
+<!--                <methods>-->
+<!--                    <include name="Login"/>-->
+<!--                    <include name="addProductToCart"/>-->
+<!--                    <include name="changeCurrencyOnCartPage"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test>-->
+
+<!--    <test name="WishListCurrencyTest">-->
+<!--        <parameter name="myAccountDropdownText" value="Login"></parameter>-->
+<!--        <classes>-->
+
+<!--            <class name="test.WishListCurrencyTest">-->
+<!--                <methods>-->
+<!--                    <include name="Login"/>-->
+<!--                    <include name="addProductToWishList"/>-->
+<!--                    <include name="changeCurrencyOnWishListPage"/>-->
+<!--                    <include name="changeCurrencyAtHomePage"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--        </classes>-->
 <!--    </test>-->
 <!--    <test name="SearchTest">-->
-<!--        &lt;!&ndash;Search Page test&ndash;&gt;-->
 <!--        <parameter name="myAccountDropdownText" value="Login"></parameter>-->
 <!--        <parameter name="productName" value="IPHONE"/>-->
 <!--        <parameter name="lowerProductName" value="Iphone"/>-->
 <!--        <parameter name="searchText" value="MAC"/>-->
 <!--        <parameter name="lowerSearchText" value="mac"/>-->
 <!--        <parameter name="categoryOption" value="Laptops"/>-->
+<!--        <parameter name="showOption" value="15"/>-->
+<!--        <parameter name="allProducts" value="%"/>-->
 <!--        <classes>-->
-<!--            <class name="test.SearchPageTest">-->
+<!--            <class name="test.search_test.SearchPageTest">-->
 <!--                <methods>-->
-<!--                    <include name="login"/>-->
-<!--                    <include name="searchPageTesting"/>-->
 <!--                    <include name="checkLowerCase"/>-->
-<!--                    <include name="checkLableContainsSearchText"/>-->
-<!--                    <include name="checkEmptyResultMessage"/>-->
-<!--                    <include name="checkCategoriesCheckbox"/>-->
-<!--                    <include name="checkProductCountFromLable"/>-->
+<!--                    <include name="searchLabelContainSearchText"/>-->
+<!--                    <include name="checkUncorrectFieldResultMessage"/>-->
+<!--                    <include name="checkEmptyFieldResultMessage"/>-->
+<!--                    <include name="checkCategoriesCheckboxDisabled"/>-->
+<!--                    <include name="checkCategoriesCheckboxEnabled"/>-->
+<!--                    <include name="checkProductCountFromLablel"/>-->
 <!--                    <include name="checkListAndGridResult"/>-->
 <!--                    <include name="checkSortByA_Z_Name"/>-->
 <!--                    <include name="checkSortByZ_A_Name"/>-->
+<!--                    <include name="checkSortByPrice"/>-->
+<!--                    <include name="checkShowDropbox"/>-->
+<!--                    <include name="checkPagesCount"/>-->
+<!--                    <include name="checkDescriptionCheckbox"/>-->
 <!--                </methods>-->
 <!--            </class>-->
 <!--        </classes>-->
-<!--    </test> -->
+<!--    </test>-->
+<!--        <test name="addToWishList">-->
+
+<!--            <parameter name="myAccountDropdownText" value="Login"/>-->
+
+<!--            <parameter name="fromSearchPageProductName" value="iPod Nano"/>-->
+<!--            <parameter name="fromHomePageProductName" value="MacBook"/>-->
+<!--            <parameter name="fromProductPageProductName" value="iPhone"/>-->
+<!--            <classes>-->
+<!--                <class name="test.TestWishList">-->
+<!--                    <methods>-->
+<!--                        <include name="addProductToWishListFromSearchPage"/>-->
+<!--                        <include name="addProductToWishListFromHomePage"/>-->
+<!--                        <include name="addProductToWishListFromProductPage"/>-->
+<!--                    </methods>-->
+<!--                </class>-->
+<!--            </classes>-->
+<!--        </test>-->
+
+<!--        <test name="addToCartFromWishList">-->
+
+<!--            <parameter name="myAccountDropdownText" value="Login"/>-->
+
+<!--            <parameter name="firstProductName" value="MacBook"/>-->
+<!--            <parameter name="secondProductName" value="iPhone"/>-->
+<!--            <classes>-->
+<!--                <class name="test.TestWishList">-->
+<!--                    <methods>-->
+<!--                        <include name="addProductToCartFromWishList"/>-->
+<!--                    </methods>-->
+<!--                </class>-->
+<!--            </classes>-->
+
+<!--        </test>-->
+
+<!--        <test name="removeFromWishList">-->
+
+<!--            <parameter name="myAccountDropdownText" value="Login"/>-->
+
+<!--            <parameter name="firstProductName" value="Samsung Galaxy Tab 10.1"/>-->
+<!--            <parameter name="secondProductName" value="Samsung SyncMaster 941BW"/>-->
+<!--            <classes>-->
+<!--                <class name="test.TestWishList">-->
+<!--                    <methods>-->
+<!--                        <include name="removeProductFromWishListByName"/>-->
+<!--                    </methods>-->
+<!--                </class>-->
+<!--            </classes>-->
+<!--        </test>-->
+
+<!--        <test name="verifyWishListEmptyPage">-->
+
+<!--            <parameter name="myAccountDropdownText" value="Login"/>-->
+
+<!--            <parameter name="fromSearchPageProductName" value="iPod Nano"/>-->
+<!--            <parameter name="fromHomePageProductName" value="iPhone"/>-->
+<!--            <parameter name="fromProductPageProductName" value="Samsung Galaxy Tab 10.1"/>-->
+<!--            <parameter name="expectedMessage" value="Your wish list is empty."/>-->
+
+<!--            <classes>-->
+<!--                <class name="test.TestWishList">-->
+<!--                    <methods>-->
+<!--                        <include name="verifyWishListEmptyPageMessage"/>-->
+<!--                    </methods>-->
+<!--                </class>-->
+<!--            </classes>-->
+<!--        </test>-->
+<!--        <test name="YuriiSereda">-->
+<!--            <parameter name="myAccountDropdownText" value="Login"/>-->
+<!--            &lt;!&ndash;  <parameter name="myAccount" value="My Account"/>&ndash;&gt;-->
+<!--            <classes>-->
+<!--                <class name="test.AddressTests">-->
+<!--                    <methods>-->
+<!--                        <include name="abilityToAddAddress"/>-->
+<!--                        <include name="abilityToDeleteAddress"/>-->
+<!--                        <include name="editAddress"/>-->
+<!--                        <include name="checkEditPageAlertMassages"/>-->
+<!--                        <include name="checkAbilityToDeleteDefaultAddress"/>-->
+<!--                        <include name="createAddressWithEmptyFirstname"/>-->
+<!--                        <include name="createAddressWithEmptyLastname"/>-->
+<!--                        <include name="createAddressWithEmptyAddress"/>-->
+<!--                        <include name="createAddressWithEmptyCountry"/>-->
+<!--                        <include name="createAddressWithEmptyRegion"/>-->
+<!--                        <include name="checkAlertsWithTooShortInputs"/>-->
+<!--                        <include name="checkAlertsWithTooLongInputs"/>-->
+<!--                        <include name="checkAlertsWithTooLongInputs"/>-->
+<!--                        <include name="createAddressWithNumbersInsteadCharacters"/>-->
+<!--                    </methods>-->
+<!--                </class>-->
+<!--            </classes>-->
+<!--        </test>-->
 </suite> <!-- Default Suite -->
-        <!--end-->

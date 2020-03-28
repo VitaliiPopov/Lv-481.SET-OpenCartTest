@@ -14,7 +14,7 @@ public class Utility {
         TakesScreenshot takesScreenshot = (TakesScreenshot) driver;
 
         File src = takesScreenshot.getScreenshotAs(OutputType.FILE);
-        String path = "/Screenshot/" + System.currentTimeMillis() + ".png";
+        String path = "C:\\OpenCartMerged\\OpencartTest\\src" + System.currentTimeMillis() + ".png";
         File destination = new File(path);
         try {
             FileUtils.copyFile(src, destination);

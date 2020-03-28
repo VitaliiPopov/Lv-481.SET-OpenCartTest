@@ -4,8 +4,6 @@
 //import com.opencart.pages.HomePage;
 //import com.opencart.pages.account.LoginPage;
 //import com.opencart.pages.account.MyAccountPage;
-//import com.opencart.pages.product_table.CartPage;
-//import com.opencart.pages.product_table.WishListPage;
 //import com.opencart.pages.search.SearchPage;
 //import com.opencart.tools.TestRunner;
 //import org.testng.Assert;
@@ -64,3 +62,4 @@
 //        Assert.assertEquals(cartPage.getCurrencyText(),ExpectedSymbolOfCurrency);
 //    }
 //}
+//>>>>>>> b217fee943151c96baf9945437b42546fac04557

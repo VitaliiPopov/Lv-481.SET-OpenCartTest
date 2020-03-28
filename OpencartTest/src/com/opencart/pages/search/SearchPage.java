@@ -125,6 +125,7 @@ public class SearchPage extends AbstractPageWithHeader {
 
     // get ArrayList of names from products
     public ArrayList<String> getProductComponentNamesList() {
+
         ArrayList<String> productComponentNamesList = new ArrayList<>();
         productContainersComponents = getProductContainersComponents();
         for (ProductContainersComponent current : productContainersComponents) {
@@ -244,7 +245,6 @@ public class SearchPage extends AbstractPageWithHeader {
     //add to Wish List by button
     public void clickProductComponentAddToWishList(String productName) {
         getProductComponentByName(productName).clickAddToWishListButton();
-        //InitializeAlert();
     }
 
     //get full description of product from Product Page by index

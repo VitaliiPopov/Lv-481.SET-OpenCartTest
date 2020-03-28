@@ -15,10 +15,9 @@ import java.util.*;
 
 import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
 
-@Listeners({AllureListener.class})
+
 public class SearchPageTest extends TestRunner {
 
-    private JsonDataConfig jsonDataConfig = new JsonDataConfig("TestData.json");
     private SearchPage searchPage;
 
     //lists for sorting by product name
@@ -28,14 +27,6 @@ public class SearchPageTest extends TestRunner {
     //lists for sorting by product price
     private ArrayList<Double> priceList;
     private ArrayList<Double> byPriceSorted;
-
-    @Parameters({"myAccountDropdownText"})
-    @Test(priority = 1)
-    public void login(String myAccountDropdownText) {
-        LoginPage loginPage = getHomePage().goToLoginPage(myAccountDropdownText);
-        MyAccountPage myAccountPage = loginPage.login(jsonDataConfig.getEmailFromJson(0), jsonDataConfig.getPasswordFromJson(0));
-        myAccountPage.goToHomePage();
-    }
 
     //check if product names are the same when lowercase text and uppercase text
     @Parameters({"searchText", "lowerSearchText"})

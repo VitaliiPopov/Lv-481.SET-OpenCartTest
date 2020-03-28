@@ -316,5 +316,4 @@ public class EditAdressPage extends AbstractPageWithHeader {
         clickContinueSubmitButton();
 
     }
-
 }

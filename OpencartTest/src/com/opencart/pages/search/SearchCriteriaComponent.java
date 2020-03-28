@@ -24,7 +24,6 @@ public class SearchCriteriaComponent {
     public SearchCriteriaComponent(WebElement searchCriteriaLayout) {
         this.searchCriteriaLayout = searchCriteriaLayout;
         initElements();
-
     }
 
     private void initElements() {
@@ -37,7 +36,8 @@ public class SearchCriteriaComponent {
 
     }
 
-    public boolean searchLableContainSearchText(String searchText) {
+    //check if search label contain text from searsh field
+    public boolean searchLabelContainSearchText(String searchText) {
         if (getSearchLableText().contains(searchText)) {
             return true;
         }
@@ -60,7 +60,7 @@ public class SearchCriteriaComponent {
         keywordsField.sendKeys(searchText);
     }
 
-    public void fillKeywordsField(String searchText) {
+    public void fillSearchField(String searchText) {
         clickKeywordsField();
         cleanKeywordsField();
         inputKeywordsField(searchText);
@@ -78,6 +78,7 @@ public class SearchCriteriaComponent {
         return categoriesDropdown;
     }
 
+    //check if dropdown is selected
     public boolean isDropdownSelected(WebElement dropdown, String optionText) {
         List<WebElement> options = dropdown.findElements(By.tagName("option"));
         for (WebElement option : options) {
@@ -96,15 +97,34 @@ public class SearchCriteriaComponent {
     }
 
     public void clickDescriptionsCheckbox() {
-        descriptionsCheckbox.click();
+        if (!isDescriptionCheckboxSelected()) {
+            descriptionsCheckbox.click();
+        }
+    }
+
+    //click on chekbox if it is checked
+    public void unClickDescriptionsCheckbox() {
+        if (isDescriptionCheckboxSelected()) {
+            descriptionsCheckbox.click();
+        }
     }
 
     public void clickSearchButton() {
         searchButton.click();
     }
 
+    //check if Subcategories checkbox is enabled to click
     public boolean isSubcategoriesCheckboxEnabled() {
         if (subcategoriesCheckbox.isEnabled()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    //check if description checkbox is selected
+    public boolean isDescriptionCheckboxSelected() {
+        if (descriptionsCheckbox.isSelected()) {
             return true;
         } else {
             return false;

@@ -1,6 +1,8 @@
 package com.opencart.pages.account;
 
 import com.opencart.pages.AbstractPageWithHeader;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -29,18 +31,6 @@ public class EditAccountPage extends AbstractPageWithHeader {
     @FindBy(how = How.CSS, css = "div.pull-right>input[value='Continue']")
     private WebElement editButton;
 
-    @FindBy(how = How.XPATH, xpath = "//*[@id='input-firstname']/following-sibling::div")
-    private WebElement alertBadFirstname;
-
-    @FindBy(how = How.XPATH, xpath = "//*[@id='input-lastname']/following-sibling::div")
-    private WebElement alertBadLastname;
-
-    @FindBy(how = How.XPATH, xpath = "//*[@id='input-email']/following-sibling::div")
-    private WebElement alertBadEmail;
-
-    @FindBy(how = How.XPATH, xpath = "//*[@id='input-telephone']/following-sibling::div")
-    private WebElement alertBadTelephone;
-
     public EditAccountPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
@@ -49,6 +39,22 @@ public class EditAccountPage extends AbstractPageWithHeader {
     //titleAccountInformation
     public String getTitleAccountInformationText() {
         return titleAccountInformation.getText();
+    }
+
+    public String getFirstNameEditValue() {
+        return firstnameEditField.getAttribute("value");
+    }
+
+    public String getLastNameEditValue() {
+        return lastnameEditField.getAttribute("value");
+    }
+
+    public String getEmailEditValue() {
+        return emailEditField.getAttribute("value");
+    }
+
+    public String getTelephoneEditValue() {
+        return telephoneEditField.getAttribute("value");
     }
 
     //firstnameEditField
@@ -110,6 +116,13 @@ public class EditAccountPage extends AbstractPageWithHeader {
 
     //FUNCTIONAL
 
+    public void clearFields() {
+        clearFirstnameEditField();
+        clearLastnameEditField();
+        clearEmailEditField();
+        clearTelephoneEditField();
+    }
+
     //firstnameEditField
     public void editFirstnameField(String firstname) {
         clickFirstnameEditField();
@@ -142,28 +155,72 @@ public class EditAccountPage extends AbstractPageWithHeader {
     //BUSINESS LOGIC
 
     //register
-    public MyAccountPage editAccountInformation(String FIRST_NAME, String LAST_NAME, String EMAIL, String PHONE) {
-        editFirstnameField(FIRST_NAME);
-        editLastnameField(LAST_NAME);
-        editEmailField(EMAIL);
-        editTelephoneField(PHONE);
+    public MyAccountPage editAccountInformation(String firstname, String lastname, String email, String phone) {
+        editFirstnameField(firstname);
+        editLastnameField(lastname);
+        editEmailField(email);
+        editTelephoneField(phone);
         clickEditButton();
         return new MyAccountPage(driver);
     }
 
-    public boolean isAlertFirstnameDisplayed() {
-        return alertBadFirstname.isDisplayed();
+    public boolean isFirstNameAlertPresent(){
+        boolean present = false;
+        try{
+            driver.findElement(By.xpath("//*[@id='input-firstname']/following-sibling::div"));
+            present = true;
+        }
+        catch(NoSuchElementException e){
+            present = false;
+        }
+        return present;
     }
 
-    public boolean isAlertLastnameDisplayed() {
-        return alertBadLastname.isDisplayed();
+    public boolean isLastNameAlertPresent(){
+        boolean present = false;
+        try{
+            driver.findElement(By.xpath("//*[@id='input-lastname']/following-sibling::div"));
+            present = true;
+        }
+        catch(NoSuchElementException e){
+            present = false;
+        }
+        return present;
     }
 
-    public boolean isAlertEmailDisplayed() {
-        return alertBadEmail.isDisplayed();
+    public boolean isEmailAlertPresent(){
+        boolean present = false;
+        try{
+            driver.findElement(By.xpath("//*[@id='input-email']/following-sibling::div"));
+            present = true;
+        }
+        catch(NoSuchElementException e){
+            present = false;
+        }
+        return present;
     }
 
-    public boolean isAlertTelephoneDisplayed() {
-        return alertBadTelephone.isDisplayed();
+    public boolean isTelephoneAlertPresent(){
+        boolean present = false;
+        try{
+            driver.findElement(By.xpath("//*[@id='input-telephone']/following-sibling::div"));
+            present = true;
+        }
+        catch(NoSuchElementException e){
+            present = false;
+        }
+        return present;
+    }
+
+    public boolean isWarningPresent(){
+        boolean present = false;
+        try{
+            driver.findElement(By.cssSelector("div[class='alert alert-danger alert-dismissible']"));
+            present = true;
+        }
+        catch(NoSuchElementException e){
+            present = false;
+        }
+        return present;
     }
 }

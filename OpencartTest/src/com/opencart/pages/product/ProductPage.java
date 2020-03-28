@@ -4,6 +4,7 @@ import com.opencart.pages.AbstractPageWithHeader;
 import com.opencart.pages.AlertComponent;
 import com.opencart.pages.cart.CartPage;
 
+import com.opencart.pages.wishlist.WishListPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,11 +16,17 @@ import java.util.Random;
 
 public class ProductPage extends AbstractPageWithHeader {
 
+    @FindBy(how = How.XPATH, xpath = ".//button/i[contains(@class,'fa-heart')]/..")
+    private WebElement addToWishListButton;
+
     @FindBy(how = How.CSS, css = "#content h1")
     private WebElement productName;
 
     @FindBy(how = How.CSS, css = "a[href='#tab-review']")
     private WebElement tabReviews;
+
+    @FindBy(how = How.CSS, css = "#tab-description div")
+    private WebElement description;
 
     @FindBy(how = How.XPATH, xpath = "//input[contains(@id,'input-name')]")
     private WebElement inputFieldName;
@@ -79,6 +86,10 @@ public class ProductPage extends AbstractPageWithHeader {
         return productName.getText();
     }
 
+    public  String getDescription() throws InterruptedException {
+        Thread.sleep(2000);
+        return  description.getText();}
+
     public String getInformationOfReviews() {
         return informationOfReviews.getText();
     }
@@ -130,6 +141,8 @@ public class ProductPage extends AbstractPageWithHeader {
     public void openTabReviews() {
         tabReviews.click();
     }
+
+    public void clickAddToWishListButton() { addToWishListButton.click();}
 
     ///endregion
 
@@ -214,6 +227,10 @@ public class ProductPage extends AbstractPageWithHeader {
         return new ProductPage(driver);
     }
 
+    public WishListPage addProductToWishList(){
+        clickAddToWishListButton();
+        return new WishListPage(driver);
+    }
     ///endregion
 
 }

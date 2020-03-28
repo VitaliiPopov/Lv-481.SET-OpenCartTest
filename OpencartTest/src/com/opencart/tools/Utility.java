@@ -12,7 +12,6 @@ public class Utility {
 
     public static String getScreenshot(WebDriver driver) {
         TakesScreenshot takesScreenshot = (TakesScreenshot) driver;
-
         File src = takesScreenshot.getScreenshotAs(OutputType.FILE);
         String path = "/Screenshot/" + System.currentTimeMillis() + ".png";
         File destination = new File(path);

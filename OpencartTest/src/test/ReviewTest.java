@@ -38,7 +38,7 @@ public class ReviewTest extends TestRunner {
     @BeforeClass
     public void setUp() {
         driver = Driver.getDriver();
-        PageFactory.initElements(driver,this);
+        PageFactory.initElements(driver, this);
         productPage = new ProductPage(driver);
     }
 
@@ -51,11 +51,12 @@ public class ReviewTest extends TestRunner {
     @Parameters({"nameOfAuthor"})
     public void tearDown(ITestResult result, String nameOfAuthor) throws Exception {
         if (result.getStatus() == ITestResult.FAILURE) {
-            byte[] takeScreenShot= takeScreenShot(result.getMethod().getMethodName());
+            byte[] takeScreenShot = takeScreenShot(result.getMethod().getMethodName());
             Allure.addAttachment(result.getMethod().getMethodName(), new ByteArrayInputStream(takeScreenShot));
         }
         startMethod().deleteReview(nameOfAuthor);
     }
+
     private byte[] takeScreenShot(String methodName) throws IOException {
         return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
     }

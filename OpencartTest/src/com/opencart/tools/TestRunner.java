@@ -24,13 +24,6 @@ public class TestRunner {
         Driver.ClearCookies();
     }
 
-   /* @AfterMethod
-    public void tearDown(ITestResult result) {
-        if (result.getStatus() == ITestResult.FAILURE) {
-            Driver.getDriver().get("https://137.116.222.54/index.php?route=account/logout");
-        }
-    }*/
-
     public HomePage getHomePage() {
         return new HomePage(Driver.getDriver());
     }

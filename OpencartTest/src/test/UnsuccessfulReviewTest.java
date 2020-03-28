@@ -17,7 +17,6 @@ import org.testng.annotations.*;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
-//@Listeners({ BaseTest.class })
 public class UnsuccessfulReviewTest extends TestRunner {
 
     private WebDriver driver;
@@ -28,7 +27,7 @@ public class UnsuccessfulReviewTest extends TestRunner {
     @BeforeClass
     public void setUp() {
         driver = Driver.getDriver();
-        PageFactory.initElements(driver,this);
+        PageFactory.initElements(driver, this);
         productPage = new ProductPage(driver);
     }
 
@@ -40,11 +39,11 @@ public class UnsuccessfulReviewTest extends TestRunner {
     @AfterMethod
     public void tearDown(ITestResult result) throws IOException {
         if (result.getStatus() == ITestResult.FAILURE) {
-            byte[] takeScreenShot= takeScreenShot(result.getMethod().getMethodName());
+            byte[] takeScreenShot = takeScreenShot(result.getMethod().getMethodName());
             Allure.addAttachment(result.getMethod().getMethodName(), new ByteArrayInputStream(takeScreenShot));
-
         }
     }
+
     private byte[] takeScreenShot(String methodName) throws IOException {
         return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
     }
@@ -93,9 +92,9 @@ public class UnsuccessfulReviewTest extends TestRunner {
         Assert.assertEquals(textOfUndeliveredReview, messageOfUndeliveredReviewBecauseOfIncorrectText);
     }
 
-    @Parameters({ "correctText", "messageOfUndeliveredReviewBecauseOfIncorrectName"})
+    @Parameters({"correctText", "messageOfUndeliveredReviewBecauseOfIncorrectName"})
     @Test(priority = 5)
-    public void unsuccessfullyWritingReviewBecauseOfTooLongName( String correctText, String messageOfUndeliveredReviewBecauseOfIncorrectName) {
+    public void unsuccessfullyWritingReviewBecauseOfTooLongName(String correctText, String messageOfUndeliveredReviewBecauseOfIncorrectName) {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView();", testProduct);
         testProduct.click();
@@ -107,15 +106,14 @@ public class UnsuccessfulReviewTest extends TestRunner {
 
     @Parameters({"nameOfAuthor", "messageOfUndeliveredReviewBecauseOfIncorrectText"})
     @Test(priority = 6)
-    public void unsuccessfullyWritingReviewBecauseOfTooLongText(String nameOfAuthor,String messageOfUndeliveredReviewBecauseOfIncorrectText) {
+    public void unsuccessfullyWritingReviewBecauseOfTooLongText(String nameOfAuthor, String messageOfUndeliveredReviewBecauseOfIncorrectText) {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView();", testProduct);
         testProduct.click();
-        String tooLongText= RandomStringUtils.randomAlphabetic(1020);
+        String tooLongText = RandomStringUtils.randomAlphabetic(1020);
         productPage.writeReview(nameOfAuthor, tooLongText);
         String textOfUndeliveredReview = productPage.getTextOfUndeliveredReviewMessage();
         Assert.assertEquals(textOfUndeliveredReview, messageOfUndeliveredReviewBecauseOfIncorrectText);
     }
-
 }
 

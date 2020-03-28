@@ -1,25 +1,30 @@
 package com.opencart.tools;
 
-import org.apache.maven.surefire.shade.common.org.apache.maven.shared.utils.io.FileUtils;
+import io.qameta.allure.Allure;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.testng.ITestResult;
 
-import java.io.File;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
-public class Utility {
+public class Utility  {
+    public static void run(ITestResult testResult, WebDriver driver) {
 
-    public static String getScreenshot(WebDriver driver) {
-        TakesScreenshot takesScreenshot = (TakesScreenshot) driver;
-        File src = takesScreenshot.getScreenshotAs(OutputType.FILE);
-        String path = "/Screenshot/" + System.currentTimeMillis() + ".png";
-        File destination = new File(path);
-        try {
-            FileUtils.copyFile(src, destination);
-        } catch (IOException e) {
-            System.out.println("Capture Failed " + e.getMessage());
+        if (testResult.getThrowable() != null) {
+            try {
+                takeScreenShot(testResult.getMethod().getMethodName(), driver);
+                byte[] takeScreenShot= takeScreenShot(testResult.getMethod().getMethodName(),driver);
+                Allure.addAttachment(testResult.getMethod().getMethodName(), new ByteArrayInputStream(takeScreenShot));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-        return path;
+    }
+
+    private static byte[] takeScreenShot(String methodName,WebDriver driver) throws IOException {
+
+        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
     }
 }

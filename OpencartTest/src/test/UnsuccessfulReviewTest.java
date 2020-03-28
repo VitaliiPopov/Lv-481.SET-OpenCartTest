@@ -4,9 +4,11 @@ import com.opencart.data.ConstantVariables;
 import com.opencart.pages.product.ProductPage;
 import com.opencart.tools.Driver;
 import com.opencart.tools.TestRunner;
-import io.qameta.allure.Allure;
+import com.opencart.tools.Utility;
 import org.apache.commons.lang.RandomStringUtils;
-import org.openqa.selenium.*;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
@@ -14,7 +16,6 @@ import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
 public class UnsuccessfulReviewTest extends TestRunner {
@@ -39,14 +40,11 @@ public class UnsuccessfulReviewTest extends TestRunner {
     @AfterMethod
     public void tearDown(ITestResult result) throws IOException {
         if (result.getStatus() == ITestResult.FAILURE) {
-            byte[] takeScreenShot = takeScreenShot(result.getMethod().getMethodName());
-            Allure.addAttachment(result.getMethod().getMethodName(), new ByteArrayInputStream(takeScreenShot));
+            Utility.run(result,driver);
         }
     }
 
-    private byte[] takeScreenShot(String methodName) throws IOException {
-        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-    }
+
 
     @Parameters({"incorrectName", "correctText", "messageOfUndeliveredReviewBecauseOfIncorrectName"})
     @Test(priority = 1)

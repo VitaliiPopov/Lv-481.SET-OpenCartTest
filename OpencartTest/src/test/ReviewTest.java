@@ -9,17 +9,16 @@ import com.opencart.pages.product.ProductPage;
 import com.opencart.tools.Driver;
 import com.opencart.tools.JsonDataConfig;
 import com.opencart.tools.TestRunner;
-import io.qameta.allure.Allure;
-import org.openqa.selenium.*;
+import com.opencart.tools.Utility;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
-
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
 
 public class ReviewTest extends TestRunner {
     private JsonDataConfig jsonDataConfig = new JsonDataConfig("TestData.json");
@@ -51,15 +50,11 @@ public class ReviewTest extends TestRunner {
     @Parameters({"nameOfAuthor"})
     public void tearDown(ITestResult result, String nameOfAuthor) throws Exception {
         if (result.getStatus() == ITestResult.FAILURE) {
-            byte[] takeScreenShot = takeScreenShot(result.getMethod().getMethodName());
-            Allure.addAttachment(result.getMethod().getMethodName(), new ByteArrayInputStream(takeScreenShot));
+            Utility.run(result,driver);
         }
         startMethod().deleteReview(nameOfAuthor);
     }
 
-    private byte[] takeScreenShot(String methodName) throws IOException {
-        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-    }
 
     @Parameters({"nameOfAuthor", "correctText"})
     @Test(priority = 1)

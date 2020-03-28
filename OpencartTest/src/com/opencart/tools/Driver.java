@@ -37,7 +37,7 @@ public class Driver {
         }
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-        driver.get(System.getenv("URL"));
+        driver.get(ConstantVariables.URL);
         return driver;
     }
 
@@ -48,7 +48,7 @@ public class Driver {
 
     public static WebDriver getAdminDriver() {
         driver = getDriver();
-        driver.get(System.getenv("ADMIN_URL"));
+        driver.get(ConstantVariables.ADMIN_URL);
         return driver;
     }
 

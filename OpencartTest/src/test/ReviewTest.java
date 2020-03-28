@@ -24,7 +24,7 @@ public class ReviewTest extends TestRunner {
     private ProductPage productPage;
 
     private AdminReviewPage startMethod() {
-        driver.navigate().to(System.getenv("ADMIN_URL"));
+        driver.navigate().to(ConstantVariables.ADMIN_URL);
         AdminLoginPage adminLoginPage = new AdminLoginPage(driver);
         AdminHomePage adminHomePage = adminLoginPage.adminLogin(jsonDataConfig.getEmailFromJson(2), jsonDataConfig.getPasswordFromJson(2));
         return adminHomePage.openReviewPage();
@@ -38,7 +38,7 @@ public class ReviewTest extends TestRunner {
 
     @BeforeMethod
     public void setUp1() {
-        driver.navigate().to(System.getenv("URL"));
+        driver.navigate().to(ConstantVariables.URL);
     }
 
     @AfterMethod

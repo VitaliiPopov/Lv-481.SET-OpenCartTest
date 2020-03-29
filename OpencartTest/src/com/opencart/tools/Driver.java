@@ -26,13 +26,13 @@ public class Driver {
                 ChromeOptions options = new ChromeOptions();
                 options.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
                 driver = new ChromeDriver(options);
-                driver.set(driver);
+                tdriver.set(driver);
             } else if (ConstantVariables.BROWSER_NAME.equalsIgnoreCase("firefox")) {
                 System.setProperty("webdriver.gecko.driver", "./target/drivers/geckodriver.exe");
                 FirefoxOptions options = new FirefoxOptions();
                 options.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
                 driver = new FirefoxDriver(options);
-                driver.set(driver);
+                tdriver.set(driver);
             }
         }
         driver.manage().window().maximize();

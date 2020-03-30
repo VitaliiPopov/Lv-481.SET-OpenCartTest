@@ -23,6 +23,7 @@ public class Screenshot  {
         }
     }
 
+
     private static byte[] takeScreenShot(String methodName,WebDriver driver) throws IOException {
 
         return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);

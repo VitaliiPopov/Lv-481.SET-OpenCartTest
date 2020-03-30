@@ -55,12 +55,6 @@ public class ProductPage extends AbstractPageWithHeader {
     @FindBy(how = How.XPATH, xpath = "//button[contains(@id,'button-review')]")
     private WebElement buttonAddReview;
 
-    @FindBy(how = How.XPATH, xpath = "//div[contains(@id,'review')]/child::p")
-    private WebElement informationOfReviews;
-
-    @FindBy(how = How.XPATH, xpath = "//div[contains(@id,'review')]/following-sibling::h2")
-    private WebElement descriptionOfTabReviews;
-
     @FindBy(how = How.CSS, css = "div.alert.alert-success")
     private WebElement deliveredReviewMessage;
 
@@ -92,14 +86,6 @@ public class ProductPage extends AbstractPageWithHeader {
     public  String getDescription() throws InterruptedException {
         Thread.sleep(2000);
         return  description.getText();}
-
-    public String getInformationOfReviews() {
-        return informationOfReviews.getText();
-    }
-
-    public String getDescriptionOfTabReviews() {
-        return descriptionOfTabReviews.getText();
-    }
 
     public String getTextOfDeliveredReviewMessage() {
         return deliveredReviewMessage.getText();

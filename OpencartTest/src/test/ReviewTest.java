@@ -25,6 +25,12 @@ public class ReviewTest extends TestRunner {
     @FindBy(how = How.CSS, css = "img[alt='MacBook']")
     private WebElement testProduct;
 
+    public void scrollToSpecificProductAndClickOnIt(){
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView();", testProduct);
+        testProduct.click();
+    }
+
     private AdminReviewPage startMethod() {
         driver.navigate().to(ConstantVariables.ADMIN_URL);
         AdminLoginPage adminLoginPage = new AdminLoginPage(driver);
@@ -40,7 +46,7 @@ public class ReviewTest extends TestRunner {
     }
 
     @BeforeMethod
-    public void setUp1() {
+    public void setUpMethod() {
         driver.navigate().to(ConstantVariables.URL);
     }
 
@@ -53,14 +59,14 @@ public class ReviewTest extends TestRunner {
         startMethod().deleteReview(nameOfAuthor);
     }
 
-    @Parameters({"nameOfAuthor", "correctText"})
+    @Parameters({"nameOfAuthor", "correctText","messageOfDeliveredReview"})
     @Test(priority = 1)
-    public void successfulReviewProcess(String nameOfAuthor, String correctText) {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].scrollIntoView();", testProduct);
-        testProduct.click();
+    public void successfulReviewProcess(String nameOfAuthor, String correctText,String messageOfDeliveredReview) {
+        scrollToSpecificProductAndClickOnIt();
         int startCount = productPage.getReviewCounter();
         productPage.writeReview(nameOfAuthor, correctText);
+        String textOfDeliveredReview = productPage.getTextOfDeliveredReviewMessage();
+        Assert.assertEquals(textOfDeliveredReview, messageOfDeliveredReview);
         String productUrl = driver.getCurrentUrl();
         AdminReviewEditPage adminReviewEditPage = startMethod().openReviewEditPage(nameOfAuthor);
         adminReviewEditPage.submitReview();
@@ -72,9 +78,7 @@ public class ReviewTest extends TestRunner {
     @Parameters({"nameOfAuthor", "correctText", "messageOfDeliveredReview"})
     @Test(priority = 2)
     public void successfullyWritingReview(String nameOfAuthor, String correctText, String messageOfDeliveredReview) {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].scrollIntoView();", testProduct);
-        testProduct.click();
+        scrollToSpecificProductAndClickOnIt();
         productPage.writeReview(nameOfAuthor, correctText);
         String textOfDeliveredReview = productPage.getTextOfDeliveredReviewMessage();
         Assert.assertEquals(textOfDeliveredReview, messageOfDeliveredReview);

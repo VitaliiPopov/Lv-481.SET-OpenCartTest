@@ -7,6 +7,7 @@ import com.opencart.pages.admin.AdminReviewEditPage;
 import com.opencart.pages.admin.AdminReviewPage;
 import com.opencart.pages.product.ProductPage;
 import com.opencart.tools.*;
+import com.opencart.tools.test_runner.TestRunner;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

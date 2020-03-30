@@ -1,20 +1,16 @@
 package test.register_test;
 
-import com.opencart.pages.HomePage;
 import com.opencart.pages.account.*;
-import com.opencart.pages.admin.AdminCustomerPage;
-import com.opencart.pages.admin.AdminHomePage;
-import com.opencart.pages.admin.AdminLoginPage;
 import com.opencart.tools.*;
+import com.opencart.tools.test_runner.TestRunner;
 import io.qameta.allure.Description;
 import org.testng.Assert;
-import org.testng.ITestContext;
 import org.testng.annotations.*;
 
 import static org.apache.commons.lang.RandomStringUtils.*;
 import static org.apache.commons.lang.RandomStringUtils.randomAlphabetic;
 
-public class RegisterTest extends TestRunner{
+public class RegisterTest extends TestRunner {
     JsonDataConfig jsonDataConfig = new JsonDataConfig("TestData.json");
     AdminManager adminAccess = new AdminManager();
     String email = jsonDataConfig.getEmailFromJson(0);

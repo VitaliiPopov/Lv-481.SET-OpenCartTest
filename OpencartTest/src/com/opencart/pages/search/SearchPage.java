@@ -37,6 +37,7 @@ public class SearchPage extends AbstractPageWithHeader {
 
     //Components
     private List<ProductContainersComponent> productContainersComponents;
+    private AlertComponent alertComponent;
 
     public SearchPage(WebDriver driver) {
         super(driver);
@@ -49,6 +50,12 @@ public class SearchPage extends AbstractPageWithHeader {
         return emptyResultMessage.getText();
     }
 
+    /**
+     * This method gets productContainersComponent. First, it waits visibility of all elements on the page,
+     * then pass every element in list in ProductContainerComponent constructor.
+     *
+     * @return productContainersComponents list.
+     */
     //productContainersComponents
     public List<ProductContainersComponent> getProductContainersComponents() {
         driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
@@ -58,11 +65,6 @@ public class SearchPage extends AbstractPageWithHeader {
             productContainersComponents.add(new ProductContainersComponent(current));
         }
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-
-        /*productContainersComponents = new ArrayList<>();
-        for (WebElement current : driver.findElements(By.xpath(PRODUCT_COMPONENT_LOCATOR)))
-            productContainersComponents.add(new ProductContainersComponent(current)); //Valera*/
-
         return productContainersComponents;
     }
 
@@ -74,20 +76,18 @@ public class SearchPage extends AbstractPageWithHeader {
         return new SearchCriteriaComponent(driver.findElement(By.xpath(SEARCH_CRITERIA_ELEMENT_LOCATOR)));
     }
 
+    /**
+     * This method gets alert component and use explicit wait before alert appear.
+     *
+     * @return new AlertComponent
+     */
     //alertComponent
     public AlertComponent getAlertComponentWithWait() {
         try {
-            Thread.sleep(3000); //Only for presentation, bug alert
+            Thread.sleep(1000); //Only for presentation, bug alert
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-//        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-//        WebDriverWait wait = new WebDriverWait(driver, 5);
-//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(ALERT_LOCATOR)));
-//        searchPageAlertComponent = new SearchPageAlertComponent(wait.until(ExpectedConditions.presenceOfElementLocated((By.cssSelector(ALERT_LOCATOR)))));
-//        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-//        return searchPageAlertComponent;
         return new AlertComponent(driver.findElement(By.xpath(ALERT_LOCATOR)));
     }
 
@@ -185,8 +185,13 @@ public class SearchPage extends AbstractPageWithHeader {
      *
      * @return Returns new Comparison page
      */
-    public ComparisonPage clickProductComparisonLink() {
+    public ComparisonPage clickProductComparisonLinkFromAlert() {
         getAlertComponentWithWait().clickOnCompareLink();
+        return new ComparisonPage(driver);
+    }
+
+    public ComparisonPage clickProductComparisonLink() {
+        getProductDisplayCriteriaComponent().clickProductCompareLink();
         return new ComparisonPage(driver);
     }
 

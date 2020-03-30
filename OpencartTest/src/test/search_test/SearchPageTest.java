@@ -1,11 +1,8 @@
 package test.search_test;
 
-import com.opencart.pages.account.LoginPage;
-import com.opencart.pages.account.MyAccountPage;
 import com.opencart.pages.search.SearchCriteriaComponent;
 import com.opencart.pages.search.SearchPage;
-import com.opencart.tools.JsonDataConfig;
-import com.opencart.tools.TestRunner;
+import com.opencart.tools.test_runner.TestRunner;
 import org.testng.Assert;
 import org.testng.annotations.*;
 

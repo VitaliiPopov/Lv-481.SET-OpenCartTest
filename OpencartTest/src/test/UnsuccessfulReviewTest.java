@@ -4,7 +4,7 @@ import com.opencart.data.ConstantVariables;
 import com.opencart.pages.product.ProductPage;
 import com.opencart.tools.Driver;
 import com.opencart.tools.Screenshot;
-import com.opencart.tools.TestRunner;
+import com.opencart.tools.test_runner.TestRunner;
 import org.apache.commons.lang.RandomStringUtils;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;

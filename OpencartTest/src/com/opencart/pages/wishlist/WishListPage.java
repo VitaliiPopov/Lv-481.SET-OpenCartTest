@@ -15,8 +15,6 @@ public class WishListPage extends AbstractPageWithHeader {
     //Components
     private WishListContainerComponent wishListContainerComponent;
 
-    private WebElement continueButton;
-
     public WishListPage(WebDriver driver) {
         super(driver);
         initElements();
@@ -24,15 +22,9 @@ public class WishListPage extends AbstractPageWithHeader {
 
     private void initElements() {
         wishListContainerComponent = new WishListContainerComponent(driver);
-        continueButton = driver.findElement(By.xpath("//div[@class='pull-right']/a"));
     }
 
     // PAGE OBJECT
-
-    // continue button
-    public void clickContinueButton() {
-        continueButton.click();
-    }
 
     public WishListContainerComponent getWishListContainerComponent() {
         return wishListContainerComponent;
@@ -85,11 +77,6 @@ public class WishListPage extends AbstractPageWithHeader {
             removeButons = driver.findElements(By.cssSelector(".text-right a.btn.btn-danger"));
         }
         return new WishListEmptyPage(driver);
-    }
-
-    public MyAccountPage goToMyAccountPage() {
-        clickContinueButton();
-        return new MyAccountPage(driver);
     }
 }
 

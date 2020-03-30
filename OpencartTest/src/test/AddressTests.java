@@ -5,11 +5,11 @@ import com.opencart.pages.account.EditAdressPage;
 import com.opencart.pages.account.LoginPage;
 import com.opencart.pages.account.MyAccountPage;
 import com.opencart.tools.JsonDataConfig;
-import com.opencart.tools.AddressBookTestRunner;
+import com.opencart.tools.test_runner.AddressBookTestRunner;
 import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import static org.apache.commons.lang.RandomStringUtils.*;
+
 import static org.apache.commons.lang.RandomStringUtils.randomAlphabetic;
 
 public class AddressTests extends AddressBookTestRunner {

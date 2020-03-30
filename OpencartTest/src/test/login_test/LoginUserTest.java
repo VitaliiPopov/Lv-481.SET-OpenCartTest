@@ -1,10 +1,8 @@
 package test.login_test;
 
 import com.opencart.pages.account.*;
-import com.opencart.pages.admin.AdminCustomerPage;
-import com.opencart.pages.admin.AdminHomePage;
-import com.opencart.pages.admin.AdminLoginPage;
 import com.opencart.tools.*;
+import com.opencart.tools.test_runner.TestRunner;
 import io.qameta.allure.Description;
 import org.junit.Assert;
 import org.testng.annotations.*;

@@ -1,10 +1,6 @@
 package com.opencart.tools;
 
-import com.opencart.pages.account.RegisterPage;
-import com.opencart.pages.account.SuccessRegisterPage;
-import com.opencart.pages.admin.AdminCustomerPage;
-import com.opencart.pages.admin.AdminHomePage;
-import com.opencart.pages.admin.AdminLoginPage;
+import com.opencart.tools.test_runner.AccountTestRunner;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 

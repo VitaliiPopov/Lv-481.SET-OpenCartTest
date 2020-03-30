@@ -5,7 +5,7 @@ import com.opencart.pages.product.ProductPage;
 import com.opencart.pages.search.SearchPage;
 import com.opencart.pages.wishlist.WishListEmptyPage;
 import com.opencart.pages.wishlist.WishListPage;
-import com.opencart.tools.WishListTestRunner;
+import com.opencart.tools.test_runner.WishListTestRunner;
 import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;

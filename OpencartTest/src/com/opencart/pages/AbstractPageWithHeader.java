@@ -9,6 +9,7 @@ import com.opencart.pages.search.SearchPage;
 import com.opencart.pages.wishlist.WishListEmptyPage;
 import com.opencart.pages.wishlist.WishListPage;
 import com.opencart.tools.RegexUtils;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -318,6 +319,7 @@ public class AbstractPageWithHeader {
         return new AccountLogoutPage(driver);
     }
 
+    @Step("Clicks on dropdown and chose login and go to the login page")
     public MyAccountPage goToMyAccountPage() {
         clickMyAccountDropdownComponentByName("My Account");
         return new MyAccountPage(driver);
@@ -376,6 +378,6 @@ public class AbstractPageWithHeader {
         clickWishList();
         return new WishListEmptyPage(driver);
     }
-    ///endregion
 
+    ///endregion
 }

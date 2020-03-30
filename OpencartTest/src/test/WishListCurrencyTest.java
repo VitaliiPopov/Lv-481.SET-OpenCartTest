@@ -9,7 +9,7 @@ import com.opencart.pages.search.SearchPage;
 import com.opencart.pages.wishlist.WishListPage;
 import com.opencart.pages.HomePage;
 import com.opencart.pages.wishlist.WishListEmptyPage;
-import com.opencart.tools.CurrencyTestRunner;
+import com.opencart.tools.test_runner.CurrencyTestRunner;
 import com.opencart.tools.JsonDataConfig;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;

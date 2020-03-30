@@ -6,7 +6,7 @@ import com.opencart.pages.account.LoginPage;
 import com.opencart.pages.account.MyAccountPage;
 import com.opencart.pages.cart.CartPage;
 import com.opencart.pages.search.SearchPage;
-import com.opencart.tools.CurrencyTestRunner;
+import com.opencart.tools.test_runner.CurrencyTestRunner;
 import com.opencart.tools.JsonDataConfig;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;

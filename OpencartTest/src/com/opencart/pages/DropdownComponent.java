@@ -75,7 +75,7 @@ public class DropdownComponent {
                 break;
             }
         }
-        if (isFound == false) {
+        if (!isFound) {
             throw new RuntimeException(WEBELEMENT_NOT_FOUND);
         }
         return isFound;

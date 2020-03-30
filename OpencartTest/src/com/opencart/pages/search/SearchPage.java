@@ -46,7 +46,7 @@ public class SearchPage extends AbstractPageWithHeader {
     ///region ATOMIC_OPERATIONS
 
     //emptyResultMessage
-    public String getemptyResultMessageText() {
+    public String getEmptyResultMessageText() {
         return emptyResultMessage.getText();
     }
 

@@ -100,7 +100,7 @@
         </classes>
     </test>
 
-    <!--  Anna  -->
+<!--      Anna  -->
 
     <test name="SmokeAccountTest">
         <parameter name="loginText" value="Login"></parameter>

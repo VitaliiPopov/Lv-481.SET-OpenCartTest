@@ -8,7 +8,6 @@ import com.opencart.tools.CompareTestRunner;
 import com.opencart.tools.JsonDataConfig;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
-import io.qameta.allure.Story;
 import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;

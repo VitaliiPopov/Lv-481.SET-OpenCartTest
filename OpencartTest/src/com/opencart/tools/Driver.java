@@ -8,7 +8,11 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 public class Driver {
@@ -20,17 +24,10 @@ public class Driver {
 
     public static WebDriver getDriver() {
         if (driver == null) {
-            if (ConstantVariables.BROWSER_NAME.equalsIgnoreCase("chrome")) {
-                ChromeOptions options = new ChromeOptions();
-                options.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
-                WebDriverManager.chromedriver().setup();
-                driver = new ChromeDriver(options);
-            } else if (ConstantVariables.BROWSER_NAME.equalsIgnoreCase("firefox")) {
-                WebDriverManager.firefoxdriver().setup();
-                FirefoxOptions options = new FirefoxOptions();
-                options.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
-                driver = new FirefoxDriver(options);
-            }
+            ChromeOptions options = new ChromeOptions();
+            options.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
+            WebDriverManager.chromedriver().setup();
+            driver = new ChromeDriver(options);
         }
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);

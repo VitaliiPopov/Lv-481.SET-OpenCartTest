@@ -40,7 +40,7 @@
         </classes>
     </test>
 
-    <!--  Yura  -->
+      <!--Yura-->
 
     <test name="YuriiSereda">
         <parameter name="myAccountDropdownText" value="Login"/>
@@ -119,6 +119,7 @@
             </class>
         </classes>
     </test>
+
     <test name="LoginTest">
         <parameter name="loginText" value="Login"></parameter>
         <parameter name="logoutText" value="Logout"></parameter>
@@ -137,6 +138,7 @@
             </class>
         </classes>
     </test>
+
     <test name="RegisterTest">
         <parameter name="loginText" value="Login"></parameter>
         <parameter name="logoutText" value="Logout"></parameter>
@@ -166,6 +168,7 @@
             </class>
         </classes>
     </test>
+
     <test name="EditAccountTest">
         <parameter name="loginText" value="Login"></parameter>
         <parameter name="logoutText" value="Logout"></parameter>
@@ -192,6 +195,7 @@
             </class>
         </classes>
     </test>
+
     <test name="ChangePasswordTest">
         <parameter name="loginText" value="Login"></parameter>
         <parameter name="logoutText" value="Logout"></parameter>
@@ -209,3 +213,4 @@
             </class>
         </classes>
     </test>
+</suite>

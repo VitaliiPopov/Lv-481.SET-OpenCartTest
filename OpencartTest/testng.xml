@@ -18,23 +18,23 @@
             <class name="test.product_comparison_test.LoggedUserProductComparisonTest">
                 <methods>
                     <include name="AddProductToCompareFromSearch"/>
-                    <include name="AddProductToCompareFromMainPage"/>
+                    <!--<include name="AddProductToCompareFromMainPage"/>
                     <include name="AddProductToCompareFromProductPage"/>
                     <include name="AddSameProductTwoTimes"/>
                     <include name="CleanAllProductsFromComparison"/>
                     <include name="AddToCartFromComparisonPage"/>
                     <include name="GoToProductPageFromComparisonPage"/>
-                    <include name="GoToComparisonPageFromProductCompareLabel"/>
+                    <include name="GoToComparisonPageFromProductCompareLabel"/>-->
                 </methods>
             </class>
             <!--NonLoggedUserProductComparisonTest-->
             <class name="test.product_comparison_test.NonLoggedUserProductComparisonTest">
                 <methods>
                     <include name="AddProductToCompareFromSearch"/>
-                    <include name="AddProductToCompareFromMainPage"/>
+                    <!--<include name="AddProductToCompareFromMainPage"/>
                     <include name="AddProductToCompareFromProductPage"/>
                     <include name="AddSameProductTwoTimes"/>
-                    <include name="CleanAllProductsFromComparison"/>
+                    <include name="CleanAllProductsFromComparison"/>-->
                 </methods>
             </class>
         </classes>

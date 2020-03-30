@@ -40,7 +40,7 @@
         </classes>
     </test>
 
-      <!--&lt;!&ndash;Yura&ndash;&gt;
+      <!--Yura-->
 
     <test name="YuriiSereda">
         <parameter name="myAccountDropdownText" value="Login"/>
@@ -66,7 +66,7 @@
         </classes>
     </test>
 
-    &lt;!&ndash;Mariia&ndash;&gt;
+    <!--Mariia-->
 
     <test name="SearchTest">
         <parameter name="myAccountDropdownText" value="Login"/>
@@ -94,13 +94,13 @@
                     <include name="checkShowDropbox"/>
                     <include name="checkPagesCount"/>
                     <include name="checkDescriptionCheckbox"/>
-                    <include name="checkCategoriesCheckboxIsUseful"/>   &lt;!&ndash;//failed&ndash;&gt;
+                    <include name="checkCategoriesCheckboxIsUseful"/>   <!--//failed-->
                 </methods>
             </class>
         </classes>
     </test>
 
-    &lt;!&ndash;  Anna  &ndash;&gt;
+    <!--  Anna  -->
 
     <test name="SmokeAccountTest">
         <parameter name="loginText" value="Login"></parameter>
@@ -212,5 +212,5 @@
                 </methods>
             </class>
         </classes>
-    </test>-->
+    </test>
 </suite>

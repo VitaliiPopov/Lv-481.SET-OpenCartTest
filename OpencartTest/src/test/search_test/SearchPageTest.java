@@ -7,15 +7,17 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 
 import java.util.Collections;
-
 import java.util.*;
 
 import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
 
-
 public class SearchPageTest extends TestRunner {
 
     private SearchPage searchPage;
+
+    //lists for
+    private ArrayList<String> upperCaseSearchText;
+    private ArrayList<String> lowerCaseSearchText;
 
     //lists for sorting by product name
     private ArrayList<String> defaultSorted;
@@ -25,14 +27,23 @@ public class SearchPageTest extends TestRunner {
     private ArrayList<Double> priceList;
     private ArrayList<Double> byPriceSorted;
 
+    //lists for checking grid and list mode
+    private ArrayList<String> gridModeProdNames;
+    private ArrayList<String> listModeProdNames;
+
+    //lists for checking subcategories checkbox work
+    private ArrayList<String> withoutCategoriesSearch;
+    private ArrayList<String> withCategoriesDropdownAndCheckbox;
+    private ArrayList<String> withCategoriesDropdown;
+
     //check if product names are the same when lowercase text and uppercase text
     @Parameters({"searchText", "lowerSearchText"})
     @Test(priority = 2)
     public void checkLowerCase(String searchText, String lowerSearchText) {
-        ArrayList<String> upperCaseSearchText = getHomePage()
+        upperCaseSearchText = getHomePage()
                 .searchProduct(searchText)
                 .getProductComponentNamesList();
-        ArrayList<String> lowerCaseSearchText = getHomePage()
+        lowerCaseSearchText = getHomePage()
                 .searchProduct(lowerSearchText)
                 .getProductComponentNamesList();
         Assert.assertEquals(upperCaseSearchText, lowerCaseSearchText);
@@ -53,7 +64,7 @@ public class SearchPageTest extends TestRunner {
     public void checkUncorrectFieldResultMessage() throws InterruptedException {
         Assert.assertTrue(getHomePage()
                 .searchProduct(randomAlphabetic(9))
-                .getemptyResultMessageText()
+                .getEmptyResultMessageText()
                 .contains("no product"));
     }
 
@@ -62,7 +73,7 @@ public class SearchPageTest extends TestRunner {
     public void checkEmptyFieldResultMessage() throws InterruptedException {
         Assert.assertTrue(getHomePage()
                 .searchProduct("")
-                .getemptyResultMessageText()
+                .getEmptyResultMessageText()
                 .contains("no product"));
     }
 
@@ -122,9 +133,10 @@ public class SearchPageTest extends TestRunner {
     public void checkShowDropbox(String allProducts, String showOption) {
         searchPage = getHomePage().searchProduct(allProducts);
         searchPage.getProductDisplayCriteriaComponent().clickShowDropdown(showOption);
-        Assert.assertEquals(searchPage
-                .getProductDisplayCriteriaComponent()
-                .getShowCountFromLabel(),
+        Assert.assertEquals(
+                searchPage
+                        .getProductDisplayCriteriaComponent()
+                        .getShowCountFromLabel(),
                 Integer.parseInt(showOption));
     }
 
@@ -133,10 +145,9 @@ public class SearchPageTest extends TestRunner {
     @Test(priority = 11)
     public void checkListAndGridResult(String lowerSearchText) {
         searchPage = getHomePage().searchProduct(lowerSearchText);
-
-        ArrayList<String> gridModeProdNames = searchPage.getProductComponentNamesList();
+        gridModeProdNames = searchPage.getProductComponentNamesList();
         searchPage.getProductDisplayCriteriaComponent().clickListButton();
-        ArrayList<String> listModeProdNames = searchPage.getProductComponentNamesList();
+        listModeProdNames = searchPage.getProductComponentNamesList();
 
         Assert.assertEquals(gridModeProdNames, listModeProdNames);
         searchPage.getProductDisplayCriteriaComponent().clickGridButton();
@@ -197,5 +208,24 @@ public class SearchPageTest extends TestRunner {
                 .toLowerCase()
                 .contains(lowerSearchText));
     }
-}
 
+    //check if categories checkbox influents to search result
+    @Parameters({"categoryOption"})
+    @Test(priority = 16)
+    public void checkCategoriesCheckboxIsUseful(String categoryOption) {
+        searchPage = getHomePage().searchProduct("%");
+        SearchCriteriaComponent searchCriteriaComponent = searchPage.getSearchCriteriaComponent();
+        withoutCategoriesSearch = searchPage.getProductComponentNamesList();
+        searchCriteriaComponent.clickCategoriesDropdown(categoryOption);
+        searchCriteriaComponent.clickSubcategoriesCheckbox();
+        searchCriteriaComponent.clickSearchButton();
+
+        withCategoriesDropdownAndCheckbox = searchPage.getProductComponentNamesList();
+        searchPage.getSearchCriteriaComponent().clickSubcategoriesCheckbox();   //uncheck search in subcategories
+        searchPage.getSearchCriteriaComponent().clickSearchButton();
+        withCategoriesDropdown = searchPage.getProductComponentNamesList();
+
+        Assert.assertNotEquals(withoutCategoriesSearch, withCategoriesDropdownAndCheckbox);
+        Assert.assertEquals(withoutCategoriesSearch, withCategoriesDropdown);
+    }
+}

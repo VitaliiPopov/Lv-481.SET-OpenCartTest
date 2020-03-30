@@ -14,14 +14,12 @@ public class ProductDisplayCriteriaComponent {
 
     private WebElement sortDropdownComponent;
     private WebElement showDropdownComponent;
-
     private WebElement listButton;
     private WebElement gridButton;
     private WebElement productCountLabel;
     private WebElement productCompareLink;
 
     public ProductDisplayCriteriaComponent(WebElement ProductDisplayCriteriaLayout) {
-
         this.productDisplayCriteriaLayout = ProductDisplayCriteriaLayout;
         initElements();
     }
@@ -35,36 +33,35 @@ public class ProductDisplayCriteriaComponent {
         productCompareLink = productCountLabel.findElement(By.xpath("//a[@id='compare-total']"));
     }
 
+    //click dropdown by WebElement and option text
     private void clickDropdown(WebElement dropdownComponent, String optionText) {
         try {
             Select sel = new Select(dropdownComponent);
             List<WebElement> options = sel.getOptions();
-
             for (WebElement option : options) {
                 if ((option.getText()).contains(optionText)) {
-                    System.out.println(option.getText());
                     option.click();
                 }
             }
         } catch (StaleElementReferenceException ex) {
             //ignor StaleElementReferenceException exception
         }
-
     }
 
     public void clickProductCompareLink(){
         productCompareLink.click();
     }
 
+    //click Sort By dropdown by option text
     public void clickSortByDropdown(String optionText) {
         clickDropdown(sortDropdownComponent, optionText);
     }
 
+    //click Showdropdown by option text with count of product to display
     public void clickShowDropdown(String optionText) {
         clickDropdown(showDropdownComponent, optionText);
     }
 
-    //public void productCountLable
     public void clickListButton() {
         listButton.click();
     }
@@ -73,22 +70,24 @@ public class ProductDisplayCriteriaComponent {
         gridButton.click();
     }
 
-    public void clickSortDropdownComponent() {
-        sortDropdownComponent.click();
-    }
-
-    public void clickShowDropdownComponent() {
-        showDropdownComponent.click();
-    }
-
-    public Integer getProductCountFromLabel() {
+    //get number values from label by index
+    private int getProductCountFromLabel(int index) {
         String productCount = productCountLabel.getText();
         productCount = productCount.replaceAll("[^0-9]+", " ");
         List<String> numberList = Arrays.asList(productCount.trim().split(" "));
-        return new Integer(numberList.get(2));
+        return new Integer(numberList.get(index));
     }
 
-    public WebElement getSortByDropdown() {
-        return sortDropdownComponent;
+    public int getPagesCountFromLabel() {
+        return getProductCountFromLabel(3);
+    }
+
+    public int getListSizeCountFromLabel() {
+        return getProductCountFromLabel(2);
+    }
+
+    //get max count of products on page according to Show dropdown
+    public int getShowCountFromLabel() {
+        return getProductCountFromLabel(1);
     }
 }

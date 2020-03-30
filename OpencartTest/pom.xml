@@ -11,7 +11,6 @@
     <properties>
         <aspectj.version>1.9.5</aspectj.version>
         <!-- - - - Reports - - - -->
-        <testng.reports.directory>target/surefire-reports/test-output</testng.reports.directory>
         <allure.result.directory>${project.build.directory}/allure-results</allure.result.directory>
     </properties>
 
@@ -38,7 +37,6 @@
                     <suiteXmlFiles>
                         <suiteXmlFile>testng.xml</suiteXmlFile>
                     </suiteXmlFiles>
-                    <reportsDirectory>${testng.reports.directory}</reportsDirectory>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar
                     </argLine>
@@ -66,12 +64,12 @@
     </reporting>
 
     <dependencies>
-        <dependency>
+        <!--<dependency>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-surefire-plugin</artifactId>
             <version>3.0.0-M4</version>
             <type>maven-plugin</type>
-        </dependency>
+        </dependency>-->
 
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>

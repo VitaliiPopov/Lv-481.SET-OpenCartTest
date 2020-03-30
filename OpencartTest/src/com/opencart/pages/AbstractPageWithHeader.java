@@ -97,6 +97,7 @@ public class AbstractPageWithHeader {
     }
 
     //currency
+    public String getFullCurrencyText(){return currency.getText().substring(1);}
     public String getCurrencyText() {
         return currency.getText().substring(0, 1);
     }
@@ -319,6 +320,11 @@ public class AbstractPageWithHeader {
     }
 
     @Step("Clicks on dropdown and chose login and go to the login page")
+    public MyAccountPage goToMyAccountPage() {
+        clickMyAccountDropdownComponentByName("My Account");
+        return new MyAccountPage(driver);
+    }
+
     public LoginPage goToLoginPage(String MY_ACCOUNT_DROPDOWN_TEXT) {
         clickMyAccountDropdownComponentByPartialName(MY_ACCOUNT_DROPDOWN_TEXT);
         return new LoginPage(driver);
@@ -368,6 +374,10 @@ public class AbstractPageWithHeader {
         return new CartPage(driver);
     }
 
-    ///endregion
+    public WishListEmptyPage goToWishListEmptyPage(){
+        clickWishList();
+        return new WishListEmptyPage(driver);
+    }
 
+    ///endregion
 }

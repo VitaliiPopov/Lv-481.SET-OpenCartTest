@@ -2,7 +2,7 @@ package test.product_comparison_test;
 
 import com.opencart.pages.comparison.ComparisonPage;
 import com.opencart.pages.comparison.EmptyComparisonPage;
-import com.opencart.tools.CompareTestRunner;
+import com.opencart.tools.test_runner.CompareTestRunner;
 import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;

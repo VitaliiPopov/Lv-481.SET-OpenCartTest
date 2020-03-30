@@ -41,5 +41,4 @@ public class SuccessRegisterPage extends AbstractPageWithHeader {
         clickContinueButton();
         return new MyAccountPage(driver);
     }
-
 }

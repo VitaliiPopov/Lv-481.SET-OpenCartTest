@@ -15,27 +15,16 @@ public class WishListPage extends AbstractPageWithHeader {
     //Components
     private WishListContainerComponent wishListContainerComponent;
 
-    private WebElement continueButton;
-
     public WishListPage(WebDriver driver) {
         super(driver);
         initElements();
     }
 
     private void initElements() {
-
         wishListContainerComponent = new WishListContainerComponent(driver);
-        //continueButton = driver.findElement(By.xpath("//div[@class='pull-right']/a"));
     }
 
     // PAGE OBJECT
-
-    // continue button
-    public void clickContinueButton() {
-        continueButton.click();
-    }
-
-
 
     public WishListContainerComponent getWishListContainerComponent() {
         return wishListContainerComponent;
@@ -45,6 +34,16 @@ public class WishListPage extends AbstractPageWithHeader {
     public WishListPage chooseCurrencyInWishList(Currencies currency) {
         clickCurrencyByPartialName(currency.toString());
         return new WishListPage(driver);
+    }
+
+    // Getting product price in Wish
+    public String getProductPriceTextInWishList(String partialProductName){
+        return getWishListContainerComponent().getUnitPrice(partialProductName);
+    }
+
+    //parse to double by Regex
+    public double getProductPriceInWishList(String partialProductName){
+        return RegexUtils.extractFirstDouble(getProductPriceTextInWishList(partialProductName));
     }
 
     // BUSINESS LOGIC
@@ -79,11 +78,5 @@ public class WishListPage extends AbstractPageWithHeader {
         }
         return new WishListEmptyPage(driver);
     }
-
-    public MyAccountPage goToMyAccountPage() {
-        clickContinueButton();
-        return new MyAccountPage(driver);
-    }
-
 }
 

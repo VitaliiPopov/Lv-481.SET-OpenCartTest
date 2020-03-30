@@ -7,7 +7,7 @@ import com.opencart.pages.cart.CartPage;
 import com.opencart.pages.product.ProductPage;
 import com.opencart.pages.search.SearchPage;
 import com.opencart.tools.JsonDataConfig;
-import com.opencart.tools.CompareTestRunner;
+import com.opencart.tools.test_runner.CompareTestRunner;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;

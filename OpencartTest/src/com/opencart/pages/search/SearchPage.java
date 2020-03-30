@@ -46,7 +46,7 @@ public class SearchPage extends AbstractPageWithHeader {
     ///region ATOMIC_OPERATIONS
 
     //emptyResultMessage
-    public String getEmptyResultMessageText() {
+    public String getemptyResultMessageText() {
         return emptyResultMessage.getText();
     }
 
@@ -96,7 +96,8 @@ public class SearchPage extends AbstractPageWithHeader {
     }
 
     //productContainerComponents
-    public Integer getProductContainerComponentsSize() {
+    public int getProductContainerComponentsSize() {
+        getProductContainersComponents();
         return productContainersComponents.size();
     }
 
@@ -122,14 +123,27 @@ public class SearchPage extends AbstractPageWithHeader {
         return result;
     }
 
+    // get ArrayList of names from products
     public ArrayList<String> getProductComponentNamesList() {
-        ArrayList<String> ProductComponentNamesList = new ArrayList<>();
+
+        ArrayList<String> productComponentNamesList = new ArrayList<>();
         productContainersComponents = getProductContainersComponents();
         for (ProductContainersComponent current : productContainersComponents) {
-            ProductComponentNamesList.add(current.getNameText());
+            productComponentNamesList.add(current.getNameText());
         }
-        return ProductComponentNamesList;
+        return productComponentNamesList;
     }
+
+    // get ArrayList of prices from products
+    public ArrayList<Double> getProductComponentPriceList() {
+        ArrayList<Double> productComponentPriceList = new ArrayList<>();
+        productContainersComponents = getProductContainersComponents();
+        for (ProductContainersComponent current : productContainersComponents) {
+            productComponentPriceList.add(current.getPriceAmount());
+        }
+        return productComponentPriceList;
+    }
+
 
     //CompareButton
 
@@ -160,13 +174,6 @@ public class SearchPage extends AbstractPageWithHeader {
         clickProductComponentCompareButtonByName(productName);
         clickProductComponentCompareButtonByName(productName);
         return this;
-    }
-
-    public void toLowerCaseProductList(List<String> list) {
-        ListIterator<String> iterator = list.listIterator();
-        while (iterator.hasNext()) {
-            iterator.set(iterator.next().toLowerCase());
-        }
     }
 
     ///endregion
@@ -216,6 +223,14 @@ public class SearchPage extends AbstractPageWithHeader {
         return new ProductPage(driver);
     }
 
+    //ArrayList of names of products to lower case
+    public void toLowerCaseProductList(List<String> list) {
+        ListIterator<String> iterator = list.listIterator();
+        while (iterator.hasNext()) {
+            iterator.set(iterator.next().toLowerCase());
+        }
+    }
+
     //alert after add to cart
     public CartPage goToShoppingCartFromAlert() {
         getAlertComponentWithoutWait().clickOnCartLink();
@@ -237,5 +252,20 @@ public class SearchPage extends AbstractPageWithHeader {
         getProductComponentByName(productName).clickAddToWishListButton();
     }
 
-    ///endregion
+    //get full description of product from Product Page by index
+    public String getProductPageDescription(int index) throws InterruptedException {
+        productContainersComponents = getProductContainersComponents();
+        ProductPage productPage = new ProductPage(driver);
+        productContainersComponents.get(index).clickPicture();
+        String result = productPage.getDescription();
+        driver.navigate().back();
+        return result;
+    }
+
+    //calculate pages count according to option number in Show dropbox
+    public int getCalculatedPagesCount(String showOption) {
+        return getProductContainerComponentsSize() / Integer.parseInt(showOption) + 1;
+    }
 }
+
+///endregion

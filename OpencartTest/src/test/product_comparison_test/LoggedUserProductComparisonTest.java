@@ -4,7 +4,7 @@ import com.opencart.pages.cart.CartPage;
 import com.opencart.pages.comparison.ComparisonPage;
 import com.opencart.pages.comparison.EmptyComparisonPage;
 import com.opencart.pages.product.ProductPage;
-import com.opencart.tools.CompareTestRunner;
+import com.opencart.tools.test_runner.CompareTestRunner;
 import com.opencart.tools.JsonDataConfig;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;

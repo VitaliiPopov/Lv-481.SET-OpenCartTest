@@ -1,6 +1,8 @@
 package com.opencart.pages.account;
 
 import com.opencart.pages.AbstractPageWithHeader;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -17,9 +19,6 @@ public class MyAccountPage extends AbstractPageWithHeader {
 
     @FindBy(how = How.XPATH, xpath = "//*[@id='content']/ul/li/a[contains(text(),'password')]")
     private WebElement changePasswordLink;
-
-    @FindBy(how = How.XPATH, xpath = "//div[@class='alert alert-success alert-dismissible']")
-    private WebElement successAlert;
 
     @FindBy(how = How.XPATH, xpath = "//a[.='Modify your address book entries']")
     private WebElement adressLink;
@@ -40,9 +39,16 @@ public class MyAccountPage extends AbstractPageWithHeader {
         return new EditAccountPage(driver);
     }
 
-    //successAlert
-    public boolean isSuccessAlertDisplayed() {
-        return successAlert.isDisplayed();
+    public boolean isSuccessAlertPresent(){
+        boolean present = false;
+        try{
+            driver.findElement(By.xpath("//div[@class='alert alert-success alert-dismissible']"));
+            present = true;
+        }
+        catch(NoSuchElementException e){
+            present = false;
+        }
+        return present;
     }
 
     //changePasswordLink

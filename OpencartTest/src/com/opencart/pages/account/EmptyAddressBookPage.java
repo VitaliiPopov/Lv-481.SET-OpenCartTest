@@ -52,6 +52,5 @@ public class EmptyAddressBookPage extends AbstractPageWithHeader {
         newAdressButton.click();
         return new EditAdressPage(driver);
     }
-
 }
 

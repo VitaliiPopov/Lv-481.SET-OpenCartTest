@@ -25,6 +25,12 @@ public class UnsuccessfulReviewTest extends TestRunner {
     @FindBy(how = How.CSS, css = "img[alt='MacBook']")
     private WebElement testProduct;
 
+    public void scrollToSpecificProductAndClickOnIt(){
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView();", testProduct);
+        testProduct.click();
+    }
+
     @BeforeClass
     public void setUp() {
         driver = Driver.getDriver();
@@ -33,7 +39,7 @@ public class UnsuccessfulReviewTest extends TestRunner {
     }
 
     @BeforeMethod
-    public void setUp1() {
+    public void setUpMethod() {
         driver.navigate().to(ConstantVariables.URL);
     }
 
@@ -47,9 +53,7 @@ public class UnsuccessfulReviewTest extends TestRunner {
     @Parameters({"incorrectName", "correctText", "messageOfUndeliveredReviewBecauseOfIncorrectName"})
     @Test(priority = 1)
     public void unsuccessfullyWritingReviewBecauseOfIncorrectName(String incorrectName, String correctText, String messageOfUndeliveredReviewBecauseOfIncorrectName) {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].scrollIntoView();", testProduct);
-        testProduct.click();
+        scrollToSpecificProductAndClickOnIt();
         productPage.writeReview(incorrectName, correctText);
         String textOfUndeliveredReview = productPage.getTextOfUndeliveredReviewMessage();
         Assert.assertEquals(textOfUndeliveredReview, messageOfUndeliveredReviewBecauseOfIncorrectName);
@@ -58,9 +62,7 @@ public class UnsuccessfulReviewTest extends TestRunner {
     @Parameters({"nameOfAuthor", "incorrectText", "messageOfUndeliveredReviewBecauseOfIncorrectText"})
     @Test(priority = 2)
     public void unsuccessfullyWritingReviewBecauseOfIncorrectText(String nameOfAuthor, String incorrectText, String messageOfUndeliveredReviewBecauseOfIncorrectText) {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].scrollIntoView();", testProduct);
-        testProduct.click();
+        scrollToSpecificProductAndClickOnIt();
         productPage.writeReview(nameOfAuthor, incorrectText);
         String textOfUndeliveredReview = productPage.getTextOfUndeliveredReviewMessage();
         Assert.assertEquals(textOfUndeliveredReview, messageOfUndeliveredReviewBecauseOfIncorrectText);
@@ -69,9 +71,7 @@ public class UnsuccessfulReviewTest extends TestRunner {
     @Parameters({"incorrectName", "incorrectText", "messageOfUndeliveredReviewBecauseOfIncorrectText"})
     @Test(priority = 3)
     public void unsuccessfullyWritingReviewBecauseOfIncorrectTextAndName(String incorrectName, String incorrectText, String messageOfUndeliveredReviewBecauseOfIncorrectText) {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].scrollIntoView();", testProduct);
-        testProduct.click();
+        scrollToSpecificProductAndClickOnIt();
         productPage.writeReview(incorrectName, incorrectText);
         String textOfUndeliveredReview = productPage.getTextOfUndeliveredReviewMessage();
         Assert.assertEquals(textOfUndeliveredReview, messageOfUndeliveredReviewBecauseOfIncorrectText);
@@ -80,9 +80,7 @@ public class UnsuccessfulReviewTest extends TestRunner {
     @Parameters({"emptyNameField", "emptyTextField", "messageOfUndeliveredReviewBecauseOfIncorrectText"})
     @Test(priority = 4)
     public void unsuccessfullyWritingReviewBecauseOfEmptyNameAndTextFields(String emptyNameField, String emptyTextField, String messageOfUndeliveredReviewBecauseOfIncorrectText) {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].scrollIntoView();", testProduct);
-        testProduct.click();
+        scrollToSpecificProductAndClickOnIt();
         productPage.writeReview(emptyNameField, emptyTextField);
         String textOfUndeliveredReview = productPage.getTextOfUndeliveredReviewMessage();
         Assert.assertEquals(textOfUndeliveredReview, messageOfUndeliveredReviewBecauseOfIncorrectText);
@@ -91,9 +89,7 @@ public class UnsuccessfulReviewTest extends TestRunner {
     @Parameters({"correctText", "messageOfUndeliveredReviewBecauseOfIncorrectName"})
     @Test(priority = 5)
     public void unsuccessfullyWritingReviewBecauseOfTooLongName(String correctText, String messageOfUndeliveredReviewBecauseOfIncorrectName) {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].scrollIntoView();", testProduct);
-        testProduct.click();
+        scrollToSpecificProductAndClickOnIt();
         String tooLongName = RandomStringUtils.randomAlphabetic(30);
         productPage.writeReview(tooLongName, correctText);
         String textOfUndeliveredReview = productPage.getTextOfUndeliveredReviewMessage();
@@ -106,7 +102,7 @@ public class UnsuccessfulReviewTest extends TestRunner {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView();", testProduct);
         testProduct.click();
-        String tooLongText = RandomStringUtils.randomAlphabetic(1020);
+        String tooLongText = RandomStringUtils.randomAlphabetic(1020)+".";
         productPage.writeReview(nameOfAuthor, tooLongText);
         String textOfUndeliveredReview = productPage.getTextOfUndeliveredReviewMessage();
         Assert.assertEquals(textOfUndeliveredReview, messageOfUndeliveredReviewBecauseOfIncorrectText);

@@ -22,7 +22,7 @@ public class WishListCurrencyTest extends CurrencyTestRunner {
 
     @Parameters({"myAccountDropdownText"})
     @Test(priority = 1)
-    public void Login(String myAccountDropdownText) throws InterruptedException {
+    public void login(String myAccountDropdownText) throws InterruptedException {
         LoginPage loginPage = getHomePage().goToLoginPage(myAccountDropdownText);
         MyAccountPage myAccountPage = loginPage.login(jsonParser.getEmailFromJson(8), jsonParser.getPasswordFromJson(8));
         myAccountPage.goToHomePage();
@@ -55,22 +55,5 @@ public class WishListCurrencyTest extends CurrencyTestRunner {
         String emptyMessage = wishList.goToWishListEmptyPage().getLabelText();
         Assert.assertEquals(emptyMessage, WishListEmptyPage.EMPTY_WISH_LIST_MESSAGE);
     }
-
-    @DataProvider
-    public Object[][] currencyHomeData() {
-        return new Object[][]{
-                {Currencies.POUND_STERLING, "£"},
-                {Currencies.EURO, "€"},
-                {Currencies.US_DOLLAR, "$"},
-        };
-    }
-
-    @Test(priority = 4, dataProvider = "currencyDataHome")
-    public void changeCurrencyAtHomePage(Currencies currency, String
-            ExpectedSymbolOfCurrency) throws InterruptedException {
-        HomePage homePage = getHomePage();
-        homePage = homePage.chooseCurrencyHomePage(currency);
-        Thread.sleep(1000); // ONLY FOR PRESENTATION
-        Assert.assertEquals(homePage.getCurrencyText(), ExpectedSymbolOfCurrency);
-    }
+    
 }

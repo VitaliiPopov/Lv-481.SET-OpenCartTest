@@ -82,11 +82,12 @@ public class ProductDisplayCriteriaComponent {
         return getProductCountFromLabel(3);
     }
 
+    //count of products in all pages
     public int getListSizeCountFromLabel() {
         return getProductCountFromLabel(2);
     }
 
-    //get max count of products on page according to Show dropdown
+    //get count of displayed products
     public int getShowCountFromLabel() {
         return getProductCountFromLabel(1);
     }

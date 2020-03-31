@@ -19,11 +19,13 @@ public class UserRepository {
                 "statham@gmail.com",
                 "bigboy",
                 "7777777",
+                "52114",
                 1);
     }
 
     public static User emptyUserStatham() {
         return new User(Integer.valueOf(""),
+                "",
                 "",
                 "",
                 "",
@@ -36,9 +38,32 @@ public class UserRepository {
         return new User(100,
                 "aaaa",
                 "aaaa",
+                "aaaa",
                 "aaaa@gmail.com",
                 "aaaa",
                 "1234",
+                1);
+    }
+
+    public static User spongeBob() {
+        return new User(99,
+                "userForPost",
+                "firstName",
+                "aaaa",
+                "aaaa@gmail.com",
+                "aaaa",
+                "1",
+                1);
+    }
+
+    public static User newUserBob(){
+        return new User(99,
+                "Bob",
+                "Boben",
+                "Birkly",
+                "bobboben@birkly.com",
+                "bbb2000",
+                "52165",
                 1);
     }
 

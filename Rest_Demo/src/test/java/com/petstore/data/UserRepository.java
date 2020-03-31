@@ -47,12 +47,23 @@ public class UserRepository {
 
     public static User spongeBob() {
         return new User(99,
-                "spongeBob",
+                "userForPost",
                 "firstName",
                 "aaaa",
                 "aaaa@gmail.com",
                 "aaaa",
                 "1",
+                1);
+    }
+
+    public static User newUserBob(){
+        return new User(99,
+                "Bob",
+                "Boben",
+                "Birkly",
+                "bobboben@birkly.com",
+                "bbb2000",
+                "52165",
                 1);
     }
 

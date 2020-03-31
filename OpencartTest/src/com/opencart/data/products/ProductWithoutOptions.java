@@ -1,0 +1,22 @@
+package com.opencart.data.products;
+
+public class ProductWithoutOptions {
+
+    private String name;
+    private int id;
+
+
+    public ProductWithoutOptions(String name, int id) {
+        this.name = name;
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+}

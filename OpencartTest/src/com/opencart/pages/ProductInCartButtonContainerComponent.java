@@ -11,7 +11,6 @@ public class ProductInCartButtonContainerComponent {
     private WebElement productName;
     private WebElement qty;
     private WebElement totalProductPrice;
-    private WebElement removeButton;
 
     public ProductInCartButtonContainerComponent(WebElement productInCartButtonContainerComponentLayout) {
         this.productInCartButtonContainerComponentLayout = productInCartButtonContainerComponentLayout;
@@ -46,13 +45,12 @@ public class ProductInCartButtonContainerComponent {
     }
 
     public String getTotalProductPriceText() {
-        return getTotalProductPrice().getText().substring(1);
+        return getTotalProductPrice().getText().substring(1).replaceAll(",", "");
     }
 
     //removeButton
     public WebElement getRemoveButton() {
-        removeButton = productInCartButtonContainerComponentLayout.findElement(By.xpath(".//td/button"));
-        return removeButton;
+        return productInCartButtonContainerComponentLayout.findElement(By.xpath(".//td/button"));
     }
 
     public void clickOnRemoveButton() {

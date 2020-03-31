@@ -9,6 +9,7 @@ import com.opencart.pages.search.SearchPage;
 import com.opencart.pages.wishlist.WishListPage;
 import com.opencart.tools.RegexUtils;
 
+import com.opencart.tools.WaitUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -25,6 +26,10 @@ public class AbstractPageWithHeader {
     //ExceptionsText
     private final String OPTION_NULL_MESSAGE = "DropdownComponent is null";
     private final String OPTION_NOT_FOUND_MESSAGE = "Option %s not found in %s";
+    //Wait
+    private WaitUtils cartWait;
+    //
+    private boolean isCartButtonOpen;
 
     //selectors
     private final String DROPDOWN_MYACCONT_SELECTOR = "ul.dropdown-menu.dropdown-menu-right"; //css
@@ -56,12 +61,13 @@ public class AbstractPageWithHeader {
     @FindBy(how = How.CSS, css = "button.btn.btn-default")
     private WebElement searchTopButton;
 
-    @FindBy(how = How.ID, id = "cart-total")//"#cart > button"
+    @FindBy(how = How.CSS, css = "#cart > button")//"#cart > button"
     private WebElement cartButton;
 
     public AbstractPageWithHeader(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
+        isCartButtonOpen = false;
     }
 
     ///region ATOMIC_OPERATIONS
@@ -86,12 +92,6 @@ public class AbstractPageWithHeader {
 
     //shoppingCart
     private void clickOnShoppingCart() {
-        //TODO
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         shoppingCart.click();
     }
 
@@ -132,7 +132,6 @@ public class AbstractPageWithHeader {
 
     private void clickCart() {
         shoppingCart.click();
-
     }
 
     //searchField
@@ -180,7 +179,8 @@ public class AbstractPageWithHeader {
 
     //cartDropdownComponent
     public CartDropdownComponent getCartDropdownComponent() {
-        return new CartDropdownComponent(driver, driver.findElement(By.cssSelector("#cart ul")));
+        this.cartWait = new WaitUtils(driver, 5);
+        return new CartDropdownComponent(driver.findElement(By.cssSelector("#cart ul")));
     }
 
     ///endregion
@@ -206,7 +206,7 @@ public class AbstractPageWithHeader {
     }
 
     //CartButton
-    public void viewCartComponent() {
+    public void openViewCartComponent() {
         clickOnCartButton();
     }
 
@@ -215,40 +215,42 @@ public class AbstractPageWithHeader {
     }
 
     public String getEmptyDropdownCartButtonText() {
-        viewCartComponent();
+        openViewCartComponent();
         return getCartDropdownComponent().getEmptyDropdownCartButtonText();
     }
 
     public BigDecimal getTotalPriceText() {
-        viewCartComponent();
         return getCartDropdownComponent().getTotalPriceText();
     }
 
     //productInCartButtonContainerComponents size
     public int getProductInCartButtonContainerComponentsSize() {
-        viewCartComponent();
+        openViewCartComponent();
         return getCartDropdownComponent().getProductInCartButtonContainerComponentsSize();
     }
 
     public ProductInCartButtonContainerComponent getProductInCartButtonContainerComponentByName(String productName) {
-        viewCartComponent();
+        openViewCartComponent();
         return getCartDropdownComponent().getProductInCartButtonContainerComponentByName(productName);
     }
 
     public void removeViewProductComponentByName(String productName) {
-        viewCartComponent();
+        openViewCartComponent();
         getCartDropdownComponent().removeViewProductComponent(productName);
     }
 
     public boolean checkTotalPrice() {
-        viewCartComponent();
+        openViewCartComponent();
+
+        try {
+            Thread.sleep(1000);//OnlyForPresentation
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
         if (getTotalPriceText().equals(getCartDropdownComponent().getTotalPriceFromColumn())) return true;
         else return false;
-    }
-
-    public void removeAllProducts() {
-        viewCartComponent();
-        getCartDropdownComponent().removeAllProducts();
     }
 
     //String
@@ -256,7 +258,7 @@ public class AbstractPageWithHeader {
         if (getProductInCartButtonContainerComponentByName(productName) == null) return false;
         else return true;
     }
-///////////////////////////////////////////////////////////////
+
     //WishList
     public String getWishListText() {
         return wishList.getText();
@@ -275,7 +277,7 @@ public class AbstractPageWithHeader {
 
     // Anya work with dropdown myAccount
     public void clickMyAccountDropdownComponentByName(String optionName) {
-        openMyAccountDropdown();
+        if(!isCartButtonOpen) openMyAccountDropdown();
         WebElement dropdown = driver.findElement(By.cssSelector(DROPDOWN_MYACCONT_SELECTOR));
         List<WebElement> options = dropdown.findElements(By.tagName("li"));
         for (WebElement option : options) {
@@ -288,7 +290,7 @@ public class AbstractPageWithHeader {
 
     public boolean isExistMyAccountDropdownOption(String optionName) {
         boolean isFound = false;
-        openMyAccountDropdown();
+        if(!isCartButtonOpen) openMyAccountDropdown();
         WebElement dropdown = driver.findElement(By.cssSelector(DROPDOWN_MYACCONT_SELECTOR));
         List<WebElement> options = dropdown.findElements(By.tagName("li"));
         for (WebElement option : options) {
@@ -352,8 +354,29 @@ public class AbstractPageWithHeader {
     }
 
     public CartPage goToCartPageByLinkInHeader() {
+
+        try {
+            Thread.sleep(500);//Only for presentation
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         clickOnShoppingCart();
         return new CartPage(driver);
+    }
+
+    public AbstractPageWithHeader removeAllProductsFromCartButton() {
+        if(!isCartButtonOpen) openViewCartComponent();
+        int size = getCartDropdownComponent().getProductInCartButtonContainerComponentsSize();
+
+        for (int i = 0; i < size; i++) {
+            if(!isCartButtonOpen) openViewCartComponent();
+            //getCartDropdownComponent().initElements();
+
+            getCartDropdownComponent().getProductInCartButtonContainerComponents().get(size-1).clickOnRemoveButton();
+        }
+
+        return new AbstractPageWithHeader(driver);
     }
 
     ///endregion

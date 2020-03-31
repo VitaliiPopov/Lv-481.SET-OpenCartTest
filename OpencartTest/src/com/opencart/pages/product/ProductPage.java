@@ -15,6 +15,9 @@ import java.util.Random;
 
 public class ProductPage extends AbstractPageWithHeader {
 
+    //Locators
+    private final String ALERT_LOCATOR = ".alert"; //css
+
     @FindBy(how = How.CSS, css = "#content h1")
     private WebElement productName;
 
@@ -64,7 +67,13 @@ public class ProductPage extends AbstractPageWithHeader {
     //initialization of product page
     public ProductPage(WebDriver driver) {
         super(driver);
-        PageFactory.initElements(driver, this);
+
+        try {
+            Thread.sleep(500);//only For Presentation
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
     }
 
     ///region ATOMIC_OPERATIONS
@@ -73,6 +82,24 @@ public class ProductPage extends AbstractPageWithHeader {
     public AvailableOptionsComponent getAvailableOptionsComponent() {
         return new AvailableOptionsComponent(driver.findElement(By.cssSelector("div#product")));
     }
+
+    //alertComponent
+    public AlertComponent getAlertComponentWithWait() {
+        try {
+            Thread.sleep(3000); //Only for presentation, bug alert
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+//        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+//        WebDriverWait wait = new WebDriverWait(driver, 5);
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(ALERT_LOCATOR)));
+//        searchPageAlertComponent = new SearchPageAlertComponent(wait.until(ExpectedConditions.presenceOfElementLocated((By.cssSelector(ALERT_LOCATOR)))));
+//        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        //return searchPageAlertComponent;
+        return new AlertComponent(driver.findElement(By.cssSelector(ALERT_LOCATOR)));
+    }
+
 
     //productName
     public String getProductName() {
@@ -197,8 +224,20 @@ public class ProductPage extends AbstractPageWithHeader {
 
     ///region LOGIC
 
-    public ProductPage goToProductPageAfterAddToCart(int value) {
+    public ProductPage addToCartProductWitOptions(String radioButtonOptionName, String checkBoxOptionName,
+                                                  String selectOptionsOptionName, int value) {
+        getAvailableOptionsComponent().setOptionsForAppleCinema(radioButtonOptionName,
+                checkBoxOptionName, selectOptionsOptionName);
         getAvailableOptionsComponent().setTextQty(value);
+        getAvailableOptionsComponent().clickOnAddToCartButton();
+        return new ProductPage(driver);
+    }
+
+    public ProductPage addToCartEmptyProductWitOptions(String radioButtonOptionName,
+                                                  String checkBoxOptionName, String selectOptionsOptionName) {
+        getAvailableOptionsComponent().setOptionsForAppleCinema(radioButtonOptionName,
+                checkBoxOptionName, selectOptionsOptionName);
+        getAvailableOptionsComponent().setEmptyTextQty();
         getAvailableOptionsComponent().clickOnAddToCartButton();
         return new ProductPage(driver);
     }
@@ -214,6 +253,19 @@ public class ProductPage extends AbstractPageWithHeader {
         return new ProductPage(driver);
     }
 
+
+    //addToCartProductWithoutOptions
+    public ProductPage addToCartProductWithoutOptions(int value) {
+        getAvailableOptionsComponent().setTextQty(value);
+        getAvailableOptionsComponent().clickOnAddToCartButton();
+        return this;
+    }
+
+    public ProductPage addToCartEmptyProductWithoutOptions() {
+        getAvailableOptionsComponent().setEmptyTextQty();
+        getAvailableOptionsComponent().clickOnAddToCartButton();
+        return this;
+    }
     ///endregion
 
 }

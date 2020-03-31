@@ -64,7 +64,7 @@ public class ProductInCartContainerComponent {
         getQuantityButtonRefresh().click();
     }
 
-    //quantityButtonRemov
+    //quantityButtonRemove
     private WebElement getQuantityButtonRemove() {
         quantityButtonRemove = productInCartContainerComponentLayout.findElement(By.cssSelector("td div button[type='button']"));
         return quantityButtonRemove;
@@ -103,6 +103,12 @@ public class ProductInCartContainerComponent {
 
     public void refreshProductQuantity(int value) {
         setQuantityInput(value);
+        clickOnQuantityButtonRefresh();
+    }
+
+    public void refreshEmptyProductQuantity() {
+        clickOnQuantityInputFild();
+        clearQuantityInputFild();
         clickOnQuantityButtonRefresh();
     }
 }

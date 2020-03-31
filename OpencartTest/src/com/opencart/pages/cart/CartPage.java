@@ -7,13 +7,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.concurrent.TimeUnit;
 
 public class CartPage extends AbstractPageWithHeader {
@@ -36,17 +36,10 @@ public class CartPage extends AbstractPageWithHeader {
 
     public CartPage(WebDriver driver) {
         super(driver);
-        PageFactory.initElements(driver, this);
         initElements();
     }
 
-    private void initElements() {
-        //TODO
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    private void initElements(){
         productInCartContainerComponents = new ArrayList<>();
         for (WebElement current : driver.findElements(By.xpath(PRODUCT_IN_CART_COMPONENT_XPATHSELECTOR)))
             productInCartContainerComponents.add(new ProductInCartContainerComponent(current));
@@ -61,7 +54,7 @@ public class CartPage extends AbstractPageWithHeader {
 
     //totalPrice
     public BigDecimal getTotalPrice() {
-        BigDecimal price = BigDecimal.valueOf(Double.parseDouble(totalPrice.getText().substring(1)));
+        BigDecimal price = BigDecimal.valueOf(Double.parseDouble(totalPrice.getText().substring(1).replaceAll(",", "")));
         return price;
     }
 
@@ -69,9 +62,14 @@ public class CartPage extends AbstractPageWithHeader {
     //emptyCartText
     public String getEmptyCartText() {
         driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-        new WebDriverWait(driver, 3).until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#content p")));
+        new WebDriverWait(driver, 5).until(ExpectedConditions.textToBe(By.xpath("//div[@id='content']/h1"), "Shopping Cart"));
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         return emptyCartText.getText();
+    }
+
+    //productInCartContainerComponents
+    public List<ProductInCartContainerComponent> getProductInCartContainerComponents() {
+        return productInCartContainerComponents;
     }
 
     //size
@@ -103,6 +101,8 @@ public class CartPage extends AbstractPageWithHeader {
     //String
     public ProductInCartContainerComponent getProductInCartComponentByName(String productName) {
         ProductInCartContainerComponent result = null;
+        //todo
+        initElements();
         for (ProductInCartContainerComponent current : productInCartContainerComponents) {
             if (current.getProductNameText().equalsIgnoreCase(productName)) {
                 result = current;
@@ -125,12 +125,12 @@ public class CartPage extends AbstractPageWithHeader {
         return result;
     }
 
-
     //findTotalPrise
+    //todo
     private BigDecimal getTotalPriceFromColumn() {
         BigDecimal totalPrice1 = new BigDecimal(0);
         for (ProductInCartContainerComponent current : productInCartContainerComponents) {
-            totalPrice1 = totalPrice1.add(BigDecimal.valueOf(Double.parseDouble(current.getTotalProductPriceText().substring(1))));
+            totalPrice1 = totalPrice1.add(BigDecimal.valueOf(Double.parseDouble(current.getTotalProductPriceText().substring(1).replaceAll(",", ""))));
         }
         return totalPrice1;
     }
@@ -139,14 +139,14 @@ public class CartPage extends AbstractPageWithHeader {
         BigDecimal totalPrice = new BigDecimal(0);
         for (ProductInCartContainerComponent current : productInCartContainerComponents) {
             int quantity = Integer.parseInt(current.getQuantityInputFildText());
-            BigDecimal unitPrice = BigDecimal.valueOf(Double.parseDouble(current.getUnitPriceText().substring(1)));
+            BigDecimal unitPrice = BigDecimal.valueOf(Double.parseDouble(current.getUnitPriceText().substring(1).replaceAll(",", "")));
             totalPrice = totalPrice.add(unitPrice.multiply(BigDecimal.valueOf(quantity)));
         }
         return totalPrice;
     }
 
     //checkTotalPrice
-    private boolean checkTotalPriceFromColumn() {
+    public boolean checkTotalPriceFromColumn() {
         if (getTotalPrice().equals(getTotalPriceFromColumn())) return true;
         else return false;
     }
@@ -159,6 +159,23 @@ public class CartPage extends AbstractPageWithHeader {
     public boolean checkTotalPrice() {
         if (checkTotalPriceFromColumn() & checkTotalPriceFromCalculation()) return true;
         else return false;
+    }
+
+    public boolean checkPriceOfProduct(String productName) {
+        //todo
+        //initElements();
+
+        ProductInCartContainerComponent current = getProductInCartComponentByName(productName);
+
+        BigDecimal totalPriceByCalculation = new BigDecimal(0);
+        BigDecimal totalPriceFromColumn = BigDecimal.valueOf(Double.parseDouble(current.getTotalProductPriceText().substring(1).replaceAll(",", "")));
+
+
+        int quantity = Integer.parseInt(current.getQuantityInputFildText());
+        BigDecimal unitPrice = BigDecimal.valueOf(Double.parseDouble(current.getUnitPriceText().substring(1).replaceAll(",", "")));
+        totalPriceByCalculation = totalPriceByCalculation.add(unitPrice.multiply(BigDecimal.valueOf(quantity)));
+
+        return totalPriceByCalculation.equals(totalPriceFromColumn);
     }
 
     //checkAddElements
@@ -174,59 +191,45 @@ public class CartPage extends AbstractPageWithHeader {
         else return true;
     }
 
-    //removeElement
+    //removeProduct
     private void removeProduct(String productName) {
         getProductInCartComponentByName(productName).clickOnQuantityButtonRemove();
     }
 
-    //removeAllProducts
-    public void removeAllProducts() {
-        for (ProductInCartContainerComponent current : productInCartContainerComponents) {
-            current.clickOnQuantityButtonRemove();
-        }
-    }
-
     //BUSINESS LOGIC
 
-    public CartPage goToCartPageAfterRemoveProductByName(String productName) {
+    public CartPage removeProductByName(String productName) {
         removeProduct(productName);
         return new CartPage(driver);
     }
 
-    public CartPage goToCartPageAfterRemoveAllProducts() {
-        removeAllProducts();
-        return new CartPage(driver);
-    }
+    public CartPage removeAllProductsFromCartPage() {
+        while (getProductInCartContainerComponents().size() > 1) {
 
-    //TODO ????????
-    public CartPage goToCartPageAfterRefreshProductQuantityByName(String productName, int value) {
-        getProductInCartComponentByName(productName).refreshProductQuantity(value);
+            try {
+                Thread.sleep(500);//TODO
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            initElements();
+            getProductInCartContainerComponents().get(0).clickOnQuantityButtonRemove();
+        }
+        //getProductInCartContainerComponents().get(0).clickOnQuantityButtonRemove();
         return new CartPage(driver);
     }
 
     //checkRefreshFunction
-    public void checkRefreshFunction(String productName, int value) {
+    public CartPage checkRefreshFunction(String productName, int value) {
         ProductInCartContainerComponent current = getProductInCartComponentByName(productName);
-        BigDecimal oldPrice = BigDecimal.valueOf(Integer.parseInt(current.getQuantityInputFildText())
-                * Double.parseDouble(current.getUnitPriceText().substring(1)));
         current.refreshProductQuantity(value);
+        return new CartPage(driver);
     }
 
-    //checkRemoveFunction
-//    public boolean checkRemoveFunction(String productName){
-//        if (getProductInCartContainerComponentsSize() > 1) {
-//            int oldSize = getProductInCartContainerComponentsSize();
-//            ProductInCartContainerComponent current = getProductInCartComponentByName(productName);
-//            current.clickOnQuantityButtonRemove();
-//            int newSize = getProductInCartContainerComponentsSize();
-//            if ((oldSize - 1) == newSize) return true;
-//            else return false;
-//        }else{
-//            ProductInCartContainerComponent current = getProductInCartComponentByName(productName);
-//            current.clickOnQuantityButtonRemove();
-//            if (getProductInCartContainerComponentsSize() == 0) return true;
-//            else return false;
-//        }
-//    }
+    public CartPage checkRefreshFunctionWithEmptyQty(String productName) {
+        ProductInCartContainerComponent current = getProductInCartComponentByName(productName);
+        current.refreshEmptyProductQuantity();
+        return new CartPage(driver);
+    }
 
 }

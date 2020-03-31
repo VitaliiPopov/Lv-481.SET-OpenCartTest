@@ -85,6 +85,10 @@ public class AvailableOptionsComponent {
         getQty().sendKeys(String.valueOf(value));
     }
 
+    public void setEmptyTextQty() {
+        getQty().clear();
+    }
+
     //addToCartButton
     public WebElement getAddToCartButton() {
         addToCartButton = availableOptionsComponentLayout.findElement(By.xpath("//div[@class='form-group']/button"));
@@ -176,11 +180,11 @@ public class AvailableOptionsComponent {
 //    }
 
     //setOptions
-    public void setOptionsForAppleCinema(String radioButtonLableName, String radioButtonOptionName,
-                                         String checkBoxLableName, String checkBoxOptionName,
-                                         String selectLableName, String selectOptionsOptionName) {
-        chooseRadioButtonOptionByPartialName(radioButtonLableName, radioButtonOptionName);
-        chooseCheckBoxOptionByPartialName(checkBoxLableName, checkBoxOptionName);
-        chooseSelectsOptionByName(selectLableName, selectOptionsOptionName);
+    public void setOptionsForAppleCinema(String radioButtonOptionName,
+                                         String checkBoxOptionName,
+                                         String selectOptionsOptionName) {
+        chooseRadioButtonOptionByPartialName("Radio", radioButtonOptionName);
+        chooseCheckBoxOptionByPartialName("Checkbox", checkBoxOptionName);
+        chooseSelectsOptionByName("Select", selectOptionsOptionName);
     }
 }

@@ -112,6 +112,7 @@ public class SearchPage extends AbstractPageWithHeader {
      */
     public ProductContainersComponent getProductComponentByName(String productName) {
         ProductContainersComponent result = null;
+        productContainersComponents = getProductContainersComponents();
         for (ProductContainersComponent current : productContainersComponents) {
             if (current.getNameText().equalsIgnoreCase(productName)) {
                 result = current;
@@ -123,11 +124,19 @@ public class SearchPage extends AbstractPageWithHeader {
 
     public ArrayList<String> getProductComponentNamesList() {
         ArrayList<String> ProductComponentNamesList = new ArrayList<>();
+        productContainersComponents = getProductContainersComponents();
         for (ProductContainersComponent current : productContainersComponents) {
             ProductComponentNamesList.add(current.getNameText());
         }
         return ProductComponentNamesList;
     }
+
+    //Picture
+    public ProductPage clickOnProductComponentPictureByName(String productName) {
+        getProductComponentByName(productName).clickPicture();
+        return new ProductPage(driver);
+    }
+
 
     //CompareButton
 
@@ -184,22 +193,12 @@ public class SearchPage extends AbstractPageWithHeader {
         clickOnProductComponentAddToCartButtonByName(productName);
         //TODO
         try {
-            Thread.sleep(2000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        if (driver.getCurrentUrl().contains(SUCCESS_SEARCH_PAGE_URL)) return returnSearchPage();
-        else return returnProductPage();
-    }
-
-    //returnSearchPage
-    private SearchPage returnSearchPage() {
-        return new SearchPage(driver);
-    }
-
-    //returnProductPage
-    private ProductPage returnProductPage() {
-        return new ProductPage(driver);
+        if (driver.getCurrentUrl().contains(SUCCESS_SEARCH_PAGE_URL)) return new SearchPage(driver);
+        else return new ProductPage(driver);
     }
 
     public void toLowerCaseProductList(List<String> list) {

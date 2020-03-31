@@ -1,6 +1,8 @@
 package com.opencart.pages;
 
+import com.opencart.pages.cart.CartPage;
 import com.opencart.pages.comparison.ComparisonPage;
+import com.opencart.pages.product.ProductPage;
 import com.opencart.pages.search.SearchPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -14,8 +16,11 @@ import java.util.concurrent.TimeUnit;
 
 public class HomePage extends AbstractPageWithHeader {
 
+    //Locators
     private final String PRODUCT_COMPONENT_LOCATOR = ".product-layout"; // css
     private final String ALERT_LOCATOR = ".alert"; //css
+    //URL
+    private final String SUCCESS_SEARCH_PAGE_URL = "search&search";// url
 
     //Components
     private List<ProductContainersComponent> productContainersComponents;
@@ -38,6 +43,7 @@ public class HomePage extends AbstractPageWithHeader {
 
     ///region ATOMIC_OPERATIONS
 
+    //alertComponent
     public AlertComponent getAlertComponentWithWait() {
         try {
             Thread.sleep(3000); //Only for presentation, bug alert
@@ -80,9 +86,15 @@ public class HomePage extends AbstractPageWithHeader {
      *
      * @param productName Product name.
      */
-    public HomePage clickProductComponentAddToCartButtonByName(String productName) {
+    public AbstractPageWithHeader clickProductComponentAddToCartButtonByName(String productName) {
         getProductComponentByName(productName).clickAddToCartButton();
-        return this;
+        if (driver.getCurrentUrl().contains(SUCCESS_SEARCH_PAGE_URL)) return new SearchPage(driver);
+        else return new ProductPage(driver);
+    }
+
+    public ProductPage clickOnPictureOfProductComponentByName(String productName) {
+        getProductComponentByName(productName).clickPicture();
+        return new ProductPage(driver);
     }
 
     /**

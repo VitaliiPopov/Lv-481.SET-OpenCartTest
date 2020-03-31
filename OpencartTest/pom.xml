@@ -8,42 +8,64 @@
     <artifactId>OpencartTest</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <properties>
+        <aspectj.version>1.9.5</aspectj.version>
+        <!-- - - - Reports - - - -->
+        <testng.reports.directory>target/surefire-reports/test-output</testng.reports.directory>
+        <allure.result.directory>${project.build.directory}/allure-results</allure.result.directory>
+    </properties>
+
     <build>
         <!-- Source directory configuration -->
         <sourceDirectory>src</sourceDirectory>
         <plugins>
-            <!-- Following plugin executes the testng tests -->
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.14.1</version>
-                <configuration>
-                    <!-- Suite testng xml file to consider for test execution -->
-                    <suiteXmlFiles>
-                        <suiteXmlFile>testng.xml</suiteXmlFile>
-                    </suiteXmlFiles>
-                </configuration>
-            </plugin>
-            <!-- Compiler plugin configures the java version to be usedfor compiling
-                the code -->
-            <plugin>
+                <!-- Compiler plugin configures the java version to be used for compiling the code -->
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
                 </configuration>
             </plugin>
+            <!-- Following plugin executes the testng tests -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.14.1</version>
+                <configuration>
+                    <testFailureIgnore>true</testFailureIgnore>
+                    <!-- Suite testng xml file to consider for test execution -->
+                    <suiteXmlFiles>
+                        <suiteXmlFile>testng.xml</suiteXmlFile>
+                    </suiteXmlFiles>
+                    <reportsDirectory>${testng.reports.directory}</reportsDirectory>
+                    <argLine>
+                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar
+                    </argLine>
+                    <systemProperties>
+                        <property>
+                            <name>allure.results.directory</name>
+                            <value>${allure.result.directory}</value>
+                        </property>
+                    </systemProperties>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
+    <reporting>
+        <excludeDefaults>true</excludeDefaults>
+        <plugins>
+            <plugin>
+                <!-- https://mvnrepository.com/artifact/io.qameta.allure/allure-maven -->
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>2.10.0</version>
+            </plugin>
+        </plugins>
+    </reporting>
+
     <dependencies>
-
-        <dependency>
-            <groupId>com.googlecode.json-simple</groupId>
-            <artifactId>json-simple</artifactId>
-            <version>1.1.1</version>
-        </dependency>
-
         <dependency>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-surefire-plugin</artifactId>
@@ -79,14 +101,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
-        <dependency>
-            <groupId>io.github.bonigarcia</groupId>
-            <artifactId>webdrivermanager</artifactId>
-            <version>3.8.1</version>
-            <scope>compile</scope>
-        </dependency>
-
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
@@ -98,13 +112,124 @@
             <artifactId>allure-testng</artifactId>
             <version>2.13.2</version>
         </dependency>
-
+        <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
         <dependency>
-            <groupId>com.googlecode.json-simple</groupId>
-            <artifactId>json-simple</artifactId>
-            <version>1.1.1</version>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>${aspectj.version}</version>
+            <scope>test</scope>
         </dependency>
-
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.10.3</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>3.8.1</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
+
+<!--    <build>-->
+<!--        &lt;!&ndash; Source directory configuration &ndash;&gt;-->
+<!--        <sourceDirectory>src</sourceDirectory>-->
+<!--        <plugins>-->
+<!--            &lt;!&ndash; Following plugin executes the testng tests &ndash;&gt;-->
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-surefire-plugin</artifactId>-->
+<!--                <version>2.14.1</version>-->
+<!--                <configuration>-->
+<!--                    &lt;!&ndash; Suite testng xml file to consider for test execution &ndash;&gt;-->
+<!--                    <suiteXmlFiles>-->
+<!--                        <suiteXmlFile>testng1.xml</suiteXmlFile>-->
+<!--                    </suiteXmlFiles>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
+<!--            &lt;!&ndash; Compiler plugin configures the java version to be usedfor compiling-->
+<!--                the code &ndash;&gt;-->
+<!--            <plugin>-->
+<!--                <artifactId>maven-compiler-plugin</artifactId>-->
+<!--                <configuration>-->
+<!--                    <source>1.8</source>-->
+<!--                    <target>1.8</target>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
+<!--        </plugins>-->
+<!--    </build>-->
+
+<!--    <dependencies>-->
+
+<!--        <dependency>-->
+<!--            <groupId>com.googlecode.json-simple</groupId>-->
+<!--            <artifactId>json-simple</artifactId>-->
+<!--            <version>1.1.1</version>-->
+<!--        </dependency>-->
+
+<!--        <dependency>-->
+<!--            <groupId>org.apache.maven.plugins</groupId>-->
+<!--            <artifactId>maven-surefire-plugin</artifactId>-->
+<!--            <version>3.0.0-M4</version>-->
+<!--            <type>maven-plugin</type>-->
+<!--        </dependency>-->
+
+<!--        <dependency>-->
+<!--            <groupId>org.seleniumhq.selenium</groupId>-->
+<!--            <artifactId>selenium-server</artifactId>-->
+<!--            <version>3.141.59</version>-->
+<!--        </dependency>-->
+
+<!--        <dependency>-->
+<!--            <groupId>org.testng</groupId>-->
+<!--            <artifactId>testng</artifactId>-->
+<!--            <version>7.1.0</version>-->
+<!--            <scope>compile</scope>-->
+<!--        </dependency>-->
+
+<!--        <dependency>-->
+<!--            <groupId> org.apache.cassandra</groupId>-->
+<!--            <artifactId>cassandra-all</artifactId>-->
+<!--            <version>0.8.1</version>-->
+<!--            <exclusions>-->
+<!--                <exclusion>-->
+<!--                    <groupId>org.slf4j</groupId>-->
+<!--                    <artifactId>slf4j-log4j12</artifactId>-->
+<!--                </exclusion>-->
+<!--                <exclusion>-->
+<!--                    <groupId>log4j</groupId>-->
+<!--                    <artifactId>log4j</artifactId>-->
+<!--                </exclusion>-->
+<!--            </exclusions>-->
+<!--        </dependency>-->
+
+<!--        <dependency>-->
+<!--            <groupId>io.github.bonigarcia</groupId>-->
+<!--            <artifactId>webdrivermanager</artifactId>-->
+<!--            <version>3.8.1</version>-->
+<!--            <scope>compile</scope>-->
+<!--        </dependency>-->
+
+<!--        <dependency>-->
+<!--            <groupId>org.apache.poi</groupId>-->
+<!--            <artifactId>poi-ooxml</artifactId>-->
+<!--            <version>4.1.2</version>-->
+<!--        </dependency>-->
+<!--        &lt;!&ndash; https://mvnrepository.com/artifact/io.qameta.allure/allure-testng &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>io.qameta.allure</groupId>-->
+<!--            <artifactId>allure-testng</artifactId>-->
+<!--            <version>2.13.2</version>-->
+<!--        </dependency>-->
+
+<!--        <dependency>-->
+<!--            <groupId>com.googlecode.json-simple</groupId>-->
+<!--            <artifactId>json-simple</artifactId>-->
+<!--            <version>1.1.1</version>-->
+<!--        </dependency>-->
+
+<!--    </dependencies>-->
 
 </project>

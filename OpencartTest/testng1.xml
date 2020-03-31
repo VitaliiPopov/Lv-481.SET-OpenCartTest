@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Valerii Rybiak">
+
+    <test name="CartTest">
+        <!--MainTest-->
+        <parameter name="myAccountDropdownText" value="Login"/>
+
+        <parameter name="ipSearchRequest" value="ip"/>
+        <parameter name="productNameOfIphone" value="iPhone"/>
+        <parameter name="alertMessageIphone" value="Success: You have added iPhone to your shopping cart!"/>
+
+        <parameter name="samsungSearchRequest" value="samsung"/>
+        <parameter name="productNameOfSamsung" value="Samsung Galaxy Tab 10.1"/>
+        <parameter name="alertMessageSamsung" value="Success: You have added Samsung to your shopping cart!"/>
+
+        <parameter name="cinemaSearchRequest" value="cinema"/>
+        <parameter name="productNameOfCinema" value="Apple Cinema 30"/>
+        <parameter name="radioButtonOptionName" value="Small"/>
+        <parameter name="checkBoxOptionName" value="Checkbox 2"/>
+        <parameter name="selectOptionsOptionName" value="Red (+$4.00)"/>
+        <parameter name="valueOf3" value="3"/>
+        <parameter name="valueOf1" value="1"/>
+        <parameter name="alertMessageCinema" value="Success: You have added Apple Cinema 30 to your shopping cart!"/>
+
+        <parameter name="alertUnsuccessMessage" value="Unsuccess:"/>
+
+        <parameter name="emptyCartButtonText" value="0 item(s) - $0.00"/>
+        <parameter name="emptyCartPageText" value="Your shopping cart is empty!"/>
+
+        <parameter name="successModifiedCartText" value="Success: You have modified your shopping cart!"/>
+        <parameter name="unsuccessModifiedCartText" value="Products marked with *** are not available in the desired quantity or not in stock!"/>
+
+        <parameter name="appleCinemaCartButtonText" value="2 item(s) - $228.00"/>
+        <parameter name="iphoneCartButtonText" value="1 item(s) - $101.00"/>
+
+        <classes>
+
+            <!--===================================================functionality===================================================-->
+
+            <!--=========================add_to_cart=========================-->
+
+                <!--=========================negative=========================-->
+
+                    <!--=========================add_empty_product=========================-->
+
+                        <!--=========================alert_check=========================-->
+
+            <!--AddProductToCartWithOptionsTest-->
+            <class name="test.cart_tests.functionality.add_to_cart.negative.add_empty_value_of_product_qty.alert_check.AddProductToCartWithOptionsTest">
+                <methods>
+                    <include name="checkAddProductWithOptionsToCartWithEmptyQty"/>
+                </methods>
+            </class>
+
+            <!--AddProductToCartWithoutOptionsTest-->
+            <class name="test.cart_tests.functionality.add_to_cart.negative.add_empty_value_of_product_qty.alert_check.AddProductToCartWithoutOptionsTest">
+                <methods>
+                    <include name="checkAddProductWithoutOptionsToCartWithEmptyQty"/>
+                </methods>
+            </class>
+
+                        <!--=========================button_check=========================-->
+
+            <!--AddProductToCartWithOptionsTest-->
+            <class name="test.cart_tests.functionality.add_to_cart.negative.add_empty_value_of_product_qty.button_check.AddProductToCartWithOptionsTest">
+                <methods>
+                    <include name="checkAddProductWithOptionsToCartWithEmptyQty"/>
+                </methods>
+            </class>
+
+            <!--AddProductToCartWithoutOptionsTest-->
+            <class name="test.cart_tests.functionality.add_to_cart.negative.add_empty_value_of_product_qty.button_check.AddProductToCartWithoutOptionsTest">
+                <methods>
+                    <include name="checkAddProductWithoutOptionsToCartWithEmptyQty"/>
+                </methods>
+            </class>
+
+                        <!--=========================cart_check=========================-->
+
+            <!--AddProductToCartWithoutOptionsTest-->
+            <class name="test.cart_tests.functionality.add_to_cart.negative.add_empty_value_of_product_qty.cart_check.AddProductToCartWithOptionsTest">
+                <methods>
+                    <include name="checkAddProductWithOptionsToCartWithEmptyQty"/>
+                </methods>
+            </class>
+
+            <!--AddProductToCartWithOptionsTest-->
+            <class name="test.cart_tests.functionality.add_to_cart.negative.add_empty_value_of_product_qty.cart_check.AddProductToCartWithOptionsTest">
+                <methods>
+                    <include name="checkAddProductWithoutOptionsToCartWithEmptyQty"/>
+                </methods>
+            </class>
+
+                    <!--=========================add_less_than_min_value_of_product_qty=========================-->
+
+                        <!--=========================alert_check=========================-->
+
+            <!--AddProductToCartWithOptionsTest-->
+            <class name="test.cart_tests.functionality.add_to_cart.negative.add_less_than_min_value_of_product_qty.alert_check.AddProductToCartWithOptionsTest">
+                <methods>
+                    <include name="checkAddProductWithOptionsToCartWith1Qty"/>
+                </methods>
+            </class>
+
+                        <!--=========================button_check=========================-->
+
+            <!--AddProductToCartWithOptionsTest-->
+            <class name="test.cart_tests.functionality.add_to_cart.negative.add_less_than_min_value_of_product_qty.button_check.AddProductToCartWithOptionsTest">
+                <methods>
+                    <include name="checkAddProductWithOptionsToCartWith1Qty"/>
+                </methods>
+            </class>
+
+                        <!--=========================cart_check=========================-->
+
+            <!--AddProductToCartWithOptionsTest-->
+            <class name="test.cart_tests.functionality.add_to_cart.negative.add_less_than_min_value_of_product_qty.cart_check.AddProductToCartWithOptionsTest">
+                <methods>
+                    <include name="checkAddProductWithOptionsToCartWith1Qty"/>
+                </methods>
+            </class>
+
+                    <!--=========================add_more_than_max_value_of_product_qty=========================-->
+
+                        <!--=========================alert_check=========================-->
+
+            <!--AddProductToCartWithOptionsTest-->
+            <class name="test.cart_tests.functionality.add_to_cart.negative.add_more_than_max_value_of_product_qty.alert_check.AddProductToCartWithOptionsTest">
+                <methods>
+                    <include name="checkAddProductWithOptionsToCartWithMaxIntValueQty"/>
+                </methods>
+            </class>
+
+            <!--AddProductToCartWithoutOptionsTest-->
+            <class name="test.cart_tests.functionality.add_to_cart.negative.add_more_than_max_value_of_product_qty.alert_check.AddProductToCartWithoutOptionsTest">
+                <methods>
+                    <include name="checkAddProductWithOptionsToCartWithMaxIntValueQty"/>
+                </methods>
+            </class>
+
+                        <!--=========================button_check=========================-->
+
+            <!--AddProductToCartWithOptionsTest-->
+            <class name="test.cart_tests.functionality.add_to_cart.negative.add_more_than_max_value_of_product_qty.button_check.AddProductToCartWithOptionsTest">
+                <methods>
+                    <include name="checkAddProductWithOptionsToCartWithMaxIntValueQty"/>
+                </methods>
+            </class>
+
+            <!--AddProductToCartWithoutOptionsTest-->
+            <class name="test.cart_tests.functionality.add_to_cart.negative.add_more_than_max_value_of_product_qty.button_check.AddProductToCartWithoutOptionsTest">
+                <methods>
+                    <include name="checkAddProductWithOptionsToCartWithMaxIntValueQty"/>
+                </methods>
+            </class>
+
+                        <!--=========================cart_check=========================-->
+
+            <!--AddProductToCartWithOptionsTest-->
+            <class name="test.cart_tests.functionality.add_to_cart.negative.add_more_than_max_value_of_product_qty.cart_check.AddProductToCartWithOptionsTest">
+                <methods>
+                    <include name="checkAddProductWithOptionsToCartWithMaxIntValueQty"/>
+                </methods>
+            </class>
+
+            <!--AddProductToCartWithoutOptionsTest-->
+            <class name="test.cart_tests.functionality.add_to_cart.negative.add_more_than_max_value_of_product_qty.cart_check.AddProductToCartWithoutOptionsTest">
+                <methods>
+                    <include name="checkAddProductWithOptionsToCartWithMaxIntValueQty"/>
+                </methods>
+            </class>
+
+                    <!--=========================add_negative_value_of_product_qty=========================-->
+
+                        <!--=========================alert_check=========================-->
+
+            <!--AddProductToCartWithOptionsTest-->
+            <class name="test.cart_tests.functionality.add_to_cart.negative.add_negative_value_of_product_qty.alert_check.AddProductToCartWithOptionsTest">
+                <methods>
+                    <include name="checkAddProductWithOptionsToCartWithMinIntValueQty"/>
+                </methods>
+            </class>
+
+            <!--AddProductToCartWithoutOptionsTest-->
+            <class name="test.cart_tests.functionality.add_to_cart.negative.add_negative_value_of_product_qty.alert_check.AddProductToCartWithoutOptionsTest">
+                <methods>
+                    <include name="checkAddProductWithOptionsToCartWithMinIntValueQty"/>
+                </methods>
+            </class>
+
+                    <!--=========================button_check=========================-->
+
+            <!--AddProductToCartWithOptionsTest-->
+            <class name="test.cart_tests.functionality.add_to_cart.negative.add_negative_value_of_product_qty.button_check.AddProductToCartWithOptionsTest">
+                <methods>
+                    <include name="checkAddProductWithOptionsToCartWithMinIntValueQty"/>
+                </methods>
+            </class>
+
+            <!--AddProductToCartWithoutOptionsTest-->
+            <class name="test.cart_tests.functionality.add_to_cart.negative.add_negative_value_of_product_qty.button_check.AddProductToCartWithoutOptionsTest">
+                <methods>
+                    <include name="checkAddProductWithOptionsToCartWithMinIntValueQty"/>
+                </methods>
+            </class>
+
+                        <!--=========================cart_check=========================-->
+
+            <!--AddProductToCartWithOptionsTest-->
+            <class name="test.cart_tests.functionality.add_to_cart.negative.add_negative_value_of_product_qty.cart_check.AddProductToCartWithOptionsTest">
+                <methods>
+                    <include name="checkAddProductWithOptionsToCartWithMinIntValueQty"/>
+                </methods>
+            </class>
+
+            <!--AddProductToCartWithoutOptionsTest-->
+            <class name="test.cart_tests.functionality.add_to_cart.negative.add_negative_value_of_product_qty.cart_check.AddProductToCartWithoutOptionsTest">
+                <methods>
+                    <include name="checkAddProductWithOptionsToCartWithMinIntValueQty"/>
+                </methods>
+            </class>
+
+                    <!--=========================add_less_than_min_value_of_product_qty=========================-->
+
+                        <!--=========================alert_check=========================-->
+
+            <!--AddProductToCartWithoutOptionsTest-->
+            <class name="test.cart_tests.functionality.add_to_cart.negative.add_not_available_product.alert_check.AddProductToCartWithoutOptionsTest">
+                <methods>
+                    <include name="checkAddNotAvailableProductToCart"/>
+                </methods>
+            </class>
+
+                        <!--=========================button_check=========================-->
+
+            <!--AddProductToCartWithoutOptionsTest-->
+            <class name="test.cart_tests.functionality.add_to_cart.negative.add_not_available_product.button_check.AddProductToCartWithoutOptionsTest">
+                <methods>
+                    <include name="checkAddNotAvailableProductToCart"/>
+                </methods>
+            </class>
+
+                        <!--=========================cart_check=========================-->
+
+            <!--AddProductToCartWithoutOptionsTest-->
+            <class name="test.cart_tests.functionality.add_to_cart.negative.add_not_available_product.cart_check.AddProductToCartWithoutOptionsTest">
+                <methods>
+                    <include name="checkAddNotAvailableProductToCart"/>
+                </methods>
+            </class>
+
+                    <!--=========================add_zero_value_of_product_qty=========================-->
+
+                        <!--=========================alert_check=========================-->
+
+            <!--AddProductToCartWithOptionsTest-->
+            <class name="test.cart_tests.functionality.add_to_cart.negative.add_zero_value_of_product_qty.alert_check.AddProductToCartWithOptionsTest">
+                <methods>
+                    <include name="checkAddProductWithOptionsToCartWithZeroValueQty"/>
+                </methods>
+            </class>
+
+            <!--AddProductToCartWithoutOptionsTest-->
+            <class name="test.cart_tests.functionality.add_to_cart.negative.add_zero_value_of_product_qty.alert_check.AddProductToCartWithoutOptionsTest">
+                <methods>
+                    <include name="checkAddProductWithOptionsToCartWithZeroValueQty"/>
+                </methods>
+            </class>
+
+                        <!--=========================button_check=========================-->
+
+            <!--AddProductToCartWithOptionsTest-->
+            <class name="test.cart_tests.functionality.add_to_cart.negative.add_zero_value_of_product_qty.button_check.AddProductToCartWithOptionsTest">
+                <methods>
+                    <include name="checkAddProductWithOptionsToCartWithZeroValueQty"/>
+                </methods>
+            </class>
+
+            <!--AddProductToCartWithoutOptionsTest-->
+            <class name="test.cart_tests.functionality.add_to_cart.negative.add_zero_value_of_product_qty.button_check.AddProductToCartWithoutOptionsTest">
+                <methods>
+                    <include name="checkAddProductWithOptionsToCartWithZeroValueQty"/>
+                </methods>
+            </class>
+
+                        <!--=========================cart_check=========================-->
+
+            <!--AddProductToCartWithOptionsTest-->
+            <class name="test.cart_tests.functionality.add_to_cart.negative.add_zero_value_of_product_qty.cart_check.AddProductToCartWithOptionsTest">
+                <methods>
+                    <include name="checkAddProductWithOptionsToCartWithZeroValueQty"/>
+                </methods>
+            </class>
+
+            <!--AddProductToCartWithoutOptionsTest-->
+            <class name="test.cart_tests.functionality.add_to_cart.negative.add_zero_value_of_product_qty.cart_check.AddProductToCartWithoutOptionsTest">
+                <methods>
+                    <include name="checkAddProductWithOptionsToCartWithZeroValueQty"/>
+                </methods>
+            </class>
+
+            <!--=========================positive=========================-->
+
+                <!--=========================alert_check=========================-->
+
+            <!--AddProductToCartWithOptionsTest-->
+            <class name="test.cart_tests.functionality.add_to_cart.positive.alert_check.AddProductToCartWithOptionsTest">
+                <methods>
+                    <include name="checkAddProductWithOptionsToCart"/>
+                </methods>
+            </class>
+
+            <!--AddProductToCartWithoutOptionsTest-->
+            <class name="test.cart_tests.functionality.add_to_cart.positive.alert_check.AddProductToCartWithoutOptionsTest">
+                <methods>
+                    <include name="checkAddProductWithoutOptionsToCart"/>
+                </methods>
+            </class>
+
+            <!--=========================cart=========================-->
+
+                <!--=========================check_total_sum=========================-->
+
+            <!--CorrectTotalSumTest-->
+            <class name="test.cart_tests.functionality.cart.check_total_sum.CorrectTotalSumTest">
+                <methods>
+                    <include name="checkCorrectTotalSumCheck"/>
+                </methods>
+            </class>
+
+                <!--=========================refresh=========================-->
+
+                    <!--=========================positive=========================-->
+
+            <!--CheckCorrectFunctionOfRefreshButtonInCart-->
+            <class name="test.cart_tests.functionality.cart.refresh.positive.CheckCorrectFunctionOfRefreshButtonInCart">
+                <methods>
+                    <include name="checkCorrectFunctionOfRefreshButtonInCart"/>
+                </methods>
+            </class>
+
+                    <!--=========================negative=========================-->
+
+            <!--SetZeroValue-->
+            <class name="test.cart_tests.functionality.cart.refresh.negative.SetZeroValue">
+                <methods>
+                    <include name="checkCorrectFunctionOfRefreshButtonInCart"/>
+                </methods>
+            </class>
+
+            <!--SetNegativeValue-->
+            <class name="test.cart_tests.functionality.cart.refresh.negative.SetNegativeValue">
+                <methods>
+                    <include name="checkCorrectFunctionOfRefreshButtonInCart"/>
+                </methods>
+            </class>
+
+            <!--SetEmptyValue-->
+            <class name="test.cart_tests.functionality.cart.refresh.negative.SetEmptyValue">
+                <methods>
+                    <include name="checkCorrectFunctionOfRefreshButtonInCart"/>
+                </methods>
+            </class>
+
+            <!--SetBigestValueThenQuantityInStockIs-->
+            <class name="test.cart_tests.functionality.cart.refresh.negative.SetBigestValueThenQuantityInStockIs">
+                <methods>
+                    <include name="checkCorrectFunctionOfRefreshButtonInCart"/>
+                </methods>
+            </class>
+
+                <!--=========================remove=========================-->
+
+            <!--RemoveSingleProductFromCartPage-->
+            <class name="test.cart_tests.functionality.cart.remove.RemoveSingleProductFromCartPage">
+                <methods>
+                    <include name="removeSingleProductFromCart"/>
+                </methods>
+            </class>
+
+            <!--ConsistentRemoveFromCartPage-->
+            <class name="test.cart_tests.functionality.cart.remove.ConsistentRemoveFromCartPage">
+                <methods>
+                    <include name="consistentRemoveFromCartPage"/>
+                </methods>
+            </class>
+
+            <!--=========================button_cart=========================-->
+
+                <!--=========================remove=========================-->
+
+            <!--RemoveSingleProductFromCartButton-->
+            <class name="test.cart_tests.functionality.button_cart.remove.RemoveSingleProductFromCartButton">
+                <methods>
+                    <include name="removeSingleProductFromCartButton"/>
+                </methods>
+            </class>
+
+                <!--=========================check_total_sum=========================-->
+
+            <!--CorrectTotalSumCheck-->
+            <class name="test.cart_tests.functionality.button_cart.check_total_sum.CorrectTotalSumCheck">
+                <methods>
+                    <include name="checkTotalSum"/>
+                </methods>
+            </class>
+
+            <!--=========================scripts=========================-->
+
+            <!--CorrectTotalSumCheck-->
+            <class name="test.cart_tests.scripts.ScriptOneTest">
+                <methods>
+                    <include name="scriptCheck"/>
+                </methods>
+            </class>
+
+        </classes>
+    </test> <!-- Individual &ndash;&gt;-->
+</suite> <!-- Default Suite -->
+
+<!--end-->

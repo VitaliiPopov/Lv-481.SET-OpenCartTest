@@ -2,6 +2,33 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 <suite name="Regression">
+    <test name="EditAccountTest">
+        <parameter name="loginText" value="Login"></parameter>
+        <parameter name="logoutText" value="Logout"></parameter>
+        <parameter name="registerText" value="Register"></parameter>
+        <parameter name="myAccountText" value="My Account"></parameter>
+        <parameter name="editAccountText" value="My Account Information"></parameter>
+        <classes>
+            <class name="test.register_test.EditAccountTest">
+                <methods>
+                    <include name="editAccountWithEmptyFieldsTest"/>
+                    <include name="editAccountWithEmptyFirstnameTest"/>
+                    <include name="editAccountWithLongFirstnameTest"/>
+                    <include name="editAccountWithEmptyLastnameTest"/>
+                    <include name="editAccountWithLongLastnameTest"/>
+                    <include name="editAccountWithEmptyEmailTest"/>
+                    <include name="editAccountEmailWithoutAtSymbolTest"/>
+                    <include name="editAccountEmailWithoutDotSymbolTest"/>
+                    <include name="editAccountWithExistedEmailTest"/>
+                    <include name="editAccountWithEmptyTelephoneTest"/>
+                    <include name="editAccountWithShortTelephoneTest"/>
+                    <include name="editAccountWithLongTelephoneTest"/>
+                    <include name="complexScenario"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
         <test name="SmokeAccountTest">
             <parameter name="loginText" value="Login"></parameter>
             <parameter name="logoutText" value="Logout"></parameter>
@@ -64,33 +91,6 @@
                         <include name="registerWithLongPasswordTest"/>
                         <include name="registerWithBadConfirmTest"/>
                         <include name="registerWithoutPrivacyPolicyAgreementTest"/>
-                    </methods>
-                </class>
-            </classes>
-        </test>
-
-        <test name="EditAccountTest">
-            <parameter name="loginText" value="Login"></parameter>
-            <parameter name="logoutText" value="Logout"></parameter>
-            <parameter name="registerText" value="Register"></parameter>
-            <parameter name="myAccountText" value="My Account"></parameter>
-            <parameter name="editAccountText" value="My Account Information"></parameter>
-            <classes>
-                <class name="test.register_test.EditAccountTest">
-                    <methods>
-                        <include name="editAccountWithEmptyFieldsTest"/>
-                        <include name="editAccountWithEmptyFirstnameTest"/>
-                        <include name="editAccountWithLongFirstnameTest"/>
-                        <include name="editAccountWithEmptyLastnameTest"/>
-                        <include name="editAccountWithLongLastnameTest"/>
-                        <include name="editAccountWithEmptyEmailTest"/>
-                        <include name="editAccountEmailWithoutAtSymbolTest"/>
-                        <include name="editAccountEmailWithoutDotSymbolTest"/>
-                        <include name="editAccountWithExistedEmailTest"/>
-                        <include name="editAccountWithEmptyTelephoneTest"/>
-                        <include name="editAccountWithShortTelephoneTest"/>
-                        <include name="editAccountWithLongTelephoneTest"/>
-                        <include name="complexScenario"/>
                     </methods>
                 </class>
             </classes>

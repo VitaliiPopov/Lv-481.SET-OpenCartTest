@@ -40,15 +40,6 @@ public class AccountTestRunner {
     }
 
     @AfterMethod
-    public void logoutUser() throws InterruptedException {
-        if (getHomePage().isExistMyAccountDropdownOption("My Account")){
-            AccountLogoutPage logoutPage = getHomePage().goToLogoutPage();
-            logoutPage.logout();
-        }
-        else getHomePage();
-    }
-
-    @AfterMethod
     public void onTestFailure(ITestResult result) throws Exception {
         if (result.getStatus() == ITestResult.FAILURE) {
             Screenshot.run(result, driver);

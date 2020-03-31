@@ -2,6 +2,117 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 <suite name="Regression">
+    <test name="EditAccountTest">
+        <parameter name="loginText" value="Login"></parameter>
+        <parameter name="logoutText" value="Logout"></parameter>
+        <parameter name="registerText" value="Register"></parameter>
+        <parameter name="myAccountText" value="My Account"></parameter>
+        <parameter name="editAccountText" value="My Account Information"></parameter>
+        <classes>
+            <class name="test.register_test.EditAccountTest">
+                <methods>
+                    <include name="editAccountWithEmptyFieldsTest"/>
+                    <include name="editAccountWithEmptyFirstnameTest"/>
+                    <include name="editAccountWithLongFirstnameTest"/>
+                    <include name="editAccountWithEmptyLastnameTest"/>
+                    <include name="editAccountWithLongLastnameTest"/>
+                    <include name="editAccountWithEmptyEmailTest"/>
+                    <include name="editAccountEmailWithoutAtSymbolTest"/>
+                    <include name="editAccountEmailWithoutDotSymbolTest"/>
+                    <include name="editAccountWithExistedEmailTest"/>
+                    <include name="editAccountWithEmptyTelephoneTest"/>
+                    <include name="editAccountWithShortTelephoneTest"/>
+                    <include name="editAccountWithLongTelephoneTest"/>
+                    <include name="complexScenario"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="SmokeAccountTest">
+        <parameter name="loginText" value="Login"></parameter>
+        <parameter name="logoutText" value="Logout"></parameter>
+        <parameter name="registerText" value="Register"></parameter>
+        <parameter name="myAccountText" value="My Account"></parameter>
+        <parameter name="editAccountText" value="My Account Information"></parameter>
+        <classes>
+            <class name="test.login_test.SmokeAccountTest">
+                <methods>
+                    <include name="smokeRegisterNewUserTest"/>
+                    <include name="smokeLoginExistedUserTest"/>
+                    <include name="smokeChangePasswordTest"/>
+                    <include name="smokeEditAccountTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="LoginTest">
+        <parameter name="loginText" value="Login"></parameter>
+        <parameter name="logoutText" value="Logout"></parameter>
+        <parameter name="registerText" value="Register"></parameter>
+        <parameter name="myAccountText" value="My Account"></parameter>
+        <parameter name="editAccountText" value="My Account Information"></parameter>
+        <classes>
+            <class name="test.login_test.LoginUserTest">
+                <methods>
+                    <include name="loginNotExistedUserTest"/>
+                    <include name="loginWithEmptyFieldsTest"/>
+                    <include name="loginWithEmptyEmailTest"/>
+                    <include name="loginWithEmptyPasswordTest"/>
+                    <include name="loginCaseSensitiveFieldsTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="RegisterTest">
+        <parameter name="loginText" value="Login"></parameter>
+        <parameter name="logoutText" value="Logout"></parameter>
+        <parameter name="registerText" value="Register"></parameter>
+        <parameter name="myAccountText" value="My Account"></parameter>
+        <parameter name="editAccountText" value="My Account Information"></parameter>
+        <classes>
+            <class name="test.register_test.RegisterTest">
+                <methods>
+                    <include name="registerWithEmptyFieldsTest"/>
+                    <include name="registerWithEmptyFirstNameTest"/>
+                    <include name="registerWithEmptyLastNameTest"/>
+                    <include name="registerWithLongFirstLastNamesTest"/>
+                    <include name="registerWithEmptyEmailTest"/>
+                    <include name="registerWithExistedEmailTest"/>
+                    <include name="registerEmailWithoutAtSymbolTest"/>
+                    <include name="registerEmailWithoutDotSymbolTest"/>
+                    <include name="registerWithEmptyTelephoneTest"/>
+                    <include name="registerWithShortTelephoneTest"/>
+                    <include name="registerWithLongTelephoneTest"/>
+                    <include name="registerWithEmptyPasswordTest"/>
+                    <include name="registerWithShortPasswordTest"/>
+                    <include name="registerWithLongPasswordTest"/>
+                    <include name="registerWithBadConfirmTest"/>
+                    <include name="registerWithoutPrivacyPolicyAgreementTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="ChangePasswordTest">
+        <parameter name="loginText" value="Login"></parameter>
+        <parameter name="logoutText" value="Logout"></parameter>
+        <parameter name="registerText" value="Register"></parameter>
+        <parameter name="myAccountText" value="My Account"></parameter>
+        <parameter name="editAccountText" value="My Account Information"></parameter>
+        <classes>
+            <class name="test.login_test.ChangePasswordTest">
+                <methods>
+                    <include name="changePasswordToEmptyTest"/>
+                    <include name="changePasswordWrongConfirmTest"/>
+                    <include name="changePasswordToShortTest"/>
+                    <include name="changePasswordToLongTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
     <test name="ReviewTest">
         <!--MainTest-->
         <parameter name="nameOfAuthor" value="Georgiy"/>
@@ -147,138 +258,34 @@
             </class>
         </classes>
     </test>
-
-    <!--&lt;!&ndash;  Anna  &ndash;&gt;
-
-    <test name="SmokeAccountTest">
-        <parameter name="loginText" value="Login"></parameter>
-        <parameter name="logoutText" value="Logout"></parameter>
-        <parameter name="registerText" value="Register"></parameter>
-        <parameter name="myAccountText" value="My Account"></parameter>
-        <parameter name="editAccountText" value="My Account Information"></parameter>
-        <classes>
-            <class name="test.login_test.SmokeAccountTest">
-                <methods>
-                    <include name="smokeRegisterNewUserTest"/>
-                    <include name="smokeLoginExistedUserTest"/>
-                    <include name="smokeChangePasswordTest"/>
-                    <include name="smokeEditAccountTest"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
-    <test name="LoginTest">
-        <parameter name="loginText" value="Login"></parameter>
-        <parameter name="logoutText" value="Logout"></parameter>
-        <parameter name="registerText" value="Register"></parameter>
-        <parameter name="myAccountText" value="My Account"></parameter>
-        <parameter name="editAccountText" value="My Account Information"></parameter>
-        <classes>
-            <class name="test.login_test.LoginUserTest">
-                <methods>
-                    <include name="loginNotExistedUserTest"/>
-                    <include name="loginWithEmptyFieldsTest"/>
-                    <include name="loginWithEmptyEmailTest"/>
-                    <include name="loginWithEmptyPasswordTest"/>
-                    <include name="loginCaseSensitiveFieldsTest"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
-    <test name="RegisterTest">
-        <parameter name="loginText" value="Login"></parameter>
-        <parameter name="logoutText" value="Logout"></parameter>
-        <parameter name="registerText" value="Register"></parameter>
-        <parameter name="myAccountText" value="My Account"></parameter>
-        <parameter name="editAccountText" value="My Account Information"></parameter>
-        <classes>
-            <class name="test.register_test.RegisterTest">
-                <methods>
-                    <include name="registerWithEmptyFieldsTest"/>
-                    <include name="registerWithEmptyFirstNameTest"/>
-                    <include name="registerWithEmptyLastNameTest"/>
-                    <include name="registerWithLongFirstLastNamesTest"/>
-                    <include name="registerWithEmptyEmailTest"/>
-                    <include name="registerWithExistedEmailTest"/>
-                    <include name="registerEmailWithoutAtSymbolTest"/>
-                    <include name="registerEmailWithoutDotSymbolTest"/>
-                    <include name="registerWithEmptyTelephoneTest"/>
-                    <include name="registerWithShortTelephoneTest"/>
-                    <include name="registerWithLongTelephoneTest"/>
-                    <include name="registerWithEmptyPasswordTest"/>
-                    <include name="registerWithShortPasswordTest"/>
-                    <include name="registerWithLongPasswordTest"/>
-                    <include name="registerWithBadConfirmTest"/>
-                    <include name="registerWithoutPrivacyPolicyAgreementTest"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
-    <test name="EditAccountTest">
-        <parameter name="loginText" value="Login"></parameter>
-        <parameter name="logoutText" value="Logout"></parameter>
-        <parameter name="registerText" value="Register"></parameter>
-        <parameter name="myAccountText" value="My Account"></parameter>
-        <parameter name="editAccountText" value="My Account Information"></parameter>
-        <classes>
-            <class name="test.register_test.EditAccountTest">
-                <methods>
-                    <include name="editAccountWithEmptyFieldsTest"/>
-                    <include name="editAccountWithEmptyFirstnameTest"/>
-                    <include name="editAccountWithLongFirstnameTest"/>
-                    <include name="editAccountWithEmptyLastnameTest"/>
-                    <include name="editAccountWithLongLastnameTest"/>
-                    <include name="editAccountWithEmptyEmailTest"/>
-                    <include name="editAccountEmailWithoutAtSymbolTest"/>
-                    <include name="editAccountEmailWithoutDotSymbolTest"/>
-                    <include name="editAccountWithExistedEmailTest"/>
-                    <include name="editAccountWithEmptyTelephoneTest"/>
-                    <include name="editAccountWithShortTelephoneTest"/>
-                    <include name="editAccountWithLongTelephoneTest"/>
-                    <include name="complexScenario"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
-    <test name="ChangePasswordTest">
-        <parameter name="loginText" value="Login"></parameter>
-        <parameter name="logoutText" value="Logout"></parameter>
-        <parameter name="registerText" value="Register"></parameter>
-        <parameter name="myAccountText" value="My Account"></parameter>
-        <parameter name="editAccountText" value="My Account Information"></parameter>
-        <classes>
-            <class name="test.login_test.ChangePasswordTest">
-                <methods>
-                    <include name="changePasswordToEmptyTest"/>
-                    <include name="changePasswordWrongConfirmTest"/>
-                    <include name="changePasswordToShortTest"/>
-                    <include name="changePasswordToLongTest"/>
-                </methods>
-            </class>
-        </classes>
-    </test>-->
     <!--Mykhailo-->
-    <test name="addToWishList">
+<!--    <test name="addToWishList">-->
 
-        <parameter name="myAccountDropdownText" value="Login"/>
+<!--      &lt;!&ndash;Yura&ndash;&gt;-->
 
-        <parameter name="fromSearchPageProductName" value="iPod Nano"/>
-        <parameter name="fromHomePageProductName" value="MacBook"/>
-        <parameter name="fromProductPageProductName" value="iPhone"/>
-        <classes>
-            <class name="test.TestWishList">
-                <methods>
-                    <include name="addProductToWishListFromSearchPage"/>
-                    <include name="addProductToWishListFromHomePage"/>
-                    <include name="addProductToWishListFromProductPage"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
+<!--    <test name="YuriiSereda">-->
+<!--        <parameter name="myAccountDropdownText" value="Login"/>-->
+<!--        <classes>-->
+<!--            <class name="test.AddressTests">-->
+<!--                <methods>-->
+<!--                    <include name="abilityToAddAddress"/>-->
+<!--                    <include name="abilityToDeleteAddress"/>-->
+<!--                    <include name="editAddress"/>-->
+<!--                    <include name="checkEditPageAlertMassages"/>-->
+<!--                    <include name="checkAbilityToDeleteDefaultAddress"/>-->
+<!--                    <include name="createAddressWithEmptyFirstname"/>-->
+<!--                    <include name="createAddressWithEmptyLastname"/>-->
+<!--                    <include name="createAddressWithEmptyAddress"/>-->
+<!--                    <include name="createAddressWithEmptyCountry"/>-->
+<!--                    <include name="createAddressWithEmptyRegion"/>-->
+<!--                    <include name="checkAlertsWithTooShortInputs"/>-->
+<!--                    <include name="checkAlertsWithTooLongInputs"/>-->
+<!--                    <include name="checkAlertsWithTooLongInputs"/>-->
+<!--                    <include name="createAddressWithNumbersInsteadCharacters"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test>-->
 
     <test name="addToCartFromWishList">
 

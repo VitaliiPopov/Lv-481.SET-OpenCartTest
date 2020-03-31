@@ -16,21 +16,13 @@ public class SmokeAccountTest extends TestRunner {
     AdminManager adminAccess = new AdminManager();
 
     @AfterMethod
+    @Description("Logout user")
     public void logoutUser() throws InterruptedException {
         if (getHomePage().isExistMyAccountDropdownOption("My Account")){
             AccountLogoutPage logoutPage = getHomePage().goToLogoutPage();
             logoutPage.logout();
         }
         else getHomePage();
-    }
-
-    @AfterClass
-    public void tearDown() {
-        try {
-            adminAccess.deleteCustomerFromAdmin(jsonDataConfig.getEmailFromJson(0));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     @Parameters({"myAccountText"})
@@ -82,6 +74,7 @@ public class SmokeAccountTest extends TestRunner {
                 jsonDataConfig.getTelephoneFromJson(1)
         );
         Assert.assertEquals(true, myAccountPage.isSuccessAlertPresent());
+        adminAccess.deleteCustomerFromAdmin(jsonDataConfig.getEmailFromJson(0));
     }
 
     public MyAccountPage loginUser(String loginDropdownText) throws InterruptedException {

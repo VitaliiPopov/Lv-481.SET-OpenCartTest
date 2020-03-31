@@ -22,7 +22,7 @@ public class ProductPage extends AbstractPageWithHeader {
     @FindBy(how = How.CSS, css = "#content h1")
     private WebElement productName;
 
-    @FindBy(how = How.XPATH, xpath = "//div[@class='btn-group']//i[@class='fa fa-exchange']") //TODO methods for click
+    @FindBy(how = How.XPATH, xpath = "//div[@class='btn-group']//i[@class='fa fa-exchange']")
     private WebElement compareButton;
 
     @FindBy(how = How.CSS, css = "a[href='#tab-review']")

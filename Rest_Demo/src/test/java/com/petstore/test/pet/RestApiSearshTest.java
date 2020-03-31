@@ -1,4 +1,4 @@
-package test;
+package com.petstore.test.pet;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;

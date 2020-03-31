@@ -19,7 +19,7 @@ public class CartCurrencyTest extends CurrencyTestRunner {
 
     @Parameters({"myAccountDropdownText"})
     @Test(priority = 1)
-    public void Login(String myAccountDropdownText) throws InterruptedException {
+    public void login(String myAccountDropdownText) throws InterruptedException {
         LoginPage loginPage = getHomePage().goToLoginPage(myAccountDropdownText);
         MyAccountPage myAccountPage = loginPage.login(jsonParser.getEmailFromJson(8), jsonParser.getPasswordFromJson(8));
         HomePage homepage = myAccountPage.goToHomePage();

@@ -8,8 +8,6 @@ import org.junit.Assert;
 import org.testng.annotations.*;
 import static org.apache.commons.lang3.RandomStringUtils.*;
 
-
-@Listeners(com.opencart.tools.AccountListener.class)
 public class ChangePasswordTest extends AccountTestRunner {
     JsonDataConfig jsonDataConfig = new JsonDataConfig("TestData.json");
 

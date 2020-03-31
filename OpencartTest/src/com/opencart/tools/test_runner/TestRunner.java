@@ -21,11 +21,6 @@ public class TestRunner {
         Driver.quit();
     }
 
-    @AfterMethod(alwaysRun = true)
-    public void afterMethod() {
-        Driver.clearCookies();
-    }
-
     public HomePage getHomePage() {
         return new HomePage(Driver.getDriver());
     }

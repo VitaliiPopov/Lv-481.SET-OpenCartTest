@@ -8,22 +8,16 @@ import org.openqa.selenium.WebElement;
 
 public class WishListEmptyPage extends AbstractPageWithHeader {
 
-    private WebElement continueButton;
     private WebElement emptyMessageLabel;
     public static final String EMPTY_WISH_LIST_MESSAGE = "Your wish list is empty.";
 
     public WishListEmptyPage(WebDriver driver) {
         super(driver);
+        initElements();
     }
 
     public void initElements() {
-        continueButton = driver.findElement(By.xpath("//div[@class='pull-right']/a"));
-        emptyMessageLabel = driver.findElement(By.xpath("//div[@id='content']/p"));
-    }
-
-    // continue button
-    public void clickContinueButton() {
-        continueButton.click();
+        emptyMessageLabel = driver.findElement(By.cssSelector("#content p"));
     }
 
     // label
@@ -31,8 +25,4 @@ public class WishListEmptyPage extends AbstractPageWithHeader {
         return emptyMessageLabel.getText();
     }
 
-    public MyAccountPage goToMyAccountPage() {
-        clickContinueButton();
-        return new MyAccountPage(driver);
-    }
 }

@@ -1,15 +1,16 @@
 package com.opencart.pages;
 
-import com.opencart.pages.account.LoginPage;
-import com.opencart.pages.cart.CartPage;
 import com.opencart.pages.account.AccountLogoutPage;
+import com.opencart.pages.account.LoginPage;
 import com.opencart.pages.account.MyAccountPage;
 import com.opencart.pages.account.RegisterPage;
+import com.opencart.pages.cart.CartPage;
 import com.opencart.pages.search.SearchPage;
+import com.opencart.pages.wishlist.WishListEmptyPage;
 import com.opencart.pages.wishlist.WishListPage;
 import com.opencart.tools.RegexUtils;
-
 import com.opencart.tools.WaitUtils;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -96,6 +97,7 @@ public class AbstractPageWithHeader {
     }
 
     //currency
+    public String getFullCurrencyText(){return currency.getText().substring(1);}
     public String getCurrencyText() {
         return currency.getText().substring(0, 1);
     }
@@ -223,6 +225,10 @@ public class AbstractPageWithHeader {
         return getCartDropdownComponent().getTotalPriceText();
     }
 
+    public int getNumberOfProductsInCartButton() {
+        return RegexUtils.extractFirstNumber(getCartButtonText());
+    }
+
     //productInCartButtonContainerComponents size
     public int getProductInCartButtonContainerComponentsSize() {
         openViewCartComponent();
@@ -268,10 +274,10 @@ public class AbstractPageWithHeader {
         return RegexUtils.extractFirstNumber(getWishListText());
     }
 
-    // hardcode by Yura
-    public MyAccountPage clickMyAccauntInDropdownHardcode() {
+    //  by Yura dropdown
+    public MyAccountPage clickMyAccountInDropdown() {
         openMyAccountDropdown();
-        driver.findElement(By.xpath("//ul[@class='dropdown-menu dropdown-menu-right']//li[last()-4]")).click();
+        driver.findElement(By.xpath("//ul[@class='dropdown-menu dropdown-menu-right']//li[last()-4]")).click();//
         return new MyAccountPage(driver);
     }
 
@@ -315,6 +321,12 @@ public class AbstractPageWithHeader {
         return new AccountLogoutPage(driver);
     }
 
+    @Step("Clicks on dropdown and chose login and go to the login page")
+    public MyAccountPage goToMyAccountPage() {
+        clickMyAccountDropdownComponentByName("My Account");
+        return new MyAccountPage(driver);
+    }
+
     public LoginPage goToLoginPage(String MY_ACCOUNT_DROPDOWN_TEXT) {
         clickMyAccountDropdownComponentByPartialName(MY_ACCOUNT_DROPDOWN_TEXT);
         return new LoginPage(driver);
@@ -324,13 +336,19 @@ public class AbstractPageWithHeader {
         clickLogo();
         return new HomePage(driver);
     }
-    public SearchPage getSearchPage(){
+
+    public SearchPage getSearchPage() {
         return new SearchPage(driver);
     }
 
     public WishListPage goToWishList() {
         clickWishList();
         return new WishListPage(driver);
+    }
+
+    public WishListEmptyPage goToWishListEmpty() {
+        clickWishList();
+        return new WishListEmptyPage(driver);
     }
 
     public CartPage goToCart() {
@@ -379,6 +397,10 @@ public class AbstractPageWithHeader {
         return new AbstractPageWithHeader(driver);
     }
 
-    ///endregion
+    public WishListEmptyPage goToWishListEmptyPage(){
+        clickWishList();
+        return new WishListEmptyPage(driver);
+    }
 
+    ///endregion
 }

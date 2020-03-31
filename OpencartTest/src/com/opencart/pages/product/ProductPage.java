@@ -3,7 +3,8 @@ package com.opencart.pages.product;
 import com.opencart.pages.AbstractPageWithHeader;
 import com.opencart.pages.AlertComponent;
 import com.opencart.pages.cart.CartPage;
-
+import com.opencart.pages.comparison.ComparisonPage;
+import com.opencart.pages.wishlist.WishListPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,11 +19,20 @@ public class ProductPage extends AbstractPageWithHeader {
     //Locators
     private final String ALERT_LOCATOR = ".alert"; //css
 
+    @FindBy(how = How.XPATH, xpath = ".//button/i[contains(@class,'fa-heart')]/..")
+    private WebElement addToWishListButton;
+
     @FindBy(how = How.CSS, css = "#content h1")
     private WebElement productName;
 
+    @FindBy(how = How.XPATH, xpath = "//div[@class='btn-group']//i[@class='fa fa-exchange']") //TODO methods for click
+    private WebElement compareButton;
+
     @FindBy(how = How.CSS, css = "a[href='#tab-review']")
     private WebElement tabReviews;
+
+    @FindBy(how = How.CSS, css = "#tab-description div")
+    private WebElement description;
 
     @FindBy(how = How.XPATH, xpath = "//input[contains(@id,'input-name')]")
     private WebElement inputFieldName;
@@ -47,12 +57,6 @@ public class ProductPage extends AbstractPageWithHeader {
 
     @FindBy(how = How.XPATH, xpath = "//button[contains(@id,'button-review')]")
     private WebElement buttonAddReview;
-
-    @FindBy(how = How.XPATH, xpath = "//div[contains(@id,'review')]/child::p")
-    private WebElement informationOfReviews;
-
-    @FindBy(how = How.XPATH, xpath = "//div[contains(@id,'review')]/following-sibling::h2")
-    private WebElement descriptionOfTabReviews;
 
     @FindBy(how = How.CSS, css = "div.alert.alert-success")
     private WebElement deliveredReviewMessage;
@@ -106,13 +110,9 @@ public class ProductPage extends AbstractPageWithHeader {
         return productName.getText();
     }
 
-    public String getInformationOfReviews() {
-        return informationOfReviews.getText();
-    }
-
-    public String getDescriptionOfTabReviews() {
-        return descriptionOfTabReviews.getText();
-    }
+    public  String getDescription() throws InterruptedException {
+        Thread.sleep(2000);
+        return  description.getText();}
 
     public String getTextOfDeliveredReviewMessage() {
         return deliveredReviewMessage.getText();
@@ -158,9 +158,19 @@ public class ProductPage extends AbstractPageWithHeader {
         tabReviews.click();
     }
 
+    public void clickAddToWishListButton() {
+        addToWishListButton.click();
+    }
+
     ///endregion
 
     ///region FUNCTIONALITY
+
+    //compareButton
+    public ProductPage clickCompareButton() {
+        compareButton.click();
+        return this;
+    }
 
     //addProductToCartAlertComponent
     public AlertComponent getAlertComponent() {
@@ -253,7 +263,6 @@ public class ProductPage extends AbstractPageWithHeader {
         return new ProductPage(driver);
     }
 
-
     //addToCartProductWithoutOptions
     public ProductPage addToCartProductWithoutOptions(int value) {
         getAvailableOptionsComponent().setTextQty(value);
@@ -268,4 +277,15 @@ public class ProductPage extends AbstractPageWithHeader {
     }
     ///endregion
 
+    public ComparisonPage goToComparisonPageFromAlert() {
+        getAlertComponent().clickOnCompareLink();
+        return new ComparisonPage(driver);
+    }
+
+    public WishListPage addProductToWishList() {
+        clickAddToWishListButton();
+        return new WishListPage(driver);
+    }
+
+    ///endregion
 }

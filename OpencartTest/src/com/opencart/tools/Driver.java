@@ -1,13 +1,18 @@
 package com.opencart.tools;
 
 import com.opencart.data.ConstantVariables;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 public class Driver {
@@ -19,17 +24,10 @@ public class Driver {
 
     public static WebDriver getDriver() {
         if (driver == null) {
-            if (ConstantVariables.BROWSER_NAME.equalsIgnoreCase("chrome")) {
-                System.setProperty("webdriver.chrome.driver", "./target/drivers/chromedriver.exe");
-                ChromeOptions options = new ChromeOptions();
-                options.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
-                driver = new ChromeDriver(options);
-            } else if (ConstantVariables.BROWSER_NAME.equalsIgnoreCase("firefox")) {
-                System.setProperty("webdriver.gecko.driver", "./target/drivers/geckodriver.exe");
-                FirefoxOptions options = new FirefoxOptions();
-                options.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
-                driver = new FirefoxDriver(options);
-            }
+            ChromeOptions options = new ChromeOptions();
+            options.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
+            WebDriverManager.chromedriver().setup();
+            driver = new ChromeDriver(options);
         }
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
@@ -47,7 +45,7 @@ public class Driver {
         return driver;
     }
 
-    public static void ClearCookies() {
+    public static void clearCookies() {
         driver.manage().deleteAllCookies();
     }
 }

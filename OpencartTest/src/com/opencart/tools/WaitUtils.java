@@ -1,5 +1,6 @@
 package com.opencart.tools;
 
+import com.opencart.data.products.ProductRepository;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;

@@ -37,6 +37,7 @@ public class SearchPage extends AbstractPageWithHeader {
 
     //Components
     private List<ProductContainersComponent> productContainersComponents;
+    private AlertComponent alertComponent;
 
     public SearchPage(WebDriver driver) {
         super(driver);
@@ -45,10 +46,16 @@ public class SearchPage extends AbstractPageWithHeader {
     ///region ATOMIC_OPERATIONS
 
     //emptyResultMessage
-    public String  getemptyResultMessageText(){
+    public String getEmptyResultMessageText() {
         return emptyResultMessage.getText();
     }
 
+    /**
+     * This method gets productContainersComponent. First, it waits visibility of all elements on the page,
+     * then pass every element in list in ProductContainerComponent constructor.
+     *
+     * @return productContainersComponents list.
+     */
     //productContainersComponents
     public List<ProductContainersComponent> getProductContainersComponents() {
         driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
@@ -58,11 +65,6 @@ public class SearchPage extends AbstractPageWithHeader {
             productContainersComponents.add(new ProductContainersComponent(current));
         }
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-
-        /*productContainersComponents = new ArrayList<>();
-        for (WebElement current : driver.findElements(By.xpath(PRODUCT_COMPONENT_LOCATOR)))
-            productContainersComponents.add(new ProductContainersComponent(current)); //Valera*/
-
         return productContainersComponents;
     }
 
@@ -74,20 +76,18 @@ public class SearchPage extends AbstractPageWithHeader {
         return new SearchCriteriaComponent(driver.findElement(By.xpath(SEARCH_CRITERIA_ELEMENT_LOCATOR)));
     }
 
+    /**
+     * This method gets alert component and use explicit wait before alert appear.
+     *
+     * @return new AlertComponent
+     */
     //alertComponent
     public AlertComponent getAlertComponentWithWait() {
         try {
-            Thread.sleep(3000); //Only for presentation, bug alert
+            Thread.sleep(1000); //Only for presentation, bug alert
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-//        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-//        WebDriverWait wait = new WebDriverWait(driver, 5);
-//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(ALERT_LOCATOR)));
-//        searchPageAlertComponent = new SearchPageAlertComponent(wait.until(ExpectedConditions.presenceOfElementLocated((By.cssSelector(ALERT_LOCATOR)))));
-//        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-        //return searchPageAlertComponent;
         return new AlertComponent(driver.findElement(By.xpath(ALERT_LOCATOR)));
     }
 
@@ -96,7 +96,8 @@ public class SearchPage extends AbstractPageWithHeader {
     }
 
     //productContainerComponents
-    public Integer getProductContainerComponentsSize() {
+    public int getProductContainerComponentsSize() {
+        getProductContainersComponents();
         return productContainersComponents.size();
     }
 
@@ -122,13 +123,24 @@ public class SearchPage extends AbstractPageWithHeader {
         return result;
     }
 
+    // get ArrayList of names from products
     public ArrayList<String> getProductComponentNamesList() {
-        ArrayList<String> ProductComponentNamesList = new ArrayList<>();
+        ArrayList<String> productComponentNamesList = new ArrayList<>();
         productContainersComponents = getProductContainersComponents();
         for (ProductContainersComponent current : productContainersComponents) {
-            ProductComponentNamesList.add(current.getNameText());
+            productComponentNamesList.add(current.getNameText());
         }
-        return ProductComponentNamesList;
+        return productComponentNamesList;
+    }
+
+    // get ArrayList of prices from products
+    public ArrayList<Double> getProductComponentPriceList() {
+        ArrayList<Double> productComponentPriceList = new ArrayList<>();
+        productContainersComponents = getProductContainersComponents();
+        for (ProductContainersComponent current : productContainersComponents) {
+            productComponentPriceList.add(current.getPriceAmount());
+        }
+        return productComponentPriceList;
     }
 
     //Picture
@@ -178,8 +190,13 @@ public class SearchPage extends AbstractPageWithHeader {
      *
      * @return Returns new Comparison page
      */
-    public ComparisonPage clickProductComparisonLink() {
+    public ComparisonPage clickProductComparisonLinkFromAlert() {
         getAlertComponentWithWait().clickOnCompareLink();
+        return new ComparisonPage(driver);
+    }
+
+    public ComparisonPage clickProductComparisonLink() {
+        getProductDisplayCriteriaComponent().clickProductCompareLink();
         return new ComparisonPage(driver);
     }
 
@@ -201,6 +218,7 @@ public class SearchPage extends AbstractPageWithHeader {
         else return new ProductPage(driver);
     }
 
+    //ArrayList of names of products to lower case
     public void toLowerCaseProductList(List<String> list) {
         ListIterator<String> iterator = list.listIterator();
         while (iterator.hasNext()) {
@@ -227,8 +245,22 @@ public class SearchPage extends AbstractPageWithHeader {
     //add to Wish List by button
     public void clickProductComponentAddToWishList(String productName) {
         getProductComponentByName(productName).clickAddToWishListButton();
-        //InitializeAlert();
     }
 
-    ///endregion
+    //get full description of product from Product Page by index
+    public String getProductPageDescription(int index) throws InterruptedException {
+        productContainersComponents = getProductContainersComponents();
+        ProductPage productPage = new ProductPage(driver);
+        productContainersComponents.get(index).clickPicture();
+        String result = productPage.getDescription();
+        driver.navigate().back();
+        return result;
+    }
+
+    //calculate pages count according to option number in Show dropbox
+    public int getCalculatedPagesCount(String showOption) {
+        return getProductContainerComponentsSize() / Integer.parseInt(showOption) + 1;
+    }
 }
+
+///endregion

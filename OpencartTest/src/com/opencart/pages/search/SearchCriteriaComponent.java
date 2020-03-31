@@ -13,7 +13,6 @@ import java.util.List;
 public class SearchCriteriaComponent {
 
     private WebElement searchCriteriaLayout;
-
     private WebElement searchElementLable;
     private WebElement keywordsField;
     private WebElement categoriesDropdown;
@@ -24,7 +23,6 @@ public class SearchCriteriaComponent {
     public SearchCriteriaComponent(WebElement searchCriteriaLayout) {
         this.searchCriteriaLayout = searchCriteriaLayout;
         initElements();
-
     }
 
     private void initElements() {
@@ -34,36 +32,15 @@ public class SearchCriteriaComponent {
         subcategoriesCheckbox = searchCriteriaLayout.findElement(By.xpath("//input[@name='sub_category']"));
         descriptionsCheckbox = searchCriteriaLayout.findElement(By.xpath("//input[@name='description']"));
         searchButton = searchCriteriaLayout.findElement(By.xpath("//input[@id='button-search']"));
-
     }
 
-    public boolean searchLableContainSearchText(String searchText) {
-        if (getSearchLableText().contains(searchText)) {
-            return true;
-        }
-        return false;
+    //check if search label contains text from searсh field
+    public boolean searchLabelContainSearchText(String searchText) {
+        return getSearchLableText().contains(searchText);
     }
 
     private String getSearchLableText() {
         return searchElementLable.getText();
-    }
-
-    public void cleanKeywordsField() {
-        keywordsField.clear();
-    }
-
-    public void clickKeywordsField() {
-        keywordsField.click();
-    }
-
-    public void inputKeywordsField(String searchText) {
-        keywordsField.sendKeys(searchText);
-    }
-
-    public void fillKeywordsField(String searchText) {
-        clickKeywordsField();
-        cleanKeywordsField();
-        inputKeywordsField(searchText);
     }
 
     public void clickCategoriesDropdown(String optionText) {
@@ -74,41 +51,28 @@ public class SearchCriteriaComponent {
         }
     }
 
-    public WebElement GetCategoriesDropdown() {
-        return categoriesDropdown;
-    }
-
-    public boolean isDropdownSelected(WebElement dropdown, String optionText) {
-        List<WebElement> options = dropdown.findElements(By.tagName("option"));
-        for (WebElement option : options) {
-            String TempOption = option.getText().trim();
-            if (TempOption.contains(optionText)) {
-                if (option.isSelected()) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
     public void clickSubcategoriesCheckbox() {
         subcategoriesCheckbox.click();
     }
 
     public void clickDescriptionsCheckbox() {
-        descriptionsCheckbox.click();
+        if (!isDescriptionCheckboxSelected()) {
+            descriptionsCheckbox.click();
+        }
     }
 
     public void clickSearchButton() {
         searchButton.click();
     }
 
+    //check if Subcategories checkbox is enabled to click
     public boolean isSubcategoriesCheckboxEnabled() {
-        if (subcategoriesCheckbox.isEnabled()) {
-            return true;
-        } else {
-            return false;
-        }
+        return subcategoriesCheckbox.isEnabled();
+    }
+
+    //check if description checkbox is selected
+    public boolean isDescriptionCheckboxSelected() {
+        return descriptionsCheckbox.isSelected();
     }
 
 }

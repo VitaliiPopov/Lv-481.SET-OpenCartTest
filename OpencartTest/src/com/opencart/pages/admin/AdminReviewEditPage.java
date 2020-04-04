@@ -26,7 +26,6 @@ public class AdminReviewEditPage {
     public AdminReviewEditPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
-        //initElements();
     }
 
     public void submitReview() {

@@ -19,7 +19,6 @@ public class AdminLoginPage {
     @FindBy(how = How.CSS, css = "button[type=submit]")
     private WebElement adminLoginButton;
 
-
     public AdminLoginPage(WebDriver driver) {
         this.driver=driver;
         PageFactory.initElements(driver, this);

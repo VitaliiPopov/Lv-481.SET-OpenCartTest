@@ -47,11 +47,6 @@ public class AdminCustomerPage extends AdminHomePage {
         driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
     }
 
-    //successModifyAlert
-    public boolean isSuccessModifyAlertDisplayed(){
-        return successModifyAlert.isDisplayed();
-    }
-
     public String getExistedEmail() {
         List<WebElement> rows = customerTable.findElements(By.tagName("td"));
         String existedEmail = rows.get(18).getText();

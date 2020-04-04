@@ -20,7 +20,6 @@ public class AdminCustomerPage extends AdminHomePage {
     @FindBy(how = How.XPATH, xpath = "//div[@class='alert alert-success alert-dismissible']")
     private WebElement successModifyAlert;
 
-
     public AdminCustomerPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);

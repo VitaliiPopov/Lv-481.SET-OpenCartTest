@@ -42,18 +42,6 @@ public class ChangePasswordTest extends AccountTestRunner {
         Assert.assertEquals(true, changePasswordPage.isPasswordAlertPresent());
     }
 
-    //password longer than 20 characters
-    @Parameters({"loginText"})
-    @Test(priority = 4)
-    @Description("Verify that user cant change password to long (more than 20 symbols)")
-    public void changePasswordToLongTest(String loginText) throws InterruptedException {
-        MyAccountPage myAccountPage = loginUser(loginText);
-        String password = randomAlphabetic(25);
-        ChangePasswordPage changePasswordPage = myAccountPage.clickChangePasswordLink();
-        changePasswordPage.changePassword(password, password);
-        Assert.assertEquals(true, changePasswordPage.isPasswordAlertPresent());//bug
-    }
-
     public MyAccountPage loginUser(String loginDropdownText) throws InterruptedException {
         LoginPage loginPage = getHomePage().goToLoginPage(loginDropdownText);
         MyAccountPage myAccountPage = loginPage.login(

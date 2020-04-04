@@ -50,7 +50,7 @@
         </classes>
     </test>
 
-    <!--    ProductComparisonTests-->
+    <!--ProductComparisonTests-->
     <test name="CompareTest">
         <parameter name="myAccountDropdownText" value="Login"/>
         <parameter name="searchName" value="ip"/>
@@ -148,14 +148,14 @@
         </classes>
     </test>
 
-    <!--&lt;!&ndash;  Anna  &ndash;&gt;
+    <!--Anna-->
 
     <test name="SmokeAccountTest">
-        <parameter name="loginText" value="Login"></parameter>
-        <parameter name="logoutText" value="Logout"></parameter>
-        <parameter name="registerText" value="Register"></parameter>
-        <parameter name="myAccountText" value="My Account"></parameter>
-        <parameter name="editAccountText" value="My Account Information"></parameter>
+        <parameter name="loginText" value="Login"/>
+        <parameter name="logoutText" value="Logout"/>
+        <parameter name="registerText" value="Register"/>
+        <parameter name="myAccountText" value="My Account"/>
+        <parameter name="editAccountText" value="My Account Information"/>
         <classes>
             <class name="test.login_test.SmokeAccountTest">
                 <methods>
@@ -169,11 +169,11 @@
     </test>
 
     <test name="LoginTest">
-        <parameter name="loginText" value="Login"></parameter>
-        <parameter name="logoutText" value="Logout"></parameter>
-        <parameter name="registerText" value="Register"></parameter>
-        <parameter name="myAccountText" value="My Account"></parameter>
-        <parameter name="editAccountText" value="My Account Information"></parameter>
+        <parameter name="loginText" value="Login"/>
+        <parameter name="logoutText" value="Logout"/>
+        <parameter name="registerText" value="Register"/>
+        <parameter name="myAccountText" value="My Account"/>
+        <parameter name="editAccountText" value="My Account Information"/>
         <classes>
             <class name="test.login_test.LoginUserTest">
                 <methods>
@@ -188,11 +188,11 @@
     </test>
 
     <test name="RegisterTest">
-        <parameter name="loginText" value="Login"></parameter>
-        <parameter name="logoutText" value="Logout"></parameter>
-        <parameter name="registerText" value="Register"></parameter>
-        <parameter name="myAccountText" value="My Account"></parameter>
-        <parameter name="editAccountText" value="My Account Information"></parameter>
+        <parameter name="loginText" value="Login"/>
+        <parameter name="logoutText" value="Logout"/>
+        <parameter name="registerText" value="Register"/>
+        <parameter name="myAccountText" value="My Account"/>
+        <parameter name="editAccountText" value="My Account Information"/>
         <classes>
             <class name="test.register_test.RegisterTest">
                 <methods>
@@ -218,11 +218,11 @@
     </test>
 
     <test name="EditAccountTest">
-        <parameter name="loginText" value="Login"></parameter>
-        <parameter name="logoutText" value="Logout"></parameter>
-        <parameter name="registerText" value="Register"></parameter>
-        <parameter name="myAccountText" value="My Account"></parameter>
-        <parameter name="editAccountText" value="My Account Information"></parameter>
+        <parameter name="loginText" value="Login"/>
+        <parameter name="logoutText" value="Logout"/>
+        <parameter name="registerText" value="Register"/>
+        <parameter name="myAccountText" value="My Account"/>
+        <parameter name="editAccountText" value="My Account Information"/>
         <classes>
             <class name="test.register_test.EditAccountTest">
                 <methods>
@@ -245,11 +245,11 @@
     </test>
 
     <test name="ChangePasswordTest">
-        <parameter name="loginText" value="Login"></parameter>
-        <parameter name="logoutText" value="Logout"></parameter>
-        <parameter name="registerText" value="Register"></parameter>
-        <parameter name="myAccountText" value="My Account"></parameter>
-        <parameter name="editAccountText" value="My Account Information"></parameter>
+        <parameter name="loginText" value="Login"/>
+        <parameter name="logoutText" value="Logout"/>
+        <parameter name="registerText" value="Register"/>
+        <parameter name="myAccountText" value="My Account"/>
+        <parameter name="editAccountText" value="My Account Information"/>
         <classes>
             <class name="test.login_test.ChangePasswordTest">
                 <methods>
@@ -260,7 +260,8 @@
                 </methods>
             </class>
         </classes>
-    </test>-->
+    </test>
+
     <!--Mykhailo-->
     <test name="addToWishList">
 
@@ -327,8 +328,8 @@
     </test>
 
     <test name="CartCurrencyTest">
-        <parameter name="myAccountDropdownText" value="Login"></parameter>
-        <parameter name="productName" value="MacBook"></parameter>
+        <parameter name="myAccountDropdownText" value="Login"/>
+        <parameter name="productName" value="MacBook"/>
         <classes>
             <class name="test.CartCurrencyTest">
                 <methods>
@@ -342,7 +343,7 @@
 
 
     <test name="WishListCurrencyTest">
-        <parameter name="myAccountDropdownText" value="Login"></parameter>
+        <parameter name="myAccountDropdownText" value="Login"/>
         <classes>
             <class name="test.WishListCurrencyTest">
                 <methods>
@@ -352,6 +353,5 @@
             </class>
         </classes>
     </test>
-
 
 </suite>

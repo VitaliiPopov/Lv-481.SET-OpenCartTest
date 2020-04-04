@@ -23,7 +23,7 @@ public class LoggedUserProductComparisonTest extends CompareTestRunner {
     public void AddProductToCompareFromSearch(String myAccountDropdownText, String search, String productName) {
         ComparisonPage comparisonPage = getHomePage()
                 .goToLoginPage(myAccountDropdownText)
-                .login(jsonDataConfig.getEmailFromJson(0), jsonDataConfig.getPasswordFromJson(0))
+                .login(jsonDataConfig.getEmailFromJson(7), jsonDataConfig.getPasswordFromJson(7))
                 .searchProduct(search)
                 .clickProductComponentCompareButtonByName(productName)
                 .clickProductComparisonLink();
@@ -35,7 +35,7 @@ public class LoggedUserProductComparisonTest extends CompareTestRunner {
     public void AddProductToCompareFromMainPage(String myAccountDropdownText, String productName) {
         ComparisonPage comparisonPage = getHomePage()
                 .goToLoginPage(myAccountDropdownText)
-                .login(jsonDataConfig.getEmailFromJson(0), jsonDataConfig.getPasswordFromJson(0))
+                .login(jsonDataConfig.getEmailFromJson(7), jsonDataConfig.getPasswordFromJson(7))
                 .goToHomePage()
                 .clickProductComponentCompareButtonByName(productName)
                 .clickProductComparisonLinkFromAlert();
@@ -47,7 +47,7 @@ public class LoggedUserProductComparisonTest extends CompareTestRunner {
     public void AddProductToCompareFromProductPage(String myAccountDropdownText, String productName) {
         ComparisonPage comparisonPage = getHomePage()
                 .goToLoginPage(myAccountDropdownText)
-                .login(jsonDataConfig.getEmailFromJson(0), jsonDataConfig.getPasswordFromJson(0))
+                .login(jsonDataConfig.getEmailFromJson(7), jsonDataConfig.getPasswordFromJson(7))
                 .goToHomePage()
                 .clickProductNameLink(productName)
                 .clickCompareButton()
@@ -60,7 +60,7 @@ public class LoggedUserProductComparisonTest extends CompareTestRunner {
     public void AddSameProductTwoTimes(String myAccountDropdownText, String searchName, String productName) {
         ComparisonPage comparisonPage = getHomePage()
                 .goToLoginPage(myAccountDropdownText)
-                .login(jsonDataConfig.getEmailFromJson(0), jsonDataConfig.getPasswordFromJson(0))
+                .login(jsonDataConfig.getEmailFromJson(7), jsonDataConfig.getPasswordFromJson(7))
                 .searchProduct(searchName)
                 .AddTwoSameProductToComparison(productName)
                 .clickProductComparisonLinkFromAlert();
@@ -72,7 +72,7 @@ public class LoggedUserProductComparisonTest extends CompareTestRunner {
     public void CleanAllProductsFromComparison(String myAccountDropdownText, int firstId, String expected) {
         EmptyComparisonPage emptyComparisonPage = getHomePage()
                 .goToLoginPage(myAccountDropdownText)
-                .login(jsonDataConfig.getEmailFromJson(0), jsonDataConfig.getPasswordFromJson(0))
+                .login(jsonDataConfig.getEmailFromJson(7), jsonDataConfig.getPasswordFromJson(7))
                 .goToHomePage()
                 .addProductToCompareByJS(firstId)
                 .clickProductComparisonLink()
@@ -86,7 +86,7 @@ public class LoggedUserProductComparisonTest extends CompareTestRunner {
     public void AddToCartFromComparisonPage(String myAccountDropdownText, String searchName, String productName) {
         CartPage cartPage = getHomePage()
                 .goToLoginPage(myAccountDropdownText)
-                .login(jsonDataConfig.getEmailFromJson(0), jsonDataConfig.getPasswordFromJson(0))
+                .login(jsonDataConfig.getEmailFromJson(7), jsonDataConfig.getPasswordFromJson(7))
                 .searchProduct(searchName)
                 .clickProductComponentCompareButtonByName(productName)
                 .clickProductComparisonLinkFromAlert()
@@ -100,7 +100,7 @@ public class LoggedUserProductComparisonTest extends CompareTestRunner {
     public void GoToProductPageFromComparisonPage(String myAccountDropdownText, String searchName, String productName) {
         ProductPage productPage = getHomePage()
                 .goToLoginPage(myAccountDropdownText)
-                .login(jsonDataConfig.getEmailFromJson(0), jsonDataConfig.getPasswordFromJson(0))
+                .login(jsonDataConfig.getEmailFromJson(7), jsonDataConfig.getPasswordFromJson(7))
                 .searchProduct(searchName)
                 .clickProductComponentCompareButtonByName(productName)
                 .clickProductComparisonLinkFromAlert()
@@ -113,7 +113,7 @@ public class LoggedUserProductComparisonTest extends CompareTestRunner {
     public void GoToComparisonPageFromProductCompareLabel(String myAccountDropdownText, String searchName, String productName) {
         ComparisonPage comparisonPage = getHomePage()
                 .goToLoginPage(myAccountDropdownText)
-                .login(jsonDataConfig.getEmailFromJson(0), jsonDataConfig.getPasswordFromJson(0))
+                .login(jsonDataConfig.getEmailFromJson(7), jsonDataConfig.getPasswordFromJson(7))
                 .searchProduct(searchName)
                 .clickProductComponentCompareButtonByName(productName)
                 .clickProductComparisonLink();

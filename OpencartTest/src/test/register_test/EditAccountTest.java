@@ -1,5 +1,4 @@
 package test.register_test;
-
 import com.opencart.pages.account.*;
 import com.opencart.tools.*;
 import com.opencart.tools.test_runner.AccountTestRunner;
@@ -9,7 +8,6 @@ import org.testng.annotations.*;
 
 import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
 
-@Listeners(com.opencart.tools.AccountListener.class)
 public class EditAccountTest extends AccountTestRunner {
     JsonDataConfig jsonDataConfig = new JsonDataConfig("TestData.json");
     AdminManager adminAccess = new AdminManager();

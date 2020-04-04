@@ -20,7 +20,6 @@ public class AdminCustomerPage extends AdminHomePage {
     @FindBy(how = How.XPATH, xpath = "//div[@class='alert alert-success alert-dismissible']")
     private WebElement successModifyAlert;
 
-
     public AdminCustomerPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
@@ -45,11 +44,6 @@ public class AdminCustomerPage extends AdminHomePage {
     public void confirmAction() {
         driver.switchTo().alert().accept();
         driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-    }
-
-    //successModifyAlert
-    public boolean isSuccessModifyAlertDisplayed(){
-        return successModifyAlert.isDisplayed();
     }
 
     public String getExistedEmail() {

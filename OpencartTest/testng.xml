@@ -3,11 +3,11 @@
 
 <suite name="Regression">
     <test name="EditAccountTest">
-        <parameter name="loginText" value="Login"></parameter>
-        <parameter name="logoutText" value="Logout"></parameter>
-        <parameter name="registerText" value="Register"></parameter>
-        <parameter name="myAccountText" value="My Account"></parameter>
-        <parameter name="editAccountText" value="My Account Information"></parameter>
+        <parameter name="loginText" value="Login"/>
+        <parameter name="logoutText" value="Logout"/>
+        <parameter name="registerText" value="Register"/>
+        <parameter name="myAccountText" value="My Account"/>
+        <parameter name="editAccountText" value="My Account Information"/>
         <classes>
             <class name="test.register_test.EditAccountTest">
                 <methods>
@@ -30,11 +30,11 @@
     </test>
 
     <test name="SmokeAccountTest">
-        <parameter name="loginText" value="Login"></parameter>
-        <parameter name="logoutText" value="Logout"></parameter>
-        <parameter name="registerText" value="Register"></parameter>
-        <parameter name="myAccountText" value="My Account"></parameter>
-        <parameter name="editAccountText" value="My Account Information"></parameter>
+        <parameter name="loginText" value="Login"/>
+        <parameter name="logoutText" value="Logout"/>
+        <parameter name="registerText" value="Register"/>
+        <parameter name="myAccountText" value="My Account"/>
+        <parameter name="editAccountText" value="My Account Information"/>
         <classes>
             <class name="test.login_test.SmokeAccountTest">
                 <methods>
@@ -48,11 +48,11 @@
     </test>
 
     <test name="LoginTest">
-        <parameter name="loginText" value="Login"></parameter>
-        <parameter name="logoutText" value="Logout"></parameter>
-        <parameter name="registerText" value="Register"></parameter>
-        <parameter name="myAccountText" value="My Account"></parameter>
-        <parameter name="editAccountText" value="My Account Information"></parameter>
+        <parameter name="loginText" value="Login"/>
+        <parameter name="logoutText" value="Logout"/>
+        <parameter name="registerText" value="Register"/>
+        <parameter name="myAccountText" value="My Account"/>
+        <parameter name="editAccountText" value="My Account Information"/>
         <classes>
             <class name="test.login_test.LoginUserTest">
                 <methods>
@@ -67,11 +67,11 @@
     </test>
 
     <test name="RegisterTest">
-        <parameter name="loginText" value="Login"></parameter>
-        <parameter name="logoutText" value="Logout"></parameter>
-        <parameter name="registerText" value="Register"></parameter>
-        <parameter name="myAccountText" value="My Account"></parameter>
-        <parameter name="editAccountText" value="My Account Information"></parameter>
+        <parameter name="loginText" value="Login"/>
+        <parameter name="logoutText" value="Logout"/>
+        <parameter name="registerText" value="Register"/>
+        <parameter name="myAccountText" value="My Account"/>
+        <parameter name="editAccountText" value="My Account Information"/>
         <classes>
             <class name="test.register_test.RegisterTest">
                 <methods>
@@ -96,22 +96,26 @@
         </classes>
     </test>
 
-    <test name="ChangePasswordTest">
-        <parameter name="loginText" value="Login"></parameter>
-        <parameter name="logoutText" value="Logout"></parameter>
-        <parameter name="registerText" value="Register"></parameter>
-        <parameter name="myAccountText" value="My Account"></parameter>
-        <parameter name="editAccountText" value="My Account Information"></parameter>
+    <!--Sofiia-->
+    <test name="ReviewTest">
+        <!--MainTest-->
+        <parameter name="nameOfAuthor" value="Georgiy"/>
+        <parameter name="correctText"
+                   value="it is a product of amazing quality, everything works and the price is quite affordable."/>
+        <parameter name="messageOfDeliveredReview"
+                   value="Thank you for your review. It has been submitted to the webmaster for approval."/>
+        <parameter name="textOfSuccessfulDeletingReview" value=" Success: You have modified reviews!"/>
         <classes>
-            <class name="test.login_test.ChangePasswordTest">
+            <!--MainTest-->
+            <class name="test.ReviewTest">
                 <methods>
-                    <include name="changePasswordToEmptyTest"/>
-                    <include name="changePasswordWrongConfirmTest"/>
-                    <include name="changePasswordToShortTest"/>
+                    <include name="successfulReviewProcess"/>
+                    <include name="successfullyWritingReview"/>
                 </methods>
             </class>
         </classes>
     </test>
+
     <test name="ReviewTest">
         <!--MainTest-->
         <parameter name="nameOfAuthor" value="Georgiy"/>
@@ -131,6 +135,7 @@
         </classes>
 
     </test> <!-- Individual -->
+
     <test name="UnsuccessfulReviewTest">
         <!--MainTest-->
         <parameter name="incorrectName" value="Ri"/>
@@ -198,32 +203,6 @@
         </classes>
     </test>
 
-    <!--Yura-->
-
-    <test name="AddressBookTest">
-        <parameter name="myAccountDropdownText" value="Login"/>
-        <classes>
-            <class name="test.AddressTests">
-                <methods>
-                    <include name="abilityToAddAddress"/>
-                    <include name="abilityToDeleteAddress"/>
-                    <include name="editAddress"/>
-                    <include name="checkEditPageAlertMassages"/>
-                    <include name="checkAbilityToDeleteDefaultAddress"/>
-                    <include name="createAddressWithEmptyFirstname"/>
-                    <include name="createAddressWithEmptyLastname"/>
-                    <include name="createAddressWithEmptyAddress"/>
-                    <include name="createAddressWithEmptyCountry"/>
-                    <include name="createAddressWithEmptyRegion"/>
-                    <include name="checkAlertsWithTooShortInputs"/>
-                    <include name="checkAlertsWithTooLongInputs"/>
-                    <include name="checkAlertsWithTooLongInputs"/>
-                    <include name="createAddressWithNumbersInsteadCharacters"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
     <!--Mariia-->
 
     <test name="SearchTest">
@@ -260,7 +239,7 @@
 
     <!--Yura-->
 
-    <test name="YuriiSereda">
+    <test name="AddressBookTest">
         <parameter name="myAccountDropdownText" value="Login"/>
         <classes>
             <class name="test.AddressTests">
@@ -297,13 +276,44 @@
                 </methods>
             </class>
         </classes>
-
     </test>
 
-    <test name="removeFromWishList">
+    <!--    Mykhailo-->
+    <test name="AddToWishList">
+        <parameter name="myAccountDropdownText" value="Login"/>
+        <parameter name="fromSearchPageProductName" value="iPod Nano"/>
+        <parameter name="fromHomePageProductName" value="MacBook"/>
+        <parameter name="fromProductPageProductName" value="iPhone"/>
+        <classes>
+            <class name="test.TestWishList">
+                <methods>
+                    <include name="addProductToWishListFromSearchPage"/>
+                    <include name="addProductToWishListFromHomePage"/>
+                    <include name="addProductToWishListFromProductPage"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="AddToCartFromWishList">
 
         <parameter name="myAccountDropdownText" value="Login"/>
 
+        <parameter name="firstProductName" value="MacBook"/>
+        <parameter name="secondProductName" value="iPhone"/>
+        <classes>
+            <class name="test.TestWishList">
+                <methods>
+                    <include name="addProductToCartFromWishList"/>
+                </methods>
+            </class>
+        </classes>
+
+    </test>
+
+    <test name="RemoveFromWishList">
+
+        <parameter name="myAccountDropdownText" value="Login"/>
         <parameter name="firstProductName" value="Samsung Galaxy Tab 10.1"/>
         <parameter name="secondProductName" value="Samsung SyncMaster 941BW"/>
         <classes>
@@ -315,10 +325,9 @@
         </classes>
     </test>
 
-    <test name="verifyWishListEmptyPage">
+    <test name="VerifyWishListEmptyPage">
 
         <parameter name="myAccountDropdownText" value="Login"/>
-
         <parameter name="expectedMessage" value="Your wish list is empty."/>
 
         <classes>
@@ -330,9 +339,11 @@
         </classes>
     </test>
 
+    <!--Nazar-->
+
     <test name="CartCurrencyTest">
-        <parameter name="myAccountDropdownText" value="Login"></parameter>
-        <parameter name="productName" value="MacBook"></parameter>
+        <parameter name="myAccountDropdownText" value="Login"/>
+        <parameter name="productName" value="MacBook"/>
         <classes>
             <class name="test.CartCurrencyTest">
                 <methods>
@@ -346,7 +357,7 @@
 
 
     <test name="WishListCurrencyTest">
-        <parameter name="myAccountDropdownText" value="Login"></parameter>
+        <parameter name="myAccountDropdownText" value="Login"/>
         <classes>
             <class name="test.WishListCurrencyTest">
                 <methods>

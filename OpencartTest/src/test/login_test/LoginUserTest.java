@@ -13,15 +13,6 @@ public class LoginUserTest extends TestRunner {
     JsonDataConfig jsonDataConfig = new JsonDataConfig("TestData.json");
     AdminManager adminAccess = new AdminManager();
 
-    /*@BeforeTest
-    public void primaryRegistration() {
-        RegisterPage registerPage = getHomePage().goToRegisterPage();
-        SuccessRegisterPage success = registerPage.register(jsonDataConfig.getUserFromJson(0));
-        success.goToAccountAfterRegistration();
-        AccountLogoutPage logoutPage = getHomePage().goToLogoutPage();
-        logoutPage.logout();
-    }*/
-
     @AfterMethod
     public void finishLogout() {
         try {
@@ -30,15 +21,6 @@ public class LoginUserTest extends TestRunner {
             e.printStackTrace();
         }
     }
-
-    /*@AfterClass
-    public void tearDown() {
-        try {
-            adminAccess.deleteCustomerFromAdmin(jsonDataConfig.getEmailFromJson(0));
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }*/
 
     @Parameters({"loginText"})
     @Test(priority = 1)

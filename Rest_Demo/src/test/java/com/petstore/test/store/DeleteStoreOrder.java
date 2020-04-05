@@ -13,7 +13,7 @@ public class DeleteStoreOrder {
 
         Response response = RestAssured
                 .given().pathParam("orderId", 1)
-                .delete("store/order/{orderId}");
+                .delete("com/petstore/test/store/order/{orderId}");
 
         System.out.println(response.getStatusCode());
 

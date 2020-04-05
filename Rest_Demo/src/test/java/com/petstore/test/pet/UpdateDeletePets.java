@@ -8,12 +8,14 @@ import org.testng.annotations.Test;
 import java.io.File;
 
 public class UpdateDeletePets {
+
+
     @Test
     void checkPetById() {
-        Response response =  RestAssured.given()
+        Response response = RestAssured.given()
                 .baseUri("http://192.168.99.100:8080")
                 .basePath("/api/v3/pet")
-                .pathParam("petId",100)
+                .pathParam("petId", 10)
                 .contentType(ContentType.JSON)
                 .when().get("/{petId}")
                 .then()
@@ -22,8 +24,8 @@ public class UpdateDeletePets {
     }
 
     @Test
-    public void updatePetData(){
-        Response response =RestAssured.given()
+    public void updatePetData() {
+        Response response = RestAssured.given()
                 .baseUri("http://192.168.99.100:8080")
                 .basePath("/api/v3/pet")
                 .contentType(ContentType.JSON)
@@ -33,10 +35,10 @@ public class UpdateDeletePets {
                 .extract().response();
         System.out.println(response.asString());
     }
+
     @Test
-    public void updatePetDataWithNonExistingId(){
-        Response response;
-        response = RestAssured.given()
+    public void updatePetDataWithNonExistingId() {
+        Response response = RestAssured.given()
                 .baseUri("http://192.168.99.100:8080")
                 .basePath("/api/v3/pet")
                 .contentType(ContentType.JSON)
@@ -46,28 +48,41 @@ public class UpdateDeletePets {
                 .extract().response();
         System.out.println(response.asString());
     }
-    @Test
-    public void delete(){
 
+    @Test
+    void checkPetByNonExistingId() {
+        Response response = RestAssured.given()
+                .baseUri("http://192.168.99.100:8080")
+                .basePath("/api/v3/pet")
+                .pathParam("petId", 856)
+                .contentType(ContentType.JSON)
+                .when().get("/{petId}")
+                .then()
+                .extract().response();
+        System.out.println(response.asString());
+    }
+
+    @Test
+    public void delete() {
 
         Response response = RestAssured.given()
                 .baseUri("http://192.168.99.100:8080/")
                 .basePath("api/v3/pet/")
-                .pathParam("petId","856")
-                .queryParam("api_key","api_key")
+                .pathParam("petId", "856")
+                .queryParam("api_key", "api_key")
                 .when().delete("{petId}")
                 .then().statusCode(200)
                 .extract().response();
         System.out.println(response.asString());
     }
 
-    @Test
-    public void uploadImage(){
+    /*@Test
+    public void uploadImage() {
         File fileForUpload = new File("F:\\OpenCart\\update.jpg");
 
-        RestAssured.baseURI="http://192.168.99.100:8080/";
+        RestAssured.baseURI = "http://192.168.99.100:8080/";
         RestAssured.given()
-                .queryParam("additionalMetadata","fsdg")
+                .queryParam("additionalMetadata", "fsdg")
                 .header("Content-Type", "application/octet-stream")
                 .body(fileForUpload)
                 .when().post("api/v3/pet/1/uploadImage")
@@ -75,5 +90,5 @@ public class UpdateDeletePets {
                 //.statusCode(200)
                 .extract().response().prettyPrint();
 
-    }
+    }*/
 }

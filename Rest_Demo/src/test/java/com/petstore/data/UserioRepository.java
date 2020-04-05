@@ -7,12 +7,6 @@ public class UserioRepository {
     private UserioRepository() {
     }
 
-//    public static Userio defaultProduct() {
-//
-//    }
-
-
-
     public static Userio wrongUserStatham() {
         return new Userio(100,
                 "aaaa",
@@ -35,7 +29,7 @@ public class UserioRepository {
                 1);
     }
 
-    public static Userio userForPut(){
+    public static Userio userForPut() {
         return new Userio(99,
                 "Bob",
                 "Boben",
@@ -46,11 +40,14 @@ public class UserioRepository {
                 1);
     }
 
-//    public static List<User> listOfValidUsers(){
-//        List users = new ArrayList();
-//        users.add(userStatham());
-//        return users;
-//    }
-
+    public static Userio newUserBob(){
+        return new Userio(99,
+                "Bob",
+                "Boben",
+                "Birkly",
+                "bobboben@birkly.com",
+                "bbb2000",
+                "52165",
+                1);
+    }
 }
-

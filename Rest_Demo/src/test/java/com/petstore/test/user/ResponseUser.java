@@ -1,7 +1,5 @@
 package com.petstore.test.user;
 
-
-import com.petstore.data.UserRepository;
 import com.petstore.data.Userio;
 import com.petstore.data.UserioRepository;
 import io.restassured.RestAssured;
@@ -9,7 +7,6 @@ import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -20,7 +17,7 @@ import static org.hamcrest.Matchers.equalTo;
 public class ResponseUser {
 
     @BeforeClass
-    public void setup(){
+    public void setup() {
         RequestSpecification requestSpec = new RequestSpecBuilder()
                 .setBaseUri("http://192.168.99.100/")
                 .setPort(8080)
@@ -49,22 +46,22 @@ public class ResponseUser {
         given()
                 .spec(requestSpecification)
                 .pathParam("username", UserioRepository.userForPost().getUsername()).
-        when()
+                when()
                 .get("/user/{username}").
-        then()
+                then()
                 .statusCode(200);
     }
 
     @Test(priority = 2)
-    public void putUpdateCorrectUser(){
+    public void putUpdateCorrectUser() {
 
         given()
                 .spec(requestSpecification)
-                .pathParam("username",UserioRepository.userForPost().getUsername())
-                .body(UserRepository.newUserBob()).
-        when()
+                .pathParam("username", UserioRepository.userForPost().getUsername())
+                .body(UserioRepository.newUserBob()).
+                when()
                 .put("/user/{username}").
-        then()
+                then()
                 .statusCode(200)
                 .extract()
                 .body()
@@ -83,7 +80,7 @@ public class ResponseUser {
     }
 
     @Test(priority = 4)
-    public void getEditedUser(){
+    public void getEditedUser() {
         given()
                 .spec(requestSpecification)
                 .pathParam("username", UserioRepository.userForPut().getUsername()).
@@ -95,7 +92,7 @@ public class ResponseUser {
     }
 
     @Test(priority = 5)
-    public void deleteCurrentUser(){
+    public void deleteCurrentUser() {
         given()
                 .spec(requestSpecification)
                 .pathParam("username", UserioRepository.userForPut().getUsername()).
@@ -109,25 +106,14 @@ public class ResponseUser {
     }
 
     @Test(priority = 6)
-    public void getDeletedUser(){
+    public void getDeletedUser() {
         given()
                 .spec(requestSpecification)
                 .pathParam("username", UserioRepository.userForPut().getUsername()).
                 when()
                 .get("/user/{username}").
                 then()
-                .statusCode(404)// for true
-      //  .statusCode(200)//for false
-                ;
-
-    }
-
-
-
-
-
-    @AfterClass
-    public void deleteUser() {
-
+                .statusCode(404);// for true
+        //  .statusCode(200);//for false
     }
 }

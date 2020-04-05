@@ -11,7 +11,7 @@ public class GetStoreInventoryTest {
         RestAssured.baseURI = "http://192.168.99.100:8080/api/v3/";
 
         Response response = RestAssured
-                .given().get("store/inventory");
+                .given().get("com/petstore/test/store/inventory");
 
         System.out.println(response.getStatusCode());
 

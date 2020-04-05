@@ -1,7 +1,7 @@
-package store.create_order;
+package com.petstore.test.store.create_order;
 
-import Entity.Order;
-import Entity.OrderRepository;
+import com.petstore.data.Order;
+import com.petstore.data.OrderRepository;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.LogDetail;

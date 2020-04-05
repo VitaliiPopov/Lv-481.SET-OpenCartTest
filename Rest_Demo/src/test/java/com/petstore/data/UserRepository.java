@@ -8,9 +8,6 @@ public class UserRepository {
     private UserRepository() {
     }
 
-    public static User defaultProduct() {
-        return userStatham();
-    }
 
     public static User userStatham() {
         return new User(4,
@@ -21,7 +18,6 @@ public class UserRepository {
                 "7777777",
                 1);
     }
-
     public static User emptyUserStatham() {
         return new User(Integer.valueOf(""),
                 "",
@@ -39,6 +35,17 @@ public class UserRepository {
                 "aaaa@gmail.com",
                 "aaaa",
                 "1234",
+                1);
+    }
+
+    public static User newUserBob(){
+        return new User(99,
+                "Bob",
+                "Boben",
+                "Birkly",
+                "bobboben@birkly.com",
+                "bbb2000",
+                "52165",
                 1);
     }
 

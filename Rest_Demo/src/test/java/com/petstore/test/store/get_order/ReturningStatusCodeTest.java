@@ -1,6 +1,6 @@
-package store.get_order;
+package com.petstore.test.store.get_order;
 
-import Entity.OrderRepository;
+import com.petstore.data.OrderRepository;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.LogDetail;

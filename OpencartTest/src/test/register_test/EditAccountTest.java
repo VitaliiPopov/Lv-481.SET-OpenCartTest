@@ -9,7 +9,7 @@ import org.testng.annotations.*;
 import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
 
 public class EditAccountTest extends AccountTestRunner {
-    JsonDataConfig jsonDataConfig = new JsonDataConfig("TestData.json");
+    JsonDataConfig json = new JsonDataConfig("TestData.json");
     AdminManager adminAccess = new AdminManager();
 
     @Parameters({"loginText"})
@@ -160,11 +160,11 @@ public class EditAccountTest extends AccountTestRunner {
         Assert.assertTrue(myAccountPage.getTitleMyAccountText().equals("My Account"));
 
         //getting valid user data for editing from json
-        String newFirstName = jsonDataConfig.getFirstNameFromJson(1);
-        String newLastName = jsonDataConfig.getLastNameFromJson(1);
-        String newEmail = jsonDataConfig.getEmailFromJson(1);
-        String newTelephone = jsonDataConfig.getTelephoneFromJson(1);
-        String newPassword = jsonDataConfig.getPasswordFromJson(1);
+        String newFirstName = json.getFirstNameFromJson(1);
+        String newLastName = json.getLastNameFromJson(1);
+        String newEmail = json.getEmailFromJson(1);
+        String newTelephone = json.getTelephoneFromJson(1);
+        String newPassword = json.getPasswordFromJson(1);
 
         EditAccountPage editAccountPage = myAccountPage.clickEditMyAccountLink();
         myAccountPage = editAccountPage.editAccountInformation(
@@ -191,15 +191,15 @@ public class EditAccountTest extends AccountTestRunner {
         Assert.assertTrue(editAccountPage.getLastNameEditValue().equals(newLastName));
         Assert.assertTrue(editAccountPage.getEmailEditValue().equals(newEmail));
         Assert.assertTrue(editAccountPage.getTelephoneEditValue().equals(newTelephone));
-        editAccountPage.editEmailField(jsonDataConfig.getEmailFromJson(0));
+        editAccountPage.editEmailField(json.getEmailFromJson(0));
         editAccountPage.clickEditButton();
     }
 
     public MyAccountPage loginUser(String loginDropdownText) throws InterruptedException {
         LoginPage loginPage = getHomePage().goToLoginPage(loginDropdownText);
         MyAccountPage myAccountPage = loginPage.login(
-                jsonDataConfig.getEmailFromJson(0),
-                jsonDataConfig.getPasswordFromJson(0));
+                json.getEmailFromJson(0),
+                json.getPasswordFromJson(0));
         return myAccountPage;
     }
 }

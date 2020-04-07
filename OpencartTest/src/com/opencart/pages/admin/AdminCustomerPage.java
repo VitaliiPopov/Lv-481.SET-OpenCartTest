@@ -27,8 +27,8 @@ public class AdminCustomerPage extends AdminHomePage {
 
     public void findCustomerByEmail(String optionName){
         String customerRow = "//td[text()='"+optionName+"']/preceding-sibling::td/input";
-        WebElement сustomerCheck = driver.findElement(By.xpath(customerRow));
-        clickCustomer(сustomerCheck);
+        WebElement customer = driver.findElement(By.xpath(customerRow));
+        clickCustomer(customer);
     }
 
     //searchedCustomer

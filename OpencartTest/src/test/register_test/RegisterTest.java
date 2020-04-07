@@ -21,6 +21,7 @@ public class RegisterTest extends TestRunner {
             logoutUser();
         } catch (InterruptedException e) {
             e.printStackTrace();
+            Thread.currentThread().interrupt();
         }
     }
 
@@ -30,6 +31,7 @@ public class RegisterTest extends TestRunner {
             adminAccess.deleteCustomerFromAdmin(email);
         } catch (InterruptedException e) {
             e.printStackTrace();
+            Thread.currentThread().interrupt();
         }
     }
 

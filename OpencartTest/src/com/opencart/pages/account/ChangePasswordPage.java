@@ -28,7 +28,6 @@ public class ChangePasswordPage extends AbstractPageWithHeader {
     public ChangePasswordPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
-        accountSidebarComponent = new AccountSidebarComponent(driver);
     }
 
     public AccountSidebarComponent getAccountSidebarComponent() {

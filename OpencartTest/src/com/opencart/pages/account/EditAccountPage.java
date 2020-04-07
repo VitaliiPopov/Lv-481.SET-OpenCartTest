@@ -11,7 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class EditAccountPage extends AbstractPageWithHeader {
 
-    private AccountSidebarComponent accountSidebarComponent;
+    static final String ATTR = "value";
 
     @FindBy(how = How.CSS, css = "#content>h1")
     private WebElement titleAccountInformation;
@@ -42,19 +42,19 @@ public class EditAccountPage extends AbstractPageWithHeader {
     }
 
     public String getFirstNameEditValue() {
-        return firstnameEditField.getAttribute("value");
+        return firstnameEditField.getAttribute(ATTR);
     }
 
     public String getLastNameEditValue() {
-        return lastnameEditField.getAttribute("value");
+        return lastnameEditField.getAttribute(ATTR);
     }
 
     public String getEmailEditValue() {
-        return emailEditField.getAttribute("value");
+        return emailEditField.getAttribute(ATTR);
     }
 
     public String getTelephoneEditValue() {
-        return telephoneEditField.getAttribute("value");
+        return telephoneEditField.getAttribute(ATTR);
     }
 
     //firstnameEditField

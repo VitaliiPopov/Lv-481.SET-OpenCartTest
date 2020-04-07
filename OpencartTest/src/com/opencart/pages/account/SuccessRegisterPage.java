@@ -9,8 +9,6 @@ import org.openqa.selenium.support.PageFactory;
 
 public class SuccessRegisterPage extends AbstractPageWithHeader {
 
-    private AccountSidebarComponent accountSidebarComponent;
-
     @FindBy(how = How.CSS, css = "#content>h1")
     private WebElement titleSuccessRegistration;
 

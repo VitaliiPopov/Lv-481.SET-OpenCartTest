@@ -39,9 +39,9 @@ public class AdminLoginPage {
         adminLoginButton.click();
     }
 
-    public AdminHomePage adminLogin(String LOGIN_NAME, String PASSWORD_NAME){
-        setAdminUsernameField(LOGIN_NAME);
-        setAdminPasswordField(PASSWORD_NAME);
+    public AdminHomePage adminLogin(String login, String password){
+        setAdminUsernameField(login);
+        setAdminPasswordField(password);
         clickAdminLoginButton();
         return new AdminHomePage(driver);
     }

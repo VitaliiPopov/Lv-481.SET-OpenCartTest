@@ -1,13 +1,12 @@
 package com.opencart.pages.account;
 
-import org.openqa.selenium.WebDriver;
-
 public class AccountSidebarComponent {
 
-    public AccountSidebarComponent(WebDriver driver) {
+    public AccountSidebarComponent() {
         initElements();
     }
 
     private void initElements() {
+        //currently no elements to init
     }
 }

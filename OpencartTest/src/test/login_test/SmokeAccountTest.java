@@ -34,7 +34,6 @@ public class SmokeAccountTest extends TestRunner {
                 .register(jsonDataConfig.getUserFromJson(0))
                 .goToAccountAfterRegistration();
         org.testng.Assert.assertEquals(myAccountPage.getTitleMyAccountText(), myAccountText);
-        //adminAccess.deleteCustomerFromAdmin(jsonDataConfig.getEmailFromJson(0));
     }
 
     @Parameters({"loginText"})

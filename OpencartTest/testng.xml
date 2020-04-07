@@ -115,7 +115,8 @@
                 </methods>
             </class>
         </classes>
-    </test>
+
+    </test> <!-- Individual -->
 
     <test name="UnsuccessfulReviewTest">
         <!--MainTest-->
@@ -239,6 +240,21 @@
                     <include name="checkAlertsWithTooLongInputs"/>
                     <include name="checkAlertsWithTooLongInputs"/>
                     <include name="createAddressWithNumbersInsteadCharacters"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="addToCartFromWishList">
+
+        <parameter name="myAccountDropdownText" value="Login"/>
+
+        <parameter name="firstProductName" value="MacBook"/>
+        <parameter name="secondProductName" value="iPhone"/>
+        <classes>
+            <class name="test.TestWishList">
+                <methods>
+                    <include name="addProductToCartFromWishList"/>
                 </methods>
             </class>
         </classes>

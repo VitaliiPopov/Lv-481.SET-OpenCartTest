@@ -12,8 +12,6 @@ import org.openqa.selenium.support.PageFactory;
 
 public class RegisterPage extends AbstractPageWithHeader {
 
-    private AccountSidebarComponent accountSidebarComponent;
-
     @FindBy(how = How.CSS, css = "#content>h1")
     private WebElement titleRegisterBlock;
 

@@ -7,7 +7,7 @@ public class AlertComponent {
 
     private WebElement alertComponentLayout;
     //
-    private final String ALERT_LAYOUT_SELECTOR = "."; //xpath
+    private static final String ALERT_LAYOUT_SELECTOR = "."; //xpath
     private final String PRODUCT_LINK_SELECTOR = "./a[contains(@href,'?route=product/product')]"; //xpath
     private final String CART_LINK_SELECTOR = "./a[text() = 'shopping cart']"; //xpath
     private final String COMPARE_LINK_SELECTOR = "./a[.='product comparison']"; //xpath
@@ -20,7 +20,7 @@ public class AlertComponent {
 
     //alertMessage
     public WebElement getAlertMessage() {
-        return alertComponentLayout.findElement(By.xpath("."));
+        return alertComponentLayout.findElement(By.xpath(ALERT_LAYOUT_SELECTOR));
     }
 
     public String getAlertMessageText() {
@@ -29,7 +29,7 @@ public class AlertComponent {
 
     //productLink
     public WebElement getProductLink() {
-        return alertComponentLayout.findElement(By.xpath("./a[contains(@href,'?route=product/product')]"));
+        return alertComponentLayout.findElement(By.xpath(PRODUCT_LINK_SELECTOR));
     }
 
     public void clickOnProductLink() {
@@ -38,7 +38,7 @@ public class AlertComponent {
 
     //cartLink
     public WebElement getCartLink() {
-        return alertComponentLayout.findElement(By.xpath("./a[text() = 'shopping cart']"));
+        return alertComponentLayout.findElement(By.xpath(CART_LINK_SELECTOR));
     }
 
     public void clickOnCartLink() {
@@ -47,7 +47,7 @@ public class AlertComponent {
 
     //compareLink
     public WebElement getCompareLink() {
-        return alertComponentLayout.findElement(By.xpath("./a[.='product comparison']"));
+        return alertComponentLayout.findElement(By.xpath(COMPARE_LINK_SELECTOR));
     }
 
     public void clickOnCompareLink() {

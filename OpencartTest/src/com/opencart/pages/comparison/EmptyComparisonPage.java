@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 
 public class EmptyComparisonPage extends AbstractPageWithHeader {
 
-    private final String ALERT_LAYOUT_LOCATOR = "//div[@class='alert alert-success alert-dismissible']"; // xpath
+    private static final String ALERT_LAYOUT_LOCATOR = "//div[@class='alert alert-success alert-dismissible']"; // xpath
     private final String PAGE_CONTENT = "#content p"; //css
 
     //Components
@@ -23,7 +23,7 @@ public class EmptyComparisonPage extends AbstractPageWithHeader {
     }
 
     private void verifyElements() {
-        WebElement temp = getPageContent();
+        getPageContent();
     }
 
     //region GETTERS

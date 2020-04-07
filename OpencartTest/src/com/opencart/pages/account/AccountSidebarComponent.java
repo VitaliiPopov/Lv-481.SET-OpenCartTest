@@ -8,6 +8,6 @@ public class AccountSidebarComponent {
         initElements();
     }
 
-    private void initElements(){
+    private void initElements() {
     }
 }

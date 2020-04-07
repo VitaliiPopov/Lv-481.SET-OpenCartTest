@@ -86,4 +86,3 @@ public class ReviewTest extends TestRunner {
         Assert.assertEquals(textOfDeliveredReview, messageOfDeliveredReview);
     }
 }
-

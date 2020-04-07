@@ -2,7 +2,6 @@ package com.opencart.pages;
 
 import com.opencart.tools.RegexUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 
 public class ProductContainersComponent {
@@ -13,7 +12,7 @@ public class ProductContainersComponent {
     private final String COMPARE_BUTTON_SELECTOR = ".//i[@class='fa fa-exchange']/.."; //xpath
     private final String PICTURE_SELECTOR = ".image a"; // css
     private final String ADD_TO_WISHLIST_BUTTON_SELECTOR = ".//i[contains(@class,'fa-heart')]/.."; //xpath
-    private final String PRICE_SELECTOR = "//p[contains(@class,'price') and not(child::span[@class='price-new'])]"; //xpath";
+    private final String PRICE_SELECTOR = "//p[contains(@class,'price') and not(child::span[@class='price-new'])]"; //xpath;
 
 
     //Layout

@@ -4,10 +4,8 @@ import com.opencart.pages.HomePage;
 import com.opencart.pages.account.AccountLogoutPage;
 import com.opencart.pages.account.RegisterPage;
 import com.opencart.pages.account.SuccessRegisterPage;
-import com.opencart.pages.cart.CartPage;
-import com.opencart.pages.wishlist.WishListPage;
 import com.opencart.tools.AdminManager;
-import com.opencart.tools.Driver;
+import com.opencart.tools.Instance;
 import com.opencart.tools.JsonDataConfig;
 import com.opencart.tools.Screenshot;
 import org.openqa.selenium.WebDriver;
@@ -17,11 +15,11 @@ import org.testng.annotations.*;
 public class AccountTestRunner {
     JsonDataConfig jsonDataConfig = new JsonDataConfig("TestData.json");
     AdminManager adminAccess = new AdminManager();
-    WebDriver driver = Driver.getDriver();
+    WebDriver driver = Instance.getDriver();
 
     @BeforeClass
     public void beforeClass() {
-        Driver.getDriver();
+        Instance.getDriver();
         try {
             primaryRegistration();
         } catch (InterruptedException e) {
@@ -36,7 +34,7 @@ public class AccountTestRunner {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        Driver.quit();
+        Instance.quit();
     }
 
     @AfterMethod
@@ -59,7 +57,7 @@ public class AccountTestRunner {
     }
 
     public HomePage getHomePage() {
-        return new HomePage(Driver.getDriver());
+        return new HomePage(Instance.getDriver());
     }
 
     public void primaryRegistration() throws InterruptedException {

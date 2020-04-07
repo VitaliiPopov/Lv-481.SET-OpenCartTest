@@ -2,7 +2,7 @@ package test;
 
 import com.opencart.data.ConstantVariables;
 import com.opencart.pages.product.ProductPage;
-import com.opencart.tools.Driver;
+import com.opencart.tools.Instance;
 import com.opencart.tools.Screenshot;
 import com.opencart.tools.test_runner.TestRunner;
 import org.apache.commons.lang.RandomStringUtils;
@@ -33,7 +33,7 @@ public class UnsuccessfulReviewTest extends TestRunner {
 
     @BeforeClass
     public void setUp() {
-        driver = Driver.getDriver();
+        driver = Instance.getDriver();
         PageFactory.initElements(driver, this);
         productPage = new ProductPage(driver);
     }

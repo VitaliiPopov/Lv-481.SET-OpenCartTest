@@ -42,7 +42,7 @@ public class ReviewTest extends TestRunner {
 
     @BeforeClass
     public void setUp() {
-        driver = Driver.getDriver();
+        driver = Instance.getDriver();
         PageFactory.initElements(driver, this);
         productPage = new ProductPage(driver);
     }

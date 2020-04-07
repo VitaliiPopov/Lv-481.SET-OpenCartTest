@@ -8,7 +8,7 @@ public class AdminManager {
     JsonDataConfig jsonDataConfig = new JsonDataConfig("TestData.json");
 
     public void deleteCustomerFromAdmin(String email) throws InterruptedException {
-        AdminLoginPage adminLoginPage = new AdminLoginPage(Driver.getAdminDriver());
+        AdminLoginPage adminLoginPage = new AdminLoginPage(Instance.getAdminDriver());
         AdminHomePage adminHomePage = adminLoginPage.adminLogin(
                 jsonDataConfig.getEmailFromJson(2),
                 jsonDataConfig.getPasswordFromJson(2));
@@ -20,7 +20,7 @@ public class AdminManager {
     }
 
     public String getExistedEmailFromAdmin() throws InterruptedException {
-        AdminLoginPage adminLoginPage = new AdminLoginPage(Driver.getAdminDriver());
+        AdminLoginPage adminLoginPage = new AdminLoginPage(Instance.getAdminDriver());
         AdminHomePage adminHomePage = adminLoginPage.adminLogin(
                 jsonDataConfig.getEmailFromJson(2),
                 jsonDataConfig.getPasswordFromJson(2));

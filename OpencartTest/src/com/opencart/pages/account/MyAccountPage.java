@@ -57,13 +57,6 @@ public class MyAccountPage extends AbstractPageWithHeader {
         return new ChangePasswordPage(driver);
     }
 
-    //changePasswordLink
-    public AddressBookPage clickAdressLink() {
-        adressLink.click();
-        return new AddressBookPage(driver);
-    }
-
-    //
     public EmptyAddressBookPage clickModifyyouraddresswhuileempty() {
         adressLink.click();
         return new EmptyAddressBookPage(driver);

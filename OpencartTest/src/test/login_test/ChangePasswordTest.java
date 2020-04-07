@@ -11,7 +11,7 @@ import static org.apache.commons.lang3.RandomStringUtils.*;
 
 public class ChangePasswordTest extends AccountTestRunner {
 
-    JsonDataConfig jsonDataConfig = new JsonDataConfig("TestData.json");
+    JsonDataConfig json = new JsonDataConfig("TestData.json");
 
     @Parameters({"loginText"})
     @Test(priority = 1)
@@ -47,8 +47,8 @@ public class ChangePasswordTest extends AccountTestRunner {
     public MyAccountPage loginUser(String loginDropdownText) {
         LoginPage loginPage = getHomePage().goToLoginPage(loginDropdownText);
         MyAccountPage myAccountPage = loginPage.login(
-                jsonDataConfig.getEmailFromJson(0),
-                jsonDataConfig.getPasswordFromJson(0));
+                json.getEmailFromJson(0),
+                json.getPasswordFromJson(0));
         return myAccountPage;
     }
 

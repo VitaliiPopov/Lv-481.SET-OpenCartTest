@@ -14,7 +14,7 @@ import org.testng.annotations.*;
 
 public class AccountTestRunner {
     JsonDataConfig jsonDataConfig = new JsonDataConfig("TestData.json");
-    AdminManager adminAccess = new AdminManager();
+    AdminManager adminManage = new AdminManager();
     WebDriver driver = Instance.getDriver();
 
     @BeforeClass
@@ -30,7 +30,7 @@ public class AccountTestRunner {
     @AfterClass
     public void tearDown() {
         try {
-            adminAccess.deleteCustomerFromAdmin(jsonDataConfig.getEmailFromJson(0));
+            adminManage.deleteCustomerFromAdmin(jsonDataConfig.getEmailFromJson(0));
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -43,7 +43,7 @@ public class AccountTestRunner {
             Screenshot.run(result, driver);
             String email = jsonDataConfig.getEmailFromJson(0);
             try {
-                adminAccess.deleteCustomerFromAdmin(email);
+                adminManage.deleteCustomerFromAdmin(email);
                 primaryRegistration();
             } catch (InterruptedException e) {
                 e.printStackTrace();

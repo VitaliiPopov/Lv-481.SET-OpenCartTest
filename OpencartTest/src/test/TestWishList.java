@@ -74,7 +74,7 @@ public class TestWishList extends WishListTestRunner {
         // Steps
         HomePage homePage = getHomePage();
         ProductPage productPage = homePage.clickOnProductNameLabel(fromProductPageProductName);
-        WishListPage wishListPage = productPage.addProductToWishList();
+        productPage.addProductToWishList();
 
         int actualNumberOfProductsInWishList = getHomePage().getWishListNumberOfProducts();
 
@@ -106,10 +106,10 @@ public class TestWishList extends WishListTestRunner {
         // Add product to cart from Wish List
         wishListPage.putFromWishListToCartProductByPartialName(secondProductName);
 
-        int actual_numberOfProductsInCart = getHomePage().getNumberOfProductsInCartButton();
+        int actualNumberOfProductsInCart = getHomePage().getNumberOfProductsInCartButton();
 
         //Check the quantity of products in CartButon after adding product to it from Wish List
-        Assert.assertEquals(actual_numberOfProductsInCart, numberOfProductsInCart + 1);
+        Assert.assertEquals(actualNumberOfProductsInCart, numberOfProductsInCart + 1);
         // POST CONDITION
         //  remove all products from WishList
         WishListEmptyPage wishListEmptyPage = getHomePage().goToWishList().removeAllProductsFromWishList();
@@ -136,7 +136,6 @@ public class TestWishList extends WishListTestRunner {
         WishListPage wishListPage = getHomePage().goToWishList();
         // Remove product from WishListPage by Product Name
         wishListPage.removeFromWishListProductByPartialName(firstProductName);
-        HomePage homePage = getHomePage();
         //Actual Result
         int actualNumberOfProductsInWishList = getHomePage().getWishListNumberOfProducts();
 
@@ -145,7 +144,7 @@ public class TestWishList extends WishListTestRunner {
         // POST CONDITION
         //  remove all products from WishList
         WishListEmptyPage wishListEmptyPage = getHomePage().goToWishList().removeAllProductsFromWishList();
-        homePage = wishListEmptyPage.goToHomePage();
+        wishListEmptyPage.goToHomePage();
         // Returning to the starter view -> then must be logOut
     }
 

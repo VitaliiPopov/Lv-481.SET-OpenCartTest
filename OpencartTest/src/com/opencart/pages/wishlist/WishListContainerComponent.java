@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WishListContainerComponent {
-    private WebElement productTableLayout;
 
     private List<ProductInWishListContainerComponent> productInWishListContainerComponents;
 
@@ -17,7 +16,7 @@ public class WishListContainerComponent {
     }
 
     private void initElements(WebDriver driver) {
-        productInWishListContainerComponents = new ArrayList<ProductInWishListContainerComponent>();
+        productInWishListContainerComponents = new ArrayList<>();
 
         for (WebElement current : driver.findElements(By.cssSelector(".table-responsive tbody tr")))
             productInWishListContainerComponents.add(new ProductInWishListContainerComponent(current));

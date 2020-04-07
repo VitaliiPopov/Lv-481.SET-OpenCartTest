@@ -1,6 +1,5 @@
 package com.opencart.pages.admin;
 
-import com.opencart.pages.account.MyAccountPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -40,9 +39,9 @@ public class AdminLoginPage {
         adminLoginButton.click();
     }
 
-    public AdminHomePage adminLogin(String LOGIN_NAME, String PASSWORD_NAME){
-        setAdminUsernameField(LOGIN_NAME);
-        setAdminPasswordField(PASSWORD_NAME);
+    public AdminHomePage adminLogin(String login, String password){
+        setAdminUsernameField(login);
+        setAdminPasswordField(password);
         clickAdminLoginButton();
         return new AdminHomePage(driver);
     }

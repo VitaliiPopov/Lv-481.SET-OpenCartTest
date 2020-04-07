@@ -18,6 +18,8 @@ import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 
+import java.security.NoSuchAlgorithmException;
+
 public class ReviewTest extends TestRunner {
     private JsonDataConfig jsonDataConfig = new JsonDataConfig("TestData.json");
     private WebDriver driver;
@@ -52,7 +54,7 @@ public class ReviewTest extends TestRunner {
 
     @AfterMethod
     @Parameters({"nameOfAuthor"})
-    public void tearDown(ITestResult result, String nameOfAuthor) throws Exception {
+    public void tearDown(ITestResult result, String nameOfAuthor) {
         if (result.getStatus() == ITestResult.FAILURE) {
             Screenshot.run(result,driver);
         }
@@ -61,7 +63,7 @@ public class ReviewTest extends TestRunner {
 
     @Parameters({"nameOfAuthor", "correctText","messageOfDeliveredReview"})
     @Test(priority = 1)
-    public void successfulReviewProcess(String nameOfAuthor, String correctText,String messageOfDeliveredReview) {
+    public void successfulReviewProcess(String nameOfAuthor, String correctText,String messageOfDeliveredReview) throws NoSuchAlgorithmException {
         scrollToSpecificProductAndClickOnIt();
         int startCount = productPage.getReviewCounter();
         productPage.writeReview(nameOfAuthor, correctText);
@@ -77,7 +79,7 @@ public class ReviewTest extends TestRunner {
 
     @Parameters({"nameOfAuthor", "correctText", "messageOfDeliveredReview"})
     @Test(priority = 2)
-    public void successfullyWritingReview(String nameOfAuthor, String correctText, String messageOfDeliveredReview) {
+    public void successfullyWritingReview(String nameOfAuthor, String correctText, String messageOfDeliveredReview) throws NoSuchAlgorithmException {
         scrollToSpecificProductAndClickOnIt();
         productPage.writeReview(nameOfAuthor, correctText);
         String textOfDeliveredReview = productPage.getTextOfDeliveredReviewMessage();

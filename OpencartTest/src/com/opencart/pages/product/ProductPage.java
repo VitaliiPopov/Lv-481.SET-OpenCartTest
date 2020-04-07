@@ -12,6 +12,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.Random;
 
 public class ProductPage extends AbstractPageWithHeader {
@@ -62,7 +64,6 @@ public class ProductPage extends AbstractPageWithHeader {
     private WebElement undeliveredReviewMessage;
 
     //Components
-    private AvailableOptionsComponent availableOptionsComponent;
     private AlertComponent alertComponent;
 
     //initialization of product page
@@ -177,8 +178,8 @@ public class ProductPage extends AbstractPageWithHeader {
         inputDataInFieldReview(text);
     }
 
-    public static int generateRandomIntegerDigit(int min, int max) {
-        Random r = new Random();
+    public static int generateRandomIntegerDigit(int min, int max) throws NoSuchAlgorithmException {
+        Random r = SecureRandom.getInstanceStrong();
         return r.nextInt((max - min) + 1) + min;
     }
 
@@ -193,7 +194,7 @@ public class ProductPage extends AbstractPageWithHeader {
     }
 
     //full method
-    public void writeReview(String name, String text) {
+    public void writeReview(String name, String text) throws NoSuchAlgorithmException {
         openTabReviews();
         inputNameInNameField(name);
         inputTextInReviewField(text);

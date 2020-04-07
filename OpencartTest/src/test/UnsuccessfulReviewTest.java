@@ -16,7 +16,7 @@ import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 
-import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 
 public class UnsuccessfulReviewTest extends TestRunner {
 
@@ -44,7 +44,7 @@ public class UnsuccessfulReviewTest extends TestRunner {
     }
 
     @AfterMethod
-    public void tearDown(ITestResult result) throws IOException {
+    public void tearDown(ITestResult result){
         if (result.getStatus() == ITestResult.FAILURE) {
             Screenshot.run(result,driver);
         }
@@ -52,7 +52,7 @@ public class UnsuccessfulReviewTest extends TestRunner {
 
     @Parameters({"incorrectName", "correctText", "messageOfUndeliveredReviewBecauseOfIncorrectName"})
     @Test(priority = 1)
-    public void unsuccessfullyWritingReviewBecauseOfIncorrectName(String incorrectName, String correctText, String messageOfUndeliveredReviewBecauseOfIncorrectName) {
+    public void unsuccessfullyWritingReviewBecauseOfIncorrectName(String incorrectName, String correctText, String messageOfUndeliveredReviewBecauseOfIncorrectName) throws NoSuchAlgorithmException {
         scrollToSpecificProductAndClickOnIt();
         productPage.writeReview(incorrectName, correctText);
         String textOfUndeliveredReview = productPage.getTextOfUndeliveredReviewMessage();
@@ -61,7 +61,7 @@ public class UnsuccessfulReviewTest extends TestRunner {
 
     @Parameters({"nameOfAuthor", "incorrectText", "messageOfUndeliveredReviewBecauseOfIncorrectText"})
     @Test(priority = 2)
-    public void unsuccessfullyWritingReviewBecauseOfIncorrectText(String nameOfAuthor, String incorrectText, String messageOfUndeliveredReviewBecauseOfIncorrectText) {
+    public void unsuccessfullyWritingReviewBecauseOfIncorrectText(String nameOfAuthor, String incorrectText, String messageOfUndeliveredReviewBecauseOfIncorrectText) throws NoSuchAlgorithmException {
         scrollToSpecificProductAndClickOnIt();
         productPage.writeReview(nameOfAuthor, incorrectText);
         String textOfUndeliveredReview = productPage.getTextOfUndeliveredReviewMessage();
@@ -70,7 +70,7 @@ public class UnsuccessfulReviewTest extends TestRunner {
 
     @Parameters({"incorrectName", "incorrectText", "messageOfUndeliveredReviewBecauseOfIncorrectText"})
     @Test(priority = 3)
-    public void unsuccessfullyWritingReviewBecauseOfIncorrectTextAndName(String incorrectName, String incorrectText, String messageOfUndeliveredReviewBecauseOfIncorrectText) {
+    public void unsuccessfullyWritingReviewBecauseOfIncorrectTextAndName(String incorrectName, String incorrectText, String messageOfUndeliveredReviewBecauseOfIncorrectText) throws NoSuchAlgorithmException {
         scrollToSpecificProductAndClickOnIt();
         productPage.writeReview(incorrectName, incorrectText);
         String textOfUndeliveredReview = productPage.getTextOfUndeliveredReviewMessage();
@@ -79,7 +79,7 @@ public class UnsuccessfulReviewTest extends TestRunner {
 
     @Parameters({"emptyNameField", "emptyTextField", "messageOfUndeliveredReviewBecauseOfIncorrectText"})
     @Test(priority = 4)
-    public void unsuccessfullyWritingReviewBecauseOfEmptyNameAndTextFields(String emptyNameField, String emptyTextField, String messageOfUndeliveredReviewBecauseOfIncorrectText) {
+    public void unsuccessfullyWritingReviewBecauseOfEmptyNameAndTextFields(String emptyNameField, String emptyTextField, String messageOfUndeliveredReviewBecauseOfIncorrectText) throws NoSuchAlgorithmException {
         scrollToSpecificProductAndClickOnIt();
         productPage.writeReview(emptyNameField, emptyTextField);
         String textOfUndeliveredReview = productPage.getTextOfUndeliveredReviewMessage();
@@ -88,7 +88,7 @@ public class UnsuccessfulReviewTest extends TestRunner {
 
     @Parameters({"correctText", "messageOfUndeliveredReviewBecauseOfIncorrectName"})
     @Test(priority = 5)
-    public void unsuccessfullyWritingReviewBecauseOfTooLongName(String correctText, String messageOfUndeliveredReviewBecauseOfIncorrectName) {
+    public void unsuccessfullyWritingReviewBecauseOfTooLongName(String correctText, String messageOfUndeliveredReviewBecauseOfIncorrectName) throws NoSuchAlgorithmException {
         scrollToSpecificProductAndClickOnIt();
         String tooLongName = RandomStringUtils.randomAlphabetic(30);
         productPage.writeReview(tooLongName, correctText);
@@ -98,7 +98,7 @@ public class UnsuccessfulReviewTest extends TestRunner {
 
     @Parameters({"nameOfAuthor", "messageOfUndeliveredReviewBecauseOfIncorrectText"})
     @Test(priority = 6)
-    public void unsuccessfullyWritingReviewBecauseOfTooLongText(String nameOfAuthor, String messageOfUndeliveredReviewBecauseOfIncorrectText) {
+    public void unsuccessfullyWritingReviewBecauseOfTooLongText(String nameOfAuthor, String messageOfUndeliveredReviewBecauseOfIncorrectText) throws NoSuchAlgorithmException {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView();", testProduct);
         testProduct.click();

@@ -33,8 +33,7 @@ public class ComparisonPage extends AbstractPageWithHeader {
     }
 
     private void verifyElements() {
-        WebElement temp = pageHeader();
-        temp = null;
+        pageHeader();
     }
 
     ///region GETTERS

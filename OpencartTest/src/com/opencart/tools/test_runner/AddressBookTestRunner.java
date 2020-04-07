@@ -6,7 +6,7 @@ import com.opencart.pages.account.AddressBookPage;
 import com.opencart.pages.account.MyAccountPage;
 import com.opencart.pages.cart.CartPage;
 import com.opencart.pages.wishlist.WishListPage;
-import com.opencart.tools.Driver;
+import com.opencart.tools.Instance;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
@@ -17,7 +17,7 @@ public class AddressBookTestRunner {
 
     @BeforeClass
     public void beforeClass() {
-        Driver.getDriver();
+        Instance.getDriver();
     }
 
     @AfterClass
@@ -25,7 +25,7 @@ public class AddressBookTestRunner {
         MyAccountPage myAccountPage = getHomePage().clickMyAccountInDropdown();
         AddressBookPage addressBookPage = myAccountPage.clickModifyYourAddressBookEntries();
         addressBookPage.deleteAll();
-        Driver.quit();
+        Instance.quit();
     }
 
 
@@ -37,14 +37,14 @@ public class AddressBookTestRunner {
     }
 
     public HomePage getHomePage() {
-        return new HomePage(Driver.getDriver());
+        return new HomePage(Instance.getDriver());
     }
 
     public CartPage getCartPage() {
-        return new CartPage(Driver.getDriver());
+        return new CartPage(Instance.getDriver());
     }
 
     public WishListPage getWishListPage() {
-        return new WishListPage(Driver.getDriver());
+        return new WishListPage(Instance.getDriver());
     }
 }

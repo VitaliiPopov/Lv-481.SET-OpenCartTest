@@ -1,7 +1,7 @@
 package com.opencart.data;
 
-public interface ConstantVariables {
-    public static String BROWSER_NAME = "chrome";
+public final class ConstantVariables {
+    public static final String BROWSER_NAME = "chrome";
     //
     public static final String URL = System.getenv("URL");
     public static final String ADMIN_URL = System.getenv("ADMIN_URL");

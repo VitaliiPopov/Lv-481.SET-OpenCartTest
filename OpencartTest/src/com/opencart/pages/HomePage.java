@@ -4,7 +4,6 @@ import com.opencart.data.Currencies;
 import com.opencart.pages.comparison.ComparisonPage;
 import com.opencart.pages.product.ProductPage;
 import com.opencart.pages.search.SearchPage;
-import com.opencart.pages.wishlist.WishListPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -48,11 +47,11 @@ public class HomePage extends AbstractPageWithHeader {
     ///region ATOMIC_OPERATIONS
 
     public AlertComponent getAlertComponentWithWait() {
-        /*try {
+        try {
             Thread.sleep(1000); //Only for presentation, bug alert
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }*/
+        }
         return new AlertComponent(driver.findElement(By.cssSelector(ALERT_LOCATOR)));
     }
 

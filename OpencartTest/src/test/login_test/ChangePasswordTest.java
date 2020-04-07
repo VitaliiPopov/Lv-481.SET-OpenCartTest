@@ -6,25 +6,27 @@ import com.opencart.tools.test_runner.AccountTestRunner;
 import io.qameta.allure.Description;
 import org.junit.Assert;
 import org.testng.annotations.*;
+
 import static org.apache.commons.lang3.RandomStringUtils.*;
 
 public class ChangePasswordTest extends AccountTestRunner {
+
     JsonDataConfig jsonDataConfig = new JsonDataConfig("TestData.json");
 
     @Parameters({"loginText"})
     @Test(priority = 1)
     @Description("Verify that user cant change password to empty")
-    public void changePasswordToEmptyTest(String loginText) throws InterruptedException {
+    public void changePasswordToEmptyTest(String loginText) {
         MyAccountPage myAccountPage = loginUser(loginText);
         ChangePasswordPage changePasswordPage = myAccountPage.clickChangePasswordLink();
         changePasswordPage.clickChangePasswordButton();
-        Assert.assertEquals(true, changePasswordPage.isPasswordAlertPresent());
+        Assert.assertTrue(changePasswordPage.isPasswordAlertPresent());
     }
 
     @Parameters({"loginText"})
     @Test(priority = 2)
     @Description("Verify that user cant change password with wrong confirm")
-    public void changePasswordWrongConfirmTest(String loginText) throws InterruptedException {
+    public void changePasswordWrongConfirmTest(String loginText) {
         MyAccountPage myAccountPage = loginUser(loginText);
         ChangePasswordPage changePasswordPage = myAccountPage.clickChangePasswordLink();
         changePasswordPage.changePassword(randomAlphabetic(5), randomAlphabetic(5));
@@ -34,7 +36,7 @@ public class ChangePasswordTest extends AccountTestRunner {
     @Parameters({"loginText"})
     @Test(priority = 3)
     @Description("Verify that user cant change password to short")
-    public void changePasswordToShortTest(String loginText) throws InterruptedException {
+    public void changePasswordToShortTest(String loginText) {
         MyAccountPage myAccountPage = loginUser(loginText);
         String password = randomAlphabetic(3);
         ChangePasswordPage changePasswordPage = myAccountPage.clickChangePasswordLink();
@@ -42,7 +44,7 @@ public class ChangePasswordTest extends AccountTestRunner {
         Assert.assertEquals(true, changePasswordPage.isPasswordAlertPresent());
     }
 
-    public MyAccountPage loginUser(String loginDropdownText) throws InterruptedException {
+    public MyAccountPage loginUser(String loginDropdownText) {
         LoginPage loginPage = getHomePage().goToLoginPage(loginDropdownText);
         MyAccountPage myAccountPage = loginPage.login(
                 jsonDataConfig.getEmailFromJson(0),

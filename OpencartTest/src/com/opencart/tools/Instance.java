@@ -15,11 +15,11 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
-public class Driver {
+public class Instance {
 
     private static WebDriver driver = null;
 
-    private Driver() {
+    private Instance() {
     }
 
     public static WebDriver getDriver() {

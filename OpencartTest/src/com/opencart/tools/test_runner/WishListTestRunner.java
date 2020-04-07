@@ -3,7 +3,7 @@ package com.opencart.tools.test_runner;
 import com.opencart.pages.HomePage;
 import com.opencart.pages.account.LoginPage;
 import com.opencart.pages.account.MyAccountPage;
-import com.opencart.tools.Driver;
+import com.opencart.tools.Instance;
 import com.opencart.tools.JsonDataConfig;
 import org.testng.annotations.*;
 
@@ -13,12 +13,12 @@ public class WishListTestRunner {
 
     @BeforeClass
     public void beforeClass() {
-        Driver.getDriver();
+        Instance.getDriver();
     }
 
     @AfterClass
     public void afterClass() {
-        Driver.quit();
+        Instance.quit();
 
     }
 
@@ -36,10 +36,10 @@ public class WishListTestRunner {
 
     @AfterMethod(alwaysRun = true)
     public void afterMethod() {
-        Driver.clearCookies();
+        Instance.clearCookies();
     }
 
     public HomePage getHomePage() {
-        return new HomePage(Driver.getDriver());
+        return new HomePage(Instance.getDriver());
     }
 }

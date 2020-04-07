@@ -9,6 +9,7 @@ import com.opencart.pages.search.SearchPage;
 import com.opencart.pages.wishlist.WishListEmptyPage;
 import com.opencart.pages.wishlist.WishListPage;
 import com.opencart.tools.RegexUtils;
+import com.opencart.tools.exception.NullOptionException;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -85,19 +86,11 @@ public class AbstractPageWithHeader {
         searchTopButton.click();
     }
 
-    //shoppingCart
-    private void clickOnShoppingCart() {
-        //TODO
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        shoppingCart.click();
+    //currency
+    public String getFullCurrencyText() {
+        return currency.getText().substring(1);
     }
 
-    //currency
-    public String getFullCurrencyText(){return currency.getText().substring(1);}
     public String getCurrencyText() {
         return currency.getText().substring(0, 1);
     }
@@ -162,7 +155,7 @@ public class AbstractPageWithHeader {
     //dropdownComponent
     protected DropdownComponent getDropdownComponent() {
         if (dropdownComponent == null) {
-            throw new RuntimeException(OPTION_NULL_MESSAGE);
+            throw new NullOptionException(OPTION_NULL_MESSAGE);
         }
         return dropdownComponent;
     }
@@ -176,7 +169,7 @@ public class AbstractPageWithHeader {
         if (getDropdownComponent().isExistDropdownOptionByPartialName(optionName)) {
             getDropdownComponent().clickDropdownOptionByPartialName(optionName);
         } else {
-            throw new RuntimeException(String.format(OPTION_NOT_FOUND_MESSAGE, optionName));
+            throw new NullOptionException(String.format(OPTION_NOT_FOUND_MESSAGE, optionName));
         }
     }
 
@@ -248,8 +241,9 @@ public class AbstractPageWithHeader {
 
     public boolean checkTotalPrice() {
         viewCartComponent();
-        if (getTotalPriceText().equals(getCartDropdownComponent().getTotalPriceFromColumn())) return true;
-        else return false;
+        if (getTotalPriceText().equals(getCartDropdownComponent().getTotalPriceFromColumn())) {
+            return true;
+        } else return false;
     }
 
     public void removeAllProducts() {
@@ -367,16 +361,6 @@ public class AbstractPageWithHeader {
         fillSearchTopField(productName);
         clickSearchTopButton();
         return new SearchPage(driver);
-    }
-
-    public CartPage goToCartPageByLinkInHeader() {
-        clickOnShoppingCart();
-        return new CartPage(driver);
-    }
-
-    public WishListEmptyPage goToWishListEmptyPage(){
-        clickWishList();
-        return new WishListEmptyPage(driver);
     }
 
     ///endregion

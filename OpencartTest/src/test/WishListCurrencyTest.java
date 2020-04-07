@@ -52,7 +52,7 @@ public class WishListCurrencyTest extends CurrencyTestRunner {
         wishList.removeFromWishListProductByPartialName(productPartialName);
         Thread.sleep(2000);// ONLY FOR PRESENTATION
 
-        String emptyMessage = wishList.goToWishListEmptyPage().getLabelText();
+        String emptyMessage = wishList.goToWishListEmpty().getLabelText();
         Assert.assertEquals(emptyMessage, WishListEmptyPage.EMPTY_WISH_LIST_MESSAGE);
     }
     

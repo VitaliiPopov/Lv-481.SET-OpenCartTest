@@ -2,7 +2,6 @@ package com.opencart.pages.wishlist;
 
 import com.opencart.data.Currencies;
 import com.opencart.pages.AbstractPageWithHeader;
-import com.opencart.pages.account.MyAccountPage;
 import com.opencart.tools.RegexUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -72,7 +71,7 @@ public class WishListPage extends AbstractPageWithHeader {
     // remove ALL Products from Wish List
     public WishListEmptyPage removeAllProductsFromWishList() {
         List<WebElement> removeButons = driver.findElements(By.cssSelector(".text-right a.btn.btn-danger"));
-        while (removeButons.size() > 0) {
+        while (!removeButons.isEmpty()) {
             removeButons.get(0).click();
             removeButons = driver.findElements(By.cssSelector(".text-right a.btn.btn-danger"));
         }

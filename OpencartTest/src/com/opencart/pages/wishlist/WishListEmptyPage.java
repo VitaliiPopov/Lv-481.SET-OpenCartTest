@@ -1,7 +1,6 @@
 package com.opencart.pages.wishlist;
 
 import com.opencart.pages.AbstractPageWithHeader;
-import com.opencart.pages.account.MyAccountPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

@@ -7,13 +7,12 @@ import org.openqa.selenium.WebElement;
 public class ProductContainersComponent {
 
     //Selectors
-    private final String PRODUCT_NAME_SELECTOR = "h4 a"; // css
-    private final String ADD_TO_CART_BUTTON_SELECTOR = ".//i[@class='fa fa-shopping-cart']/.."; //xpath
-    private final String COMPARE_BUTTON_SELECTOR = ".//i[@class='fa fa-exchange']/.."; //xpath
-    private final String PICTURE_SELECTOR = ".image a"; // css
-    private final String ADD_TO_WISHLIST_BUTTON_SELECTOR = ".//i[contains(@class,'fa-heart')]/.."; //xpath
-    private final String PRICE_SELECTOR = "//p[contains(@class,'price') and not(child::span[@class='price-new'])]"; //xpath;
-
+    private static final String PRODUCT_NAME_SELECTOR = "h4 a"; // css
+    private static final String ADD_TO_CART_BUTTON_SELECTOR = ".//i[@class='fa fa-shopping-cart']/.."; //xpath
+    private static final String COMPARE_BUTTON_SELECTOR = ".//i[@class='fa fa-exchange']/.."; //xpath
+    private static final String PICTURE_SELECTOR = ".image a"; // css
+    private static final String ADD_TO_WISHLIST_BUTTON_SELECTOR = ".//i[contains(@class,'fa-heart')]/.."; //xpath
+    private static final String PRICE_SELECTOR = "//p[contains(@class,'price') and not(child::span[@class='price-new'])]";
 
     //Layout
     private WebElement productContainerLayout;
@@ -77,7 +76,6 @@ public class ProductContainersComponent {
     }
 
     public double getPriceAmount() {
-        RegexUtils regexUtils = new RegexUtils();
-        return regexUtils.extractFirstDouble(getPrice().getText());
+        return RegexUtils.extractFirstDouble(getPrice().getText());
     }
 }

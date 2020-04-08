@@ -9,7 +9,6 @@ public class SearchCriteriaComponent {
 
     private WebElement searchCriteriaLayout;
     private WebElement searchElementLable;
-    private WebElement keywordsField;
     private WebElement categoriesDropdown;
     private WebElement subcategoriesCheckbox;
     private WebElement descriptionsCheckbox;
@@ -22,7 +21,6 @@ public class SearchCriteriaComponent {
 
     private void initElements() {
         searchElementLable = searchCriteriaLayout.findElement(By.xpath("//div[@id='content']/h1"));
-        keywordsField = searchCriteriaLayout.findElement(By.cssSelector("#input-search.form-control"));
         categoriesDropdown = searchCriteriaLayout.findElement(By.cssSelector("#content select:first-child"));
         subcategoriesCheckbox = searchCriteriaLayout.findElement(By.xpath("//input[@name='sub_category']"));
         descriptionsCheckbox = searchCriteriaLayout.findElement(By.xpath("//input[@name='description']"));

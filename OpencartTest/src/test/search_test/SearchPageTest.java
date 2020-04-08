@@ -15,31 +15,12 @@ public class SearchPageTest extends TestRunner {
 
     private SearchPage searchPage;
 
-    //lists for
-    private ArrayList<String> upperCaseSearchText;
-    private ArrayList<String> lowerCaseSearchText;
-
-    //lists for sorting by product name
-    private ArrayList<String> defaultSorted;
-    private ArrayList<String> a_z_byNameSorted;
-
-    //lists for sorting by product price
-    private ArrayList<Double> priceList;
-    private ArrayList<Double> byPriceSorted;
-
-    //lists for checking grid and list mode
-    private ArrayList<String> gridModeProdNames;
-    private ArrayList<String> listModeProdNames;
-
-    //lists for checking subcategories checkbox work
-    private ArrayList<String> withoutCategoriesSearch;
-    private ArrayList<String> withCategoriesDropdownAndCheckbox;
-    private ArrayList<String> withCategoriesDropdown;
-
     //check if product names are the same when lowercase text and uppercase text
     @Parameters({"searchText", "lowerSearchText"})
     @Test(priority = 2)
     public void checkLowerCase(String searchText, String lowerSearchText) {
+        List<String> upperCaseSearchText;
+        List<String> lowerCaseSearchText;
         upperCaseSearchText = getHomePage()
                 .searchProduct(searchText)
                 .getProductComponentNamesList();
@@ -52,7 +33,7 @@ public class SearchPageTest extends TestRunner {
     //check if search label contain text from searsh field
     @Parameters({"lowerProductName"})
     @Test(priority = 3)
-    public void searchLabelContainSearchText(String lowerProductName) throws InterruptedException {
+    public void searchLabelContainSearchText(String lowerProductName) {
         Assert.assertTrue(getHomePage()
                 .searchProduct(lowerProductName)
                 .getSearchCriteriaComponent()
@@ -61,7 +42,7 @@ public class SearchPageTest extends TestRunner {
 
     //check that "no product" message appears after entering random string to search field
     @Test(priority = 4)
-    public void checkUncorrectFieldResultMessage() throws InterruptedException {
+    public void checkUncorrectFieldResultMessage() {
         Assert.assertTrue(getHomePage()
                 .searchProduct(randomAlphabetic(9))
                 .getEmptyResultMessageText()
@@ -70,7 +51,7 @@ public class SearchPageTest extends TestRunner {
 
     //check that "no product" message appears after entering empty string to search field
     @Test(priority = 5)
-    public void checkEmptyFieldResultMessage() throws InterruptedException {
+    public void checkEmptyFieldResultMessage() {
         Assert.assertTrue(getHomePage()
                 .searchProduct("")
                 .getEmptyResultMessageText()
@@ -78,9 +59,9 @@ public class SearchPageTest extends TestRunner {
     }
 
     //check if categories checkbox is disabled when categories dropdown is default
-    @Parameters({"lowerSearchText", "categoryOption"})
+    @Parameters({"lowerSearchText"})
     @Test(priority = 6)
-    public void checkCategoriesCheckboxDisabled(String lowerSearchText, String categoryOption) throws InterruptedException {
+    public void checkCategoriesCheckboxDisabled(String lowerSearchText) {
         Assert.assertFalse(getHomePage()
                 .searchProduct(lowerSearchText)
                 .getSearchCriteriaComponent()
@@ -144,6 +125,9 @@ public class SearchPageTest extends TestRunner {
     @Parameters({"lowerSearchText"})
     @Test(priority = 11)
     public void checkListAndGridResult(String lowerSearchText) {
+        //lists for checking grid and list mode
+        List<String> gridModeProdNames;
+        List<String> listModeProdNames;
         searchPage = getHomePage().searchProduct(lowerSearchText);
         gridModeProdNames = searchPage.getProductComponentNamesList();
         searchPage.getProductDisplayCriteriaComponent().clickListButton();
@@ -156,8 +140,10 @@ public class SearchPageTest extends TestRunner {
     //check if list is correctly sorted by name after clicking "Name (A - Z)" option in SortBy dropdown
     @Parameters({"lowerSearchText"})
     @Test(priority = 12)
-    public void checkSortByA_Z_Name(String lowerSearchText) {
-
+    public void checkSortByAZName(String lowerSearchText) {
+        //lists for sorting by product name
+        List<String> defaultSorted;
+        List<String> a_z_byNameSorted;
         searchPage = getHomePage().searchProduct(lowerSearchText);
         defaultSorted = searchPage.getProductComponentNamesList();
         searchPage.toLowerCaseProductList(defaultSorted);
@@ -173,7 +159,9 @@ public class SearchPageTest extends TestRunner {
     //check if list is correctly sorted by name after clicking "Name (Z - A)" option in SortBy dropdown
     @Parameters({"lowerSearchText"})
     @Test(priority = 13)
-    public void checkSortByZ_A_Name(String lowerSearchText) {
+    public void checkSortByZAName(String lowerSearchText) {
+        List<String> defaultSorted;
+        List<String> a_z_byNameSorted;
         searchPage = getHomePage().searchProduct(lowerSearchText);
         defaultSorted = searchPage.getProductComponentNamesList();
         searchPage.toLowerCaseProductList(defaultSorted);
@@ -189,6 +177,9 @@ public class SearchPageTest extends TestRunner {
     @Parameters({"lowerSearchText"})
     @Test(priority = 14)
     public void checkSortByPrice(String lowerSearchText) {
+        //lists for sorting by product price
+        List<Double> priceList;
+        List<Double> byPriceSorted;
         searchPage = getHomePage().searchProduct(lowerSearchText);
         priceList = searchPage.getProductComponentPriceList();
         Collections.sort(priceList);
@@ -213,6 +204,10 @@ public class SearchPageTest extends TestRunner {
     @Parameters({"categoryOption"})
     @Test(priority = 16)
     public void checkCategoriesCheckboxIsUseful(String categoryOption) {
+        //lists for checking subcategories checkbox work
+        List<String> withoutCategoriesSearch;
+        List<String> withCategoriesDropdownAndCheckbox;
+        List<String> withCategoriesDropdown;
         searchPage = getHomePage().searchProduct("%");
         SearchCriteriaComponent searchCriteriaComponent = searchPage.getSearchCriteriaComponent();
         withoutCategoriesSearch = searchPage.getProductComponentNamesList();

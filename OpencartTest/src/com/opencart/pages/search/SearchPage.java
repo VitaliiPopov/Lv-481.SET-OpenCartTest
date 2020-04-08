@@ -22,14 +22,12 @@ import java.util.concurrent.TimeUnit;
 
 public class SearchPage extends AbstractPageWithHeader {
 
-    //Errors
-    public final String PRODUCT_NOT_FOUND = "PRODUCT NOT FOUND";
     //Selectors
-    private final String PRODUCT_COMPONENT_LOCATOR = "//div[@class='product-thumb']";// xpath
-    private final String SUCCESS_SEARCH_PAGE_URL = "search&search";// url
-    private final String ALERT_LOCATOR = "//div[@class='alert alert-success alert-dismissible']";// xpath
-    private final String SEARCH_CRITERIA_ELEMENT_LOCATOR = "//div[@id='content']";// xpath
-    private final String PRODUCT_DISPLAY_ELEMENT_LOCATOR = "//div[@id='content']/p/following-sibling::div[1]"; //xpath
+    private static final String PRODUCT_COMPONENT_LOCATOR = "//div[@class='product-thumb']";// xpath
+    private static final String SUCCESS_SEARCH_PAGE_URL = "search&search";// url
+    private static final String ALERT_LOCATOR = "//div[@class='alert alert-success alert-dismissible']";// xpath
+    private static final String SEARCH_CRITERIA_ELEMENT_LOCATOR = "//div[@id='content']";// xpath
+    private static final String PRODUCT_DISPLAY_ELEMENT_LOCATOR = "//div[@id='content']/p/following-sibling::div[1]"; //xpath
 
     //WebElements
     @FindBy(how = How.XPATH, xpath = "//p[contains(text(),'no product')]")
@@ -37,7 +35,6 @@ public class SearchPage extends AbstractPageWithHeader {
 
     //Components
     private List<ProductContainersComponent> productContainersComponents;
-    private AlertComponent alertComponent;
 
     public SearchPage(WebDriver driver) {
         super(driver);
@@ -124,7 +121,7 @@ public class SearchPage extends AbstractPageWithHeader {
     }
 
     // get ArrayList of names from products
-    public ArrayList<String> getProductComponentNamesList() {
+    public List<String> getProductComponentNamesList() {
 
         ArrayList<String> productComponentNamesList = new ArrayList<>();
         productContainersComponents = getProductContainersComponents();
@@ -135,7 +132,7 @@ public class SearchPage extends AbstractPageWithHeader {
     }
 
     // get ArrayList of prices from products
-    public ArrayList<Double> getProductComponentPriceList() {
+    public List<Double> getProductComponentPriceList() {
         ArrayList<Double> productComponentPriceList = new ArrayList<>();
         productContainersComponents = getProductContainersComponents();
         for (ProductContainersComponent current : productContainersComponents) {
@@ -143,7 +140,6 @@ public class SearchPage extends AbstractPageWithHeader {
         }
         return productComponentPriceList;
     }
-
 
     //CompareButton
 
@@ -203,7 +199,6 @@ public class SearchPage extends AbstractPageWithHeader {
      */
     public AbstractPageWithHeader afterClickOnProductComponentAddToCartButtonByName(String productName) {
         clickOnProductComponentAddToCartButtonByName(productName);
-        //TODO
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {

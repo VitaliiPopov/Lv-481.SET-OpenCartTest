@@ -48,7 +48,7 @@ public class ProductDisplayCriteriaComponent {
         }
     }
 
-    public void clickProductCompareLink(){
+    public void clickProductCompareLink() {
         productCompareLink.click();
     }
 
@@ -75,7 +75,7 @@ public class ProductDisplayCriteriaComponent {
         String productCount = productCountLabel.getText();
         productCount = productCount.replaceAll("[^0-9]+", " ");
         List<String> numberList = Arrays.asList(productCount.trim().split(" "));
-        return new Integer(numberList.get(index));
+        return Integer.parseInt(numberList.get(index));
     }
 
     public int getPagesCountFromLabel() {

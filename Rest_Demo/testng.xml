@@ -15,6 +15,24 @@
                     <include name="getDeletedUser"/>
                 </methods>
             </class>
+            <class name="com.petstore.test.pet.NewPetTest">
+                <methods>
+                    <include name="smokeAddPet"/>
+                    <include name="addEmptyPet"/>
+                    <include name="addPetWithoutID"/>
+                    <include name="addPetWithIDOnly"/>
+                    <include name="addPetWithStringID"/>
+                    <include name="addPetWithDigitName"/>
+                    <include name="addPetWithoutCategoryID"/>
+                    <include name="addPetWithStringCategoryID"/>
+                    <include name="addPetWithoutCategoryName"/>
+                    <include name="addPetWithDigitCategoryName"/>
+                    <include name="addPetWithManyPhotoUrls"/>
+                    <include name="addPetWithStringTagID"/>
+                    <include name="addPetWithManyTags"/>
+                    <include name="addPetWithNotExistedStatus"/>
+                </methods>
+            </class>
         </classes>
     </test>
 </suite>

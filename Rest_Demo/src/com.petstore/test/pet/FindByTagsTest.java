@@ -1,6 +1,12 @@
 package com.petstore.test.pet;
+import com.petstore.data.ConstantVariables;
 import io.restassured.RestAssured;
+import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.filter.log.LogDetail;
+import io.restassured.http.ContentType;
+import io.restassured.specification.RequestSpecification;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import javax.swing.text.html.parser.Entity;
@@ -11,15 +17,27 @@ import static io.restassured.RestAssured.given;
 import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
 
 public class FindByTagsTest {
-    public static final String URI = "http://192.168.99.100:8080";
+
+    @BeforeClass
+    public static void setup() {
+        RequestSpecification requestSpec = new RequestSpecBuilder()
+                .setBaseUri(ConstantVariables.API_URL)
+                .setPort(ConstantVariables.API_PORT)
+                .setBasePath(ConstantVariables.API_PATH)
+                .setAccept(ContentType.JSON)
+                .setContentType(ContentType.JSON)
+                .log(LogDetail.ALL)
+                .build();
+
+        RestAssured.requestSpecification = requestSpec;
+    }
 
     @Test
     void checkBodyContainsTag() {
-        RestAssured.baseURI = URI;
         List<Entity> list = new ArrayList<>();
         list = given()
                 .when()
-                .get("/api/v3/pet/findByTags?tags=tag1")
+                .get("/pet/findByTags?tags=tag1")
                 .then()
                 .extract().body().as(list.getClass());
         for (Object pet : list) {
@@ -29,19 +47,16 @@ public class FindByTagsTest {
 
     @Test
     void checkBodyContainsManyTags() {
-        RestAssured.baseURI = URI;
         boolean flag = false;
         List<Entity> list = new ArrayList<>();
         list = given()
                 .when()
-                .get("/api/v3/pet/findByTags?tags=tag1&tags=tag2")
+                .get("/pet/findByTags?tags=tag1&tags=tag2")
                 .then()
                 .extract().body().as(list.getClass());
 
         for (Object pet : list) {
-            if (pet.toString().contains("name=tag1")) {
-                flag = true;
-            } else if (pet.toString().contains("name=tag2")) {
+            if (pet.toString().contains("name=tag1")||pet.toString().contains("name=tag2")) {
                 flag = true;
             }
             Assert.assertTrue(flag);
@@ -50,12 +65,11 @@ public class FindByTagsTest {
 
     @Test
     void checkWithOneIncorrectTag() {
-        RestAssured.baseURI = URI;
 
         List<Entity> list = new ArrayList<>();
         list = given()
                 .when()
-                .get("/api/v3/pet/findByTags?jkdljffg&tags=tag1")
+                .get("/pet/findByTags?jkdljffg&tags=tag1")
                 .then()
                 .statusCode(200)
                 .extract().body().as(list.getClass());
@@ -67,25 +81,23 @@ public class FindByTagsTest {
 
     @Test
     void checkIcorrectDataTags() {
-        RestAssured.baseURI = URI;
         given()
                 .expect()
                 .statusCode(200)
                 .when()
-                .get("/api/v3/pet/findByTags?tags=4--5'2")
+                .get("/pet/findByTags?tags=4--5'2")
                 .then()
                 .extract().body().jsonPath().toString().contains("[]");
     }
 
     @Test
     void checkTooLongTagsData() {
-        RestAssured.baseURI = URI;
         String randString = randomAlphabetic(100);
         given()
                 .expect()
                 .statusCode(200)
                 .when()
-                .get("/api/v3/pet/findByTags?tags=" + randString)
+                .get("/pet/findByTags?tags=" + randString)
                 .then()
                 .extract().body().jsonPath().toString().contains("[]");
     }

@@ -1,5 +1,6 @@
 package com.petstore.test.user;
 
+import com.petstore.data.ConstantVariables;
 import com.petstore.data.Userio;
 import com.petstore.data.UserioRepository;
 import io.restassured.RestAssured;
@@ -17,11 +18,11 @@ import static org.hamcrest.Matchers.equalTo;
 public class ResponseUser {
 
     @BeforeClass
-    public void setup() {
+    public static void setup() {
         RequestSpecification requestSpec = new RequestSpecBuilder()
-                .setBaseUri("http://192.168.99.100/")
-                .setPort(8080)
-                .setBasePath("api/v3")
+                .setBaseUri(ConstantVariables.API_URL)
+                .setPort(ConstantVariables.API_PORT)
+                .setBasePath(ConstantVariables.API_PATH)
                 .setAccept(ContentType.JSON)
                 .setContentType(ContentType.JSON)
                 .log(LogDetail.ALL)

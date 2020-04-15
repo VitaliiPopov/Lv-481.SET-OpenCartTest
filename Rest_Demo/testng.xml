@@ -1,13 +1,19 @@
-<suite name = "Api">
-    <test name = "ApiLoginTest">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Api">
+    <test name="UserTest">
         <classes>
-            <class name="com.petstore.test.user.ApiLoginTest">
-            </class>
-            <class name="com.petstore.test.user.ApiPostAndGetTest">
-            </class>
-            <class name="com.petstore.test.user.ApiTestWithIncorrectData">
-            </class>
-            <class name="com.petstore.test.user.ApiLogoutTest">
+            <class name="com.petstore.test.user.ResponseUser">
+                <methods>
+                    <include name="postCreateNewUser"/>
+                    <include name="getCreatedUser"/>
+                    <include name="putUpdateCorrectUser"/>
+                    <include name="getNonExistUser"/>
+                    <include name="getEditedUser"/>
+                    <include name="deleteCurrentUser"/>
+                    <include name="getDeletedUser"/>
+                </methods>
             </class>
         </classes>
     </test>

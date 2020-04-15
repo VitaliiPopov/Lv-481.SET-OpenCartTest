@@ -57,4 +57,17 @@
             </class>
         </classes>
     </test>
+    <test name="PetTest">
+        <classes>
+            <class name="com.petstore.test.pet.UpdateDeletePets">
+                <methods>
+                    <include name="checkPetById"/>
+                    <include name="updatePetData"/>
+                    <include name="updatePetDataWithNonExistingId"/>
+                    <include name="checkPetByNonExistingId"/>
+                    <include name="delete"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>

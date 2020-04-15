@@ -68,6 +68,27 @@
                     <include name="delete"/>
                 </methods>
             </class>
+            <class name="com.petstore.test.pet.FindByStatusTest">
+                <methods>
+                    <include name="testContentType"/>
+                    <include name="checkAvailableStatus"/>
+                    <include name="checkPendingStatus"/>
+                    <include name="checkSoldStatus"/>
+                    <include name="checkEmptyStatus"/>
+                    <include name="checkIncorrectDataStatus"/>
+                    <include name="checkTooLongStatusdata"/>
+                </methods>
+            </class>
+            <class name="com.petstore.test.pet.FindByTagsTest">
+                <methods>
+                    <include name="checkBodyContainsTag"/>
+                    <include name="checkBodyContainsManyTags"/>
+                    <include name="checkBodyContainsManyTags"/>
+                    <include name="checkWithOneIncorrectTag"/>
+                    <include name="checkIcorrectDataTags"/>
+                    <include name="checkTooLongTagsData"/>
+                </methods>
+            </class>
         </classes>
     </test>
 </suite>

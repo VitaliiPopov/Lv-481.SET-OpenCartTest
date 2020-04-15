@@ -75,20 +75,4 @@ public class UpdateDeletePets {
                 .extract().response();
         System.out.println(response.asString());
     }
-
-    /*@Test
-    public void uploadImage() {
-        File fileForUpload = new File("F:\\OpenCart\\update.jpg");
-
-        RestAssured.baseURI = "http://192.168.99.100:8080/";
-        RestAssured.given()
-                .queryParam("additionalMetadata", "fsdg")
-                .header("Content-Type", "application/octet-stream")
-                .body(fileForUpload)
-                .when().post("api/v3/pet/1/uploadImage")
-                .then()
-                //.statusCode(200)
-                .extract().response().prettyPrint();
-
-    }*/
 }

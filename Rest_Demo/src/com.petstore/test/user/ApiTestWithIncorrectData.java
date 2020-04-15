@@ -1,4 +1,5 @@
 package com.petstore.test.user;
+import com.petstore.data.ConstantVariables;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -10,7 +11,7 @@ import static org.testng.AssertJUnit.assertNotNull;
 
 public class ApiTestWithIncorrectData {
 
-    private String host=System.getenv("API_URL");
+
 
     @Test
     public void checkCreateUserWithIncorrectId() {
@@ -25,12 +26,13 @@ public class ApiTestWithIncorrectData {
         content.put("userStatus", "2");
 
 
-        Response response = RestAssured.given().baseUri(host)
+        Response response = RestAssured.given().baseUri(ConstantVariables.API_URL)
+                .port(ConstantVariables.API_PORT)
                 .log().all()
-                .basePath("/api/v3/user")
+                .basePath(ConstantVariables.API_PATH)
                 .contentType(ContentType.JSON)
                 .body(content)
-                .when().post();
+                .when().post("/user");
         String statusLine =response.statusLine().substring(13,24);
         String jsonBody = response.getBody().asString();
         try {
@@ -46,11 +48,12 @@ public class ApiTestWithIncorrectData {
     @Test
     public void checkGetUserByIncorrectUserName() {
 
-        Response response = RestAssured.given().baseUri(host)
-                .basePath("/api/v3/user/{username}")
+        Response response = RestAssured.given().baseUri(ConstantVariables.API_URL)
+                .port(ConstantVariables.API_PORT)
+                .basePath(ConstantVariables.API_PATH)
                 .accept(ContentType.JSON)
                 .pathParam("username", "Oket")
-                .when().get()
+                .when().get("/user/{username}")
                 .then()
                 .extract().response();
         String jsonBody = response.getBody().asString();

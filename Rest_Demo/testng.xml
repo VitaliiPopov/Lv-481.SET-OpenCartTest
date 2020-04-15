@@ -33,6 +33,28 @@
                     <include name="addPetWithNotExistedStatus"/>
                 </methods>
             </class>
+            <class name="com.petstore.test.user.ApiLoginTest">
+                <methods>
+                    <include name="checkLoginStatusCode"/>
+                </methods>
+            </class>
+            <class name="com.petstore.test.user.ApiLogoutTest">
+                <methods>
+                    <include name="checkLogout"/>
+                </methods>
+            </class>
+            <class name="com.petstore.test.user.ApiPostAndGetTest">
+                <methods>
+                    <include name="checkCreateUser"/>
+                    <include name="checkGetUserByUserName"/>
+                </methods>
+            </class>
+            <class name="com.petstore.test.user.ApiTestWithIncorrectData">
+                <methods>
+                    <include name="checkCreateUserWithIncorrectId"/>
+                    <include name="checkGetUserByIncorrectUserName"/>
+                </methods>
+            </class>
         </classes>
     </test>
 </suite>

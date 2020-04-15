@@ -81,5 +81,4 @@ public class UpdateDeletePets {
                 .extract().response();
         System.out.println(response.asString());
     }
-
 }

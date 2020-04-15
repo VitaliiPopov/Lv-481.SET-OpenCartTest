@@ -91,4 +91,24 @@
             </class>
         </classes>
     </test>
+    <test name="StoreTest">
+        <classes>
+            <class name="com.petstore.test.store.create_order.SendRequestTest">
+                <methods>
+                    <include name="sendRequestBody_ValidOrder"/>
+                    <include name="sendRequestBody_AllNull"/>
+                    <include name="sendRequestBodyWithId_NULL"/>
+                    <include name="sendRequestBodyWithId_String"/>
+                </methods>
+            </class>
+            <class name="com.petstore.test.store.get_order.ReturningStatusCodeTest">
+                <methods>
+                    <include name="whenSendingFindOrderRequest_ShouldReturn200"/>
+                    <include name="whenSendingFindOrderRequest_ShouldReturn404"/>
+                    <include name="whenSendingFindOrderRequest_ShouldReturn400"/>
+                    <include name="whenSendingFindOrderRequest_ShouldReturn405"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>

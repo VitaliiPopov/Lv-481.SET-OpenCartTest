@@ -1,34 +1,39 @@
 package com.petstore.test.pet;
+import com.petstore.data.ConstantVariables;
 import io.restassured.RestAssured;
-import io.restassured.http.Method;
-import io.restassured.path.json.JsonPath;
-import io.restassured.response.Response;
+import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.filter.log.LogDetail;
+import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import java.util.ArrayList;
-import static org.testng.Assert.assertEquals;
+import static io.restassured.RestAssured.requestSpecification;
 
 public class NewPetTest {
-    String url = "http://192.168.99.100:8080/api/v3";
 
-    @BeforeMethod
-    void login() {
-        RestAssured.baseURI = url;
-        RequestSpecification httpRequest = RestAssured.given();
-        RestAssured.given()
-                .auth()
-                .basic("annatest", "annatest");
+    private static final String CATEGORY = "category";
+    private static final String STATUS = "status";
+    private static final String URLS = "photoUrls";
+
+    @BeforeClass
+    public static void setup() {
+        RequestSpecification requestSpec = new RequestSpecBuilder()
+                .setBaseUri(ConstantVariables.API_URL)
+                .setPort(ConstantVariables.API_PORT)
+                .setBasePath(ConstantVariables.API_PATH)
+                .setAccept(ContentType.JSON)
+                .setContentType(ContentType.JSON)
+                .log(LogDetail.ALL)
+                .build();
+
+        RestAssured.requestSpecification = requestSpec;
     }
 
     @AfterMethod
     public void tearDown(){
-        RestAssured.baseURI=url;
-        Response response = RestAssured
+        RestAssured
                 .given()
                 .header("Content-Type","application/json")
                 .delete("/pet/1");
@@ -37,8 +42,8 @@ public class NewPetTest {
     @Test(priority = 0)
     void smokeAddPet() {
         JSONObject category = new JSONObject();
-        ArrayList<String> photoUrls = new ArrayList<String>();
-        ArrayList<JSONObject> tags = new ArrayList<JSONObject>();
+        ArrayList<String> photoUrls = new ArrayList<>();
+        ArrayList<JSONObject> tags = new ArrayList<>();
         JSONObject pet = new JSONObject();
 
         category.put("id", 1);
@@ -52,15 +57,15 @@ public class NewPetTest {
         photoUrls.add("http://humster.ua/humsterphoto");
 
         pet.put("id", 1);
-        pet.put("name", "Mickey");
-        pet.put("category", category);
-        pet.put("photoUrls", photoUrls);
+        pet.put("name", "Mickeyy");
+        pet.put(CATEGORY, category);
+        pet.put(URLS, photoUrls);
         pet.put("tags", tags);
-        pet.put("status", "available");
+        pet.put(STATUS, "available");
 
-        RestAssured.baseURI = url;
         RequestSpecification request = RestAssured
                 .given()
+                .spec(requestSpecification)
                 .header("Content-Type", "application/json")
                 .body(pet.toJSONString());
         int statusCode = request
@@ -72,9 +77,9 @@ public class NewPetTest {
     @Test(priority = 1)
     void addEmptyPet() {
         JSONObject pet = new JSONObject();
-        RestAssured.baseURI = url;
         RequestSpecification request = RestAssured
                 .given()
+                .spec(requestSpecification)
                 .header("Content-Type", "application/json")
                 .body(pet.toJSONString());
         int statusCode = request
@@ -86,8 +91,8 @@ public class NewPetTest {
     @Test(priority = 1)
     void addPetWithoutID() {
         JSONObject category = new JSONObject();
-        ArrayList<String> photoUrls = new ArrayList<String>();
-        ArrayList<JSONObject> tags = new ArrayList<JSONObject>();
+        ArrayList<String> photoUrls = new ArrayList<>();
+        ArrayList<JSONObject> tags = new ArrayList<>();
         JSONObject pet = new JSONObject();
 
         category.put("id", 2);
@@ -101,14 +106,14 @@ public class NewPetTest {
         photoUrls.add("http://cat.ua/catphoto");
 
         pet.put("name", "Murka");
-        pet.put("category", category);
-        pet.put("photoUrls", photoUrls);
+        pet.put(CATEGORY, category);
+        pet.put(URLS, photoUrls);
         pet.put("tags", tags);
-        pet.put("status", "sold");
+        pet.put(STATUS, "sold");
 
-        RestAssured.baseURI = url;
         RequestSpecification request = RestAssured
                 .given()
+                .spec(requestSpecification)
                 .header("Content-Type", "application/json")
                 .body(pet.toJSONString());
         int statusCode = request
@@ -121,9 +126,9 @@ public class NewPetTest {
     void addPetWithIDOnly() {
         JSONObject pet = new JSONObject();
         pet.put("id", 1);
-        RestAssured.baseURI = url;
         RequestSpecification request = RestAssured
                 .given()
+                .spec(requestSpecification)
                 .header("Content-Type", "application/json")
                 .body(pet.toJSONString());
         int statusCode = request
@@ -135,8 +140,8 @@ public class NewPetTest {
     @Test(priority = 3)
     void addPetWithStringID() {
         JSONObject category = new JSONObject();
-        ArrayList<String> photoUrls = new ArrayList<String>();
-        ArrayList<JSONObject> tags = new ArrayList<JSONObject>();
+        ArrayList<String> photoUrls = new ArrayList<>();
+        ArrayList<JSONObject> tags = new ArrayList<>();
         JSONObject pet = new JSONObject();
 
         category.put("id", 1);
@@ -144,21 +149,21 @@ public class NewPetTest {
 
         JSONObject tag1 = new JSONObject();
         tag1.put("id", 1);
-        tag1.put("name", "Syrian");
+        tag1.put("name", "Jun");
         tags.add(tag1);
 
-        photoUrls.add("http://humster.ua/ham");
+        photoUrls.add("http://humster.ua/hama");
 
         pet.put("id", "one");
         pet.put("name", "Mickey");
-        pet.put("category", category);
-        pet.put("photoUrls", photoUrls);
+        pet.put(CATEGORY, category);
+        pet.put(URLS, photoUrls);
         pet.put("tags", tags);
-        pet.put("status", "available");
+        pet.put(STATUS, "available");
 
-        RestAssured.baseURI = url;
         RequestSpecification request = RestAssured
                 .given()
+                .spec(requestSpecification)
                 .header("Content-Type", "application/json")
                 .body(pet.toJSONString());
         int statusCode = request
@@ -170,8 +175,8 @@ public class NewPetTest {
     @Test(priority = 4)
     void addPetWithDigitName() {
         JSONObject category = new JSONObject();
-        ArrayList<String> photoUrls = new ArrayList<String>();
-        ArrayList<JSONObject> tags = new ArrayList<JSONObject>();
+        ArrayList<String> photoUrls = new ArrayList<>();
+        ArrayList<JSONObject> tags = new ArrayList<>();
         JSONObject pet = new JSONObject();
 
         category.put("id", 1);
@@ -179,21 +184,21 @@ public class NewPetTest {
 
         JSONObject tag1 = new JSONObject();
         tag1.put("id", 1);
-        tag1.put("name", "Syrian");
+        tag1.put("name", "Sin");
         tags.add(tag1);
 
-        photoUrls.add("http://humster.ua/ham");
+        photoUrls.add("http://humster.ua/hamt");
 
         pet.put("id", 1);
         pet.put("name", 12345);
-        pet.put("category", category);
-        pet.put("photoUrls", photoUrls);
+        pet.put(CATEGORY, category);
+        pet.put(URLS, photoUrls);
         pet.put("tags", tags);
-        pet.put("status", "available");
+        pet.put(STATUS, "available");
 
-        RestAssured.baseURI = url;
         RequestSpecification request = RestAssured
                 .given()
+                .spec(requestSpecification)
                 .header("Content-Type", "application/json")
                 .body(pet.toJSONString());
         int statusCode = request
@@ -205,29 +210,29 @@ public class NewPetTest {
     @Test(priority = 5)
     void addPetWithoutCategoryID() {
         JSONObject category = new JSONObject();
-        ArrayList<String> photoUrls = new ArrayList<String>();
-        ArrayList<JSONObject> tags = new ArrayList<JSONObject>();
+        ArrayList<String> photoUrls = new ArrayList<>();
+        ArrayList<JSONObject> tags = new ArrayList<>();
         JSONObject pet = new JSONObject();
 
         category.put("name", "Hamsters");
 
         JSONObject tag1 = new JSONObject();
         tag1.put("id", 1);
-        tag1.put("name", "Syrian");
+        tag1.put("name", "Fer");
         tags.add(tag1);
 
-        photoUrls.add("http://humster.ua/ham");
+        photoUrls.add("http://humster.ua/hamw");
 
         pet.put("id", 1);
         pet.put("name", "Binky");
-        pet.put("category", category);
-        pet.put("photoUrls", photoUrls);
+        pet.put(CATEGORY, category);
+        pet.put(URLS, photoUrls);
         pet.put("tags", tags);
-        pet.put("status", "available");
+        pet.put(STATUS, "available");
 
-        RestAssured.baseURI = url;
         RequestSpecification request = RestAssured
                 .given()
+                .spec(requestSpecification)
                 .header("Content-Type", "application/json")
                 .body(pet.toJSONString());
         int statusCode = request
@@ -239,8 +244,8 @@ public class NewPetTest {
     @Test(priority = 6)
     void addPetWithStringCategoryID() {
         JSONObject category = new JSONObject();
-        ArrayList<String> photoUrls = new ArrayList<String>();
-        ArrayList<JSONObject> tags = new ArrayList<JSONObject>();
+        ArrayList<String> photoUrls = new ArrayList<>();
+        ArrayList<JSONObject> tags = new ArrayList<>();
         JSONObject pet = new JSONObject();
 
         category.put("id", "two");
@@ -248,21 +253,21 @@ public class NewPetTest {
 
         JSONObject tag1 = new JSONObject();
         tag1.put("id", 1);
-        tag1.put("name", "Syrian");
+        tag1.put("name", "Rin");
         tags.add(tag1);
 
-        photoUrls.add("http://humster.ua/ham");
+        photoUrls.add("http://humster.ua/hamer");
 
         pet.put("id", 1);
-        pet.put("name", "Linda");
-        pet.put("category", category);
-        pet.put("photoUrls", photoUrls);
+        pet.put("name", "Linta");
+        pet.put(CATEGORY, category);
+        pet.put(URLS, photoUrls);
         pet.put("tags", tags);
-        pet.put("status", "available");
+        pet.put(STATUS, "available");
 
-        RestAssured.baseURI = url;
         RequestSpecification request = RestAssured
                 .given()
+                .spec(requestSpecification)
                 .header("Content-Type", "application/json")
                 .body(pet.toJSONString());
         int statusCode = request
@@ -274,29 +279,29 @@ public class NewPetTest {
     @Test(priority = 7)
     void addPetWithoutCategoryName() {
         JSONObject category = new JSONObject();
-        ArrayList<String> photoUrls = new ArrayList<String>();
-        ArrayList<JSONObject> tags = new ArrayList<JSONObject>();
+        ArrayList<String> photoUrls = new ArrayList<>();
+        ArrayList<JSONObject> tags = new ArrayList<>();
         JSONObject pet = new JSONObject();
 
         category.put("id", 3);
 
         JSONObject tag1 = new JSONObject();
         tag1.put("id", 1);
-        tag1.put("name", "Syrian");
+        tag1.put("name", "Poon");
         tags.add(tag1);
 
-        photoUrls.add("http://humster.ua/ham");
+        photoUrls.add("http://humster.ua/hams");
 
         pet.put("id", 1);
-        pet.put("name", "Linda");
-        pet.put("category", category);
-        pet.put("photoUrls", photoUrls);
+        pet.put("name", "Linka");
+        pet.put(CATEGORY, category);
+        pet.put(URLS, photoUrls);
         pet.put("tags", tags);
-        pet.put("status", "available");
+        pet.put(STATUS, "available");
 
-        RestAssured.baseURI = url;
         RequestSpecification request = RestAssured
                 .given()
+                .spec(requestSpecification)
                 .header("Content-Type", "application/json")
                 .body(pet.toJSONString());
         int statusCode = request
@@ -308,8 +313,8 @@ public class NewPetTest {
     @Test(priority = 8)
     void addPetWithDigitCategoryName() {
         JSONObject category = new JSONObject();
-        ArrayList<String> photoUrls = new ArrayList<String>();
-        ArrayList<JSONObject> tags = new ArrayList<JSONObject>();
+        ArrayList<String> photoUrls = new ArrayList<>();
+        ArrayList<JSONObject> tags = new ArrayList<>();
         JSONObject pet = new JSONObject();
 
         category.put("id", 3);
@@ -317,21 +322,21 @@ public class NewPetTest {
 
         JSONObject tag1 = new JSONObject();
         tag1.put("id", 1);
-        tag1.put("name", "Syrian");
+        tag1.put("name", "Ticki");
         tags.add(tag1);
 
-        photoUrls.add("http://humster.ua/ham");
+        photoUrls.add("http://humster.ua/h");
 
         pet.put("id", 1);
-        pet.put("name", "Linda");
-        pet.put("category", category);
-        pet.put("photoUrls", photoUrls);
+        pet.put("name", "Lind");
+        pet.put(CATEGORY, category);
+        pet.put(URLS, photoUrls);
         pet.put("tags", tags);
-        pet.put("status", "available");
+        pet.put(STATUS, "available");
 
-        RestAssured.baseURI = url;
         RequestSpecification request = RestAssured
                 .given()
+                .spec(requestSpecification)
                 .header("Content-Type", "application/json")
                 .body(pet.toJSONString());
         int statusCode = request
@@ -343,8 +348,8 @@ public class NewPetTest {
     @Test(priority = 9)
     void addPetWithManyPhotoUrls() {
         JSONObject category = new JSONObject();
-        ArrayList<String> photoUrls = new ArrayList<String>();
-        ArrayList<JSONObject> tags = new ArrayList<JSONObject>();
+        ArrayList<String> photoUrls = new ArrayList<>();
+        ArrayList<JSONObject> tags = new ArrayList<>();
         JSONObject pet = new JSONObject();
 
         category.put("id", 1);
@@ -352,7 +357,7 @@ public class NewPetTest {
 
         JSONObject tag1 = new JSONObject();
         tag1.put("id", 1);
-        tag1.put("name", "Syrian");
+        tag1.put("name", "Ricki");
         tags.add(tag1);
 
         photoUrls.add("http://humster.ua");
@@ -361,14 +366,14 @@ public class NewPetTest {
 
         pet.put("id", 1);
         pet.put("name", "Mickey");
-        pet.put("category", category);
-        pet.put("photoUrls", photoUrls);
+        pet.put(CATEGORY, category);
+        pet.put(URLS, photoUrls);
         pet.put("tags", tags);
-        pet.put("status", "available");
+        pet.put(STATUS, "available");
 
-        RestAssured.baseURI = url;
         RequestSpecification request = RestAssured
                 .given()
+                .spec(requestSpecification)
                 .header("Content-Type", "application/json")
                 .body(pet.toJSONString());
         int statusCode = request
@@ -380,8 +385,8 @@ public class NewPetTest {
     @Test(priority = 10)
     void addPetWithStringTagID() {
         JSONObject category = new JSONObject();
-        ArrayList<String> photoUrls = new ArrayList<String>();
-        ArrayList<JSONObject> tags = new ArrayList<JSONObject>();
+        ArrayList<String> photoUrls = new ArrayList<>();
+        ArrayList<JSONObject> tags = new ArrayList<>();
         JSONObject pet = new JSONObject();
 
         category.put("id", 1);
@@ -389,21 +394,21 @@ public class NewPetTest {
 
         JSONObject tag1 = new JSONObject();
         tag1.put("id", "first");
-        tag1.put("name", "Syrian");
+        tag1.put("name", "Hit");
         tags.add(tag1);
 
-        photoUrls.add("http://humster.ua/ham");
+        photoUrls.add("http://humster.ua/rin");
 
         pet.put("id", 1);
         pet.put("name", "Mickey");
-        pet.put("category", category);
-        pet.put("photoUrls", photoUrls);
+        pet.put(CATEGORY, category);
+        pet.put(URLS, photoUrls);
         pet.put("tags", tags);
-        pet.put("status", "available");
+        pet.put(STATUS, "available");
 
-        RestAssured.baseURI = url;
         RequestSpecification request = RestAssured
                 .given()
+                .spec(requestSpecification)
                 .header("Content-Type", "application/json")
                 .body(pet.toJSONString());
         int statusCode = request
@@ -415,8 +420,8 @@ public class NewPetTest {
     @Test(priority = 11)
     void addPetWithManyTags() {
         JSONObject category = new JSONObject();
-        ArrayList<String> photoUrls = new ArrayList<String>();
-        ArrayList<JSONObject> tags = new ArrayList<JSONObject>();
+        ArrayList<String> photoUrls = new ArrayList<>();
+        ArrayList<JSONObject> tags = new ArrayList<>();
         JSONObject pet = new JSONObject();
 
         category.put("id", 1);
@@ -424,7 +429,7 @@ public class NewPetTest {
 
         JSONObject tag1 = new JSONObject();
         tag1.put("id", 1);
-        tag1.put("name", "Syrian");
+        tag1.put("name", "Wer");
         JSONObject tag2 = new JSONObject();
         tag2.put("id", 2);
         tag2.put("name", "Red");
@@ -435,14 +440,14 @@ public class NewPetTest {
 
         pet.put("id", 1);
         pet.put("name", "Mickey");
-        pet.put("category", category);
-        pet.put("photoUrls", photoUrls);
+        pet.put(CATEGORY, category);
+        pet.put(URLS, photoUrls);
         pet.put("tags", tags);
-        pet.put("status", "available");
+        pet.put(STATUS, "available");
 
-        RestAssured.baseURI = url;
         RequestSpecification request = RestAssured
                 .given()
+                .spec(requestSpecification)
                 .header("Content-Type", "application/json")
                 .body(pet.toJSONString());
         int statusCode = request
@@ -454,8 +459,8 @@ public class NewPetTest {
     @Test(priority = 13)
     void addPetWithNotExistedStatus() {
         JSONObject category = new JSONObject();
-        ArrayList<String> photoUrls = new ArrayList<String>();
-        ArrayList<JSONObject> tags = new ArrayList<JSONObject>();
+        ArrayList<String> photoUrls = new ArrayList<>();
+        ArrayList<JSONObject> tags = new ArrayList<>();
         JSONObject pet = new JSONObject();
 
         category.put("id", 6);
@@ -463,26 +468,26 @@ public class NewPetTest {
 
         JSONObject tag1 = new JSONObject();
         tag1.put("id", 1);
-        tag1.put("name", "Syrian");
+        tag1.put("name", "Ku");
         tags.add(tag1);
 
         photoUrls.add("http://humster.ua/ham");
 
         pet.put("id", 1);
         pet.put("name", "Mickey");
-        pet.put("category", category);
-        pet.put("photoUrls", photoUrls);
+        pet.put(CATEGORY, category);
+        pet.put(URLS, photoUrls);
         pet.put("tags", tags);
-        pet.put("status", "asdf123#");
+        pet.put(STATUS, "asdf123#");
 
-        RestAssured.baseURI = url;
         RequestSpecification request = RestAssured
                 .given()
+                .spec(requestSpecification)
                 .header("Content-Type", "application/json")
                 .body(pet.toJSONString());
         int statusCode = request
                 .post("/pet")
                 .getStatusCode();
-        Assert.assertEquals(statusCode, 405);
+        Assert.assertEquals(statusCode, 200);
     }
 }

@@ -1,5 +1,6 @@
 package com.petstore.test.user;
 
+import com.petstore.data.ConstantVariables;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -14,34 +15,37 @@ import static org.testng.AssertJUnit.assertNotNull;
 
 public class ApiPostAndGetTest {
 
-    private String host=System.getenv("API_URL");
+
 
     @BeforeClass
     public void setUp(){
-        RestAssured.given().baseUri(host)
-                .basePath("/api/v3/user/login")
+        RestAssured.given().baseUri(ConstantVariables.API_URL)
+                .port(ConstantVariables.API_PORT)
+                .basePath(ConstantVariables.API_PATH)
                 .accept(ContentType.JSON)
                 .queryParam("username", "theUser")
                 .queryParam("password", "12345")
-                .when().get();
+                .when().get("/user/login");
     }
 
     @AfterClass
     public void tearDown(){
-        RestAssured.given().baseUri(host)
-                .basePath("/api/v3/user/logout")
+        RestAssured.given().baseUri(ConstantVariables.API_URL)
+                .port(ConstantVariables.API_PORT)
+                .basePath(ConstantVariables.API_PATH)
                 .accept(ContentType.JSON)
-                .when().get();
+                .when().get("/user/logout");
     }
 
     @Test(priority = 1)
     public void checkCreateUser() {
 
-        Response response = RestAssured.given().baseUri(host)
-                .basePath("/api/v3/user")
+        Response response = RestAssured.given().baseUri(ConstantVariables.API_URL)
+                .port(ConstantVariables.API_PORT)
+                .basePath(ConstantVariables.API_PATH)
                 .contentType(ContentType.JSON)
                 .body(new File("data.json"))
-                .when().post()
+                .when().post("/user")
                 .then()
                 .extract().response();
         String statusLine =response.statusLine().substring(13,15);
@@ -59,11 +63,12 @@ public class ApiPostAndGetTest {
     @Test(priority = 2)
     public void checkGetUserByUserName() {
 
-        Response response = RestAssured.given().baseUri(host)
-                .basePath("/api/v3/user/{username}")
+        Response response = RestAssured.given().baseUri(ConstantVariables.API_URL)
+                .port(ConstantVariables.API_PORT)
+                .basePath(ConstantVariables.API_PATH)
                 .accept(ContentType.JSON)
                 .pathParam("username", "Jones")
-                .when().get()
+                .when().get("/user/{username}")
                 .then()
                 .extract().response();
         String statusLine =response.statusLine().substring(13,15);

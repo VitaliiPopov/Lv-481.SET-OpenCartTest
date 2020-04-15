@@ -1,5 +1,6 @@
 package com.petstore.test.user;
 
+import com.petstore.data.ConstantVariables;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -8,15 +9,16 @@ import org.testng.annotations.Test;
 
 public class ApiLogoutTest {
 
-    private String host=System.getenv("API_URL");
+
 
     @Test(priority = 1)
     public void checkLogout() {
 
-        Response response = RestAssured.given().baseUri(host)
-                .basePath("/api/v3/user/logout")
+        Response response = RestAssured.given().baseUri(ConstantVariables.API_URL)
+                .port(ConstantVariables.API_PORT)
+                .basePath(ConstantVariables.API_PATH)
                 .accept(ContentType.JSON)
-                .when().get()
+                .when().get("/user/logout")
                 .then()
                 .extract().response();
         String statusLine =response.statusLine().substring(13,15);

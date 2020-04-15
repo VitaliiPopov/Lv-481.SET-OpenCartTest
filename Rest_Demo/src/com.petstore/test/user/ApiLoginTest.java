@@ -1,5 +1,6 @@
 package com.petstore.test.user;
 
+import com.petstore.data.ConstantVariables;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -11,17 +12,18 @@ import static org.testng.AssertJUnit.assertNotNull;
 
 public class ApiLoginTest {
 
-    private String host=System.getenv("API_URL");
+
 
     @Test(priority = 1)
     public void checkLoginStatusCode() {
 
-        Response response = RestAssured.given().baseUri(host)
-                .basePath("/api/v3/user/login")
+        Response response = RestAssured.given().baseUri(ConstantVariables.API_URL)
+                .port(ConstantVariables.API_PORT)
+                .basePath(ConstantVariables.API_PATH)
                 .accept(ContentType.JSON)
                 .queryParam("username", "theUser")
                 .queryParam("password", "12345")
-                .when().get()
+                .when().get("/user/login")
                 .then()
                 .extract().response();
         String statusLine =response.statusLine().substring(13,15);

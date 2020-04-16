@@ -1,4 +1,5 @@
 package test.register_test;
+
 import com.opencart.pages.account.*;
 import com.opencart.tools.*;
 import com.opencart.tools.test_runner.AccountTestRunner;

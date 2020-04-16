@@ -59,12 +59,12 @@ public class SearchPage extends AbstractPageWithHeader {
     //productContainersComponents
     public List<ProductContainersComponent> getProductContainersComponents() {
         driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-        WebDriverWait wait = new WebDriverWait(driver, 3);
+        WebDriverWait wait = new WebDriverWait(driver, 10);
         productContainersComponents = new ArrayList<>();
         for (WebElement current : wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(PRODUCT_COMPONENT_LOCATOR)))) {
             productContainersComponents.add(new ProductContainersComponent(current));
         }
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         return productContainersComponents;
     }
 

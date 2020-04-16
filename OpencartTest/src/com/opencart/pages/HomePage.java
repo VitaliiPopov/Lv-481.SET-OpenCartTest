@@ -36,19 +36,19 @@ public class HomePage extends AbstractPageWithHeader {
      */
     private void initElements() {
         driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-        WebDriverWait wait = new WebDriverWait(driver, 3);
+        WebDriverWait wait = new WebDriverWait(driver, 10);
         productContainersComponents = new ArrayList<>();
         for (WebElement current : wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector(PRODUCT_COMPONENT_LOCATOR)))) {
             productContainersComponents.add(new ProductContainersComponent(current));
         }
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
     ///region ATOMIC_OPERATIONS
 
     public AlertComponent getAlertComponentWithWait() {
         try {
-            Thread.sleep(1000); //Only for presentation, bug alert
+            Thread.sleep(3000); //Only for presentation, bug alert
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

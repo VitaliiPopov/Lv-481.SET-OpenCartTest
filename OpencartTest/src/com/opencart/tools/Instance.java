@@ -8,7 +8,6 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.CapabilityType;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.MalformedURLException;
@@ -17,31 +16,50 @@ import java.util.concurrent.TimeUnit;
 
 public class Instance {
 
-    private static WebDriver driver = null;
+    protected static WebDriver driver = null;
 
     private Instance() {
     }
 
     public static WebDriver getDriver() {
         if (driver == null) {
-            ChromeOptions options = new ChromeOptions();
-            options.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
-            WebDriverManager.chromedriver().setup();
-            driver = new ChromeDriver(options);
+            if (System.getProperty("BrowserName").equalsIgnoreCase("chrome")) {
+                ChromeOptions options = new ChromeOptions();
+                options.setCapability(CapabilityType.BROWSER_NAME, "chrome");
+                options.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
+                options.addArguments("--start-maximized");
+                try {
+                    driver = new RemoteWebDriver(new URL("http://52.143.161.185:4444/wd/hub"), options);
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                }
+            } else if (System.getProperty("BrowserName").equalsIgnoreCase("firefox")) {
+                FirefoxOptions options = new FirefoxOptions();
+                options.setCapability(CapabilityType.BROWSER_NAME, "firefox");
+                options.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
+                try {
+                    driver = new RemoteWebDriver(new URL("http://52.143.161.185:4444/wd/hub"), options);
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-        driver.get(ConstantVariables.URL);
         return driver;
     }
 
-    public static void quit() {
-        driver.quit();
-        driver = null;
+    public static void getURL() {
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.get(ConstantVariables.URL);
     }
 
-    public static WebDriver getAdminDriver() {
-        driver = getDriver();
+    public static void quit() {
+        if (driver != null) {
+            driver.quit();
+            driver = null;
+        }
+    }
+
+    public static WebDriver getAdminDriver() { // TODO
         driver.get(ConstantVariables.ADMIN_URL);
         return driver;
     }
@@ -49,4 +67,5 @@ public class Instance {
     public static void clearCookies() {
         driver.manage().deleteAllCookies();
     }
+    
 }

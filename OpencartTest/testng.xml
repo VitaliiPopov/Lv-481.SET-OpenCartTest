@@ -116,4 +116,65 @@
             </class>
         </classes>
     </test>
+
+        <test name="AddToWishList">
+            <parameter name="myAccountDropdownText" value="Login"/>
+            <parameter name="fromSearchPageProductName" value="iPod Nano"/>
+            <parameter name="fromHomePageProductName" value="MacBook"/>
+            <parameter name="fromProductPageProductName" value="iPhone"/>
+            <classes>
+                <class name="test.TestWishList">
+                    <methods>
+                        <include name="addProductToWishListFromSearchPage"/>
+                        <include name="addProductToWishListFromHomePage"/>
+                        <include name="addProductToWishListFromProductPage"/>
+                    </methods>
+                </class>
+            </classes>
+        </test>
+
+        <test name="AddToCartFromWishList">
+
+            <parameter name="myAccountDropdownText" value="Login"/>
+
+            <parameter name="firstProductName" value="MacBook"/>
+            <parameter name="secondProductName" value="iPhone"/>
+            <classes>
+                <class name="test.TestWishList">
+                    <methods>
+                        <include name="addProductToCartFromWishList"/>
+                    </methods>
+                </class>
+            </classes>
+
+        </test>
+
+        <test name="RemoveFromWishList">
+
+            <parameter name="myAccountDropdownText" value="Login"/>
+            <parameter name="firstProductName" value="Samsung Galaxy Tab 10.1"/>
+            <parameter name="secondProductName" value="Samsung SyncMaster 941BW"/>
+            <classes>
+                <class name="test.TestWishList">
+                    <methods>
+                        <include name="removeProductFromWishListByName"/>
+                    </methods>
+                </class>
+            </classes>
+        </test>
+
+        <test name="VerifyWishListEmptyPage">
+
+            <parameter name="myAccountDropdownText" value="Login"/>
+            <parameter name="expectedMessage" value="Your wish list is empty."/>
+
+            <classes>
+                <class name="test.TestWishList">
+                    <methods>
+                        <include name="verifyWishListEmptyPageMessage"/>
+                    </methods>
+                </class>
+            </classes>
+        </test>
+
 </suite>

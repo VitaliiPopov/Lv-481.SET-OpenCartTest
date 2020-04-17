@@ -25,12 +25,13 @@ public class WishListTestRunner {
     @BeforeMethod
     @Parameters({"myAccountDropdownText"})
     public void login(String myAccountDropdownText) {
+        Instance.getURL();
         // Preconditions
         //      Login to system
         LoginPage loginPage = getHomePage().goToLoginPage(myAccountDropdownText);
         MyAccountPage myAccountPage = loginPage.login(jsonParser.getEmailFromJson(7), jsonParser.getPasswordFromJson(7));
         myAccountPage.goToHomePage();
-        jsonParser.getUserFromJson(1).getEmail();
+
 
     }
 

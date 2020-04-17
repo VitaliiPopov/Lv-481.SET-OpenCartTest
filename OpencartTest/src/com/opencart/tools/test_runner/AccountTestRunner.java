@@ -17,7 +17,7 @@ public class AccountTestRunner {
     @BeforeClass
     public void beforeClass() {
         Instance.getDriver();
-        Instance.getURL();
+        //Instance.getURL();
         try {
             primaryRegistration();
         } catch (InterruptedException e) {

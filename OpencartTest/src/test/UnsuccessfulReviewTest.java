@@ -1,6 +1,5 @@
 package test;
 
-import com.opencart.data.ConstantVariables;
 import com.opencart.pages.product.ProductPage;
 import com.opencart.tools.Instance;
 import com.opencart.tools.Screenshot;
@@ -34,13 +33,14 @@ public class UnsuccessfulReviewTest extends TestRunner {
     @BeforeClass
     public void setUp() {
         driver = Instance.getDriver();
+        Instance.getURL();
         PageFactory.initElements(driver, this);
         productPage = new ProductPage(driver);
     }
 
     @BeforeMethod
     public void setUpMethod() {
-        driver.navigate().to(ConstantVariables.URL);
+        Instance.getURL();
     }
 
     @AfterMethod

@@ -2,51 +2,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 <suite name="Regression">
-    <!--<test name="EditAccountTest">
-        <parameter name="loginText" value="Login"/>
-        <parameter name="logoutText" value="Logout"/>
-        <parameter name="registerText" value="Register"/>
-        <parameter name="myAccountText" value="My Account"/>
-        <parameter name="editAccountText" value="My Account Information"/>
-        <classes>
-            <class name="test.register_test.EditAccountTest">
-                <methods>
-                    <include name="editAccountWithEmptyFieldsTest"/>
-                    <include name="editAccountWithEmptyFirstnameTest"/>
-                    <include name="editAccountWithLongFirstnameTest"/>
-                    <include name="editAccountWithEmptyLastnameTest"/>
-                    <include name="editAccountWithLongLastnameTest"/>
-                    <include name="editAccountWithEmptyEmailTest"/>
-                    <include name="editAccountEmailWithoutAtSymbolTest"/>
-                    <include name="editAccountEmailWithoutDotSymbolTest"/>
-                    <include name="editAccountWithExistedEmailTest"/>
-                    <include name="editAccountWithEmptyTelephoneTest"/>
-                    <include name="editAccountWithShortTelephoneTest"/>
-                    <include name="editAccountWithLongTelephoneTest"/>
-                    <include name="complexScenario"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
-    <test name="SmokeAccountTest">
-        <parameter name="loginText" value="Login"/>
-        <parameter name="logoutText" value="Logout"/>
-        <parameter name="registerText" value="Register"/>
-        <parameter name="myAccountText" value="My Account"/>
-        <parameter name="editAccountText" value="My Account Information"/>
-        <classes>
-            <class name="test.login_test.SmokeAccountTest">
-                <methods>
-                    <include name="smokeRegisterNewUserTest"/>
-                    <include name="smokeLoginExistedUserTest"/>
-                    <include name="smokeChangePasswordTest"/>
-                    <include name="smokeEditAccountTest"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
     <test name="LoginTest">
         <parameter name="loginText" value="Login"/>
         <parameter name="logoutText" value="Logout"/>
@@ -80,7 +35,6 @@
                     <include name="registerWithEmptyLastNameTest"/>
                     <include name="registerWithLongFirstLastNamesTest"/>
                     <include name="registerWithEmptyEmailTest"/>
-                    <include name="registerWithExistedEmailTest"/>
                     <include name="registerEmailWithoutAtSymbolTest"/>
                     <include name="registerEmailWithoutDotSymbolTest"/>
                     <include name="registerWithEmptyTelephoneTest"/>
@@ -96,29 +50,9 @@
         </classes>
     </test>
 
-    &lt;!&ndash;Sofiia&ndash;&gt;
-
-    <test name="ReviewTest">
-        &lt;!&ndash;MainTest&ndash;&gt;
-        <parameter name="nameOfAuthor" value="Georgiy"/>
-        <parameter name="correctText"
-                   value="it is a product of amazing quality, everything works and the price is quite affordable."/>
-        <parameter name="messageOfDeliveredReview"
-                   value="Thank you for your review. It has been submitted to the webmaster for approval."/>
-        <parameter name="textOfSuccessfulDeletingReview" value=" Success: You have modified reviews!"/>
-        <classes>
-            &lt;!&ndash;MainTest&ndash;&gt;
-            <class name="test.ReviewTest">
-                <methods>
-                    <include name="successfulReviewProcess"/>
-                    <include name="successfullyWritingReview"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
+    <!--Sofiia-->
     <test name="UnsuccessfulReviewTest">
-        &lt;!&ndash;MainTest&ndash;&gt;
+        <!--MainTest-->
         <parameter name="incorrectName" value="Ri"/>
         <parameter name="correctText"
                    value="it is a product of amazing quality, everything works and the price is quite affordable."/>
@@ -132,7 +66,7 @@
         <parameter name="emptyTextField" value=""/>
 
         <classes>
-            &lt;!&ndash;MainTest&ndash;&gt;
+            <!--MainTest-->
             <class name="test.UnsuccessfulReviewTest">
                 <methods>
                     <include name="unsuccessfullyWritingReviewBecauseOfIncorrectName"/>
@@ -145,8 +79,7 @@
             </class>
         </classes>
     </test>
--->
-    <!--    ProductComparisonTests-->
+    <!--ProductComparisonTests-->
     <test name="CompareTest">
         <parameter name="myAccountDropdownText" value="Login"/>
         <parameter name="searchName" value="ip"/>
@@ -183,154 +116,4 @@
             </class>
         </classes>
     </test>
-
-    <!--Mariia-->
-
-    <!--<test name="SearchTest">
-        <parameter name="myAccountDropdownText" value="Login"/>
-        <parameter name="productName" value="IPHONE"/>
-        <parameter name="lowerProductName" value="Iphone"/>
-        <parameter name="searchText" value="MAC"/>
-        <parameter name="lowerSearchText" value="mac"/>
-        <parameter name="categoryOption" value="Laptops"/>
-        <parameter name="showOption" value="15"/>
-        <parameter name="allProducts" value="%"/>
-        <classes>
-            <class name="test.search_test.SearchPageTest">
-                <methods>
-                    <include name="checkLowerCase"/>
-                    <include name="searchLabelContainSearchText"/>
-                    <include name="checkUncorrectFieldResultMessage"/>
-                    <include name="checkEmptyFieldResultMessage"/>
-                    <include name="checkCategoriesCheckboxDisabled"/>
-                    <include name="checkCategoriesCheckboxEnabled"/>
-                    <include name="checkProductCountFromLablel"/>
-                    <include name="checkListAndGridResult"/>
-                    <include name="checkSortByA_Z_Name"/>
-                    <include name="checkSortByZ_A_Name"/>
-                    <include name="checkSortByPrice"/>
-                    <include name="checkShowDropbox"/>
-                    <include name="checkPagesCount"/>
-                    <include name="checkDescriptionCheckbox"/>
-                    <include name="checkCategoriesCheckboxIsUseful"/>   &lt;!&ndash;//failed&ndash;&gt;
-                </methods>
-            </class>
-        </classes>
-    </test>
-
-    &lt;!&ndash;Yura&ndash;&gt;
-
-    <test name="AddressBookTest">
-        <parameter name="myAccountDropdownText" value="Login"/>
-        <classes>
-            <class name="test.AddressTests">
-                <methods>
-                    <include name="abilityToAddAddress"/>
-                    <include name="abilityToDeleteAddress"/>
-                    <include name="editAddress"/>
-                    <include name="checkEditPageAlertMassages"/>
-                    <include name="checkAbilityToDeleteDefaultAddress"/>
-                    <include name="createAddressWithEmptyFirstname"/>
-                    <include name="createAddressWithEmptyLastname"/>
-                    <include name="createAddressWithEmptyAddress"/>
-                    <include name="createAddressWithEmptyCountry"/>
-                    <include name="createAddressWithEmptyRegion"/>
-                    <include name="checkAlertsWithTooShortInputs"/>
-                    <include name="checkAlertsWithTooLongInputs"/>
-                    <include name="checkAlertsWithTooLongInputs"/>
-                    <include name="createAddressWithNumbersInsteadCharacters"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
-    &lt;!&ndash;    Mykhailo&ndash;&gt;
-    <test name="AddToWishList">
-        <parameter name="myAccountDropdownText" value="Login"/>
-        <parameter name="fromSearchPageProductName" value="iPod Nano"/>
-        <parameter name="fromHomePageProductName" value="MacBook"/>
-        <parameter name="fromProductPageProductName" value="iPhone"/>
-        <classes>
-            <class name="test.TestWishList">
-                <methods>
-                    <include name="addProductToWishListFromSearchPage"/>
-                    <include name="addProductToWishListFromHomePage"/>
-                    <include name="addProductToWishListFromProductPage"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
-    <test name="AddToCartFromWishList">
-
-        <parameter name="myAccountDropdownText" value="Login"/>
-
-        <parameter name="firstProductName" value="MacBook"/>
-        <parameter name="secondProductName" value="iPhone"/>
-        <classes>
-            <class name="test.TestWishList">
-                <methods>
-                    <include name="addProductToCartFromWishList"/>
-                </methods>
-            </class>
-        </classes>
-
-    </test>
-
-    <test name="RemoveFromWishList">
-
-        <parameter name="myAccountDropdownText" value="Login"/>
-        <parameter name="firstProductName" value="Samsung Galaxy Tab 10.1"/>
-        <parameter name="secondProductName" value="Samsung SyncMaster 941BW"/>
-        <classes>
-            <class name="test.TestWishList">
-                <methods>
-                    <include name="removeProductFromWishListByName"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
-    <test name="VerifyWishListEmptyPage">
-
-        <parameter name="myAccountDropdownText" value="Login"/>
-        <parameter name="expectedMessage" value="Your wish list is empty."/>
-
-        <classes>
-            <class name="test.TestWishList">
-                <methods>
-                    <include name="verifyWishListEmptyPageMessage"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
-    &lt;!&ndash;Nazar&ndash;&gt;
-
-    <test name="CartCurrencyTest">
-        <parameter name="myAccountDropdownText" value="Login"/>
-        <parameter name="productName" value="MacBook"/>
-        <classes>
-            <class name="test.CartCurrencyTest">
-                <methods>
-                    <include name="login"/>
-                    <include name="addProductToCart"/>
-                    <include name="changeCurrencyOnCartPage"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
-
-    <test name="WishListCurrencyTest">
-        <parameter name="myAccountDropdownText" value="Login"/>
-        <classes>
-            <class name="test.WishListCurrencyTest">
-                <methods>
-                    <include name="login"/>
-                    <include name="changeCurrencyOnWishListPage"/>
-                </methods>
-            </class>
-        </classes>
-    </test>-->
 </suite>

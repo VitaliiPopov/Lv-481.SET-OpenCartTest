@@ -12,25 +12,11 @@ import static org.apache.commons.lang.RandomStringUtils.randomAlphabetic;
 
 public class RegisterTest extends TestRunner {
     JsonDataConfig jsonDataConfig = new JsonDataConfig("TestData.json");
-    AdminManager adminAccess = new AdminManager();
     String email = jsonDataConfig.getEmailFromJson(0);
 
-    @AfterMethod
-    public void finishLogout() {
-        try {
-            logoutUser();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @AfterClass
-    public void tearDown() {
-        try {
-            adminAccess.deleteCustomerFromAdmin(email);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    @BeforeMethod
+    public void beforeMethod(){
+        Instance.getURL();
     }
 
     @Parameters({"registerText"})
@@ -110,22 +96,6 @@ public class RegisterTest extends TestRunner {
         Assert.assertEquals(true, registerPage.isEmailAlertPresent());
     }
 
-    @Test(priority = 6)
-    @Description("Verify that user cant register with existed email")
-    public void registerWithExistedEmailTest() throws InterruptedException {
-        String existedEmail = adminAccess.getExistedEmailFromAdmin();
-        String password = randomAscii(5);
-        RegisterPage registerPage = getHomePage().goToRegisterPage();
-        registerPage.register(
-                 randomAlphabetic(10),
-                 randomAlphabetic(10),
-                 existedEmail,
-                 randomAlphabetic(5),
-                 password,
-                 password);
-        Assert.assertTrue(registerPage.getWarningText().contains("E-Mail"));
-    }
-
     @Parameters({"loginText", "registerText"})
     @Test(priority = 7)
     @Description("Verify that user cant register with email without @ symbol")
@@ -158,7 +128,6 @@ public class RegisterTest extends TestRunner {
                 password);
         Assert.assertEquals(true, registerPage.isEmailAlertPresent());
     }
-
 
     @Test(priority = 9)
     @Description("Verify that user cant register with empty telephone")
@@ -289,5 +258,4 @@ public class RegisterTest extends TestRunner {
         }
         else getHomePage();
     }
-
 }

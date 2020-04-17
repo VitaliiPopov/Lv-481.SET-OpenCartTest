@@ -50,7 +50,36 @@
         </classes>
     </test>
 
-<!--ProductComparisonTests-->
+    <!--Sofiia-->
+    <test name="UnsuccessfulReviewTest">
+        <!--MainTest-->
+        <parameter name="incorrectName" value="Ri"/>
+        <parameter name="correctText"
+                   value="it is a product of amazing quality, everything works and the price is quite affordable."/>
+        <parameter name="messageOfUndeliveredReviewBecauseOfIncorrectName"
+                   value="Warning: Review Name must be between 3 and 25 characters!"/>
+        <parameter name="nameOfAuthor" value="Georgiy"/>
+        <parameter name="incorrectText" value="product is amazing."/>
+        <parameter name="messageOfUndeliveredReviewBecauseOfIncorrectText"
+                   value="Warning: Review Text must be between 25 and 1000 characters!"/>
+        <parameter name="emptyNameField" value=""/>
+        <parameter name="emptyTextField" value=""/>
+
+        <classes>
+            <!--MainTest-->
+            <class name="test.UnsuccessfulReviewTest">
+                <methods>
+                    <include name="unsuccessfullyWritingReviewBecauseOfIncorrectName"/>
+                    <include name="unsuccessfullyWritingReviewBecauseOfIncorrectText"/>
+                    <include name="unsuccessfullyWritingReviewBecauseOfIncorrectTextAndName"/>
+                    <include name="unsuccessfullyWritingReviewBecauseOfEmptyNameAndTextFields"/>
+                    <include name="unsuccessfullyWritingReviewBecauseOfTooLongName"/>
+                    <include name="unsuccessfullyWritingReviewBecauseOfTooLongText"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <!--ProductComparisonTests-->
     <test name="CompareTest">
         <parameter name="myAccountDropdownText" value="Login"/>
         <parameter name="searchName" value="ip"/>
@@ -83,34 +112,6 @@
                     <include name="AddProductToCompareFromProductPage"/>
                     <include name="AddSameProductTwoTimes"/>
                     <include name="CleanAllProductsFromComparison"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-    <test name="UnsuccessfulReviewTest">
-
-        <parameter name="incorrectName" value="Ri"/>
-        <parameter name="correctText"
-                   value="it is a product of amazing quality, everything works and the price is quite affordable."/>
-        <parameter name="messageOfUndeliveredReviewBecauseOfIncorrectName"
-                   value="Warning: Review Name must be between 3 and 25 characters!"/>
-        <parameter name="nameOfAuthor" value="Georgiy"/>
-        <parameter name="incorrectText" value="product is amazing."/>
-        <parameter name="messageOfUndeliveredReviewBecauseOfIncorrectText"
-                   value="Warning: Review Text must be between 25 and 1000 characters!"/>
-        <parameter name="emptyNameField" value=""/>
-        <parameter name="emptyTextField" value=""/>
-
-        <classes>
-
-            <class name="test.UnsuccessfulReviewTest">
-                <methods>
-                    <include name="unsuccessfullyWritingReviewBecauseOfIncorrectName"/>
-                    <include name="unsuccessfullyWritingReviewBecauseOfIncorrectText"/>
-                    <include name="unsuccessfullyWritingReviewBecauseOfIncorrectTextAndName"/>
-                    <include name="unsuccessfullyWritingReviewBecauseOfEmptyNameAndTextFields"/>
-                    <include name="unsuccessfullyWritingReviewBecauseOfTooLongName"/>
-                    <include name="unsuccessfullyWritingReviewBecauseOfTooLongText"/>
                 </methods>
             </class>
         </classes>

@@ -29,7 +29,7 @@ public class Instance {
                 options.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
                 options.addArguments("--start-maximized");
                 try {
-                    driver = new RemoteWebDriver(new URL("http://52.143.161.185:4444/wd/hub"), options);
+                    driver = new RemoteWebDriver(new URL(ConstantVariables.HUB_URL), options);
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
                 }
@@ -38,7 +38,7 @@ public class Instance {
                 options.setCapability(CapabilityType.BROWSER_NAME, "firefox");
                 options.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
                 try {
-                    driver = new RemoteWebDriver(new URL("http://52.143.161.185:4444/wd/hub"), options);
+                    driver = new RemoteWebDriver(new URL(ConstantVariables.HUB_URL), options);
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
                 }

@@ -1,10 +1,8 @@
 package com.opencart.tools.test_runner;
 
-import com.opencart.pages.AbstractPageWithHeader;
 import com.opencart.pages.HomePage;
 import com.opencart.tools.Instance;
 import io.qameta.allure.Step;
-import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;

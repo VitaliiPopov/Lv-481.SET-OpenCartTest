@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 <suite name="Regression">
-    <test name="EditAccountTest">
+    <!--<test name="EditAccountTest">
         <parameter name="loginText" value="Login"/>
         <parameter name="logoutText" value="Logout"/>
         <parameter name="registerText" value="Register"/>
@@ -96,10 +96,10 @@
         </classes>
     </test>
 
-    <!--Sofiia-->
+    &lt;!&ndash;Sofiia&ndash;&gt;
 
     <test name="ReviewTest">
-        <!--MainTest-->
+        &lt;!&ndash;MainTest&ndash;&gt;
         <parameter name="nameOfAuthor" value="Georgiy"/>
         <parameter name="correctText"
                    value="it is a product of amazing quality, everything works and the price is quite affordable."/>
@@ -107,7 +107,7 @@
                    value="Thank you for your review. It has been submitted to the webmaster for approval."/>
         <parameter name="textOfSuccessfulDeletingReview" value=" Success: You have modified reviews!"/>
         <classes>
-            <!--MainTest-->
+            &lt;!&ndash;MainTest&ndash;&gt;
             <class name="test.ReviewTest">
                 <methods>
                     <include name="successfulReviewProcess"/>
@@ -118,7 +118,7 @@
     </test>
 
     <test name="UnsuccessfulReviewTest">
-        <!--MainTest-->
+        &lt;!&ndash;MainTest&ndash;&gt;
         <parameter name="incorrectName" value="Ri"/>
         <parameter name="correctText"
                    value="it is a product of amazing quality, everything works and the price is quite affordable."/>
@@ -132,7 +132,7 @@
         <parameter name="emptyTextField" value=""/>
 
         <classes>
-            <!--MainTest-->
+            &lt;!&ndash;MainTest&ndash;&gt;
             <class name="test.UnsuccessfulReviewTest">
                 <methods>
                     <include name="unsuccessfullyWritingReviewBecauseOfIncorrectName"/>
@@ -145,7 +145,7 @@
             </class>
         </classes>
     </test>
-
+-->
     <!--    ProductComparisonTests-->
     <test name="CompareTest">
         <parameter name="myAccountDropdownText" value="Login"/>
@@ -186,7 +186,7 @@
 
     <!--Mariia-->
 
-    <test name="SearchTest">
+    <!--<test name="SearchTest">
         <parameter name="myAccountDropdownText" value="Login"/>
         <parameter name="productName" value="IPHONE"/>
         <parameter name="lowerProductName" value="Iphone"/>
@@ -212,13 +212,13 @@
                     <include name="checkShowDropbox"/>
                     <include name="checkPagesCount"/>
                     <include name="checkDescriptionCheckbox"/>
-                    <include name="checkCategoriesCheckboxIsUseful"/>   <!--//failed-->
+                    <include name="checkCategoriesCheckboxIsUseful"/>   &lt;!&ndash;//failed&ndash;&gt;
                 </methods>
             </class>
         </classes>
     </test>
 
-    <!--Yura-->
+    &lt;!&ndash;Yura&ndash;&gt;
 
     <test name="AddressBookTest">
         <parameter name="myAccountDropdownText" value="Login"/>
@@ -244,7 +244,7 @@
         </classes>
     </test>
 
-    <!--    Mykhailo-->
+    &lt;!&ndash;    Mykhailo&ndash;&gt;
     <test name="AddToWishList">
         <parameter name="myAccountDropdownText" value="Login"/>
         <parameter name="fromSearchPageProductName" value="iPod Nano"/>
@@ -305,7 +305,7 @@
         </classes>
     </test>
 
-    <!--Nazar-->
+    &lt;!&ndash;Nazar&ndash;&gt;
 
     <test name="CartCurrencyTest">
         <parameter name="myAccountDropdownText" value="Login"/>
@@ -332,5 +332,5 @@
                 </methods>
             </class>
         </classes>
-    </test>
+    </test>-->
 </suite>

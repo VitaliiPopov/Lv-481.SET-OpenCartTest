@@ -19,6 +19,7 @@ public class Instance {
     protected static WebDriver driver = null;
 
     private Instance() {
+        throw new IllegalStateException("Utility class");
     }
 
     public static WebDriver getDriver() {

@@ -42,7 +42,6 @@
                     <include name="registerWithLongTelephoneTest"/>
                     <include name="registerWithEmptyPasswordTest"/>
                     <include name="registerWithShortPasswordTest"/>
-                    <include name="registerWithLongPasswordTest"/>
                     <include name="registerWithBadConfirmTest"/>
                     <include name="registerWithoutPrivacyPolicyAgreementTest"/>
                 </methods>

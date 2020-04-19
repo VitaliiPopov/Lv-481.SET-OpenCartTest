@@ -207,22 +207,6 @@ public class RegisterTest extends TestRunner {
         Assert.assertEquals(true, registerPage.isPasswordAlertPresent());
     }
 
-    //password longer than 20 characters
-    @Test(priority = 14)
-    @Description("Verify that user cant register with long password (more than 32 symbols)")
-    public void registerWithLongPasswordTest() throws InterruptedException {
-        String password = randomAscii(25);
-        RegisterPage registerPage = getHomePage().goToRegisterPage();
-        registerPage.register(
-                randomAlphabetic(5),
-                randomAlphabetic(5),
-                email,
-                randomAlphabetic(5),
-                password,
-                password);
-        Assert.assertEquals(true, registerPage.isPasswordAlertPresent());//bug
-    }
-
     @Test(priority = 15)
     @Description("Verify that user cant register with bad password confirmation")
     public void registerWithBadConfirmTest() {

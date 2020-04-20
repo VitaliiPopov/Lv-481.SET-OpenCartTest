@@ -15,14 +15,14 @@ import java.util.concurrent.TimeUnit;
 public class ComparisonPage extends AbstractPageWithHeader {
 
     //Locators
-    private final String PAGE_HEADER_LOCATOR = "#content > h1"; // css
-    private final String ALERT_LAYOUT_LOCATOR = "//div[@class='alert alert-success alert-dismissible']"; // xpath
-    private final String FIRST_PRODUCT_NAME_LOCATOR = "//td[text() = 'Product']/following-sibling::td/a[1]"; //xpath
-    private final String LAST_PRODUCT_NAME_LOCATOR = "//td[text() = 'Product']/following-sibling::td[last()]/a"; //xpath
-    private final String ADD_TO_CART_FIRST_LOCATOR = "//tbody[last()]/descendant::input"; //xpath
-    private final String ADD_TO_CART_LAST_LOCATOR = "//tbody[last()]/descendant::input[last()]"; //xpath
-    private final String REMOVE_FIRST_LOCATOR = "//div[@id='content']//tbody[last()]/descendant::a"; //xpath
-    private final String REMOVE_LAST_LOCATOR = "//div[@id='content']//tbody[last()]/descendant::a[last()]"; //xpath
+    private static final String PAGE_HEADER_LOCATOR = "#content > h1"; // css
+    private static final String ALERT_LAYOUT_LOCATOR = "//div[@class='alert alert-success alert-dismissible']"; // xpath
+    private static final String FIRST_PRODUCT_NAME_LOCATOR = "//td[text() = 'Product']/following-sibling::td/a[1]"; //xpath
+    private static final String LAST_PRODUCT_NAME_LOCATOR = "//td[text() = 'Product']/following-sibling::td[last()]/a"; //xpath
+    private static final String ADD_TO_CART_FIRST_LOCATOR = "//tbody[last()]/descendant::input"; //xpath
+    private static final String ADD_TO_CART_LAST_LOCATOR = "//tbody[last()]/descendant::input[last()]"; //xpath
+    private static final String REMOVE_FIRST_LOCATOR = "//div[@id='content']//tbody[last()]/descendant::a"; //xpath
+    private static final String REMOVE_LAST_LOCATOR = "//div[@id='content']//tbody[last()]/descendant::a[last()]"; //xpath
 
     //Components
     private ComparisonPageAlertComponent comparisonPageAlertComponent;

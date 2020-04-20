@@ -11,7 +11,7 @@ public class NonLoggedUserProductComparisonTest extends CompareTestRunner {
 
     @Parameters({"searchName", "productName"})
     @Test
-    public void AddProductToCompareFromSearch(String search, String productName) {
+    public void addProductToCompareFromSearch(String search, String productName) {
         ComparisonPage comparisonPage = getHomePage()
                 .goToHomePage()
                 .searchProduct(search)
@@ -22,7 +22,7 @@ public class NonLoggedUserProductComparisonTest extends CompareTestRunner {
 
     @Parameters({"productName"})
     @Test
-    public void AddProductToCompareFromMainPage(String productName) {
+    public void addProductToCompareFromMainPage(String productName) {
         ComparisonPage comparisonPage = getHomePage()
                 .goToHomePage()
                 .clickProductComponentCompareButtonByName(productName)
@@ -32,7 +32,7 @@ public class NonLoggedUserProductComparisonTest extends CompareTestRunner {
 
     @Parameters({"productName"})
     @Test
-    public void AddProductToCompareFromProductPage(String productName) {
+    public void addProductToCompareFromProductPage(String productName) {
         ComparisonPage comparisonPage = getHomePage()
                 .goToHomePage()
                 .clickProductNameLink(productName)
@@ -43,7 +43,7 @@ public class NonLoggedUserProductComparisonTest extends CompareTestRunner {
 
     @Parameters({"searchName", "productName"})
     @Test
-    public void AddSameProductTwoTimes(String searchName, String productName) {
+    public void addSameProductTwoTimes(String searchName, String productName) {
         ComparisonPage comparisonPage = getHomePage()
                 .goToHomePage()
                 .searchProduct(searchName)
@@ -54,7 +54,7 @@ public class NonLoggedUserProductComparisonTest extends CompareTestRunner {
 
     @Parameters({"firstProductId", "expectedEmptyPageResult"})
     @Test
-    public void CleanAllProductsFromComparison(int firstId, String expected) {
+    public void cleanAllProductsFromComparison(int firstId, String expected) {
         EmptyComparisonPage emptyComparisonPage = getHomePage()
                 .goToHomePage()
                 .addProductToCompareByJS(firstId)

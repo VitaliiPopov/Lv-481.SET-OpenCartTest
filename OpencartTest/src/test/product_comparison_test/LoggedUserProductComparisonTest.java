@@ -20,7 +20,7 @@ public class LoggedUserProductComparisonTest extends CompareTestRunner {
     @Parameters({"myAccountDropdownText", "searchName", "productName"})
     @Test
     @Description("Verify if user can add product to compare from search page")
-    public void AddProductToCompareFromSearch(String myAccountDropdownText, String search, String productName) {
+    public void addProductToCompareFromSearch(String myAccountDropdownText, String search, String productName) {
         ComparisonPage comparisonPage = getHomePage()
                 .goToLoginPage(myAccountDropdownText)
                 .login(jsonDataConfig.getEmailFromJson(7), jsonDataConfig.getPasswordFromJson(7))
@@ -32,7 +32,7 @@ public class LoggedUserProductComparisonTest extends CompareTestRunner {
 
     @Parameters({"myAccountDropdownText", "productName"})
     @Test
-    public void AddProductToCompareFromMainPage(String myAccountDropdownText, String productName) {
+    public void addProductToCompareFromMainPage(String myAccountDropdownText, String productName) {
         ComparisonPage comparisonPage = getHomePage()
                 .goToLoginPage(myAccountDropdownText)
                 .login(jsonDataConfig.getEmailFromJson(7), jsonDataConfig.getPasswordFromJson(7))
@@ -44,7 +44,7 @@ public class LoggedUserProductComparisonTest extends CompareTestRunner {
 
     @Parameters({"myAccountDropdownText", "productName"})
     @Test
-    public void AddProductToCompareFromProductPage(String myAccountDropdownText, String productName) {
+    public void addProductToCompareFromProductPage(String myAccountDropdownText, String productName) {
         ComparisonPage comparisonPage = getHomePage()
                 .goToLoginPage(myAccountDropdownText)
                 .login(jsonDataConfig.getEmailFromJson(7), jsonDataConfig.getPasswordFromJson(7))
@@ -57,7 +57,7 @@ public class LoggedUserProductComparisonTest extends CompareTestRunner {
 
     @Parameters({"myAccountDropdownText", "searchName", "productName"})
     @Test
-    public void AddSameProductTwoTimes(String myAccountDropdownText, String searchName, String productName) {
+    public void addSameProductTwoTimes(String myAccountDropdownText, String searchName, String productName) {
         ComparisonPage comparisonPage = getHomePage()
                 .goToLoginPage(myAccountDropdownText)
                 .login(jsonDataConfig.getEmailFromJson(7), jsonDataConfig.getPasswordFromJson(7))
@@ -69,7 +69,7 @@ public class LoggedUserProductComparisonTest extends CompareTestRunner {
 
     @Parameters({"myAccountDropdownText", "firstProductId", "expectedEmptyPageResult"})
     @Test
-    public void CleanAllProductsFromComparison(String myAccountDropdownText, int firstId, String expected) {
+    public void cleanAllProductsFromComparison(String myAccountDropdownText, int firstId, String expected) {
         EmptyComparisonPage emptyComparisonPage = getHomePage()
                 .goToLoginPage(myAccountDropdownText)
                 .login(jsonDataConfig.getEmailFromJson(7), jsonDataConfig.getPasswordFromJson(7))
@@ -83,7 +83,7 @@ public class LoggedUserProductComparisonTest extends CompareTestRunner {
 
     @Parameters({"myAccountDropdownText", "searchName", "productName"})
     @Test
-    public void AddToCartFromComparisonPage(String myAccountDropdownText, String searchName, String productName) {
+    public void addToCartFromComparisonPage(String myAccountDropdownText, String searchName, String productName) {
         CartPage cartPage = getHomePage()
                 .goToLoginPage(myAccountDropdownText)
                 .login(jsonDataConfig.getEmailFromJson(7), jsonDataConfig.getPasswordFromJson(7))
@@ -97,7 +97,7 @@ public class LoggedUserProductComparisonTest extends CompareTestRunner {
 
     @Parameters({"myAccountDropdownText", "searchName", "productName"})
     @Test
-    public void GoToProductPageFromComparisonPage(String myAccountDropdownText, String searchName, String productName) {
+    public void goToProductPageFromComparisonPage(String myAccountDropdownText, String searchName, String productName) {
         ProductPage productPage = getHomePage()
                 .goToLoginPage(myAccountDropdownText)
                 .login(jsonDataConfig.getEmailFromJson(7), jsonDataConfig.getPasswordFromJson(7))
@@ -110,7 +110,7 @@ public class LoggedUserProductComparisonTest extends CompareTestRunner {
 
     @Parameters({"myAccountDropdownText", "searchName", "productName"})
     @Test
-    public void GoToComparisonPageFromProductCompareLabel(String myAccountDropdownText, String searchName, String productName) {
+    public void goToComparisonPageFromProductCompareLabel(String myAccountDropdownText, String searchName, String productName) {
         ComparisonPage comparisonPage = getHomePage()
                 .goToLoginPage(myAccountDropdownText)
                 .login(jsonDataConfig.getEmailFromJson(7), jsonDataConfig.getPasswordFromJson(7))

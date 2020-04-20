@@ -3,7 +3,7 @@ package com.petstore.data;
 public class OrderRepository {
 
     private OrderRepository(){
-
+        throw new IllegalStateException("Utility class!");
     }
 
     public static Order validOrder(){

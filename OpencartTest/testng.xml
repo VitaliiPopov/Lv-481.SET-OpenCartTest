@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Regression">
+    <test name="LoginTest">
+        <parameter name="loginText" value="Login"/>
+        <parameter name="logoutText" value="Logout"/>
+        <parameter name="registerText" value="Register"/>
+        <parameter name="myAccountText" value="My Account"/>
+        <parameter name="editAccountText" value="My Account Information"/>
+        <classes>
+            <class name="test.login_test.LoginUserTest">
+                <methods>
+                    <include name="loginNotExistedUserTest"/>
+                    <include name="loginWithEmptyFieldsTest"/>
+                    <include name="loginWithEmptyEmailTest"/>
+                    <include name="loginWithEmptyPasswordTest"/>
+                    <include name="loginCaseSensitiveFieldsTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="RegisterTest">
+        <parameter name="loginText" value="Login"/>
+        <parameter name="logoutText" value="Logout"/>
+        <parameter name="registerText" value="Register"/>
+        <parameter name="myAccountText" value="My Account"/>
+        <parameter name="editAccountText" value="My Account Information"/>
+        <classes>
+            <class name="test.register_test.RegisterTest">
+                <methods>
+                    <include name="registerWithEmptyFieldsTest"/>
+                    <include name="registerWithEmptyFirstNameTest"/>
+                    <include name="registerWithEmptyLastNameTest"/>
+                    <include name="registerWithLongFirstLastNamesTest"/>
+                    <include name="registerWithEmptyEmailTest"/>
+                    <include name="registerEmailWithoutAtSymbolTest"/>
+                    <include name="registerEmailWithoutDotSymbolTest"/>
+                    <include name="registerWithEmptyTelephoneTest"/>
+                    <include name="registerWithShortTelephoneTest"/>
+                    <include name="registerWithLongTelephoneTest"/>
+                    <include name="registerWithEmptyPasswordTest"/>
+                    <include name="registerWithShortPasswordTest"/>
+                    <include name="registerWithBadConfirmTest"/>
+                    <include name="registerWithoutPrivacyPolicyAgreementTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!--Sofiia-->
+    <test name="UnsuccessfulReviewTest">
+        <!--MainTest-->
+        <parameter name="incorrectName" value="Ri"/>
+        <parameter name="correctText"
+                   value="it is a product of amazing quality, everything works and the price is quite affordable."/>
+        <parameter name="messageOfUndeliveredReviewBecauseOfIncorrectName"
+                   value="Warning: Review Name must be between 3 and 25 characters!"/>
+        <parameter name="nameOfAuthor" value="Georgiy"/>
+        <parameter name="incorrectText" value="product is amazing."/>
+        <parameter name="messageOfUndeliveredReviewBecauseOfIncorrectText"
+                   value="Warning: Review Text must be between 25 and 1000 characters!"/>
+        <parameter name="emptyNameField" value=""/>
+        <parameter name="emptyTextField" value=""/>
+
+        <classes>
+            <!--MainTest-->
+            <class name="test.UnsuccessfulReviewTest">
+                <methods>
+                    <include name="unsuccessfullyWritingReviewBecauseOfIncorrectName"/>
+                    <include name="unsuccessfullyWritingReviewBecauseOfIncorrectText"/>
+                    <include name="unsuccessfullyWritingReviewBecauseOfIncorrectTextAndName"/>
+                    <include name="unsuccessfullyWritingReviewBecauseOfEmptyNameAndTextFields"/>
+                    <include name="unsuccessfullyWritingReviewBecauseOfTooLongName"/>
+                    <include name="unsuccessfullyWritingReviewBecauseOfTooLongText"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <!--ProductComparisonTests-->
+    <test name="CompareTest">
+        <parameter name="myAccountDropdownText" value="Login"/>
+        <parameter name="searchName" value="ip"/>
+        <parameter name="defaultProductId" value="40"/>
+        <parameter name="firstProductId" value="41"/>
+        <parameter name="secondProductId" value="43"/>
+        <parameter name="productName" value="iPhone"/>
+        <parameter name="firstProductName" value="iPhone"/>
+        <parameter name="secondProductName" value="iPod Classic"/>
+        <parameter name="expectedEmptyPageResult" value="You have not chosen any products to compare."/>
+        <classes>
+            <!--LoggedUserProductComparisonTest-->
+            <class name="test.product_comparison_test.LoggedUserProductComparisonTest">
+                <methods>
+                    <include name="addProductToCompareFromSearch"/>
+                    <include name="addProductToCompareFromMainPage"/>
+                    <include name="addProductToCompareFromProductPage"/>
+                    <include name="addSameProductTwoTimes"/>
+                    <include name="cleanAllProductsFromComparison"/>
+                    <include name="addToCartFromComparisonPage"/>
+                    <include name="goToProductPageFromComparisonPage"/>
+                    <include name="goToComparisonPageFromProductCompareLabel"/>
+                </methods>
+            </class>
+            <!--NonLoggedUserProductComparisonTest-->
+            <class name="test.product_comparison_test.NonLoggedUserProductComparisonTest">
+                <methods>
+                    <include name="addProductToCompareFromSearch"/>
+                    <include name="addProductToCompareFromMainPage"/>
+                    <include name="addProductToCompareFromProductPage"/>
+                    <include name="addSameProductTwoTimes"/>
+                    <include name="cleanAllProductsFromComparison"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+        <test name="AddToWishList">
+            <parameter name="myAccountDropdownText" value="Login"/>
+            <parameter name="fromSearchPageProductName" value="iPod Nano"/>
+            <parameter name="fromHomePageProductName" value="MacBook"/>
+            <parameter name="fromProductPageProductName" value="iPhone"/>
+            <classes>
+                <class name="test.TestWishList">
+                    <methods>
+                        <include name="addProductToWishListFromSearchPage"/>
+                        <include name="addProductToWishListFromHomePage"/>
+                        <include name="addProductToWishListFromProductPage"/>
+                    </methods>
+                </class>
+            </classes>
+        </test>
+
+        <test name="AddToCartFromWishList">
+
+            <parameter name="myAccountDropdownText" value="Login"/>
+
+            <parameter name="firstProductName" value="MacBook"/>
+            <parameter name="secondProductName" value="iPhone"/>
+            <classes>
+                <class name="test.TestWishList">
+                    <methods>
+                        <include name="addProductToCartFromWishList"/>
+                    </methods>
+                </class>
+            </classes>
+
+        </test>
+
+        <test name="RemoveFromWishList">
+
+            <parameter name="myAccountDropdownText" value="Login"/>
+            <parameter name="firstProductName" value="Samsung Galaxy Tab 10.1"/>
+            <parameter name="secondProductName" value="Samsung SyncMaster 941BW"/>
+            <classes>
+                <class name="test.TestWishList">
+                    <methods>
+                        <include name="removeProductFromWishListByName"/>
+                    </methods>
+                </class>
+            </classes>
+        </test>
+
+        <test name="VerifyWishListEmptyPage">
+
+            <parameter name="myAccountDropdownText" value="Login"/>
+            <parameter name="expectedMessage" value="Your wish list is empty."/>
+
+            <classes>
+                <class name="test.TestWishList">
+                    <methods>
+                        <include name="verifyWishListEmptyPageMessage"/>
+                    </methods>
+                </class>
+            </classes>
+        </test>
+
+</suite>

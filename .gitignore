@@ -74,6 +74,7 @@ hs_err_pid*
 /**/.idea/
 /**/*.iml
 /**/*.ucls
+/**/resources/
 
 # Ignore binary
 /.allure/
@@ -99,10 +100,12 @@ hs_err_pid*
 # Ignore all .txt files in the directory doc/
 # doc/**/*.txt
 
-# Ignore .doc .pfd .docx
+# Ignore .doc .pfd .docx .xlsx .json
 *.doc
 *.docx
 *.pdf
+*.xlsx
+*.json
 
 # bower
 /bower_components/

@@ -3,7 +3,6 @@ package com.petstore.test.store.create_order;
 import com.petstore.data.ConstantVariables;
 import com.petstore.data.Order;
 import com.petstore.data.OrderRepository;
-import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
@@ -19,7 +18,7 @@ import static org.hamcrest.Matchers.equalTo;
 public class SendRequestTest {
 
     @BeforeClass
-    public void setRequestSpec() {
+    public static void setRequestSpec() {
         RequestSpecification requestSpec = new RequestSpecBuilder()
                 .setBaseUri(ConstantVariables.API_URL)
                 .setPort(ConstantVariables.API_PORT)
@@ -28,7 +27,7 @@ public class SendRequestTest {
                 .setContentType(ContentType.JSON)
                 .log(LogDetail.ALL)
                 .build();
-        RestAssured.requestSpecification = requestSpec;
+        requestSpecification = requestSpec;
     }
 
     @Test

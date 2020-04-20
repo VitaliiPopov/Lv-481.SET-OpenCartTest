@@ -57,7 +57,7 @@ public class Instance {
         }
     }
 
-    public static WebDriver getAdminDriver() { // TODO
+    public static WebDriver getAdminDriver() {
         driver.get(ConstantVariables.ADMIN_URL);
         return driver;
     }

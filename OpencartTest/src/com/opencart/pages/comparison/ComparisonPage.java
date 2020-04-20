@@ -113,7 +113,7 @@ public class ComparisonPage extends AbstractPageWithHeader {
     }
     ///endregion
 
-    ///region Logic
+    ///region LOGIC
 
     //AlertMessage
 
